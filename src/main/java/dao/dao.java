@@ -76,6 +76,35 @@ public class dao {
         }
         return null ;}
 
+    public List<Products> getProductsByCategory(int category_Id) {
+        List<Products> l = new ArrayList<>();
+        String query = "SELECT * FROM Products WHERE category_Id = ?";
+        try (Connection connection = MySQLConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            // Gán giá trị của category_Id vào câu truy vấn tại vị trí tham số ?
+            statement.setInt(1, category_Id);
+            // Thực thi câu truy vấn
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Products product = new Products(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getInt("price"),
+                        rs.getInt("stock"),
+                        rs.getString("image"),
+                        rs.getTimestamp("created_at"), // Lấy giá trị DATETIME
+                        rs.getInt("category_Id")
+                );
+                l.add(product);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return l;
+    }
+
+
     public int updateProduct(Products product) {
         String query = "UPDATE Products SET name = ?, description = ?, price = ?, stock = ?, image = ?, category_id = ? WHERE id = ?";
         try (Connection connection = MySQLConnection.getConnection();

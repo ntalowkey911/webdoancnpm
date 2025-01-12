@@ -206,6 +206,11 @@
                 padding: 10px;
                 background-color: #f8f9fa;
             }
+            .product-card img {
+                width: 100%;       /* Chiếm hết chiều rộng của thẻ chứa */
+                height: 200px;     /* Chiều cao cố định của hình ảnh */
+                object-fit: cover; /* Hình ảnh sẽ bao phủ toàn bộ khu vực mà không bị méo, có thể bị cắt bớt */
+            }
 
             .product-card {
                 border: 1px solid #ddd;
@@ -215,10 +220,6 @@
                 padding: 10px;
             }
 
-            .product-card img {
-                max-width: 100%;
-                height: auto;
-            }
 
             .product-card h5 {
                 font-size: 1.2rem;
@@ -456,7 +457,7 @@
                         <h5>Categories</h5>
                         <ul class="list-unstyled">
                             <c:forEach var="o" items="${categoriesList}">
-                                <li><a href="#">${o.name}</a></li>
+                                <li><a href="?categoryId=${o.id}">${o.name}</a></li>
                             </c:forEach>
                         </ul>
                     </div>
@@ -467,7 +468,7 @@
                             <img src="${pageContext.request.contextPath}/${lastp.image}" alt="${lastp.name}">
                             <p>${lastp.name}</p>
                             <p>${lastp.description}</p>
-                            <p class="price">${lastp.price} VND</p>
+                            <p class="price">${lastp.price}K</p>
                         </c:if>
                         <c:if test="${empty lastp}">
                             <p>No product available</p>
@@ -481,19 +482,20 @@
                 <div class="col-md-9">
                     <div class="row">
                         <c:forEach var="product" items="${productList}">
-                        <div class="col-md-4 mb-4">
-                            <div class="product-card">
-                                <img class="img-fluid" src="<%= request.getContextPath() %>/${product.image}" alt="${product.name}">
-                                <h5 class="product-name">${product.name}</h5>
-                                <p class="product-price">${product.price}k </p>
-                                <h6>createdAt:${product.createdAt}</h6>
-                                <button class="btn btn-success">Add to cart</button>
-                                <button class="btn btn-success">Mua ngay </button>
+                            <div class="col-md-4 mb-4">
+                                <div class="product-card">
+                                    <img class="img-fluid" src="<%= request.getContextPath() %>/${product.image}" alt="${product.name}">
+                                    <h5 class="product-name">${product.name}</h5>
+                                    <p class="product-price">${product.price}k </p>
+                                    <h6>createdAt:${product.createdAt}</h6>
+                                    <button class="btn btn-success">Add to cart</button>
+                                    <button class="btn btn-success">Mua ngay </button>
+                                </div>
                             </div>
-                        </div>
                         </c:forEach>
                     </div>
                 </div>
+
 
             </div>
         </div>
@@ -548,10 +550,6 @@
          </div>
          <div class="copyright mt-5">
              <div class="row container mx-auto">
-                 <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
-                   <img src="img/payment.png" alt="payment..logo">
-                 </div> -->
-
                  <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
                      <p>MARSSTORE WEBSITE &copy; DESIGN 2024</p>
                  </div>

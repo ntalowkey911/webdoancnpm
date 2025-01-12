@@ -44,9 +44,19 @@ public class ShopController extends HttpServlet {
         } else {
             request.setAttribute("message", "Không có sản phẩm nào.");
         }
-
         Products l=productDAO.getLatestProduct();
         request.setAttribute("lastp", l);
+
+
+        String categoryId = request.getParameter("categoryId");
+        if (categoryId != null) {
+            List<Products> filteredProducts = productDAO.getProductsByCategory(Integer.parseInt(categoryId));
+            request.setAttribute("productList", filteredProducts);
+        } else {
+            List<Products> allProducts = productDAO.getAllProducts();
+            request.setAttribute("productList", allProducts);
+        }
+
 
         // Chuyển tiếp yêu cầu tới trang JSP để hiển thị
         RequestDispatcher dispatcher = request.getRequestDispatcher("doanweb/html/shop.jsp");
