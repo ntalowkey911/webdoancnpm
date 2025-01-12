@@ -370,15 +370,15 @@
                         </ul>
                     </div>
 
-                    <div class="last-product">
-                        <h5>Last Product</h5>
-                        <c:forEach var="o" items="${lastp}">
-                            <img  src="<%= request.getContextPath() %>/${o.image}" alt="${o.name}">
-                            <p>${o.name}</p>
-                            <p>${o.description}</p>
-                            <p class="price">${o.price}</p>
-                        </c:forEach>
-                    </div>
+<%--                    <div class="last-product">--%>
+<%--                        <h5>Last Product</h5>--%>
+<%--                        <c:forEach var="o" items="${lastp}">--%>
+<%--                            <img  src="<%= request.getContextPath() %>/${o.image}" alt="${o.name}">--%>
+<%--                            <p>${o.name}</p>--%>
+<%--                            <p>${o.description}</p>--%>
+<%--                            <p class="price">${o.price}</p>--%>
+<%--                        </c:forEach>--%>
+<%--                    </div>--%>
 
                 </div>
 
