@@ -213,7 +213,7 @@
   <section id="new" class="w-100">
     <div class="row m-0 p-0">
       <div class="one col-lg-4 col-md-12 col-12 p-0">
-        <img class="img-fluid" src="" alt="">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted%20image%20(104).png" alt="">
         <div class="details">
           <h2>Đùi Gà</h2>
           <button class="text-uppercase"
@@ -245,7 +245,7 @@
 
     </div>
   </section>
-  </footer>
+
   <section id="featured" class="my-5 pb-5">
     <div class="container text-center mt-5 py-5">
       <h3>Các món mới</h3>
@@ -261,21 +261,21 @@
         <button class="buy-btn" onclick="window.location.href = './sproduct4.html';">mua ngay</button>
       </div>
       <div class="product text-center col-lg-3 col-md-4 col-12">
-        <img class="img-fluid" src="../images/duigaimg/Pasted%20image%20(104).png" alt="">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted%20image%20(104).png" alt="">
 
         <h5 class="product-name">Gà rán sốt cay kiểu Thái</h5>
         <h4 class="product-price">65.000 VND</h4>
         <button class="buy-btn" onclick="window.location.href = './sproduct5.html';">Mua ngay</button>
       </div>
       <div class="product text-center col-lg-3 col-md-4 col-12">
-        <img class="img-fluid" src="../images/duigaimg/Pasted%20image%20(102).png" alt="">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted%20image%20(102).png" alt="">
 
         <h5 class="product-name">Gà rán giòn sốt chanh dây</h5>
         <h4 class="product-price">85.000 VND</h4>
         <button class="buy-btn" onclick="window.location.href = './sproduct6.html';">Mua ngay</button>
       </div>
       <div class="product container text-center col-lg-3 col-md-4 col-12">
-        <img class="img-fluid" src="../images/duigaimg/Pasted%20image%20(103).png" alt="">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted%20image%20(103).png" alt="">
 
         <h5 class="product-name">Gà rán xù kiểu Nhật</h5>
         <h4 class="product-price">55.000 VND</h4>
@@ -285,7 +285,7 @@
   </section>
 
   <!-- Banner -->
-  <section id="banner" class="my-5 py-5" src="../images/duigaimg/Pasted image (103).png">
+  <section id="banner" class="my-5 py-5" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted image (103).png">
     <div class="ml-5 mr-5">
       <h4>Giảm giá cuối năm</h4>
       <h1>Tăng tiêu dùng cuối năm<br>Giảm 20% cho các đơn hàng có giá trị trên 350.000 VND.</h1>
@@ -302,7 +302,7 @@
     </div>
     <div class="row mx-auto container-fluid">
       <div class="product text-center col-lg-3 col-md-4 col-12">
-        <img class="img-fluid" src="/images/ComboGa/Halloween.png"
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/ComboGa/Halloween.png"
           alt="Combo Halloween">
 
         <h5 class="product-name">Combo Halloween</h5>
@@ -311,7 +311,7 @@
           onclick="window.location.href = '/html/Menu/shop2.html';">Mua ngay</button>
       </div>
       <div class="product text-center col-lg-3 col-md-4 col-12">
-        <img class="img-fluid" src="/images/ComboGa/195k.png" alt="Combo 195k">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/ComboGa/195k.png" alt="Combo 195k">
 
         <h5 class="product-name">Combo 195k</h5>
         <!-- <h4 class="product-price">251.200</h4> -->
@@ -319,7 +319,7 @@
           onclick="window.location.href = '/html/Menu/shop2.html';">Mua ngay</button>
       </div>
       <div class="product text-center col-lg-3 col-md-4 col-12">
-        <img class="img-fluid" src="/images/ComboGa/Summer.png" alt="Summer combo">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/ComboGa/Summer.png" alt="Summer combo">
 
         <h5 class="product-name">Combo mùa hè mát mẻ</h5>
         <!-- <h4 class="product-price">599.000 đ</h4> -->
@@ -327,7 +327,7 @@
           onclick="window.location.href = '/html/Menu/shop2.html';">Mua ngay</button>
       </div>
       <div class="product container text-center col-lg-3 col-md-4 col-12">
-        <img class="img-fluid" src="/images/ComboGa/99k.png" alt="Combo 99k">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/ComboGa/99k.png" alt="Combo 99k">
 
         <h5 class="product-name">Combo 99k</h5>
         <!-- <h4 class="product-price">399.000 đ</h4> -->
@@ -345,7 +345,7 @@
     </div>
     <div class="row mx-auto container-fluid">
       <div class="product text-center col-lg-3 col-md-4 col-12">
-        <img class="img-fluid" src="/images/CanhGa/CanhGaXiMuoi.png"
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaXiMuoi.png"
           alt="Cánh gà xí muội">
         <h5 class="product-name">Cánh gà sốt cay xí muội</h5>
         <h4 class="product-price">30.000 VND</h4>
@@ -353,7 +353,7 @@
           onclick="window.location.href = '/html/Menu/shop1.html';">Mua ngay</button>
       </div>
       <div class="product text-center col-lg-3 col-md-4 col-12">
-        <img class="img-fluid" src="/images/CanhGa/CanhGaKieuThai.jpg"
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaKieuThai.jpg"
           alt="Gà rán sốt cay kiểu Thái">
         <h5 class="product-name">Cánh Gà rán sốt cay kiểu Thái</h5>
         <h4 class="product-price">45.000 VND</h4>
@@ -361,7 +361,7 @@
           onclick="window.location.href = '/html/Menu/shop1.html';">Mua ngay</button>
       </div>
       <div class="product text-center col-lg-3 col-md-4 col-12">
-        <img class="img-fluid" src="/images/CanhGa/CanhGaChanhDay.jpg"
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaChanhDay.jpg"
           alt="Gà rán giòn sốt chanh dây">
         <h5 class="product-name">Cánh Gà rán giòn sốt chanh dây</h5>
         <h4 class="product-price">50.000 VND</h4>
@@ -369,7 +369,7 @@
           onclick="window.location.href = '/html/Menu/shop1.html';">Mua ngay</button>
       </div>
       <div class="product container text-center col-lg-3 col-md-4 col-12">
-        <img class="img-fluid" src="/images/CanhGa/CanhGaKieuNhat.jpg"
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaKieuNhat.jpg"
           alt="Gà rán xù kiểu Nhật">
         <h5 class="product-name">Cánh Gà rán xù kiểu Nhật</h5>
         <h4 class="product-price">39.000 VND</h4>
@@ -387,7 +387,7 @@
     </div>
     <div class="row mx-auto container-fluid">
       <div class="product text-center col-lg-3 col-md-4 col-12">
-        <img class="img-fluid" src="/images/duigaimg/Pasted image (13).png"
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted image (13).png"
           alt="Cánh gà xí muội">
         <h5 class="product-name">Đùi gà sốt cay xí muội</h5>
         <h4 class="product-price">30.000 VND</h4>
@@ -395,7 +395,7 @@
           onclick="window.location.href = '/html/Menu/shop.jsp';">Mua ngay</button>
       </div>
       <div class="product text-center col-lg-3 col-md-4 col-12">
-        <img class="img-fluid" src="/images/duigaimg/Pasted image (15).png"
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted image (15).png"
           alt="Gà rán sốt cay kiểu Thái">
         <h5 class="product-name">Đùi Gà rán sốt cay kiểu Thái</h5>
         <h4 class="product-price">45.000 VND</h4>
@@ -403,7 +403,7 @@
           onclick="window.location.href = '/html/Menu/shop.jsp';">Mua ngay</button>
       </div>
       <div class="product text-center col-lg-3 col-md-4 col-12">
-        <img class="img-fluid" src="/images/duigaimg/Pasted image (20).png"
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted image (20).png"
           alt="Gà rán giòn sốt chanh dây">
         <h5 class="product-name">Đùi Gà rán giòn sốt chanh dây</h5>
         <h4 class="product-price">50.000 VND</h4>
@@ -411,7 +411,7 @@
           onclick="window.location.href = '/html/Menu/shop.jsp';">Mua ngay</button>
       </div>
       <div class="product container text-center col-lg-3 col-md-4 col-12">
-        <img class="img-fluid" src="/images/duigaimg/Pasted image (11).png"
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted image (11).png"
           alt="Gà rán xù kiểu Nhật">
         <h5 class="product-name">Đùi Gà rán xù kiểu Nhật</h5>
         <h4 class="product-price">39.000 VND</h4>

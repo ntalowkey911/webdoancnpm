@@ -287,8 +287,99 @@
                         padding: 8px;
                     }
 
-            
-        </style>    
+          /*sidebar  */
+            .container {
+                margin-top: 1.5rem; /* Khoảng cách phía trên container */
+            }
+
+            .category-list {
+                margin: 0; /* Xóa margin thừa */
+                padding: 0; /* Xóa padding thừa */
+                box-sizing: border-box; /* Đảm bảo không có padding thừa gây dư */
+            }
+
+            /* Title (ô đầu tiên) */
+            .category-list h5 {
+                background-color: #007bff; /* Màu xanh nổi bật */
+                color: #fff;
+                padding: 10px;
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0; /* Xóa margin để không có khoảng cách */
+                text-transform: uppercase;
+                border-radius: 5px 5px 0 0; /* Bo góc trên */
+                display: flex;
+                align-items: center;
+            }
+
+            /* Categories list */
+            .category-list ul {
+                list-style: none;
+                padding: 0;
+                margin: 0; /* Xóa margin để không có khoảng cách */
+            }
+
+            .category-list ul li {
+                background-color: #ffffff; /* Nền trắng cho từng item */
+                color: #333; /* Chữ đen xám */
+                padding: 10px;
+                border-bottom: 1px solid #ddd; /* Viền dưới từng mục */
+                text-align: left; /* Căn trái cho tên thể loại */
+                display: block; /* Đảm bảo mỗi mục sẽ chiếm một dòng */
+                width: 100%; /* Đảm bảo chiếm hết chiều rộng của container */
+                box-sizing: border-box; /* Đảm bảo không dư thừa padding */
+                transition: background-color 0.3s ease;
+            }
+
+            .category-list ul li:hover {
+                background-color: #f0f0f0; /* Nền xám nhạt khi hover */
+            }
+
+            .category-list ul li a {
+                text-decoration: none;
+                color: inherit;
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+
+            .last-product {
+                border: 1px solid #ddd; /* Viền mỏng */
+                border-radius: 5px; /* Bo góc */
+                padding: 1rem; /* Khoảng cách bên trong */
+                background-color: #f9f9f9; /* Màu nền nhạt */
+            }
+
+            .last-product h5 {
+                font-size: 1.2rem; /* Cỡ chữ tiêu đề */
+                font-weight: bold; /* Chữ đậm */
+                margin-bottom: 0.75rem; /* Khoảng cách dưới */
+                color: #333; /* Màu chữ */
+            }
+
+            .last-product img {
+                max-width: 100%; /* Đảm bảo ảnh không vượt quá kích thước khung */
+                height: auto; /* Giữ tỉ lệ ảnh */
+                margin-bottom: 0.75rem; /* Khoảng cách dưới ảnh */
+                border-radius: 5px; /* Bo góc ảnh */
+            }
+
+            .last-product p {
+                margin: 0.5rem 0; /* Khoảng cách giữa các đoạn văn */
+                color: #555; /* Màu chữ nhạt */
+            }
+
+            .last-product .price {
+                font-weight: bold; /* Chữ đậm */
+                color: #e63946; /* Màu đỏ */
+                font-size: 1.1rem; /* Cỡ chữ */
+            }
+
+
+
+
+
+        </style>
         <script>
     // Hàm loại bỏ dấu tiếng Việt
     function removeVietnameseTones(str) {
@@ -370,15 +461,19 @@
                         </ul>
                     </div>
 
-<%--                    <div class="last-product">--%>
-<%--                        <h5>Last Product</h5>--%>
-<%--                        <c:forEach var="o" items="${lastp}">--%>
-<%--                            <img  src="<%= request.getContextPath() %>/${o.image}" alt="${o.name}">--%>
-<%--                            <p>${o.name}</p>--%>
-<%--                            <p>${o.description}</p>--%>
-<%--                            <p class="price">${o.price}</p>--%>
-<%--                        </c:forEach>--%>
-<%--                    </div>--%>
+                    <div class="last-product">
+                        <h5>Last Product</h5>
+                        <c:if test="${not empty lastp}">
+                            <img src="${pageContext.request.contextPath}/${lastp.image}" alt="${lastp.name}">
+                            <p>${lastp.name}</p>
+                            <p>${lastp.description}</p>
+                            <p class="price">${lastp.price} VND</p>
+                        </c:if>
+                        <c:if test="${empty lastp}">
+                            <p>No product available</p>
+                        </c:if>
+                    </div>
+
 
                 </div>
 
