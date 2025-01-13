@@ -245,14 +245,18 @@
         <td>${item.product.name}</td>
         <td>${item.product.price} VND</td>
         <td>
-          <form action="updateQuantity" method="post">
-            <input type="hidden" name="productId" value="${item.product.id}">
-            <div class="quantity-selector">
-              <button type="button" class="btn-minus" onclick="updateQuantity(-1)">-</button>
-              <input type="number" name="quantity" id="quantity" value="${item.quantity}" min="1" class="form-control" readonly>
-              <button type="button" class="btn-plus" onclick="updateQuantity(1)">+</button>
-            </div>
-          </form>
+            <form action="" method="post">
+              <input type="hidden" name="id" value="${item.product.id}">
+              <div class="quantity-selector">
+                <button type="button" class="btn-minus"
+                        onclick="window.location.href='quantity-inc-dec?action=dec&id=${item.product.id}'">-</button>
+
+                <input type="number" name="quantity" id="quantity" value="${item.quantity}" min="1" class="form-control" disabled>
+                <button type="button" class="btn-minus"
+                        onclick="window.location.href='quantity-inc-dec?action=inc&id=${item.product.id}'">+</button>
+              </div>
+            </form>
+
         </td>
         <td>${item.totalPrice} VND</td>
         <td>
