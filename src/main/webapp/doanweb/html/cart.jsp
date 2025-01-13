@@ -14,8 +14,8 @@
           src="https://kit.fontawesome.com/cc9450bd42.js"
           crossorigin="anonymous"
   ></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <link href="<%= request.getContextPath() %>/https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="<%= request.getContextPath() %>/https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
   <!-- bootstarp stackpath cdn -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -187,7 +187,31 @@
     </tr>
     </thead>
     <tbody>
-    <!-- Nội dung động thêm ở đây -->
+    <!-- Hiển thị sản phẩm từ giỏ hàng -->
+    <c:forEach var="item" items="${cart}">
+      <tr>
+        <td>
+          <form action="removeFromCart" method="post">
+            <input type="hidden" name="productId" value="${item.product.id}">
+            <button type="submit" class="btn btn-danger">
+              <i class="bi bi-trash3"></i> <!-- Icon từ Bootstrap Icons -->
+            </button>
+          </form>
+        </td>
+        <td>
+          <img src="${item.product.image}" alt="${item.product.name}" width="100">
+        </td>
+        <td>${item.product.name}</td>
+        <td><fmt:formatNumber value="${item.product.price}" type="currency" currencySymbol="VND" /></td>
+        <td>
+          <form action="updateQuantity" method="post">
+            <input type="hidden" name="productId" value="${item.product.id}">
+            <input type="number" name="quantity" value="${item.quantity}" min="1" class="form-control">
+          </form>
+        </td>
+        <td><fmt:formatNumber value="${item.totalPrice}" type="currency" currencySymbol="VND" /></td>
+      </tr>
+    </c:forEach>
     </tbody>
   </table>
 </section>
@@ -199,25 +223,32 @@
         <h5>Tổng giỏ hàng</h5>
         <div class="d-flex justify-content-between">
           <h6>Tạm tính</h6>
-          <p id="subtotal-value"></p>
+          <p id="subtotal-value">
+            <fmt:formatNumber value="${subtotal}" type="currency" currencySymbol="VND" />
+          </p>
         </div>
         <div class="d-flex justify-content-between">
           <h6>Phí vận chuyển</h6>
-          <p id="shipping-value"></p>
+          <p id="shipping-value">20,000 VND</p>
         </div>
         <div class="d-flex justify-content-between">
           <h6>Thời gian giao hàng dự kiến</h6>
           <p id="shippingtime">1h</p>
         </div>
         <hr class="second-hr">
-        <div id="discount-row" class="d-flex justify-content-between" style="display: none;">
+        <div id="discount-row" class="d-flex justify-content-between">
           <h6>Giảm giá</h6>
-          <p id="discount-value"></p>
+          <p id="discount-value">
+            <fmt:formatNumber value="${discount}" type="currency" currencySymbol="VND" />
+          </p>
         </div>
         <div class="d-flex justify-content-between">
           <h6>Tổng cộng</h6>
-          <p id="total-value"></p>
+          <p id="total-value">
+            <fmt:formatNumber value="${total}" type="currency" currencySymbol="VND" />
+          </p>
         </div>
+
         <div class="form-group my-3">
           <label for="voucherSelect">
             <h6>Chọn voucher</h6>

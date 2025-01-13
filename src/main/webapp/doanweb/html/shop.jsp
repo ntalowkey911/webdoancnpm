@@ -498,7 +498,7 @@
                                          alt="${product.name}">
                                     <h5 class="product-name">${product.name}</h5>
                                     <p class="product-price">${product.price}k </p>
-                                    <h6>createdAt: ${product.createdAt}</h6>
+<%--                                    <h6>createdAt: ${product.createdAt}</h6>--%>
                                 </a>
                                 <button class="btn btn-success">Add to cart</button>
                                 <button class="btn btn-success">Mua ngay</button>
