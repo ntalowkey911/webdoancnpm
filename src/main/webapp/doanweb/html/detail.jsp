@@ -55,7 +55,7 @@
              <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
         <div class="container-fluid mr-5">
                      <!-- <div class="col-1"></div> -->
-            <img src="/images/Page1/LogoWeb.png" onclick="location.reload();" id="logo-img" alt="logo..">
+            <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" onclick="location.reload();" id="logo-img" alt="logo..">
             
             <button class="navbar-toggler" onclick="toggleMenu()">
                 <span><i id = "nav-bar-icon" class="bi bi-list"></i></span>
@@ -64,21 +64,18 @@
           
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    
+
                     <li class="nav-item">
-                        <a class="nav-link " href="/html/index.html">Trang Chủ</a>
+                        <a class="nav-link " href="<%= request.getContextPath() %>/home">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/html/Menu/shop.html">Cửa Hàng</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Quality</a>
-                    </li> -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/html/Menu/AboutUs.html">Thông tin</a>
+                        <a class="nav-link active" href="#">Cửa Hàng</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/html/Menu/ContactUs.html">Liên hệ</a>
+                        <a class="nav-link" href="<%= request.getContextPath() %>/about">Thông tin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%= request.getContextPath() %>/contact">Liên hệ</a>
 
                     </li>
                     <li class="nav-item" id="nav-icons">
@@ -151,18 +148,18 @@
     <section class="container sproduct my-5 pt-5">
         <div class="row mt-5">
             <div class="col-lg-5 col-md-12 col-12">
-                <img class="img-fluid w-100 py-5" src="/images/CanhGa/CanhGaKieuThai.png" id="MainImg" alt="product-img">
-            
+                <img class="img-fluid w-100 py-5 " src="<%= request.getContextPath() %>/${product.image}" alt="${product.name}">
             </div>
             <div class="col-lg-6 col-md-12 col-12">
                 <h6 class="text-secondary mt-5" onclick="window.location.href = 'sproduct1.html';">Trang chủ / Sản phẩm</h6>
-                <h3 class="pt-3 pb-2">Đùi gà kiểu Thái</h3>
-                <h2 class="p">50.000 đ</h2>
+                <h3 class="pt-3 pb-2">${product.name}</h3>
+                <h2 class="p">${product.price}k </h2>
+                <span class="bold">kho  ${product.stock}</span>
                 <span class="bold">Số lượng: </span><input id="noi" class="my-3" type="number" value="1" min="1">
                 <span class="bold"><span id="available-quantity"></span></span><br>
                 <button class="buy-btn" onclick="addToCart()">Thêm vào giỏ hàng</button>
                 <h4 class="mt-5 pb-3">Chi tiết sản phẩm</h4>
-                <span class="text-secondary">Đùi gà kiểu thái là sự kết hợp hoàn hảo giữa gà Việt Nam và hương liệu của Thái tạo nên vị ngon tuyệt vời của món ăn , phụ gia là chanh ớt cay nồng của Việt Nam tạo nên hương vị đặc trưng của món ăn.</span>
+                <span class="text-secondary">${product.description}</span>
             </div>
         </div>
     </section>
@@ -247,27 +244,7 @@
             <hr class="border border-danger border-2 opacity-75 mx-auto">
         </div>
         <div class="row mx-auto container-fluid">
-            <div class="product text-center col-lg-3 col-md-4 col-12">
-                <img class="img-fluid" src="/images/duigaimg/Pasted image (4).png" alt="">
-               
-                <h5 class="product-name">Gà rán sốt cay xí muội</h5>
-                <h4 class="product-price">75.000 đ</h4>
-                <button class="buy-btn" onclick="window.location.href = 'sproduct4.html';">mua ngay</button>
-            </div>
-            <div class="product text-center col-lg-3 col-md-4 col-12">
-                <img class="img-fluid" src="/images/duigaimg/Pasted image (104).png"" alt="">
-               
-                <h5 class="product-name">Gà rán sốt cay kiểu Thái</h5>
-                <h4 class="product-price">65.000 đ</h4>
-                <button class="buy-btn" onclick="window.location.href = 'sproduct5.html';">Mua ngay</button>
-            </div>
-            <div class="product text-center col-lg-3 col-md-4 col-12">
-                <img class="img-fluid" src="/images/duigaimg/Pasted image (102).png"" alt="">
-               
-                <h5 class="product-name">Gà rán giòn sốt chanh dây</h5>
-                <h4 class="product-price">85.000 đ</h4>
-                <button class="buy-btn" onclick="window.location.href = 'sproduct6.html';">Mua ngay</button>
-            </div>
+
             <div class="product container text-center col-lg-3 col-md-4 col-12">
                 <img class="img-fluid" src="/images/duigaimg/Pasted image (103).png"" alt="">
                
@@ -278,69 +255,66 @@
         </div>
     </section>
 
-   <footer class="mt-5 p-5 bg-dark">
-  <div class="row conatiner mx-auto pt-5">
-    <div class="footer-one col-lg-3 col-md-6 col-12">
-    
-      <img id="logo-img-footer" src="/images/Page1/LogoWeb.png" alt="logo">
-      <p class="py-3 pl-2 ml-4 mr-5">Tiệm Gà Sao Hỏa là một quán ăn hiện đại với phong cách thiết kế đậm chất không gian. Thực đơn của quán không chỉ có các món gà nổi tiếng, mà còn kèm theo những món ăn độc lạ lấy cảm hứng từ vũ trụ mang lại cảm giác mới mẻ cho thực khách.</p>
-    
-    </div>
+    <footer class="mt-5 p-5 bg-dark">
+        <div class="row conatiner mx-auto pt-5">
+            <div class="footer-one col-lg-3 col-md-6 col-12">
 
-    <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
-      <h5 class="pb-2">Liên kết nhanh</h5>
-      <ul class="text-uppercase list-unstyled">
-        <li><a href="index.html">trang chủ</a></li>
-        <li><a href="/html/Menu/shop.html">Cửa hàng</a></li>
-        <li><a href="/html/Menu/AboutUs.html">thông tin</a></li>
-        <li><a href="/html/Menu/ContactUs.html">liên hệ</a></li>
-        <li><a href="/html/Menu/Cart.html">Giỏ hàng</a></li>
-      </ul>
-    </div>
-    <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
-      <h5 class="pb-2">Liên hệ với chúng tôi</h5>
-      <div>
-        <h6 class="text-uppercase">Địa chỉ</h6>
-        <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
-      </div>
-      <div>
-        <h6 class="text-uppercase">điện thoại</h6>
-        <p>0849294483</p>
-      </div>
-      <div>
-        <h6 class="text-uppercase">Email</h6>
-        <p>MarsStore@gmail.com</p>
-      </div>
-    </div>
-    <div class="Photos col-lg-3 col-md-6 col-12">
-         <h5 class="pb-2">Các đơn vị tài trợ</h5>
-    <div class="row">
-      <img class="footer-img img-fluid mb-2" src="/images/Page1/image copy 3.png" alt="leather-img">
-      <img class="footer-img img-fluid mb-2" src="/images/Page1/image copy 2.png" alt="leather-img">
-      <img class="footer-img img-fluid mb-2" src="/images/Page1/image copy.png" alt="leather-img">
-      <img class="footer-img img-fluid mb-2" src="/images/Page1/image.png" alt="leather-img">
-    </div>
-    </div>
-  <div class="copyright mt-5">
-    <div class="row container mx-auto">
-      <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
-        <img src="img/payment.png" alt="payment..logo">
-      </div> -->
+                <img id="logo-img-footer" src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" alt="logo">
+                <p class="py-3 pl-2 ml-4 mr-5">Tiệm Gà Sao Hỏa là một quán ăn hiện đại với phong cách thiết kế đậm chất không gian. Thực đơn của quán không chỉ có các món gà nổi tiếng, mà còn kèm theo những món ăn độc lạ lấy cảm hứng từ vũ trụ mang lại cảm giác mới mẻ cho thực khách.</p>
 
-      <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
-        <p>MARSSTORE WEBSITE &copy; DESIGN 2024</p>
-      </div>
+            </div>
 
-      <div class="col-lg-3 col-md-6 col-12">
-        <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
-        <a href="https://x.com/home?lang=vi"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="https://www.linkedin.com/feed/"><i class="bi bi-linkedin"></i></a>
-        <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
-      </div>
-    </div>
-  </div>  
-</footer>
+            <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+                <h5 class="pb-2">Liên kết nhanh</h5>
+                <ul class="text-uppercase list-unstyled">
+                    <li><a href="index.html">trang chủ</a></li>
+                    <li><a href="/html/Menu/shop.html">Cửa hàng</a></li>
+                    <li><a href="/html/Menu/AboutUs.html">thông tin</a></li>
+                    <li><a href="/html/Menu/ContactUs.html">liên hệ</a></li>
+                    <li><a href="/html/Menu/Cart.html">Giỏ hàng</a></li>
+                </ul>
+            </div>
+            <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+                <h5 class="pb-2">Liên hệ với chúng tôi</h5>
+                <div>
+                    <h6 class="text-uppercase">Địa chỉ</h6>
+                    <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
+                </div>
+                <div>
+                    <h6 class="text-uppercase">điện thoại</h6>
+                    <p>0849294483</p>
+                </div>
+                <div>
+                    <h6 class="text-uppercase">Email</h6>
+                    <p>MarsStore@gmail.com</p>
+                </div>
+            </div>
+            <div class="Photos col-lg-3 col-md-6 col-12">
+                <h5 class="pb-2">Các đơn vị tài trợ</h5>
+                <div class="row">
+                    <img class="footer-img img-fluid mb-2" src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy 3.png" alt="leather-img">
+                    <img class="footer-img img-fluid mb-2" src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy 2.png" alt="leather-img">
+                    <img class="footer-img img-fluid mb-2" src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy.png" alt="leather-img">
+                    <img class="footer-img img-fluid mb-2" src="<%= request.getContextPath() %>/doanweb/images/Page1/image.png" alt="leather-img">
+                </div>
+            </div>
+            <div class="copyright mt-5">
+                <div class="row container mx-auto">
+                    <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
+                        <p>MARSSTORE WEBSITE &copy; DESIGN 2024</p>
+                    </div>
 
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/home?lang=vi"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://www.linkedin.com/feed/"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
