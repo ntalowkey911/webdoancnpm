@@ -301,7 +301,7 @@
 
         /*sidebar  */
         /* Định dạng toàn bộ danh sách dưới dạng bảng */
-        .list-unstyled {
+        .list-category{
             list-style-type: none; /* Xóa các dấu đầu dòng */
             padding: 0;
             margin: 0;
@@ -310,7 +310,7 @@
         }
 
         /* Định dạng hàng đầu tiên (thẻ h5) */
-        .list-unstyled .category-title {
+        .list-category .category-title {
             background-color: #BC1F23; /* Màu nền khác biệt */
             color: white; /* Màu chữ trắng */
             padding: 10px;
@@ -322,7 +322,7 @@
         }
 
         /* Định dạng các mục trong danh sách (li) */
-        .list-unstyled li {
+        .list-category li {
             background-color: #f9f9f9; /* Màu nền cho các hàng khác */
             border: 1px solid #ddd; /* Đường viền */
             padding: 10px; /* Khoảng cách bên trong */
@@ -330,19 +330,19 @@
         }
 
         /* Hiệu ứng hover cho các hàng */
-        .list-unstyled li:hover {
+        .list-category li:hover {
             background-color: #f1f1f1; /* Màu nền khi hover */
         }
 
         /* Định dạng liên kết bên trong li */
-        .list-unstyled li a {
+        .list-category li a {
             text-decoration: none; /* Xóa gạch chân */
             color: #333; /* Màu chữ */
             display: block; /* Để toàn bộ hàng có thể click */
         }
 
         /* Hiệu ứng hover cho liên kết */
-        .list-unstyled li a:hover {
+        .list-category li a:hover {
             color: #BC1F23; /* Đổi màu chữ khi hover */
         }
 
@@ -454,7 +454,7 @@
             <!-- Sidebar -->
             <div class="col-md-3">
                 <div class="category-list mb-4">
-                    <ul class="list-unstyled">
+                    <ul class="list-category">
                         <h5 class="category-title">Categories</h5>
                         <c:forEach var="o" items="${categoriesList}">
                             <li><a href="?categoryId=${o.id}">${o.name}</a></li>
