@@ -47,7 +47,7 @@ public class ShopController extends HttpServlet {
         Products l=productDAO.getLatestProduct();
         request.setAttribute("lastp", l);
 
-
+// loc sp
         String categoryId = request.getParameter("categoryId");
         if (categoryId != null) {
             List<Products> filteredProducts = productDAO.getProductsByCategory(Integer.parseInt(categoryId));

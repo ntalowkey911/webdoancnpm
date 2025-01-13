@@ -33,7 +33,7 @@ const productList = {
     price: "50000",
     image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuThai.png",
     quantity: 10,
-    link: "/WebProgramming/MartianChickenShop/html/chickendishes/sproduct1.html",
+    link: "/WebProgramming/MartianChickenShop/html/chickendishes/detail.jsp",
   },
   2: {
     name: "Cánh gà giòn",
