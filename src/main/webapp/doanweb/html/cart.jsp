@@ -74,6 +74,41 @@
       border-radius: 0.25rem;
       background-color: #fff;
     }
+
+    .quantity-selector {
+      display: flex;
+      align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+      justify-content: center; /* Căn giữa các phần tử theo chiều ngang */
+      gap: 10px; /* Khoảng cách giữa các phần tử */
+      padding-top: 12px;
+    }
+
+    .quantity-selector button {
+      padding: 5px 10px;
+      font-size: 20px; /* Điều chỉnh kích thước chữ để dễ nhìn */
+      border: 1px solid #ccc;
+      background-color: #f0f0f0;
+      cursor: pointer;
+      width: 35px; /* Điều chỉnh kích thước nút */
+      height: 35px; /* Điều chỉnh kích thước nút */
+      display: flex;
+      align-items: center; /* Căn giữa nội dung nút theo chiều dọc */
+      justify-content: center; /* Căn giữa nội dung nút theo chiều ngang */
+    }
+
+    .quantity-selector button:hover {
+      background-color: #e0e0e0;
+    }
+
+    .quantity-selector input {
+      width: 50px; /* Điều chỉnh chiều rộng của ô nhập liệu */
+      text-align: center;
+      padding: 5px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+    }
+
+
   </style>
 </head>
 <body>
@@ -104,11 +139,19 @@
           <a class="nav-link" href="<%= request.getContextPath() %>/contact">Liên hệ</a>
 
         </li>
-        <li class="nav-item" id="nav-icons">
-          <!-- <i class="bi bi-search"></i> -->
-          <a href="/html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
-          <a href="/html/Menu/Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
-        </li>
+        <div class="nav-item">
+          <li class="nav-item">
+            <a href="/html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
+            <!-- Biểu tượng giỏ hàng với số lượng sản phẩm -->
+            <a href="<%= request.getContextPath() %>/cart" class="position-relative">
+              <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i> <!-- Biểu tượng giỏ hàng -->
+              <!-- Số lượng sản phẩm trong giỏ -->
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
+                ${sessionScope.totalItems != null ? sessionScope.totalItems : 0}
+              </span>
+            </a>
+          </li>
+        </div>
 
       </ul>
     </div>
@@ -180,29 +223,22 @@
 </section>
 
 <section id="cart-container" class="container-fluid my-5">
-  <table width="100%" id="cart-table">
+  <table id="cart-table">
     <thead>
     <tr>
-      <td>Xóa</td>
-      <td>Hình ảnh</td>
-      <td>Sản phẩm</td>
-      <td>Giá</td>
-      <td>Số lượng</td>
-      <td>Tổng tiền</td>
+      <td class="col-12 col-md-2">Hình ảnh</td> <!-- Chiếm 20% trên màn hình lớn -->
+      <td class="col-12 col-md-2">Sản phẩm</td> <!-- Chiếm 20% trên màn hình lớn -->
+      <td class="col-12 col-md-1">Giá</td> <!-- Chiếm 15% trên màn hình lớn -->
+      <td class="col-12 col-md-2">Số lượng</td> <!-- Chiếm 20% trên màn hình lớn -->
+      <td class="col-12 col-md-1">Tổng tiền</td> <!-- Chiếm 10% trên màn hình lớn -->
+      <td class="col-12 col-md-1">Xóa</td> <!-- Chiếm 10% trên màn hình lớn -->
     </tr>
     </thead>
     <tbody>
     <!-- Hiển thị sản phẩm từ giỏ hàng -->
     <c:forEach var="item" items="${cart}">
       <tr>
-        <td>
-          <form action="removeFromCart" method="post">
-            <input type="hidden" name="productId" value="${item.product.id}">
-            <button type="submit" class="btn btn-danger">
-              <i class="bi bi-trash3"></i> <!-- Icon từ Bootstrap Icons -->
-            </button>
-          </form>
-        </td>
+
         <td>
           <img src="${item.product.image}" alt="${item.product.name}" width="100">
         </td>
@@ -211,10 +247,22 @@
         <td>
           <form action="updateQuantity" method="post">
             <input type="hidden" name="productId" value="${item.product.id}">
-            <input type="number" name="quantity" value="${item.quantity}" min="1" class="form-control">
+            <div class="quantity-selector">
+              <button type="button" class="btn-minus" onclick="updateQuantity(-1)">-</button>
+              <input type="number" name="quantity" id="quantity" value="${item.quantity}" min="1" class="form-control" readonly>
+              <button type="button" class="btn-plus" onclick="updateQuantity(1)">+</button>
+            </div>
           </form>
         </td>
         <td>${item.totalPrice} VND</td>
+        <td>
+          <form action="removeFromCart" method="post">
+            <input type="hidden" name="productId" value="${item.product.id}">
+            <button type="submit" class="remove-btn">
+              <i class="bi bi-trash3"></i> <!-- Icon từ Bootstrap Icons -->
+            </button>
+          </form>
+        </td>
       </tr>
     </c:forEach>
     </tbody>

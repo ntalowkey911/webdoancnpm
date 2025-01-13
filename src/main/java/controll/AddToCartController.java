@@ -46,6 +46,7 @@ public class AddToCartController extends HttpServlet {
         HttpSession session = request.getSession();
         List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
 
+
         // Nếu giỏ hàng chưa được tạo, khởi tạo giỏ hàng mới
         if (cart == null) {
             cart = new ArrayList<>();
@@ -67,6 +68,12 @@ public class AddToCartController extends HttpServlet {
         if (!productFound) {
             cart.add(new CartItem(product, 1)); // Mặc định thêm 1 sản phẩm vào giỏ
         }
+        // Cập nhật số lượng sản phẩm trong giỏ hàng
+        int totalItems = 0;
+        for (CartItem cartItem : cart) {
+            totalItems += cartItem.getQuantity(); // Tính tổng số lượng sản phẩm trong giỏ
+        }
+        session.setAttribute("totalItems", totalItems); // Lưu số lượng vào session
 
         // Kiểm tra hành động "Mua ngay"
         if ("buy-now".equals(action)) {

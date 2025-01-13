@@ -97,11 +97,19 @@
                     <a class="nav-link" href="<%= request.getContextPath() %>/contact">Liên hệ</a>
 
                 </li>
-                <li class="nav-item" id="nav-icons">
-                    <!-- <i class="bi bi-search"></i> -->
-                    <a href="/html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
-                    <a href="/html/Menu/Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
-                </li>
+                <div class="nav-item">
+                    <li class="nav-item">
+                        <a href="/html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
+                        <!-- Biểu tượng giỏ hàng với số lượng sản phẩm -->
+                        <a href="<%= request.getContextPath() %>/cart" class="position-relative">
+                            <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i> <!-- Biểu tượng giỏ hàng -->
+                            <!-- Số lượng sản phẩm trong giỏ -->
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
+                                ${sessionScope.totalItems != null ? sessionScope.totalItems : 0}
+                            </span>
+                        </a>
+                    </li>
+                </div>
 
             </ul>
         </div>
@@ -115,7 +123,7 @@
                     <h4><a href="/html/index.html">TRANG CHỦ</a></h4>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="/html/Menu/Cart.html">GIỎ HÀNG</a></h4>
+                    <h4><a href="/">GIỎ HÀNG</a></h4>
                 </div>
                 <div class="menu-section">
                     <h4><a href="/html/Menu/AboutUs.html">VỀ MFS</a></h4>
@@ -500,8 +508,8 @@
                                     <p class="product-price">${product.price}k </p>
 <%--                                    <h6>createdAt: ${product.createdAt}</h6>--%>
                                 </a>
-                                <button class="btn btn-success">Add to cart</button>
-                                <button class="btn btn-success">Mua ngay</button>
+                                <button class="btn btn-success" onclick="window.location.href='add-to-cart?id=${product.id}'">Add to cart</button>
+                                <button class="btn btn-success" onclick="window.location.href='add-to-cart?id=${product.id}'">Mua ngay</button>
                             </div>
                         </div>
                     </c:forEach>

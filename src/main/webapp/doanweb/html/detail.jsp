@@ -124,11 +124,19 @@
                     <a class="nav-link" href="<%= request.getContextPath() %>/contact">Liên hệ</a>
 
                 </li>
-                <li class="nav-item" id="nav-icons">
-                    <!-- <i class="bi bi-search"></i> -->
-                    <a href="<%= request.getContextPath() %>/html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
-                    <a href="<%= request.getContextPath() %>/cart"><i class="bi bi-bag-heart-fill"></i></a>
-                </li>
+                <div class="nav-item">
+                    <li class="nav-item">
+                        <a href="/html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
+                        <!-- Biểu tượng giỏ hàng với số lượng sản phẩm -->
+                        <a href="<%= request.getContextPath() %>/cart" class="position-relative">
+                            <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i> <!-- Biểu tượng giỏ hàng -->
+                            <!-- Số lượng sản phẩm trong giỏ -->
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
+                                ${sessionScope.totalItems != null ? sessionScope.totalItems : 0}
+                            </span>
+                        </a>
+                    </li>
+                </div>
 
             </ul>
         </div>

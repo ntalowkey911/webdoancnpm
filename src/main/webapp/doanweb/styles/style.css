@@ -64,7 +64,7 @@
 }
 
 #nav-icons {
-  margin-left: 25px;
+  margin-left: 0px;
   margin-right: 0px;
 
 }
@@ -214,7 +214,18 @@
   margin-bottom: 8px;
   display: inline-block;
 }
+.position-relative {
+  position: relative; /* Đặt vị trí của giỏ hàng so với navbar */
+}
 
+#cart-count {
+  position: absolute;
+  top: -5px; /* Đưa số lượng lên trên */
+  right: -5px; /* Đưa số lượng ra ngoài một chút */
+  font-size: 0.9rem; /* Giảm kích thước của số lượng */
+  padding: 0.2rem 0.6rem; /* Điều chỉnh padding của badge */
+  z-index: 10; /* Đảm bảo số lượng luôn hiển thị phía trên */
+}
 @media (max-width: 1500px) {
   .navbar {
     height: 120px;
