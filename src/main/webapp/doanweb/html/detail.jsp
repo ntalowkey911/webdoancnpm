@@ -41,11 +41,22 @@
         .sproduct input:focus {
             outline: none;
         }
-        .buy-btn {
-            background: #BC1F23;
+        .cart-btn {
+            background-color: #BC1F23;
+            font-size: 0.8rem;
+            font-weight: 700;
+            outline: none;
+            border-radius: 2px;
+            border: none;
             color: aliceblue;
-            opacity: 1;
-            transition: 0.3s all;
+            padding: 13px 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.5s ease-in-out;
+        }
+
+        .cart-btn:hover {
+            background-color: black;
         }
 
     </style>
@@ -155,10 +166,11 @@
                 <h6 class="text-secondary mt-5" onclick="window.location.href = 'sproduct1.html';">Trang chủ / Sản phẩm</h6>
                 <h3 class="pt-3 pb-2">${product.name}</h3>
                 <h2 class="p">${product.price}k </h2>
-                <span class="bold">kho  ${product.stock}</span>
                 <span class="bold">Số lượng: </span><input id="noi" class="my-3" type="number" value="1" min="1">
+                <span class="bold">${product.stock} sản phẩm có sẵn</span>
                 <span class="bold"><span id="available-quantity"></span></span><br>
-                <button class="buy-btn" onclick="addToCart()">Thêm vào giỏ hàng</button>
+                <button class="buy-btn" onclick="addToCart()">Mua ngay</button>
+                <button class="cart-btn" onclick="addToCart()">Thêm vào giỏ hàng</button>
                 <h4 class="mt-5 pb-3">Chi tiết sản phẩm</h4>
                 <span class="text-secondary">${product.description}</span>
             </div>
@@ -247,7 +259,7 @@
         <div class="row mx-auto container-fluid">
 
             <div class="product container text-center col-lg-3 col-md-4 col-12">
-                <img class="img-fluid" src="/images/duigaimg/Pasted image (103).png"" alt="">
+                <img class="img-fluid" src="/images/duigaimg/Pasted image (103).png" alt="">
                
                 <h5 class="product-name">Gà rán xù kiểu Nhật</h5>
                 <h4 class="product-price">55.000 đ</h4>
