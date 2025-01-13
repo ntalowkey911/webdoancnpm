@@ -309,42 +309,51 @@
             width: 100%; /* Căn chỉnh chiều rộng 100% */
         }
 
-        /* Định dạng hàng đầu tiên (thẻ h5) */
-        .list-category .category-title {
-            background-color: #BC1F23; /* Màu nền khác biệt */
-            color: white; /* Màu chữ trắng */
+        /* Định dạng tiêu đề category */
+        .category-title, .lproduct-title {
+            background-color: #BC1F23; /* Màu nền đỏ */
+            color: white !important;
             padding: 10px;
             text-align: center;
             font-size: 18px;
             font-weight: bold;
             text-transform: uppercase;
             border: 1px solid #ddd; /* Đường viền */
+            margin-bottom: 15px; /* Khoảng cách dưới tiêu đề */
+            display: block; /* Đảm bảo hiển thị đầy đủ */
+            width: 100%; /* Đảm bảo chiều rộng đầy đủ */
         }
+
 
         /* Định dạng các mục trong danh sách (li) */
         .list-category li {
-            background-color: #f9f9f9; /* Màu nền cho các hàng khác */
+            background-color: #f9f9f9; /* Màu nền sáng cho các mục */
             border: 1px solid #ddd; /* Đường viền */
-            padding: 10px; /* Khoảng cách bên trong */
-            text-align: left; /* Căn trái nội dung */
+            padding: 10px;
+            text-align: left;
+            transition: background-color 0.3s ease; /* Hiệu ứng chuyển đổi màu nền khi hover */
         }
 
         /* Hiệu ứng hover cho các hàng */
         .list-category li:hover {
-            background-color: #f1f1f1; /* Màu nền khi hover */
+            background-color: #e0e0e0; /* Màu nền nhạt hơn khi hover */
         }
 
         /* Định dạng liên kết bên trong li */
         .list-category li a {
             text-decoration: none; /* Xóa gạch chân */
-            color: #333; /* Màu chữ */
-            display: block; /* Để toàn bộ hàng có thể click */
+            color: #333; /* Màu chữ tối */
+            display: block; /* Toàn bộ hàng có thể click */
+            padding: 5px 0; /* Thêm khoảng cách trên/dưới cho liên kết */
+            font-weight: normal; /* Làm cho chữ không đậm */
         }
 
         /* Hiệu ứng hover cho liên kết */
         .list-category li a:hover {
-            color: #BC1F23; /* Đổi màu chữ khi hover */
+            color: #BC1F23; /* Đổi màu chữ thành màu đỏ khi hover */
+            font-weight: bold; /* Làm đậm chữ khi hover */
         }
+
 
 
 
@@ -454,16 +463,17 @@
             <!-- Sidebar -->
             <div class="col-md-3">
                 <div class="category-list mb-4">
+                    <h5 class="category-title">Categories</h5>
                     <ul class="list-category">
-                        <h5 class="category-title">Categories</h5>
                         <c:forEach var="o" items="${categoriesList}">
                             <li><a href="?categoryId=${o.id}">${o.name}</a></li>
                         </c:forEach>
                     </ul>
                 </div>
 
+
                 <div class="last-product">
-                    <h5>Last Product</h5>
+                    <h5 class="lproduct-title">Last Product</h5>
                     <c:if test="${not empty lastp}">
                         <img src="${pageContext.request.contextPath}/${lastp.image}" alt="${lastp.name}">
                         <p>${lastp.name}</p>
