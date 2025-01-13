@@ -438,7 +438,7 @@
 
     </script>
 
-    <div style="text-align: right; margin-bottom: 20px;">
+    <div style="text-align: right; margin-right: 100px; ">
         <button class="sort-button" onclick="sortProducts('asc')">Sắp xếp từ thấp đến cao</button>
         <button class="sort-button" onclick="sortProducts('desc')">Sắp xếp từ cao đến thấp</button>
     </div>

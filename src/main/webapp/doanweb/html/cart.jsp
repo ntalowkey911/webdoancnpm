@@ -256,12 +256,9 @@
         </td>
         <td>${item.totalPrice} VND</td>
         <td>
-          <form action="removeFromCart" method="post">
-            <input type="hidden" name="productId" value="${item.product.id}">
-            <button type="submit" class="remove-btn">
-              <i class="bi bi-trash3"></i>
-            </button>
-          </form>
+          <button type="button" class="remove-btn" onclick="window.location.href='add-to-cart?id=${item.product.id}&action=remove'">
+            <i class="bi bi-trash3"></i>
+          </button>
         </td>
       </tr>
     </c:forEach>
