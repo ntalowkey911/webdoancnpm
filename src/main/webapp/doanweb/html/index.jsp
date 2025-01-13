@@ -68,7 +68,7 @@
 
           </li>
           <li class="nav-item" id="admin-btn" style="display: none;">
-            <a class="nav-link" href="<%= request.getContextPath() %>/doanweb/Admin.jsp">Quản trị</a>
+            <a class="nav-link" href="<%= request.getContextPath() %>/doanweb/html/Admin.jsp">Quản trị</a>
           </li>
           <div class="nav-item" id="nav-icons">
             <!-- <i class="bi bi-search"></i> -->
@@ -82,7 +82,7 @@
               <a href="javascript:void(0);" onclick="logout()">Đăng xuất</a>
             </div>
 
-            <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
+            <a href="<%= request.getContextPath() %>/cart"><i class="bi bi-bag-heart-fill"></i></a>
           </div>
 
         </ul>

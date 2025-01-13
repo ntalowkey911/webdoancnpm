@@ -61,5 +61,6 @@ public class ShopController extends HttpServlet {
         // Chuyển tiếp yêu cầu tới trang JSP để hiển thị
         RequestDispatcher dispatcher = request.getRequestDispatcher("doanweb/html/shop.jsp");
         dispatcher.forward(request, response);
+
     }
 }
