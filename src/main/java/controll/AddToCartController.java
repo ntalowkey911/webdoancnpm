@@ -25,6 +25,7 @@ public class AddToCartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Lấy ID sản phẩm từ tham số truy vấn
         String productId = request.getParameter("id");
+        String action = request.getParameter("action"); // Lấy hành động (buy-now hoặc thêm vào giỏ hàng)
 
         // Kiểm tra nếu ID sản phẩm không hợp lệ
         if (productId == null || productId.isEmpty()) {
@@ -67,8 +68,16 @@ public class AddToCartController extends HttpServlet {
             cart.add(new CartItem(product, 1)); // Mặc định thêm 1 sản phẩm vào giỏ
         }
 
-        // Chuyển hướng người dùng đến trang giỏ hàng
-        response.sendRedirect("/cart");
+        // Kiểm tra hành động "Mua ngay"
+        if ("buy-now".equals(action)) {
+            // Chuyển hướng đến trang giỏ hàng sau khi thêm sản phẩm
+            response.sendRedirect("/cart");
+        } else {
+            // Thông báo thêm sản phẩm thành công mà không chuyển trang
+            request.setAttribute("message", "Sản phẩm đã được thêm vào giỏ hàng!");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/detail");
+            dispatcher.forward(request, response);
+        }
     }
 
     // Lấy thông tin sản phẩm từ cơ sở dữ liệu theo ID

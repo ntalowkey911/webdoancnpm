@@ -3,24 +3,29 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shop</title>
-  <link rel="stylesheet" href="<%= request.getContextPath() %>/doanweb/styles/style.css">
-  <link rel="icon" href="<%= request.getContextPath() %>/doanweb/images/Page1/LoadWeb.png" type="image/png">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/doanweb/styles/style.css">
+    <link rel="icon" href="<%= request.getContextPath() %>/doanweb/images/Page1/LoadWeb.png" type="image/png">
 
-  <script src="/js/index.js"></script>
-  <script
-          src="https://kit.fontawesome.com/cc9450bd42.js"
-          crossorigin="anonymous"
-  ></script>
-  <link href="<%= request.getContextPath() %>/https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <script src="<%= request.getContextPath() %>/https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/js/index.js"></script>
+    <script
+            src="https://kit.fontawesome.com/cc9450bd42.js"
+            crossorigin="anonymous"
+    ></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
 
-  <!-- bootstarp stackpath cdn -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <!-- Bootstrap icons cdn-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- bootstarp stackpath cdn -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Bootstrap icons cdn-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <style>
     .ShopMore {
       background-color: black;
@@ -202,14 +207,14 @@
           <img src="${item.product.image}" alt="${item.product.name}" width="100">
         </td>
         <td>${item.product.name}</td>
-        <td><fmt:formatNumber value="${item.product.price}" type="currency" currencySymbol="VND" /></td>
+        <td>${item.product.price} VND</td>
         <td>
           <form action="updateQuantity" method="post">
             <input type="hidden" name="productId" value="${item.product.id}">
             <input type="number" name="quantity" value="${item.quantity}" min="1" class="form-control">
           </form>
         </td>
-        <td><fmt:formatNumber value="${item.totalPrice}" type="currency" currencySymbol="VND" /></td>
+        <td>${item.totalPrice} VND</td>
       </tr>
     </c:forEach>
     </tbody>
@@ -224,7 +229,7 @@
         <div class="d-flex justify-content-between">
           <h6>Tạm tính</h6>
           <p id="subtotal-value">
-            <fmt:formatNumber value="${subtotal}" type="currency" currencySymbol="VND" />
+            ${subtotal} VND
           </p>
         </div>
         <div class="d-flex justify-content-between">
@@ -324,7 +329,9 @@
     <div class="footer-one col-lg-3 col-md-6 col-12">
 
       <img id="logo-img-footer" src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" alt="logo">
-      <p class="py-3 pl-2 ml-4 mr-5">Tiệm Gà Sao Hỏa là một quán ăn hiện đại với phong cách thiết kế đậm chất không gian. Thực đơn của quán không chỉ có các món gà nổi tiếng, mà còn kèm theo những món ăn độc lạ lấy cảm hứng từ vũ trụ mang lại cảm giác mới mẻ cho thực khách.</p>
+      <p class="py-3 pl-2 ml-4 mr-5">Tiệm Gà Sao Hỏa là một quán ăn hiện đại với phong cách thiết kế đậm chất
+        không gian. Thực đơn của quán không chỉ có các món gà nổi tiếng, mà còn kèm theo những món ăn độc lạ lấy
+        cảm hứng từ vũ trụ mang lại cảm giác mới mẻ cho thực khách.</p>
 
     </div>
 
@@ -356,18 +363,18 @@
     <div class="Photos col-lg-3 col-md-6 col-12">
       <h5 class="pb-2">Các đơn vị tài trợ</h5>
       <div class="row">
-        <img class="footer-img img-fluid mb-2" src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy 3.png" alt="leather-img">
-        <img class="footer-img img-fluid mb-2" src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy 2.png" alt="leather-img">
-        <img class="footer-img img-fluid mb-2" src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy.png" alt="leather-img">
-        <img class="footer-img img-fluid mb-2" src="<%= request.getContextPath() %>/doanweb/images/Page1/image.png" alt="leather-img">
+        <img class="footer-img img-fluid mb-2"
+             src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy 3.png" alt="leather-img">
+        <img class="footer-img img-fluid mb-2"
+             src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy 2.png" alt="leather-img">
+        <img class="footer-img img-fluid mb-2"
+             src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy.png" alt="leather-img">
+        <img class="footer-img img-fluid mb-2"
+             src="<%= request.getContextPath() %>/doanweb/images/Page1/image.png" alt="leather-img">
       </div>
     </div>
     <div class="copyright mt-5">
       <div class="row container mx-auto">
-        <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
-          <img src="img/payment.png" alt="payment..logo">
-        </div> -->
-
         <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
           <p>MARSSTORE WEBSITE &copy; DESIGN 2024</p>
         </div>
@@ -384,6 +391,10 @@
 
 </footer>
 <!-- bootstarp cdn -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
 </html>

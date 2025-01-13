@@ -67,6 +67,32 @@
             background-color: black;
         }
 
+        .ShopMore {
+            background-color: black;
+            font-size: 18px;
+            font-weight: 700;
+            outline: none;
+            border-radius: 2px;
+            border: none;
+            color: aliceblue;
+            padding: 13px 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.5s ease-in-out;
+            padding: 20px;
+            width: 250px;
+        }
+
+        .ShopMore:hover {
+            background-color: #BC1F23;
+            color: black;
+        }
+
+        .alert-success {
+            width: 61%;  /* Điều chỉnh chiều rộng của thông báo */
+            text-align: center;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -199,16 +225,39 @@
 
             <button
                     class="buy-btn"
-                    onclick="buyNow()">
+                    onclick="window.location.href='add-to-cart?id=${product.id}&action=buy-now'">
                 Mua ngay
             </button>
-            <button class="cart-btn" onclick="window.location.href='add-to-cart?id=${product.id}'">Thêm vào giỏ hàng</button>
+            <button class="cart-btn" onclick="window.location.href='add-to-cart?id=${product.id}'">Thêm vào giỏ hàng
+            </button>
+            <%
+                String message = (String) request.getAttribute("message");
+                if (message != null) {
+            %>
+            <div class="alert alert-success" id="successMessage">
+                <%= message %>
+            </div>
+            <% } %>
+            <script>
+                // Kiểm tra xem có thông báo hay không
+                window.onload = function() {
+                    var messageElement = document.getElementById("successMessage");
+                    if (messageElement) {
+                        messageElement.style.display = "block";  // Hiển thị thông báo
+                        setTimeout(function() {
+                            messageElement.style.display = "none";  // Ẩn thông báo sau 2 giây
+                        }, 2000);  // 2000ms = 2s
+                    }
+                };
+            </script>
+
             <h4 class="mt-5 pb-3">Chi tiết sản phẩm</h4>
             <span class="text-secondary">${product.description}</span>
         </div>
     </div>
 
 </section>
+
 
 <!-- Product Review Section -->
 <section class="container my-5">
@@ -326,6 +375,7 @@
         </button>
     </div>
 </section>
+
 <footer class="mt-5 p-5 bg-dark">
     <div class="row conatiner mx-auto pt-5">
         <div class="footer-one col-lg-3 col-md-6 col-12">
