@@ -259,7 +259,7 @@
           <form action="removeFromCart" method="post">
             <input type="hidden" name="productId" value="${item.product.id}">
             <button type="submit" class="remove-btn">
-              <i class="bi bi-trash3"></i> <!-- Icon từ Bootstrap Icons -->
+              <i class="bi bi-trash3"></i>
             </button>
           </form>
         </td>
@@ -277,7 +277,7 @@
         <div class="d-flex justify-content-between">
           <h6>Tạm tính</h6>
           <p id="subtotal-value">
-            ${subtotal} VND
+            <strong>${sessionScope.totalPrice} VND</strong>
           </p>
         </div>
         <div class="d-flex justify-content-between">

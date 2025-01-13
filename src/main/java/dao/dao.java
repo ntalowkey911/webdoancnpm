@@ -1,5 +1,6 @@
 package dao;
 
+import dao.cart.CartItem;
 import entity.Categories;
 import entity.Products;
 
@@ -184,6 +185,39 @@ public class dao {
         }
         return 0;
     }
+    //Tổng giá tiền của giỏ hàng
+    public double getTotalCartPrice(ArrayList<CartItem> cartList) {
+        double sum = 0;
+
+        // Kiểm tra nếu giỏ hàng không rỗng
+        if (cartList != null && !cartList.isEmpty()) {
+            for (CartItem cartItem : cartList) {
+                // Truy vấn giá của sản phẩm từ cơ sở dữ liệu theo ID
+                String query = "SELECT price FROM products WHERE id = ?";
+
+                try (Connection connection = MySQLConnection.getConnection();
+                     PreparedStatement statement = connection.prepareStatement(query)) {
+
+                    // Thiết lập tham số cho câu lệnh SQL (ID sản phẩm)
+                    statement.setInt(1, cartItem.getProduct().getId());
+
+                    try (ResultSet rs = statement.executeQuery()) {
+                        // Nếu có sản phẩm, lấy giá và tính tổng
+                        if (rs.next()) {
+                            double price = rs.getDouble("price");
+                            // Cộng giá trị của sản phẩm vào tổng giỏ hàng (có nhân với số lượng)
+                            sum += price * cartItem.getQuantity();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();  // In lỗi nếu có sự cố
+                }
+            }
+        }
+
+        return sum;  // Trả về tổng giá trị giỏ hàng
+    }
+
 
     public static void main(String[] args) {
         dao d = new dao();

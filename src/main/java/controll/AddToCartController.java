@@ -2,6 +2,7 @@ package controll;
 
 import dao.MySQLConnection;
 import dao.cart.CartItem;
+import dao.dao;
 import entity.Products;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -21,6 +22,7 @@ import java.util.List;
 @WebServlet("/add-to-cart") // Đường dẫn để gọi servlet
 public class AddToCartController extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private dao dao = new dao();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Lấy ID sản phẩm từ tham số truy vấn
@@ -34,7 +36,7 @@ public class AddToCartController extends HttpServlet {
         }
 
         // Lấy sản phẩm từ cơ sở dữ liệu
-        Products product = getProductById(Integer.parseInt(productId));
+        Products product = dao.getProductById(Integer.parseInt(productId));
 
         // Nếu sản phẩm không tồn tại, chuyển hướng đến trang lỗi
         if (product == null) {
@@ -68,12 +70,16 @@ public class AddToCartController extends HttpServlet {
         if (!productFound) {
             cart.add(new CartItem(product, 1)); // Mặc định thêm 1 sản phẩm vào giỏ
         }
+
         // Cập nhật số lượng sản phẩm trong giỏ hàng
         int totalItems = 0;
         for (CartItem cartItem : cart) {
             totalItems += cartItem.getQuantity(); // Tính tổng số lượng sản phẩm trong giỏ
         }
         session.setAttribute("totalItems", totalItems); // Lưu số lượng vào session
+        //Tổng giá tiền của tất cả sản phẩm trong giỏ hàng
+        double totalPrice = dao.getTotalCartPrice((ArrayList<CartItem>) cart);
+        session.setAttribute("totalPrice", totalPrice);
 
         // Kiểm tra hành động "Mua ngay"
         if ("buy-now".equals(action)) {
@@ -87,39 +93,6 @@ public class AddToCartController extends HttpServlet {
         }
     }
 
-    // Lấy thông tin sản phẩm từ cơ sở dữ liệu theo ID
-    private Products getProductById(int productId) {
-        Products product = null;
-        String query = "SELECT * FROM Products WHERE id = ?";  // Câu lệnh SQL để lấy sản phẩm theo ID
-
-        try (Connection connection = MySQLConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
-            // Thiết lập tham số cho PreparedStatement
-            statement.setInt(1, productId);
-
-            // Thực thi câu lệnh và lấy kết quả
-            try (ResultSet rs = statement.executeQuery()) {
-                // Nếu có sản phẩm với ID tương ứng
-                if (rs.next()) {
-                    product = new Products(
-                            rs.getInt("id"),
-                            rs.getString("name"),
-                            rs.getString("description"),
-                            rs.getInt("price"),
-                            rs.getInt("stock"),
-                            rs.getString("image"),
-                            rs.getTimestamp("created_at"), // Lấy giá trị DATETIME
-                            rs.getInt("category_Id")
-                    );
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();  // In ra lỗi nếu có
-        }
-        return product;  // Trả về sản phẩm nếu tìm thấy, nếu không trả về null
-    }
 
 
     // Xử lý yêu cầu POST (dùng chung với doGet)
