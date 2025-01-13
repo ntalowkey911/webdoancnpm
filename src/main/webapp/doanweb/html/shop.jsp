@@ -484,17 +484,21 @@
                         <c:forEach var="product" items="${productList}">
                             <div class="col-md-4 mb-4">
                                 <div class="product-card">
-                                    <img class="img-fluid" src="<%= request.getContextPath() %>/${product.image}" alt="${product.name}">
-                                    <h5 class="product-name">${product.name}</h5>
-                                    <p class="product-price">${product.price}k </p>
-                                    <h6>createdAt:${product.createdAt}</h6>
+                                    <!-- Bao quanh <img> bằng thẻ <a> -->
+                                    <a href="detail?id=${product.id}">
+                                        <img class="img-fluid" src="<%= request.getContextPath() %>/${product.image}" alt="${product.name}">
+                                        <h5 class="product-name">${product.name}</h5>
+                                        <p class="product-price">${product.price}k </p>
+                                        <h6>createdAt: ${product.createdAt}</h6>
+                                    </a>
                                     <button class="btn btn-success">Add to cart</button>
-                                    <button class="btn btn-success">Mua ngay </button>
+                                    <button class="btn btn-success">Mua ngay</button>
                                 </div>
                             </div>
                         </c:forEach>
                     </div>
                 </div>
+
 
 
             </div>
