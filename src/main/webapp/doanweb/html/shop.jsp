@@ -7,7 +7,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/doanweb/styles/style.css">
+    <head>
+        <link rel="stylesheet" href="<%= request.getContextPath() %>/doanweb/styles/style.css">
+    </head>
     <link rel="icon" href="<%= request.getContextPath() %>/doanweb/images/Page1/LoadWeb.png" type="image/png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -506,10 +508,9 @@
                                          alt="${product.name}">
                                     <h5 class="product-name">${product.name}</h5>
                                     <p class="product-price">${product.price}k </p>
-<%--                                    <h6>createdAt: ${product.createdAt}</h6>--%>
                                 </a>
-                                <button class="btn btn-success" onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart'">Add to cart</button>
-                                <button class="btn btn-primary" onclick="window.location.href='add-to-cart?id=${product.id}&action=buy-now'">Mua ngay</button>
+                                <button class="sort-button" onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart'">Add to cart</button>
+                                <button class="sort-button" onclick="window.location.href='add-to-cart?id=${product.id}&action=buy-now'">Mua ngay</button>
 
                             </div>
                         </div>
