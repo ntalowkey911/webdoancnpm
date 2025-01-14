@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 
-<%--    <script src="<%= request.getContextPath() %>/doanweb/js/index.js"></script>--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -194,16 +193,7 @@
             <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" class="img-fluid" alt="login-img">
         </div>
         <div class="col-lg-6 col-md-6 col-12 mt-5 pt-5">
-            <form id="loginForm" action="${pageContext.request.contextPath}/login" method="POST">
-                <c:if test="${not empty mess}">
-                    <p class="text-danger">${mess}</p>
-                </c:if>
-                <c:if test="${not empty loginSuccess}">
-                    <p class="text-success">${loginSuccess}</p>
-                </c:if>
                 <div class="form-group">
-                    <label for="username">Tài Khoản</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your Name" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Mật khẩu</label>
@@ -215,7 +205,6 @@
         </div>
     </div>
 </div>
-
 
 
 <footer class="mt-5 p-5 bg-dark">

@@ -37,6 +37,32 @@
             cursor: pointer;
         }
 
+        .product-image-container {
+            width: 400px; /* Kích thước hình vuông */
+            height: 400px; /* Kích thước hình vuông */
+            display: flex; /* Dùng flexbox để căn giữa nội dung */
+            justify-content: center; /* Căn giữa ngang */
+            align-items: center; /* Căn giữa dọc */
+            background-color: #f8f8f8; /* Nền xám nhạt nếu ảnh không lấp đầy */
+            overflow: hidden; /* Cắt phần ảnh thừa */
+            margin-top: 50px;
+        }
+
+        .product-image {
+            width: 100%; /* Chiều rộng đầy đủ container */
+            height: 100%; /* Chiều cao đầy đủ container */
+            object-fit: cover; /* Đảm bảo ảnh lấp đầy và giữ tỷ lệ */
+        }
+        /* CSS cho phần hình ảnh sản phẩm */
+        .product img {
+            margin-left: 60px;
+            width: 80%;
+            max-width: 300px;
+            height: 300px;
+            object-fit: cover;
+        }
+
+
         .sproduct input {
             width: 50px;
             height: 40px;
@@ -89,9 +115,13 @@
         }
 
         .alert-success {
-            width: 61%;  /* Điều chỉnh chiều rộng của thông báo */
+            width: 61%; /* Điều chỉnh chiều rộng của thông báo */
             text-align: center;
             margin-top: 10px;
+        }
+        .product-name {
+            color: black;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -129,9 +159,11 @@
                         <a href="/html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
                         <!-- Biểu tượng giỏ hàng với số lượng sản phẩm -->
                         <a href="<%= request.getContextPath() %>/cart" class="position-relative">
-                            <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i> <!-- Biểu tượng giỏ hàng -->
+                            <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i>
+                            <!-- Biểu tượng giỏ hàng -->
                             <!-- Số lượng sản phẩm trong giỏ -->
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                  id="cart-count">
                                 ${sessionScope.totalItems != null ? sessionScope.totalItems : 0}
                             </span>
                         </a>
@@ -203,11 +235,13 @@
 <!-- Product details section -->
 <section class="container sproduct my-5 pt-5">
     <div class="row mt-5">
-        <div class="col-lg-5 col-md-12 col-12">
-            <img
-                    class="img-fluid w-100 py-5"
-                    src="<%= request.getContextPath() %>/${product.image}"
-                    alt="${product.name}">
+        <div class="col-lg-5 col-md-12 col-12 d-flex justify-content-center align-items-center">
+            <div class="product-image-container">
+                <img
+                        class="product-image"
+                        src="<%= request.getContextPath() %>/${product.image}"
+                        alt="${product.name}">
+            </div>
         </div>
         <div class="col-lg-6 col-md-12 col-12">
             <h6
@@ -248,11 +282,11 @@
             <% } %>
             <script>
                 // Kiểm tra xem có thông báo hay không
-                window.onload = function() {
+                window.onload = function () {
                     var messageElement = document.getElementById("successMessage");
                     if (messageElement) {
                         messageElement.style.display = "block";  // Hiển thị thông báo
-                        setTimeout(function() {
+                        setTimeout(function () {
                             messageElement.style.display = "none";  // Ẩn thông báo sau 2 giây
                         }, 2000);  // 2000ms = 2s
                     }
@@ -346,43 +380,28 @@
         <hr class="border border-danger border-2 opacity-75 mx-auto">
     </div>
     <div class="row mx-auto container-fluid">
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaXiMuoi.png"
-                 alt="Cánh gà xí muội">
-
-            <h5 class="product-name">Cánh gà sốt cay xí muội</h5>
-            <h4 class="product-price">30.000 VND</h4>
-            <button class="buy-btn" onclick="window.location.href = 'sproduct13.html';">Mua ngay</button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaKieuThai.jpg"
-                 alt="Gà rán sốt cay kiểu Thái">
-
-            <h5 class="product-name">Gà rán sốt cay kiểu Thái</h5>
-            <h4 class="product-price">45.000 VND</h4>
-            <button class="buy-btn" onclick="window.location.href = 'sproduct17.html';">Mua ngay</button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaChanhDay.jpg"
-                 alt="Gà rán giòn sốt chanh dây">
-
-            <h5 class="product-name">Gà rán giòn sốt chanh dây</h5>
-            <h4 class="product-price">50.000 VND</h4>
-            <button class="buy-btn" onclick="window.location.href = 'sproduct20.html';">Mua ngay</button>
-        </div>
-        <div class="product container text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaKieuNhat.jpg"
-                 alt="Gà rán xù kiểu Nhật">
-
-            <h5 class="product-name">Gà rán xù kiểu Nhật</h5>
-            <h4 class="product-price">39.000 VND</h4>
-            <button class="buy-btn" onclick="window.location.href = 'sproduct21.html';">Mua ngay</button>
-        </div>
-        <button class="ShopMore my-5 mx-auto" onclick="window.location.href = '/shop';">Tiếp tục mua
-            sắm
-        </button>
+        <!-- Kiểm tra xem productList có dữ liệu hay không -->
+        <c:if test="${not empty randomProductList}">
+            <c:forEach var="product" items="${randomProductList}" varStatus="status">
+                <!-- Chỉ hiển thị 4 sản phẩm đầu tiên -->
+                <c:if test="${status.index < 4}">
+                    <div class="product text-center col-lg-3 col-md-4 col-12 mb-4">
+                        <a href="detail?id=${product.id}">
+                            <img class="img-fluid" src="<%= request.getContextPath() %>/${product.image}" alt="${product.name}">
+                            <h5 class="product-name">${product.name}</h5>
+                            <h4 class="product-price">${product.price} VND</h4>
+                        </a>
+                    </div>
+                </c:if>
+            </c:forEach>
+        </c:if>
+    </div>
+    <div class="text-center">
+        <button class="ShopMore my-5 mx-auto" onclick="window.location.href = '/shop';">Tiếp tục mua sắm</button>
     </div>
 </section>
+
+
 
 <footer class="mt-5 p-5 bg-dark">
     <div class="row conatiner mx-auto pt-5">

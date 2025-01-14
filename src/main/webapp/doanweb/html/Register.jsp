@@ -14,14 +14,7 @@
 
 
     <script src="<%= request.getContextPath() %>/doanweb/js/index.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
     <!-- bootstarp stackpath cdn -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <!-- Bootstrap icons cdn-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -34,7 +27,6 @@
             font-size: 2.5rem;
             font-weight: 700;
         }
-
         .login-btn {
             width: 30%;
             background-color: #343a40;
@@ -50,34 +42,28 @@
             width: 80%;
             margin: 0 auto;
         }
-
         #signUpForm input, #loginForm input {
             border: 1px solid #343a40;
             padding: 10px;
         }
-
         #signUpForm input:focus, #loginForm input:focus {
             background-color: aliceblue;
         }
-
         #signUpForm button, #loginForm button {
             background-color: #343a40;
             color: aliceblue;
             border: none;
             font-weight: 600;
         }
-
         #signUpForm button:hover, #loginForm button:hover {
             background-color: #BC1F23;
             color: aliceblue;
             border: none;
         }
-
         #showSignUp {
             color: #BC1F23;
             font-weight: 600;
         }
-
         #showSignUp:hover {
             color: #343a40;
             text-decoration: none;
@@ -88,8 +74,6 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
     <div class="container-fluid mr-5">
-        <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" onclick="location.reload();"
-             id="logo-img" alt="logo..">
 
         <button class="navbar-toggler" onclick="toggleMenu()">
             <span><i id="nav-bar-icon" class="bi bi-list"></i></span>
@@ -136,8 +120,6 @@
                         <a href="javascript:void(0);" onclick="logout()">Đăng xuất</a>
                     </div>
 
-                    <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Cart.html"><i
-                            class="bi bi-bag-heart-fill"></i></a>
                 </div>
 
             </ul>
@@ -165,10 +147,6 @@
                 <div class="menu-section">
                     <h4><a href="javascript:void(0);" class="toggle-menu">THỰC ĐƠN</a></h4>
                     <ul class="submenu">
-                        <li><a href="<%= request.getContextPath() %>/doanweb/html/Menu/shop.html">Các món đùi gà nổi
-                            bật</a></li>
-                        <li><a href="<%= request.getContextPath() %>/doanweb/html/Menu/shop1.html">Các món cánh gà nổi
-                            bật</a></li>
                         <li><a href="<%= request.getContextPath() %>/doanweb#">Combo gà phải thử</a></li>
                     </ul>
                 </div>
@@ -184,14 +162,10 @@
 
                 <div class="menu-section user" id="user-sidebar">
                     <h4><i class="bi bi-person"></i><a href="<%= request.getContextPath() %>Login.html">ĐĂNG
-                        NHẬP</a> / <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Register.html">ĐĂNG KÝ</a>
-                    </h4>
 
                 </div>
                 <div class="menu-section user-logged-in" id="user-logged-in" style="display: none;">
                     <span id="greeting-menu"></span>
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/Menu/Profile.html">TÀI KHOẢN CỦA TÔI
-                        / </a></h4>
                     <h4><i class="bi bi-person"></i><a href="javascript:void(0);" onclick="logout()">ĐĂNG XUẤT</a></h4>
                 </div>
             </div>
@@ -209,47 +183,27 @@
 <div class="container mt-5" id="container-register">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-12 mt-0">
-            <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" class="img-fluid"
-                 alt="login-img">
         </div>
         <div class="col-lg-6 col-md-6 col-12 mt-5">
             <form id="signUpForm" action="" onsubmit="SignUp()">
                 <div class="form-group">
-                    <label for="username">Tên</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên của bạn"
-                           required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email của bạn"
-                           required>
                 </div>
                 <div class="form-group">
                     <label for="password">Mật khẩu</label>
-                    <input type="password" class="form-control" id="password" name="password"
-                           placeholder="Nhập mật khẩu" required>
                 </div>
                 <div class="form-group">
                     <label for="confirmPassword">Nhập lại mật khẩu</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
-                           placeholder="Nhập lại mật khẩu" required>
                 </div>
                 <div class="form-group">
-                    <label for="phone">Số Điện Thoại</label>
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Số Điện Thoại"
-                           required>
                 </div>
 
                 <div class="form-group">
-                    <label for="address">Địa chỉ</label>
-                    <input type="text" class="form-control" id="address" name="address"
-                           placeholder="Số nhà, tên đường,..." required>
                 </div>
-
 
                 <button type="submit" class="btn btn-dark" onclick="signUp()">Đăng ký</button>
-                <p class="py-2 text-center">Bạn có tài khoản rồi? <a
-                        href="<%= request.getContextPath() %>/doanweb/html/Login.jsp" id="showSignUp">Đăng Nhập</a></p>
             </form>
         </div>
     </div>
@@ -261,7 +215,6 @@
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirm-password').value;
-        const phone = document.getElementById('phone').value;
         const address = document.getElementById('address').value;
 
         // Kiểm tra các điều kiện
@@ -288,9 +241,6 @@
         <div class="footer-one col-lg-3 col-md-6 col-12">
 
             <img id="logo-img-footer" src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" alt="logo">
-            <p class="py-3 pl-2 ml-4 mr-5">Tiệm Gà Sao Hỏa là một quán ăn hiện đại với phong cách thiết kế đậm chất
-                không gian. Thực đơn của quán không chỉ có các món gà nổi tiếng, mà còn kèm theo những món ăn độc lạ lấy
-                cảm hứng từ vũ trụ mang lại cảm giác mới mẻ cho thực khách.</p>
 
         </div>
 
@@ -322,14 +272,6 @@
         <div class="Photos col-lg-3 col-md-6 col-12">
             <h5 class="pb-2">Các đơn vị tài trợ</h5>
             <div class="row">
-                <img class="footer-img img-fluid mb-2"
-                     src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy 3.png" alt="leather-img">
-                <img class="footer-img img-fluid mb-2"
-                     src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy 2.png" alt="leather-img">
-                <img class="footer-img img-fluid mb-2"
-                     src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy.png" alt="leather-img">
-                <img class="footer-img img-fluid mb-2"
-                     src="<%= request.getContextPath() %>/doanweb/images/Page1/image.png" alt="leather-img">
             </div>
         </div>
         <div class="copyright mt-5">
@@ -354,12 +296,6 @@
 
 </footer>
 <!-- bootstarp cdn -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-        crossorigin="anonymous"></script>
 </body>
 </html>
 

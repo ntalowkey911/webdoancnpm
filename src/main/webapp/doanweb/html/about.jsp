@@ -38,53 +38,50 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
-        <div class="container-fluid mr-5">
-                     <!-- <div class="col-1"></div> -->
-            <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" onclick="location.reload();" id="logo-img" alt="logo..">
-            
-            <button class="navbar-toggler" onclick="toggleMenu()">
-                <span><i id = "nav-bar-icon" class="bi bi-list"></i></span>
-            </button>
-            <div class="search-bar">
-              <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm...">
-              <button class="search-button" id="searchButton">
-                  <i class="bi bi-search"></i>
-              </button>
-          </div>
+<!-- Nav section -->
+<nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
+    <div class="container-fluid mr-5">
+        <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" onclick="location.reload();"
+             id="logo-img" alt="logo..">
 
-          <div id="searchResults" class="search-results"></div>
+        <button class="navbar-toggler" onclick="toggleMenu()">
+            <span><i id="nav-bar-icon" class="bi bi-list"></i></span>
+        </button>
 
-          
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    
-                    <li class="nav-item">
-                        <a class="nav-link " href="<%= request.getContextPath() %>/home">Trang Chủ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<%= request.getContextPath() %>/shop">Cửa Hàng</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Thông tin</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<%= request.getContextPath() %>/contact">Liên hệ</a>
-                    </li>
-                    <li class="nav-item" id="nav-icons">
-                        <!-- <i class="bi bi-search"></i> -->
-                        <a href="/html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
-                        <a href="/html/Menu/Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
-                    </li>
-                    
-                </ul>
-              </div>
 
-            
-                <!-- Biểu tượng menu để mở/đóng sidebar
-                <i class="bi bi-list menu-icon" onclick="toggleMenu()" id="menu-btn"></i>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
 
-                <-- Sidebar menu -->
+                <li class="nav-item">
+                    <a class="nav-link " href="<%= request.getContextPath() %>/home">Trang Chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="#">Cửa Hàng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="<%= request.getContextPath() %>/about">Thông tin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= request.getContextPath() %>/contact">Liên hệ</a>
+
+                </li>
+                <div class="nav-item">
+                    <li class="nav-item">
+                        <a href="<%= request.getContextPath() %>/doanweb/html/Login.jsp"><i class="bi bi-person-fill"></i> </a>
+                        <!-- Biểu tượng giỏ hàng với số lượng sản phẩm -->
+                        <a href="<%= request.getContextPath() %>/cart" class="position-relative">
+                            <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i> <!-- Biểu tượng giỏ hàng -->
+                            <!-- Số lượng sản phẩm trong giỏ -->
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
+                                ${sessionScope.totalItems != null ? sessionScope.totalItems : 0}
+                            </span>
+                        </a>
+                    </li>
+                </div>
+
+            </ul>
+        </div>
+
           <div id="mySideBar" class="sidebar">
               <div class="sidebar-header">
                   <img src="/images/Page1/LogoWeb.png" alt="Logo" class="logo"> 

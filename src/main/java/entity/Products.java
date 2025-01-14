@@ -10,10 +10,10 @@ public class Products {
     private int stock;
     private String image;
     private Timestamp createdAt; // Sử dụng Timestamp cho DATETIME
-    private int category_Id; // Tham chiếu đến Category
+    private int category_id; // Tham chiếu đến Category
     // Constructor
 
-    public Products(int id, String name, String description, int price, int stock, String image, Timestamp createdAt, int category_Id) {
+    public Products(int id, String name, String description, int price, int stock, String image, Timestamp createdAt, int category_id) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -21,7 +21,7 @@ public class Products {
         this.stock = stock;
         this.image = image;
         this.createdAt = createdAt;
-        this.category_Id = category_Id;
+        this.category_id = category_id;
     }
 
     // Getters và Setters
@@ -70,11 +70,11 @@ public class Products {
     }
 
     public int getCategoryId() {
-        return category_Id;
+        return category_id;
     }
 
-    public void setCategoryId(int category_Id) {
-        this.category_Id = category_Id;
+    public void setCategoryId(int category_id) {
+        this.category_id = category_id;
     }
     @Override
     public String toString() {
@@ -86,7 +86,7 @@ public class Products {
                 ", stock=" + stock +
                 ", image='" + image + '\'' +
                 ", createdAt=" + createdAt + // Thêm trường này
-                ", category_Id=" + category_Id +
+                ", category_id=" + category_id +
                 '}';
     }
 
