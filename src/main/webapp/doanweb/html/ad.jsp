@@ -24,28 +24,29 @@
     dao daoInstance = new dao();
     List<Products> productList = daoInstance.getAllProducts();
     List<Categories> categoryList = daoInstance.getAllCategories();
+    String deleteProductId = request.getParameter("deleteProductId");
+    String deleteCategoryId = request.getParameter("deleteCategoryId");
 
-    // Kiểm tra xem có hành động xóa không
-    String deleteId = request.getParameter("deleteId");
-    if (deleteId != null) {
-        int result = daoInstance.deleteProduct(Integer.parseInt(deleteId));
-        if (result > 0) {
-            out.println("<p style='color:green;'>Xóa sản phẩm thành công!</p>");
-        } else {
-            out.println("<p style='color:red;'>Xóa sản phẩm thất bại!</p>");
-        }
+    // Xóa sản phẩm
+    if (deleteProductId != null) {
+        daoInstance.deleteProduct(Integer.parseInt(deleteProductId));
+    }
+
+    // Xóa danh mục
+    if (deleteCategoryId != null) {
+        daoInstance.deleteCategory(Integer.parseInt(deleteCategoryId));
     }
 %>
 
-<!-- Form thêm sản phẩm -->
-<form action="AddProductServlet" method="post">
-    <h3>Thêm sản phẩm mới</h3>
+<form action="AddProduct" method="post">
+    <h3>Thêm/Sửa sản phẩm</h3>
+    <input type="hidden" name="id" placeholder="ID (chỉ nhập khi sửa)">
     <input type="text" name="name" placeholder="Tên sản phẩm" required>
     <input type="text" name="description" placeholder="Mô tả sản phẩm" required>
     <input type="number" name="price" placeholder="Giá sản phẩm" required>
     <input type="number" name="stock" placeholder="Số lượng tồn" required>
     <input type="text" name="image" placeholder="Link ảnh" required>
-    <select name="categoryId" required>
+    <select name="category_id" required>
         <option value="">Chọn danh mục</option>
         <% for (Categories category : categoryList) { %>
         <option value="<%= category.getId() %>"><%= category.getName() %></option>
@@ -53,6 +54,7 @@
     </select>
     <button type="submit">Thêm sản phẩm</button>
 </form>
+
 
 <!-- Hiển thị danh sách sản phẩm -->
 <table>
@@ -77,34 +79,33 @@
         <td><%= product.getCategoryId() %></td>
         <td>
             <a href="UpdateProduct.jsp?id=<%= product.getId() %>">Sửa</a> |
-            <a href="admin.jsp?deleteId=<%= product.getId() %>" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
-        </td>
+            <a href="DeleteProduct?id=<%= product.getId() %>" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>        </td>
     </tr>
     <% } %>
 </table>
 
 <!-- Quản lý danh mục -->
 <h2>Quản lý danh mục</h2>
-<form action="AddCategoryServlet" method="post">
+<form action="AddCategory" method="post">
     <h3>Thêm danh mục mới</h3>
     <input type="text" name="categoryName" placeholder="Tên danh mục" required>
     <button type="submit">Thêm danh mục</button>
 </form>
+
 <table>
     <tr>
         <th>ID</th>
         <th>Tên danh mục</th>
+        <th>Hành động</th>
     </tr>
     <% for (Categories category : categoryList) { %>
     <tr>
         <td><%= category.getId() %></td>
         <td><%= category.getName() %></td>
+        <td>
+            <a href="DeleteCategory?id=<%= category.getId() %>" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này?')">Xóa</a>        </td>
     </tr>
     <% } %>
 </table>
-
-<!-- Hiển thị đơn hàng -->
-<h2>Danh sách đơn hàng</h2>
-<!-- Đây là phần bạn cần thêm DAO và chức năng để lấy danh sách đơn hàng -->
 </body>
 </html>

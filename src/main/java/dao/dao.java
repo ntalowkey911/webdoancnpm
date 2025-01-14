@@ -8,13 +8,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static dao.MySQLConnection.getConnection;
+
 public class dao {
     // Phương thức lấy danh sách tất cả sản phẩm
     public List<Products> getAllProducts() {
         List<Products> l  = new ArrayList<>();
         String query = "SELECT * FROM Products";
 
-        try (Connection connection = MySQLConnection.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet rs  = statement.executeQuery()) {
 
@@ -27,7 +29,7 @@ public class dao {
                         rs.getInt("stock"),
                         rs.getString("image"),
                         rs.getTimestamp("created_at"),// Lấy giá trị DATETIME
-                        rs.getInt("category_Id")
+                        rs.getInt("category_id")
                 );
                 l .add(product);
 
@@ -40,7 +42,7 @@ public class dao {
     public List<Categories> getAllCategories() {
         List<Categories> l  = new ArrayList<>();
         String query = "SELECT * FROM Categories";
-        try (Connection connection = MySQLConnection.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet rs  = statement.executeQuery()) {
             while (rs.next()) {
@@ -58,7 +60,7 @@ public class dao {
 
     public static Products  getLatestProduct()  {
         String query = "SELECT * FROM Products ORDER BY id  DESC LIMIT 1";
-        try (Connection connection = MySQLConnection.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet rs  = statement.executeQuery()) {
             while (rs.next()) {
@@ -69,20 +71,20 @@ public class dao {
                         rs.getInt("stock"),
                         rs.getString("image"),
                         rs.getTimestamp("created_at"),// Lấy giá trị DATETIME
-                        rs.getInt("category_Id"));
+                        rs.getInt("category_id"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null ;}
 
-    public List<Products> getProductsByCategory(int category_Id) {
+    public List<Products> getProductsByCategory(int category_id) {
         List<Products> l = new ArrayList<>();
-        String query = "SELECT * FROM Products WHERE category_Id = ?";
-        try (Connection connection = MySQLConnection.getConnection();
+        String query = "SELECT * FROM Products WHERE category_id = ?";
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            // Gán giá trị của category_Id vào câu truy vấn tại vị trí tham số ?
-            statement.setInt(1, category_Id);
+            // Gán giá trị của category_id vào câu truy vấn tại vị trí tham số ?
+            statement.setInt(1, category_id);
             // Thực thi câu truy vấn
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -94,7 +96,7 @@ public class dao {
                         rs.getInt("stock"),
                         rs.getString("image"),
                         rs.getTimestamp("created_at"), // Lấy giá trị DATETIME
-                        rs.getInt("category_Id")
+                        rs.getInt("category_id")
                 );
                 l.add(product);
             }
@@ -108,7 +110,7 @@ public class dao {
         Products product = null;
         String query = "SELECT * FROM Products WHERE id = ?";  // Câu lệnh SQL để lấy sản phẩm theo ID
 
-        try (Connection connection = MySQLConnection.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
             // Thiết lập tham số cho PreparedStatement
@@ -126,7 +128,7 @@ public class dao {
                             rs.getInt("stock"),
                             rs.getString("image"),
                             rs.getTimestamp("created_at"), // Lấy giá trị DATETIME
-                            rs.getInt("category_Id")
+                            rs.getInt("category_id")
                     );
                 }
             }
@@ -136,44 +138,71 @@ public class dao {
         }
         return product;  // Trả về sản phẩm nếu tìm thấy, nếu không trả về null
     }
-
-    public int updateProduct(Products product) {
-        String query = "UPDATE Products SET name = ?, description = ?, price = ?, stock = ?, image = ?, category_id = ? WHERE id = ?";
-        try (Connection connection = MySQLConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
-            statement.setString(1, product.getName());
-            statement.setString(2, product.getDescription());
-            statement.setInt(3, product.getPrice());
-            statement.setInt(4, product.getStock());
-            statement.setString(5, product.getImage());
-            statement.setInt(6, product.getCategoryId());
-            statement.setInt(7, product.getId());
-            return statement.executeUpdate();
+    /// ///////////////////
+    public void addProduct(String name, String description, double price, int stock, String image, int category_id) {
+        String sql = "INSERT INTO Products (name, description, price, stock, image, category_id) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, name);
+            stmt.setString(2, description);
+            stmt.setDouble(3, price);
+            stmt.setInt(4, stock);
+            stmt.setString(5, image);
+            stmt.setInt(6, category_id);
+            stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
+    }
+    public void addCategories(String name){
+        String sql = "INSERT INTO Categories (name) VALUES (?)";
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, name);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Sửa sản phẩm
+    public void updateProduct(int id, String name, String description, double price, int stock, String image, int category_id) {
+        String sql = "UPDATE Products SET name=?, description=?, price=?, stock=?, image=?, category_id=? WHERE id=?";
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, name);
+            stmt.setString(2, description);
+            stmt.setDouble(3, price);
+            stmt.setInt(4, stock);
+            stmt.setString(5, image);
+            stmt.setInt(6, category_id);
+            stmt.setInt(7, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     // Xóa sản phẩm
-    public int deleteProduct(int productId) {
-        String query = "DELETE FROM Products WHERE id = ?";
-        try (Connection connection = MySQLConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
-            statement.setInt(1, productId);
-            return statement.executeUpdate();
+    public void deleteProduct(int id) {
+        String sql = "DELETE FROM Products WHERE id=?";
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
     }
-
+    public void deleteCategory(int id) {
+        String sql = "DELETE FROM Categories  WHERE id=?";
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     // Cập nhật số lượng tồn kho
     public int updateStock(int productId, int stock) {
-        String query = "UPDATE products SET stock = ? WHERE id = ?";
-        try (Connection connection = MySQLConnection.getConnection();
+        String query = "UPDATE Products SET stock = ? WHERE id = ?";
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setInt(1, stock);
@@ -194,7 +223,7 @@ public class dao {
                 // Truy vấn giá của sản phẩm từ cơ sở dữ liệu theo ID
                 String query = "SELECT price FROM products WHERE id = ?";
 
-                try (Connection connection = MySQLConnection.getConnection();
+                try (Connection connection = getConnection();
                      PreparedStatement statement = connection.prepareStatement(query)) {
 
                     // Thiết lập tham số cho câu lệnh SQL (ID sản phẩm)

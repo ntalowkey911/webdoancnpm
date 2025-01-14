@@ -410,14 +410,16 @@
             font-size: 0.8rem;
             font-weight: 700;
             outline: none;
-            border-radius: 2px;
+            border-radius: 5px;
             border: none;
             color: aliceblue;
-            padding: 13px 30px;
+            padding:5px 5px;
             cursor: pointer;
             text-transform: uppercase;
             transition: 0.5s ease-in-out;
         }
+
+
 
         .add-btn:hover {
             background-color: black;
