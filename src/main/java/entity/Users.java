@@ -2,24 +2,26 @@ package entity;
 
 public class Users {
     private int id;
-    private String name;
+    private String username;
     private String email;
     private String password;
     private String phone;
     private String address;
+    private String created_at;
     private String role;
 
     // Constructors
     public Users () {
     }
 
-    public Users (int id, String name, String email, String password, String phone, String address, String role) {
+    public Users (int id, String username, String email, String password, String phone, String address,String created_at, String role) {
         this.id = id;
-        this.name = name;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.phone = phone;
         this.address = address;
+        this.created_at = created_at;
         this.role = role;
     }
 
@@ -33,11 +35,11 @@ public class Users {
     }
 
     public String getName() {
-        return name;
+        return username;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.username = name;
     }
 
     public String getEmail() {
@@ -72,6 +74,14 @@ public class Users {
         this.address = address;
     }
 
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
 
     public String getRole() {
         return role;
@@ -86,7 +96,7 @@ public class Users {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +

@@ -193,7 +193,16 @@
             <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" class="img-fluid" alt="login-img">
         </div>
         <div class="col-lg-6 col-md-6 col-12 mt-5 pt-5">
+            <form id="loginForm" action="${pageContext.request.contextPath}/login" method="POST">
+                <c:if test="${not empty mess}">
+                    <p class="text-danger">${mess}</p>
+                </c:if>
+                <c:if test="${not empty loginSuccess}">
+                    <p class="text-success">${loginSuccess}</p>
+                </c:if>
                 <div class="form-group">
+                    <label for="username">Tài Khoản</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your Name" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Mật khẩu</label>

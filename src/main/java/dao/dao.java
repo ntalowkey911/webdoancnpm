@@ -3,6 +3,7 @@ package dao;
 import entity.CartItem;
 import entity.Categories;
 import entity.Products;
+import entity.Users;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -246,7 +247,40 @@ public class dao {
         return sum;  // Trả về tổng giá trị giỏ hàng
     }
 
+    public Users login(String username, String password) {
+        String query = "SELECT * FROM Users WHERE username = ? AND password = ?";
+        try (Connection connection = MySQLConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, username);
+            statement.setString(2, password);
 
+            // Kiểm tra kết quả truy vấn
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    // Lấy thông tin người dùng từ kết quả truy vấn
+                    Users user = new Users(
+                            rs.getInt("id"),
+                            rs.getString("username"),
+                            rs.getString("email"),
+                            rs.getString("password"),
+                            rs.getString("phone"),
+                            rs.getString("address"),
+                            rs.getString("created_at"),
+                            rs.getString("role")
+                    );
+                    // Hiển thị thông tin người dùng ra console (debug)
+                    System.out.println("Đăng nhập thành công! Người dùng: " + user);
+                    return user;
+                } else {
+                    System.out.println("Không tìm thấy người dùng.");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
     public static void main(String[] args) {
         dao d = new dao();
         List<Products> l = d.getAllProducts();
