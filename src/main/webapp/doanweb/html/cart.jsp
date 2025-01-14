@@ -245,7 +245,7 @@
         <td>${item.product.name}</td>
         <td>${item.product.price} VND</td>
         <td>
-            <form action="" method="post">
+            <form action="" method="post" >
               <input type="hidden" name="id" value="${item.product.id}">
               <div class="quantity-selector">
                 <button type="button" class="btn-minus"

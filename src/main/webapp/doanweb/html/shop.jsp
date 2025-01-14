@@ -508,8 +508,8 @@
                                     <p class="product-price">${product.price}k </p>
 <%--                                    <h6>createdAt: ${product.createdAt}</h6>--%>
                                 </a>
-                                <button class="btn btn-success" onclick="window.location.href='add-to-cart?id=${product.id}'">Add to cart</button>
-                                <button class="btn btn-success" onclick="window.location.href='add-to-cart?id=${product.id}'">Mua ngay</button>
+                                <button class="btn btn-success" onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart'">Add to cart</button>
+                                <button class="btn btn-primary" onclick="window.location.href='add-to-cart?id=${product.id}&action=buy-now'">Mua ngay</button>
                             </div>
                         </div>
                     </c:forEach>

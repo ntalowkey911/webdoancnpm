@@ -89,17 +89,15 @@ public class AddToCartController extends HttpServlet {
         double totalPrice = dao.getTotalCartPrice((ArrayList<CartItem>) cart);
         session.setAttribute("totalPrice", totalPrice);
 
-        // Kiểm tra hành động "Mua ngay"
-        if ("buy-now".equals(action)) {
+        // Kiểm tra hành động "Mua ngay" , "Xóa sản phẩm", "Thêm sản phẩm ở shop"
+        if ("buy-now".equals(action) || "remove".equals(action)) {
             // Chuyển hướng đến trang giỏ hàng sau khi thêm sản phẩm
             response.sendRedirect("/cart");
-
-        }else if ("remove".equals(action)) {
-            // Chuyển hướng đến trang giỏ hàng sau khi thêm sản phẩm
-            response.sendRedirect("/cart");
-
+        }else if ("add-cart".equals(action) ) {
+            // THêm sản phẩm vào giỏ không chuyển trang
+            response.sendRedirect("/shop");
         } else {
-            // Thông báo thêm sản phẩm thành công mà không chuyển trang
+            // Thông báo khi thêm sản phẩm thành công
             request.setAttribute("message", "Sản phẩm đã được thêm vào giỏ hàng!");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/detail");
             dispatcher.forward(request, response);
