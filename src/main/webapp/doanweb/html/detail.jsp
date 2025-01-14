@@ -36,6 +36,24 @@
             flex-basis: 24%;
             cursor: pointer;
         }
+        .product-image-container {
+            width: 400px; /* Kích thước hình vuông */
+            height: 400px; /* Kích thước hình vuông */
+            display: flex; /* Dùng flexbox để căn giữa nội dung */
+            justify-content: center; /* Căn giữa ngang */
+            align-items: center; /* Căn giữa dọc */
+            background-color: #f8f8f8; /* Nền xám nhạt nếu ảnh không lấp đầy */
+            overflow: hidden; /* Cắt phần ảnh thừa */
+            margin-top: 50px;
+        }
+
+        .product-image {
+            width: 100%; /* Chiều rộng đầy đủ container */
+            height: 100%; /* Chiều cao đầy đủ container */
+            object-fit: cover; /* Đảm bảo ảnh lấp đầy và giữ tỷ lệ */
+        }
+
+
 
         .sproduct input {
             width: 50px;
@@ -203,11 +221,13 @@
 <!-- Product details section -->
 <section class="container sproduct my-5 pt-5">
     <div class="row mt-5">
-        <div class="col-lg-5 col-md-12 col-12">
-            <img
-                    class="img-fluid w-100 py-5"
-                    src="<%= request.getContextPath() %>/${product.image}"
-                    alt="${product.name}">
+        <div class="col-lg-5 col-md-12 col-12 d-flex justify-content-center align-items-center">
+            <div class="product-image-container">
+                <img
+                        class="product-image"
+                        src="<%= request.getContextPath() %>/${product.image}"
+                        alt="${product.name}">
+            </div>
         </div>
         <div class="col-lg-6 col-md-12 col-12">
             <h6

@@ -83,7 +83,13 @@
               <a href="javascript:void(0);" onclick="logout()">Đăng xuất</a>
             </div>
 
-            <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
+            <a href="<%= request.getContextPath() %>/cart" class="position-relative">
+              <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i> <!-- Biểu tượng giỏ hàng -->
+              <!-- Số lượng sản phẩm trong giỏ -->
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
+                ${sessionScope.totalItems != null ? sessionScope.totalItems : 0}
+              </span>
+            </a>
           </div>
 
         </ul>
