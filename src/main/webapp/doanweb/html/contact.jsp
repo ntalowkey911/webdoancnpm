@@ -70,13 +70,13 @@
                     <a class="nav-link " href="<%= request.getContextPath() %>/home">Trang Chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Cửa Hàng</a>
+                    <a class="nav-link" href="#">Cửa Hàng</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<%= request.getContextPath() %>/about">Thông tin</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<%= request.getContextPath() %>/contact">Liên hệ</a>
+                    <a class="nav-link active" href="<%= request.getContextPath() %>/contact">Liên hệ</a>
 
                 </li>
                 <div class="nav-item">

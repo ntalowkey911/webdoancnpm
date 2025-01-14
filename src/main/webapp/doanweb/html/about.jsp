@@ -56,10 +56,10 @@
                     <a class="nav-link " href="<%= request.getContextPath() %>/home">Trang Chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Cửa Hàng</a>
+                    <a class="nav-link " href="#">Cửa Hàng</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<%= request.getContextPath() %>/about">Thông tin</a>
+                    <a class="nav-link active" href="<%= request.getContextPath() %>/about">Thông tin</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<%= request.getContextPath() %>/contact">Liên hệ</a>
@@ -81,7 +81,7 @@
 
             </ul>
         </div>
-                <-- Sidebar menu -->
+
           <div id="mySideBar" class="sidebar">
               <div class="sidebar-header">
                   <img src="/images/Page1/LogoWeb.png" alt="Logo" class="logo"> 
