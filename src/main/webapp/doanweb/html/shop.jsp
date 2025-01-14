@@ -335,6 +335,7 @@
         }
 
 
+
         /* Định dạng các mục trong danh sách (li) */
         .list-category li {
             background-color: #f9f9f9; /* Màu nền sáng cho các mục */
@@ -399,6 +400,32 @@
             font-size: 1.1rem; /* Cỡ chữ */
         }
 
+        .button-container {
+            display: flex;  /* Dùng Flexbox để các nút nằm cùng một hàng */
+            justify-content: space-between;  /* Căn đều các nút theo chiều ngang */
+            gap: 10px;  /* Khoảng cách giữa các nút */
+        }
+        .add-btn {
+            background-color: #BC1F23;
+            font-size: 0.8rem;
+            font-weight: 700;
+            outline: none;
+            border-radius: 2px;
+            border: none;
+            color: aliceblue;
+            padding: 13px 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.5s ease-in-out;
+        }
+
+        .add-btn:hover {
+            background-color: black;
+        }
+        .container {
+            max-width: 1400px; /* Tăng độ rộng tối đa của container */
+            width: 100%; /* Đảm bảo container chiếm hết chiều ngang nếu cần */
+        }
 
     </style>
     <script>
@@ -470,8 +497,7 @@
     <body>
     <div class="container mt-4">
         <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="category-list mb-4">
                     <h5 class="category-title">Categories</h5>
                     <ul class="list-category">
@@ -480,7 +506,6 @@
                         </c:forEach>
                     </ul>
                 </div>
-
 
                 <div class="last-product">
                     <h5 class="lproduct-title">Last Product</h5>
@@ -496,31 +521,28 @@
                 </div>
             </div>
 
-            <!-- Main Content -->
-            <div class="col-md-9">
+            <div class="col-md-10">
                 <div class="row">
                     <c:forEach var="product" items="${productList}">
-                        <div class="col-md-4 mb-4">
+                        <div class="col-md-3 mb-4">
                             <div class="product-card">
-                                <!-- Bao quanh <img> bằng thẻ <a> -->
                                 <a href="detail?id=${product.id}">
-                                    <img class="img-fluid" src="<%= request.getContextPath() %>/${product.image}"
-                                         alt="${product.name}">
+                                    <img class="img-fluid" src="<%= request.getContextPath() %>/${product.image}" alt="${product.name}">
                                     <h5 class="product-name">${product.name}</h5>
-                                    <p class="product-price">${product.price}k </p>
+                                    <p class="product-price">${product.price}k</p>
                                 </a>
-                                <button class="sort-button" onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart'">Add to cart</button>
-                                <button class="sort-button" onclick="window.location.href='add-to-cart?id=${product.id}&action=buy-now'">Mua ngay</button>
-
+                                <div class="button-container">
+                                    <button class="add-btn" onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart'">Add to cart</button>
+                                    <button class="buy-btn" onclick="window.location.href='add-to-cart?id=${product.id}&action=buy-now'">Mua ngay</button>
+                                </div>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
             </div>
-
-
         </div>
     </div>
+
     </body>
 
     </div>
