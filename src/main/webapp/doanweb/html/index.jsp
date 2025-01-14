@@ -5,537 +5,491 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiệm gà sao hỏa</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/doanweb/styles/style.css">
-    <link rel="icon" href="<%= request.getContextPath() %>/doanweb/images/Page1/LoadWeb.png" type="image/png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiệm gà sao hỏa</title>
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/doanweb/styles/style.css">
+  <link rel="icon" href="<%= request.getContextPath() %>/doanweb/images/Page1/LoadWeb.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 
-    <script src="/js/index.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
 
-    <!-- bootstarp stackpath cdn -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="/js/index.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 
-    <!-- Bootstrap icons cdn-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- bootstarp stackpath cdn -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <!-- Bootstrap icons cdn-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
-<style>
 
-</style>
 <body>
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
     <div class="container-fluid mr-5">
-        <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" onclick="location.reload();"
-             id="logo-img" alt="logo..">
+      <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" onclick="location.reload();" id="logo-img" alt="logo..">
 
-        <button class="navbar-toggler" onclick="toggleMenu()">
-            <span><i id="nav-bar-icon" class="bi bi-list"></i></span>
+      <button class="navbar-toggler" onclick="toggleMenu()">
+        <span><i id="nav-bar-icon" class="bi bi-list"></i></span>
+      </button>
+
+      <div class="search-bar">
+        <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm...">
+        <button class="search-button" id="searchButton">
+          <i class="bi bi-search"></i>
         </button>
+      </div>
 
-        <div class="search-bar">
-            <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm...">
-            <button class="search-button" id="searchButton">
-                <i class="bi bi-search"></i>
-            </button>
+      <div id="searchResults" class="search-results"></div>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Trang Chủ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= request.getContextPath() %>/shop">Cửa Hàng</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<%= request.getContextPath() %>/about">Thông tin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= request.getContextPath() %>/contact">Liên hệ</a>
+
+          </li>
+          <li class="nav-item" id="admin-btn" style="display: none;">
+            <a class="nav-link" href="<%= request.getContextPath() %>/doanweb/Admin.jsp">Quản trị</a>
+          </li>
+          <div class="nav-item" id="nav-icons">
+            <!-- <i class="bi bi-search"></i> -->
+            <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Login.html"><i class="bi bi-person-fill"
+                id="user-icon"></i></a>
+            <!-- User Menu -->
+
+            <div class="user-menu" id="user-menu">
+              <span id="greeting"></span>
+              <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Profile.html">Tài khoản của tôi</a>
+              <a href="javascript:void(0);" onclick="logout()">Đăng xuất</a>
+            </div>
+
+            <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
+          </div>
+
+        </ul>
+      </div>
+
+
+      <div id="mySideBar" class="sidebar">
+        <div class="sidebar-header">
+          <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" alt="Logo" class="logo">
+          <span id="closeBtn" class="close-btn" onclick="toggleMenu()">&times;</span>
         </div>
-
-        <div id="searchResults" class="search-results"></div>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Trang Chủ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<%= request.getContextPath() %>/shop">Cửa Hàng</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="<%= request.getContextPath() %>/about">Thông tin</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<%= request.getContextPath() %>/contact">Liên hệ</a>
-
-                </li>
-
-                <li class="nav-item" id="admin-btn" style="display: none;">
-                    <a class="nav-link" href="<%= request.getContextPath() %>/doanweb/html/admin.jsp">Quản trị</a>
-                </li>
-
-                <div class="nav-item">
-                    <li class="nav-item">
-                        <a href="/html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
-                        <!-- Biểu tượng giỏ hàng với số lượng sản phẩm -->
-                        <a href="<%= request.getContextPath() %>/cart" class="position-relative">
-                            <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i> <!-- Biểu tượng giỏ hàng -->
-                            <!-- Số lượng sản phẩm trong giỏ -->
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
-                                ${sessionScope.totalItems != null ? sessionScope.totalItems : 0}
-                            </span>
-                        </a>
-                    </li>
-
-
-                </div>
-
+        <div class="sidebar-content">
+          <div class="menu-section">
+            <h4><a href="<%= request.getContextPath() %>/doanweb/index.jsp">TRANG CHỦ</a></h4>
+          </div>
+          <div class="menu-section">
+            <h4><a href="<%= request.getContextPath() %>/doanweb/html/Cart.jsp">GIỎ HÀNG</a></h4>
+          </div>
+          <div class="menu-section">
+            <h4><a href="<%= request.getContextPath() %>/doanweb/html/AboutUs.jsp">VỀ MFS</a></h4>
+          </div>
+          <div class="menu-section">
+            <h4><a href="<%= request.getContextPath() %>/doanweb/html/sidebar/chinhsach.jsp">CHÍNH SÁCH</a></h4>
+          </div>
+          <div class="menu-section">
+            <h4><a href="javascript:void(0);" class="toggle-menu">THỰC ĐƠN</a></h4>
+            <ul class="submenu">
+              <li><a href="<%= request.getContextPath() %>/doanweb/html/Menu/shop.html">Các món đùi gà nổi bật</a></li>
+              <li><a href="<%= request.getContextPath() %>/doanweb/html/Menu/shop1.html">Các món cánh gà nổi bật</a></li>
+              <li><a href="<%= request.getContextPath() %>/doanweb#">Combo gà phải thử</a></li>
             </ul>
+          </div>
+          <div class="menu-section">
+            <h4><a href="<%= request.getContextPath() %>/doanweb/html/sidebar/DichVu.html">DỊCH VỤ</a></h4>
+          </div>
+          <div class="menu-section">
+            <h4><a href="<%= request.getContextPath() %>/doanweb/html/Menu/ContactUs.html">LIÊN HỆ</a></h4>
+          </div>
+          <div class="menu-section">
+            <h4><a href="<%= request.getContextPath() %>/doanweb/html/sidebar/job.html">TUYỂN DỤNG</a></h4>
+          </div>
+
+          <div class="menu-section user" id="user-sidebar">
+            <h4><i class="bi bi-person"></i><a href="<%= request.getContextPath() %>/doanweb/html/Menu/Login.html">ĐĂNG
+                NHẬP</a> / <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Register.html">ĐĂNG KÝ</a></h4>
+
+          </div>
+          <div class="menu-section user-logged-in" id="user-logged-in" style="display: none;">
+            <span id="greeting-menu"></span>
+            <h4><a href="<%= request.getContextPath() %>/doanweb/html/Menu/Profile.html">TÀI KHOẢN CỦA TÔI / </a></h4>
+            <h4><i class="bi bi-person"></i><a href="javascript:void(0);" onclick="logout()">ĐĂNG XUẤT</a></h4>
+          </div>
         </div>
+      </div>
+  </nav>
 
-
-        <div id="mySideBar" class="sidebar">
-            <div class="sidebar-header">
-                <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" alt="Logo" class="logo">
-                <span id="closeBtn" class="close-btn" onclick="toggleMenu()">&times;</span>
-            </div>
-            <div class="sidebar-content">
-                <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/index.jsp">TRANG CHỦ</a></h4>
-                </div>
-                <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/Cart.jsp">GIỎ HÀNG</a></h4>
-                </div>
-                <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/about.jsp">VỀ MFS</a></h4>
-                </div>
-                <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/sidebar/chinhsach.jsp">CHÍNH SÁCH</a></h4>
-                </div>
-                <div class="menu-section">
-                    <h4><a href="javascript:void(0);" class="toggle-menu">THỰC ĐƠN</a></h4>
-                    <ul class="submenu">
-                        <li><a href="<%= request.getContextPath() %>/doanweb/html/Menu/shop.html">Các món đùi gà nổi
-                            bật</a></li>
-                        <li><a href="<%= request.getContextPath() %>/doanweb/html/Menu/shop1.html">Các món cánh gà nổi
-                            bật</a></li>
-                        <li><a href="<%= request.getContextPath() %>/doanweb#">Combo gà phải thử</a></li>
-                    </ul>
-                </div>
-                <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/sidebar/DichVu.html">DỊCH VỤ</a></h4>
-                </div>
-                <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/Menu/ContactUs.html">LIÊN HỆ</a></h4>
-                </div>
-                <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/sidebar/job.html">TUYỂN DỤNG</a></h4>
-                </div>
-
-                <div class="menu-section user" id="user-sidebar">
-                    <h4><i class="bi bi-person"></i><a
-                            href="<%= request.getContextPath() %>/doanweb/html/Menu/Login.html">ĐĂNG
-                        NHẬP</a> / <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Register.html">ĐĂNG KÝ</a>
-                    </h4>
-
-                </div>
-                <div class="menu-section user-logged-in" id="user-logged-in" style="display: none;">
-                    <span id="greeting-menu"></span>
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/Menu/Profile.html">TÀI KHOẢN CỦA TÔI
-                        / </a></h4>
-                    <h4><i class="bi bi-person"></i><a href="javascript:void(0);" onclick="logout()">ĐĂNG XUẤT</a></h4>
-                </div>
-            </div>
-        </div>
-</nav>
-
-<!-- Home Section -->
-<section id="home">
+  <!-- Home Section -->
+  <section id="home">
     <div id="home-bg" class="container my-10">
-        <div class="text-container">
-            <h5>Món ăn mới</h5>
-            <h1><span>Best Sale </span>This Year</h1>
-            <p>Món gà truyền thống kết hợp với sốt ớt cay nồng <br>Tạo nên hương vị khó cưỡng mỗi khi ăn !</p>
-            <button onclick="window.location.href = '/html/Menu/shop.jsp';">Mua
-                ngay
-            </button>
+      <div class="text-container">
+        <h5>Món ăn mới</h5>
+        <h1><span>Best Sale </span>This Year</h1>
+        <p>Món gà truyền thống kết hợp với sốt ớt cay nồng <br>Tạo nên hương vị khó cưỡng mỗi khi ăn !</p>
+        <button onclick="window.location.href = '/html/Menu/shop.jsp';">Mua
+          ngay</button>
 
 
-        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- Services section-->
-<section id="company-services" class="container p-5">
+  <!-- Services section-->
+  <section id="company-services" class="container p-5">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 pb-3">
-                <div class="icon-box d-flex">
-                    <div class="icon-box-icon pe-3 pb-3">
-                        <span><i class="bi bi-cart"></i></span>
-                    </div>
-                    <div class="icon-box-content">
-                        <h3 class="card-title text-uppercase text-dark">Giao hàng miễn phí</h3>
-                        <p>Miễn phí giao hàng khi đặt từ 2 phần gà trở lên và khi mua cả combo đủ vị <span
-                                style="color: rgb(255, 0, 0)">mới nhất.</span></p>
-                    </div>
-                </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 pb-3">
+          <div class="icon-box d-flex">
+            <div class="icon-box-icon pe-3 pb-3">
+              <span><i class="bi bi-cart"></i></span>
             </div>
-            <div class="col-lg-6 col-md-6 pb-3">
-                <div class="icon-box d-flex">
-                    <div class="icon-box-icon pe-3 pb-3">
-                        <span><i class="bi bi-award"></i></span>
-                    </div>
-                    <div class="icon-box-content">
-                        <h3 class="card-title text-uppercase text-dark">Chất lượng hàng đầu Việt Nam</h3>
-                        <p>100% đảm bảo gà có nguồn gốc rõ ràng , và có giấy chứng nhận vệ sinh an toàn thực phẩm của bộ
-                            y tế.</p>
-
-                    </div>
-                </div>
+            <div class="icon-box-content">
+              <h3 class="card-title text-uppercase text-dark">Giao hàng miễn phí</h3>
+              <p>Miễn phí giao hàng khi đặt từ 2 phần gà trở lên và khi mua cả combo đủ vị <span
+                  style="color: rgb(255, 0, 0)">mới nhất.</span></p>
             </div>
-            <div class="col-lg-6 col-md-6 pb-3">
-                <div class="icon-box d-flex">
-                    <div class="icon-box-icon pe-3 pb-3">
-                        <span><i class="bi bi-tags"></i></span>
-                    </div>
-                    <div class="icon-box-content">
-                        <h3 class="card-title text-uppercase text-dark">Ưu đãi hằng ngày</h3>
-                        <p>Giảm 15% cho các khách hàng thân thiết và đơn hàng đầu tiên của các khách hàng mới.</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 pb-3">
-                <div class="icon-box d-flex">
-                    <div class="icon-box-icon pe-3 pb-3">
-                        <span><i class="bi bi-shield-check"></i></span>
-                    </div>
-                    <div class="icon-box-content">
-                        <h3 class="card-title text-uppercase text-dark">bảo mật thông tin khách hàng</h3>
-                        <p>Trải nghiệm sự an tâm với cổng thanh toán an toàn 100% của chúng tôi.</p>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </div>
-</section>
+        <div class="col-lg-6 col-md-6 pb-3">
+          <div class="icon-box d-flex">
+            <div class="icon-box-icon pe-3 pb-3">
+              <span><i class="bi bi-award"></i></span>
+            </div>
+            <div class="icon-box-content">
+              <h3 class="card-title text-uppercase text-dark">Chất lượng hàng đầu Việt Nam</h3>
+              <p>100% đảm bảo gà có nguồn gốc rõ ràng , và có giấy chứng nhận vệ sinh an toàn thực phẩm của bộ y tế.</p>
 
-<!-- Product images section -->
-<section id="new" class="w-100">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 pb-3">
+          <div class="icon-box d-flex">
+            <div class="icon-box-icon pe-3 pb-3">
+              <span><i class="bi bi-tags"></i></span>
+            </div>
+            <div class="icon-box-content">
+              <h3 class="card-title text-uppercase text-dark">Ưu đãi hằng ngày</h3>
+              <p>Giảm 15% cho các khách hàng thân thiết và đơn hàng đầu tiên của các khách hàng mới.</p>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 pb-3">
+          <div class="icon-box d-flex">
+            <div class="icon-box-icon pe-3 pb-3">
+              <span><i class="bi bi-shield-check"></i></span>
+            </div>
+            <div class="icon-box-content">
+              <h3 class="card-title text-uppercase text-dark">bảo mật thông tin khách hàng</h3>
+              <p>Trải nghiệm sự an tâm với cổng thanh toán an toàn 100% của chúng tôi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product images section -->
+  <section id="new" class="w-100">
     <div class="row m-0 p-0">
-        <div class="one col-lg-4 col-md-12 col-12 p-0">
-            <img class="img-fluid"
-                 src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted%20image%20(104).png" alt="">
-            <div class="details">
-                <h2>Đùi Gà</h2>
-                <button class="text-uppercase"
-                        onclick="window.location.href = '/html/Menu/ChickenLeg.html';">Mua
-                    ngay
-                </button>
-            </div>
+      <div class="one col-lg-4 col-md-12 col-12 p-0">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted%20image%20(104).png" alt="">
+        <div class="details">
+          <h2>Đùi Gà</h2>
+          <button class="text-uppercase"
+            onclick="window.location.href = '/html/Menu/ChickenLeg.html';">Mua
+            ngay</button>
         </div>
+      </div>
 
-        <div class="one col-lg-4 col-md-12 col-12 p-0">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/Page1/comboga_1.webp" alt="">
-            <div class="details">
-                <h2>Combo Gà đủ vị</h2>
-                <button class="text-uppercase"
-                        onclick="window.location.href = '/html/Menu/ComboChicken.html';">Mua ngay
-                </button>
+      <div class="one col-lg-4 col-md-12 col-12 p-0">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/Page1/comboga_1.webp" alt="">
+        <div class="details">
+          <h2>Combo Gà đủ vị</h2>
+          <button class="text-uppercase"
+            onclick="window.location.href = '/html/Menu/ComboChicken.html';">Mua ngay</button>
 
-            </div>
         </div>
+      </div>
 
-        <div class="one col-lg-4 col-md-12 col-12 p-0">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/Page1/canhga_1.jpg" alt="">
-            <div class="details">
-                <h2>Cánh Gà</h2>
-                <button class="text-uppercase"
-                        onclick="window.location.href = '/html/Menu/WingChicken.html';">Mua
-                    ngay
-                </button>
-            </div>
+      <div class="one col-lg-4 col-md-12 col-12 p-0">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/Page1/canhga_1.jpg" alt="">
+        <div class="details">
+          <h2>Cánh Gà</h2>
+          <button class="text-uppercase"
+            onclick="window.location.href = '/html/Menu/WingChicken.html';">Mua
+            ngay</button>
         </div>
+      </div>
 
 
     </div>
-</section>
+  </section>
 
-<section id="featured" class="my-5 pb-5">
+  <section id="featured" class="my-5 pb-5">
     <div class="container text-center mt-5 py-5">
-        <h3>Các món mới</h3>
-        <hr class="border border-danger border-2 opacity-75 mx-auto">
-        <p style="font-size: 18px">Tại đây có các món mới ra của cửa hàng !</p>
+      <h3>Các món mới</h3>
+      <hr class="border border-danger border-2 opacity-75 mx-auto">
+      <p style="font-size: 18px">Tại đây có các món mới ra của cửa hàng !</p>
     </div>
     <div class="row mx-auto container-fluid">
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid"
-                 src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted%20image%20(4).png" alt="">
+      <div class="product text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted%20image%20(4).png" alt="">
 
-            <h5 class="product-name">Gà rán sốt cay xí muội</h5>
-            <h4 class="product-price">75.000 VND</h4>
-            <button class="buy-btn" onclick="window.location.href = './sproduct4.html';">mua ngay</button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid"
-                 src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted%20image%20(104).png" alt="">
+        <h5 class="product-name">Gà rán sốt cay xí muội</h5>
+        <h4 class="product-price">75.000 VND</h4>
+        <button class="buy-btn" onclick="window.location.href = './sproduct4.html';">mua ngay</button>
+      </div>
+      <div class="product text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted%20image%20(104).png" alt="">
 
-            <h5 class="product-name">Gà rán sốt cay kiểu Thái</h5>
-            <h4 class="product-price">65.000 VND</h4>
-            <button class="buy-btn" onclick="window.location.href = './sproduct5.html';">Mua ngay</button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid"
-                 src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted%20image%20(102).png" alt="">
+        <h5 class="product-name">Gà rán sốt cay kiểu Thái</h5>
+        <h4 class="product-price">65.000 VND</h4>
+        <button class="buy-btn" onclick="window.location.href = './sproduct5.html';">Mua ngay</button>
+      </div>
+      <div class="product text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted%20image%20(102).png" alt="">
 
-            <h5 class="product-name">Gà rán giòn sốt chanh dây</h5>
-            <h4 class="product-price">85.000 VND</h4>
-            <button class="buy-btn" onclick="window.location.href = './sproduct6.html';">Mua ngay</button>
-        </div>
-        <div class="product container text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid"
-                 src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted%20image%20(103).png" alt="">
+        <h5 class="product-name">Gà rán giòn sốt chanh dây</h5>
+        <h4 class="product-price">85.000 VND</h4>
+        <button class="buy-btn" onclick="window.location.href = './sproduct6.html';">Mua ngay</button>
+      </div>
+      <div class="product container text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted%20image%20(103).png" alt="">
 
-            <h5 class="product-name">Gà rán xù kiểu Nhật</h5>
-            <h4 class="product-price">55.000 VND</h4>
-            <button class="buy-btn" onclick="window.location.href = './sproduct7.html';">Mua ngay</button>
-        </div>
+        <h5 class="product-name">Gà rán xù kiểu Nhật</h5>
+        <h4 class="product-price">55.000 VND</h4>
+        <button class="buy-btn" onclick="window.location.href = './sproduct7.html';">Mua ngay</button>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- Banner -->
-<section id="banner" class="my-5 py-5"
-         src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted image (103).png">
+  <!-- Banner -->
+  <section id="banner" class="my-5 py-5" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted image (103).png">
     <div class="ml-5 mr-5">
-        <h4>Giảm giá cuối năm</h4>
-        <h1>Tăng tiêu dùng cuối năm<br>Giảm 20% cho các đơn hàng có giá trị trên 350.000 VND.</h1>
-        <button class="text-uppercase"
-                onclick="window.location.href = '/html/Menu/shop.jsp';">Mua ngay
-        </button>
+      <h4>Giảm giá cuối năm</h4>
+      <h1>Tăng tiêu dùng cuối năm<br>Giảm 20% cho các đơn hàng có giá trị trên 350.000 VND.</h1>
+      <button class="text-uppercase"
+        onclick="window.location.href = '/html/Menu/shop.jsp';">Mua ngay</button>
     </div>
-</section>
-<section id="combo" class="my-5">
+  </section>
+  <section id="combo" class="my-5">
     <div class="container text-center mt-5 py-5">
-        <h3>Combo Gà đủ vị</h3>
-        <hr class="border border-danger border-2 opacity-75 mx-auto">
-        <p style="font-size: 18px">Tại đây có bán combo gà ngũ vị bán chạy nhất trong năm của <span
-                style="color: rgb(255, 0, 0)">Cửa hàng.</span></p>
+      <h3>Combo Gà đủ vị</h3>
+      <hr class="border border-danger border-2 opacity-75 mx-auto">
+      <p style="font-size: 18px">Tại đây có bán combo gà ngũ vị bán chạy nhất trong năm của <span
+          style="color: rgb(255, 0, 0)">Cửa hàng.</span> </p>
     </div>
     <div class="row mx-auto container-fluid">
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/ComboGa/Halloween.png"
-                 alt="Combo Halloween">
+      <div class="product text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/ComboGa/Halloween.png"
+          alt="Combo Halloween">
 
-            <h5 class="product-name">Combo Halloween</h5>
-            <!-- <h4 class="product-price">450.000 đ</h4> -->
-            <button class="buy-btn"
-                    onclick="window.location.href = '/html/Menu/shop2.html';">Mua ngay
-            </button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/ComboGa/195k.png"
-                 alt="Combo 195k">
+        <h5 class="product-name">Combo Halloween</h5>
+        <!-- <h4 class="product-price">450.000 đ</h4> -->
+        <button class="buy-btn"
+          onclick="window.location.href = '/html/Menu/shop2.html';">Mua ngay</button>
+      </div>
+      <div class="product text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/ComboGa/195k.png" alt="Combo 195k">
 
-            <h5 class="product-name">Combo 195k</h5>
-            <!-- <h4 class="product-price">251.200</h4> -->
-            <button class="buy-btn"
-                    onclick="window.location.href = '/html/Menu/shop2.html';">Mua ngay
-            </button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/ComboGa/Summer.png"
-                 alt="Summer combo">
+        <h5 class="product-name">Combo 195k</h5>
+        <!-- <h4 class="product-price">251.200</h4> -->
+        <button class="buy-btn"
+          onclick="window.location.href = '/html/Menu/shop2.html';">Mua ngay</button>
+      </div>
+      <div class="product text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/ComboGa/Summer.png" alt="Summer combo">
 
-            <h5 class="product-name">Combo mùa hè mát mẻ</h5>
-            <!-- <h4 class="product-price">599.000 đ</h4> -->
-            <button class="buy-btn"
-                    onclick="window.location.href = '/html/Menu/shop2.html';">Mua ngay
-            </button>
-        </div>
-        <div class="product container text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/ComboGa/99k.png" alt="Combo 99k">
+        <h5 class="product-name">Combo mùa hè mát mẻ</h5>
+        <!-- <h4 class="product-price">599.000 đ</h4> -->
+        <button class="buy-btn"
+          onclick="window.location.href = '/html/Menu/shop2.html';">Mua ngay</button>
+      </div>
+      <div class="product container text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/ComboGa/99k.png" alt="Combo 99k">
 
-            <h5 class="product-name">Combo 99k</h5>
-            <!-- <h4 class="product-price">399.000 đ</h4> -->
-            <button class="buy-btn"
-                    onclick="window.location.href = '/html/Menu/shop2.html';">Mua Ngay
-            </button>
-        </div>
+        <h5 class="product-name">Combo 99k</h5>
+        <!-- <h4 class="product-price">399.000 đ</h4> -->
+        <button class="buy-btn"
+          onclick="window.location.href = '/html/Menu/shop2.html';">Mua Ngay</button>
+      </div>
     </div>
-</section>
+  </section>
 
-<section id="wing" class="my-12">
+  <section id="wing" class="my-12">
     <div class="container text-center mt-5 py-5">
-        <h3>Cánh gà</h3>
-        <hr class="border border-danger border-2 opacity-75 mx-auto">
-        <p style="font-size: 18px">Ở đây có cánh gà to chắc và được mua nhiều nhất năm! </p>
+      <h3>Cánh gà</h3>
+      <hr class="border border-danger border-2 opacity-75 mx-auto">
+      <p style="font-size: 18px">Ở đây có cánh gà to chắc và được mua nhiều nhất năm! </p>
     </div>
     <div class="row mx-auto container-fluid">
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaXiMuoi.png"
-                 alt="Cánh gà xí muội">
-            <h5 class="product-name">Cánh gà sốt cay xí muội</h5>
-            <h4 class="product-price">30.000 VND</h4>
-            <button class="buy-btn"
-                    onclick="window.location.href = '/html/Menu/shop1.html';">Mua ngay
-            </button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaKieuThai.jpg"
-                 alt="Gà rán sốt cay kiểu Thái">
-            <h5 class="product-name">Cánh Gà rán sốt cay kiểu Thái</h5>
-            <h4 class="product-price">45.000 VND</h4>
-            <button class="buy-btn"
-                    onclick="window.location.href = '/html/Menu/shop1.html';">Mua ngay
-            </button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaChanhDay.jpg"
-                 alt="Gà rán giòn sốt chanh dây">
-            <h5 class="product-name">Cánh Gà rán giòn sốt chanh dây</h5>
-            <h4 class="product-price">50.000 VND</h4>
-            <button class="buy-btn"
-                    onclick="window.location.href = '/html/Menu/shop1.html';">Mua ngay
-            </button>
-        </div>
-        <div class="product container text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaKieuNhat.jpg"
-                 alt="Gà rán xù kiểu Nhật">
-            <h5 class="product-name">Cánh Gà rán xù kiểu Nhật</h5>
-            <h4 class="product-price">39.000 VND</h4>
-            <button class="buy-btn"
-                    onclick="window.location.href = '/html/Menu/shop1.html';">Mua ngay
-            </button>
-        </div>
+      <div class="product text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaXiMuoi.png"
+          alt="Cánh gà xí muội">
+        <h5 class="product-name">Cánh gà sốt cay xí muội</h5>
+        <h4 class="product-price">30.000 VND</h4>
+        <button class="buy-btn"
+          onclick="window.location.href = '/html/Menu/shop1.html';">Mua ngay</button>
+      </div>
+      <div class="product text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaKieuThai.jpg"
+          alt="Gà rán sốt cay kiểu Thái">
+        <h5 class="product-name">Cánh Gà rán sốt cay kiểu Thái</h5>
+        <h4 class="product-price">45.000 VND</h4>
+        <button class="buy-btn"
+          onclick="window.location.href = '/html/Menu/shop1.html';">Mua ngay</button>
+      </div>
+      <div class="product text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaChanhDay.jpg"
+          alt="Gà rán giòn sốt chanh dây">
+        <h5 class="product-name">Cánh Gà rán giòn sốt chanh dây</h5>
+        <h4 class="product-price">50.000 VND</h4>
+        <button class="buy-btn"
+          onclick="window.location.href = '/html/Menu/shop1.html';">Mua ngay</button>
+      </div>
+      <div class="product container text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaKieuNhat.jpg"
+          alt="Gà rán xù kiểu Nhật">
+        <h5 class="product-name">Cánh Gà rán xù kiểu Nhật</h5>
+        <h4 class="product-price">39.000 VND</h4>
+        <button class="buy-btn"
+          onclick="window.location.href = '/html/Menu/shop1.html';">Mua ngay</button>
+      </div>
     </div>
-</section>
+  </section>
 
-<section id="leg" class="my-12">
+  <section id="leg" class="my-12">
     <div class="container text-center mt-5 py-5">
-        <h3>Đùi gà</h3>
-        <hr class="border border-danger border-2 opacity-75 mx-auto">
-        <p style="font-size: 18px">Ở đây có đùi gà to chắc và được mua nhiều nhất năm! </p>
+      <h3>Đùi gà</h3>
+      <hr class="border border-danger border-2 opacity-75 mx-auto">
+      <p style="font-size: 18px">Ở đây có đùi gà to chắc và được mua nhiều nhất năm! </p>
     </div>
     <div class="row mx-auto container-fluid">
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted image (13).png"
-                 alt="Cánh gà xí muội">
-            <h5 class="product-name">Đùi gà sốt cay xí muội</h5>
-            <h4 class="product-price">30.000 VND</h4>
-            <button class="buy-btn"
-                    onclick="window.location.href = '/html/Menu/shop.jsp';">Mua ngay
-            </button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted image (15).png"
-                 alt="Gà rán sốt cay kiểu Thái">
-            <h5 class="product-name">Đùi Gà rán sốt cay kiểu Thái</h5>
-            <h4 class="product-price">45.000 VND</h4>
-            <button class="buy-btn"
-                    onclick="window.location.href = '/html/Menu/shop.jsp';">Mua ngay
-            </button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted image (20).png"
-                 alt="Gà rán giòn sốt chanh dây">
-            <h5 class="product-name">Đùi Gà rán giòn sốt chanh dây</h5>
-            <h4 class="product-price">50.000 VND</h4>
-            <button class="buy-btn"
-                    onclick="window.location.href = '/html/Menu/shop.jsp';">Mua ngay
-            </button>
-        </div>
-        <div class="product container text-center col-lg-3 col-md-4 col-12">
-            <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted image (11).png"
-                 alt="Gà rán xù kiểu Nhật">
-            <h5 class="product-name">Đùi Gà rán xù kiểu Nhật</h5>
-            <h4 class="product-price">39.000 VND</h4>
-            <button class="buy-btn"
-                    onclick="window.location.href = '/html/Menu/shop.jsp';">Mua ngay
-            </button>
-        </div>
+      <div class="product text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted image (13).png"
+          alt="Cánh gà xí muội">
+        <h5 class="product-name">Đùi gà sốt cay xí muội</h5>
+        <h4 class="product-price">30.000 VND</h4>
+        <button class="buy-btn"
+          onclick="window.location.href = '/html/Menu/shop.jsp';">Mua ngay</button>
+      </div>
+      <div class="product text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted image (15).png"
+          alt="Gà rán sốt cay kiểu Thái">
+        <h5 class="product-name">Đùi Gà rán sốt cay kiểu Thái</h5>
+        <h4 class="product-price">45.000 VND</h4>
+        <button class="buy-btn"
+          onclick="window.location.href = '/html/Menu/shop.jsp';">Mua ngay</button>
+      </div>
+      <div class="product text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted image (20).png"
+          alt="Gà rán giòn sốt chanh dây">
+        <h5 class="product-name">Đùi Gà rán giòn sốt chanh dây</h5>
+        <h4 class="product-price">50.000 VND</h4>
+        <button class="buy-btn"
+          onclick="window.location.href = '/html/Menu/shop.jsp';">Mua ngay</button>
+      </div>
+      <div class="product container text-center col-lg-3 col-md-4 col-12">
+        <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/duigaimg/Pasted image (11).png"
+          alt="Gà rán xù kiểu Nhật">
+        <h5 class="product-name">Đùi Gà rán xù kiểu Nhật</h5>
+        <h4 class="product-price">39.000 VND</h4>
+        <button class="buy-btn"
+          onclick="window.location.href = '/html/Menu/shop.jsp';">Mua ngay</button>
+      </div>
     </div>
-</section>
+  </section>
 
 
-<br><br><br><br><br><br><br><br>
-<footer class="mt-5 p-5 bg-dark">
+  <br><br><br><br><br><br><br><br>
+  <footer class="mt-5 p-5 bg-dark">
     <div class="row conatiner mx-auto pt-5">
-        <div class="footer-one col-lg-3 col-md-6 col-12">
+      <div class="footer-one col-lg-3 col-md-6 col-12">
 
-            <img id="logo-img-footer" src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" alt="logo">
-            <p class="py-3 pl-2 ml-4 mr-5">Tiệm Gà Sao Hỏa là một quán ăn hiện đại với phong cách thiết kế đậm chất
-                không gian. Thực đơn của quán không chỉ có các món gà nổi tiếng, mà còn kèm theo những món ăn độc lạ lấy
-                cảm hứng từ vũ trụ mang lại cảm giác mới mẻ cho thực khách.</p>
+        <img id="logo-img-footer" src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" alt="logo">
+        <p class="py-3 pl-2 ml-4 mr-5">Tiệm Gà Sao Hỏa là một quán ăn hiện đại với phong cách thiết kế đậm chất không gian. Thực đơn của quán không chỉ có các món gà nổi tiếng, mà còn kèm theo những món ăn độc lạ lấy cảm hứng từ vũ trụ mang lại cảm giác mới mẻ cho thực khách.</p>
 
-        </div>
+      </div>
 
-        <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
-            <h5 class="pb-2">Liên kết nhanh</h5>
-            <ul class="text-uppercase list-unstyled">
-                <li><a href="index.html">trang chủ</a></li>
-                <li><a href="/html/Menu/shop.html">Cửa hàng</a></li>
-                <li><a href="/html/Menu/AboutUs.html">thông tin</a></li>
-                <li><a href="/html/Menu/ContactUs.html">liên hệ</a></li>
-                <li><a href="/html/Menu/Cart.html">Giỏ hàng</a></li>
-            </ul>
+      <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+        <h5 class="pb-2">Liên kết nhanh</h5>
+        <ul class="text-uppercase list-unstyled">
+          <li><a href="index.html">trang chủ</a></li>
+          <li><a href="/html/Menu/shop.html">Cửa hàng</a></li>
+          <li><a href="/html/Menu/AboutUs.html">thông tin</a></li>
+          <li><a href="/html/Menu/ContactUs.html">liên hệ</a></li>
+          <li><a href="/html/Menu/Cart.html">Giỏ hàng</a></li>
+        </ul>
+      </div>
+      <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+        <h5 class="pb-2">Liên hệ với chúng tôi</h5>
+        <div>
+          <h6 class="text-uppercase">Địa chỉ</h6>
+          <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
         </div>
-        <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
-            <h5 class="pb-2">Liên hệ với chúng tôi</h5>
-            <div>
-                <h6 class="text-uppercase">Địa chỉ</h6>
-                <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
-            </div>
-            <div>
-                <h6 class="text-uppercase">điện thoại</h6>
-                <p>0849294483</p>
-            </div>
-            <div>
-                <h6 class="text-uppercase">Email</h6>
-                <p>MarsStore@gmail.com</p>
-            </div>
+        <div>
+          <h6 class="text-uppercase">điện thoại</h6>
+          <p>0849294483</p>
         </div>
-        <div class="Photos col-lg-3 col-md-6 col-12">
-            <h5 class="pb-2">Các đơn vị tài trợ</h5>
-            <div class="row">
-                <img class="footer-img img-fluid mb-2"
-                     src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy 3.png" alt="leather-img">
-                <img class="footer-img img-fluid mb-2"
-                     src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy 2.png" alt="leather-img">
-                <img class="footer-img img-fluid mb-2"
-                     src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy.png" alt="leather-img">
-                <img class="footer-img img-fluid mb-2"
-                     src="<%= request.getContextPath() %>/doanweb/images/Page1/image.png" alt="leather-img">
-            </div>
+        <div>
+          <h6 class="text-uppercase">Email</h6>
+          <p>MarsStore@gmail.com</p>
         </div>
-        <div class="copyright mt-5">
-            <div class="row container mx-auto">
-                <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
-                  <img src="img/payment.png" alt="payment..logo">
-                </div> -->
+      </div>
+      <div class="Photos col-lg-3 col-md-6 col-12">
+        <h5 class="pb-2">Các đơn vị tài trợ</h5>
+        <div class="row">
+          <img class="footer-img img-fluid mb-2" src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy 3.png" alt="leather-img">
+          <img class="footer-img img-fluid mb-2" src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy 2.png" alt="leather-img">
+          <img class="footer-img img-fluid mb-2" src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy.png" alt="leather-img">
+          <img class="footer-img img-fluid mb-2" src="<%= request.getContextPath() %>/doanweb/images/Page1/image.png" alt="leather-img">
+        </div>
+      </div>
+      <div class="copyright mt-5">
+        <div class="row container mx-auto">
+          <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
+            <img src="img/payment.png" alt="payment..logo">
+          </div> -->
 
-                <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
-                    <p>MARSSTORE WEBSITE &copy; DESIGN 2024</p>
-                </div>
+          <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
+            <p>MARSSTORE WEBSITE &copy; DESIGN 2024</p>
+          </div>
 
-                <div class="col-lg-3 col-md-6 col-12">
-                    <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
-                    <a href="https://x.com/home?lang=vi"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="https://www.linkedin.com/feed/"><i class="bi bi-linkedin"></i></a>
-                    <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
-                </div>
-            </div>
+          <div class="col-lg-3 col-md-6 col-12">
+            <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
+            <a href="https://x.com/home?lang=vi"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.linkedin.com/feed/"><i class="bi bi-linkedin"></i></a>
+            <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
+          </div>
         </div>
+      </div>
     </div>
 
-</footer>
-<!-- bootstarp cdn -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-        crossorigin="anonymous"></script>
+  </footer>
+  <!-- bootstarp cdn -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 </html>
 
