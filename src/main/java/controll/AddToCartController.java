@@ -1,7 +1,6 @@
 package controll;
 
-import dao.MySQLConnection;
-import dao.cart.CartItem;
+import entity.CartItem;
 import dao.dao;
 import entity.Products;
 import jakarta.servlet.RequestDispatcher;
@@ -13,9 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 

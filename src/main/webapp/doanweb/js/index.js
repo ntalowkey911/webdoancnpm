@@ -319,7 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(function () {
         if (user.role === "admin") {
           window.location.href =
-            "/WebProgramming/MartianChickenShop/html/Admin.jsp"; // Trang admin
+            "/WebProgramming/MartianChickenShop/html/admin.jsp"; // Trang admin
         } else {
           window.location.href =
             "/WebProgramming/MartianChickenShop/html/index.jsp"; // Trang user

@@ -1,6 +1,4 @@
-package dao.cart;
-
-import entity.Products;
+package entity;
 
 public class CartItem {
     private Products product; // Đối tượng sản phẩm

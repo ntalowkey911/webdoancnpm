@@ -243,7 +243,7 @@
           <img src="${item.product.image}" alt="${item.product.name}" width="100">
         </td>
         <td>${item.product.name}</td>
-        <td>${item.product.price} VND</td>
+        <td>${item.product.price}k</td>
         <td>
             <form action="" method="post">
               <input type="hidden" name="id" value="${item.product.id}">
@@ -258,7 +258,7 @@
             </form>
 
         </td>
-        <td>${item.totalPrice} VND</td>
+        <td>${item.totalPrice} k</td>
         <td>
           <button type="button" class="remove-btn" onclick="window.location.href='add-to-cart?id=${item.product.id}&action=remove'">
             <i class="bi bi-trash3"></i>
@@ -278,7 +278,7 @@
         <div class="d-flex justify-content-between">
           <h6>Tạm tính</h6>
           <p id="subtotal-value">
-            <strong>${sessionScope.totalPrice} VND</strong>
+            <strong>${sessionScope.totalPrice}k</strong>
           </p>
         </div>
         <div class="d-flex justify-content-between">

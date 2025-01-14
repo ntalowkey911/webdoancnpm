@@ -16,7 +16,7 @@ public class ContactUsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("doanweb/html/ContactUs.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("doanweb/html/contact.jsp");
         dispatcher.forward(request, response);
     }
 }

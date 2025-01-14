@@ -1,12 +1,11 @@
 package dao;
 
-import dao.cart.CartItem;
+import entity.CartItem;
 import entity.Categories;
 import entity.Products;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class dao {
