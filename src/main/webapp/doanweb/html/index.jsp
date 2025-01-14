@@ -71,7 +71,7 @@
                 </li>
 
                 <li class="nav-item" id="admin-btn" style="display: none;">
-                    <a class="nav-link" href="<%= request.getContextPath() %>/doanweb/html/Admin.jsp">Quản trị</a>
+                    <a class="nav-link" href="<%= request.getContextPath() %>/doanweb/html/admin.jsp">Quản trị</a>
                 </li>
 
                 <div class="nav-item">
@@ -107,7 +107,7 @@
                     <h4><a href="<%= request.getContextPath() %>/doanweb/html/Cart.jsp">GIỎ HÀNG</a></h4>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/AboutUs.jsp">VỀ MFS</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/about.jsp">VỀ MFS</a></h4>
                 </div>
                 <div class="menu-section">
                     <h4><a href="<%= request.getContextPath() %>/doanweb/html/sidebar/chinhsach.jsp">CHÍNH SÁCH</a></h4>
