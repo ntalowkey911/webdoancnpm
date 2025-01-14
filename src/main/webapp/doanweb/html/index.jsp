@@ -15,7 +15,7 @@
 
 
 
-  <script src="/js/index.js"></script>
+  <script src="<%= request.getContextPath() %>/doanweb/js/index.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -42,6 +42,7 @@
       </button>
 
       <div class="search-bar">
+        <label for="searchInput"></label>
         <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm...">
         <button class="search-button" id="searchButton">
           <i class="bi bi-search"></i>
@@ -68,11 +69,11 @@
 
           </li>
           <li class="nav-item" id="admin-btn" style="display: none;">
-            <a class="nav-link" href="<%= request.getContextPath() %>/doanweb/Admin.jsp">Quản trị</a>
+            <a class="nav-link" href="<%= request.getContextPath() %>/doanweb/html/admin.jsp">Quản trị</a>
           </li>
           <div class="nav-item" id="nav-icons">
             <!-- <i class="bi bi-search"></i> -->
-            <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Login.html"><i class="bi bi-person-fill"
+            <a href="<%= request.getContextPath() %>/doanweb/html/Login.jsp"><i class="bi bi-person-fill"
                 id="user-icon"></i></a>
             <!-- User Menu -->
 
@@ -96,10 +97,10 @@
         </div>
         <div class="sidebar-content">
           <div class="menu-section">
-            <h4><a href="<%= request.getContextPath() %>/doanweb/index.jsp">TRANG CHỦ</a></h4>
+            <h4><a href="<%= request.getContextPath() %>/doanweb/html/index.jsp">TRANG CHỦ</a></h4>
           </div>
           <div class="menu-section">
-            <h4><a href="<%= request.getContextPath() %>/doanweb/html/Cart.jsp">GIỎ HÀNG</a></h4>
+            <h4><a href="<%= request.getContextPath() %>/doanweb/html/cart.jsp">GIỎ HÀNG</a></h4>
           </div>
           <div class="menu-section">
             <h4><a href="<%= request.getContextPath() %>/doanweb/html/AboutUs.jsp">VỀ MFS</a></h4>
@@ -110,7 +111,7 @@
           <div class="menu-section">
             <h4><a href="javascript:void(0);" class="toggle-menu">THỰC ĐƠN</a></h4>
             <ul class="submenu">
-              <li><a href="<%= request.getContextPath() %>/doanweb/html/Menu/shop.html">Các món đùi gà nổi bật</a></li>
+              <li><a href="<%= request.getContextPath() %>/doanweb/html/shop.jsp">Các món đùi gà nổi bật</a></li>
               <li><a href="<%= request.getContextPath() %>/doanweb/html/Menu/shop1.html">Các món cánh gà nổi bật</a></li>
               <li><a href="<%= request.getContextPath() %>/doanweb#">Combo gà phải thử</a></li>
             </ul>
