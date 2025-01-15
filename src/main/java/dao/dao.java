@@ -14,12 +14,12 @@ import static dao.MySQLConnection.getConnection;
 public class dao {
     // Phương thức lấy danh sách tất cả sản phẩm
     public List<Products> getAllProducts() {
-        List<Products> l  = new ArrayList<>();
+        List<Products> l = new ArrayList<>();
         String query = "SELECT * FROM Products";
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet rs  = statement.executeQuery()) {
+             ResultSet rs = statement.executeQuery()) {
 
             while (rs.next()) {
                 Products product = new Products(
@@ -32,38 +32,40 @@ public class dao {
                         rs.getTimestamp("created_at"),// Lấy giá trị DATETIME
                         rs.getInt("category_id")
                 );
-                l .add(product);
+                l.add(product);
 
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return l ;
+        return l;
     }
+
     public List<Categories> getAllCategories() {
-        List<Categories> l  = new ArrayList<>();
+        List<Categories> l = new ArrayList<>();
         String query = "SELECT * FROM Categories";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet rs  = statement.executeQuery()) {
+             ResultSet rs = statement.executeQuery()) {
             while (rs.next()) {
                 Categories product = new Categories(
                         rs.getInt("id"),
                         rs.getString("name")
                 );
-                l .add(product);
+                l.add(product);
 
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return l ;}
+        return l;
+    }
 
-    public static Products  getLatestProduct()  {
+    public static Products getLatestProduct() {
         String query = "SELECT * FROM Products ORDER BY id  DESC LIMIT 1";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet rs  = statement.executeQuery()) {
+             ResultSet rs = statement.executeQuery()) {
             while (rs.next()) {
                 return new Products(rs.getInt("id"),
                         rs.getString("name"),
@@ -77,7 +79,8 @@ public class dao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null ;}
+        return null;
+    }
 
     public List<Products> getProductsByCategory(int category_id) {
         List<Products> l = new ArrayList<>();
@@ -139,6 +142,7 @@ public class dao {
         }
         return product;  // Trả về sản phẩm nếu tìm thấy, nếu không trả về null
     }
+
     /// ///////////////////
     public void addProduct(String name, String description, double price, int stock, String image, int category_id) {
         String sql = "INSERT INTO Products (name, description, price, stock, image, category_id) VALUES (?, ?, ?, ?, ?, ?)";
@@ -154,7 +158,8 @@ public class dao {
             e.printStackTrace();
         }
     }
-    public void addCategories(String name){
+
+    public void addCategories(String name) {
         String sql = "INSERT INTO Categories (name) VALUES (?)";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, name);
@@ -191,6 +196,7 @@ public class dao {
             e.printStackTrace();
         }
     }
+
     public void deleteCategory(int id) {
         String sql = "DELETE FROM Categories  WHERE id=?";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -200,6 +206,7 @@ public class dao {
             e.printStackTrace();
         }
     }
+
     // Cập nhật số lượng tồn kho
     public int updateStock(int productId, int stock) {
         String query = "UPDATE Products SET stock = ? WHERE id = ?";
@@ -214,6 +221,7 @@ public class dao {
         }
         return 0;
     }
+
     //Tổng giá tiền của giỏ hàng
     public double getTotalCartPrice(ArrayList<CartItem> cartList) {
         double sum = 0;
@@ -281,10 +289,72 @@ public class dao {
         return null;
 
     }
+
+    public Users checkExist(String username) {
+        String query = "SELECT * FROM Users WHERE username = ?";
+        try (Connection connection = MySQLConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, username);
+
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    // Trả về đối tượng người dùng nếu tìm thấy
+                    return new Users(
+                            rs.getInt("id"),
+                            rs.getString("username"),
+                            rs.getString("email"),
+                            rs.getString("password"),
+                            rs.getString("phone"),
+                            rs.getString("address"),
+                            rs.getString("created_at"),
+                            rs.getString("role")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Database error: " + e.getMessage());
+            e.printStackTrace(); // In lỗi chi tiết ra để dễ dàng debug
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace(); // In lỗi nếu có lỗi không phải từ database
+        }
+        return null; // Trả về null nếu không tìm thấy người dùng
+    }
+
+    public void Register(String username, String email, String password, String phone, String address) {
+        String query = "INSERT INTO Users (username, email, password, phone, address, created_at, role) VALUES (?, ?, ?, ?, ?, NOW(), 0)";
+        try (Connection connection = MySQLConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, username);
+            statement.setString(2, email);
+            statement.setString(3, password);
+            statement.setString(4, phone);
+            statement.setString(5, address);
+
+            // Thực thi câu lệnh và kiểm tra kết quả
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("User registered successfully.");
+            } else {
+                System.out.println("Failed to register user.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Database error: " + e.getMessage());
+            e.printStackTrace(); // In lỗi chi tiết ra để dễ dàng debug
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace(); // In lỗi nếu có lỗi không phải từ database
+        }
+    }
+
+
+
     public static void main(String[] args) {
         dao d = new dao();
         List<Products> l = d.getAllProducts();
-        List<Categories> l1  = d.getAllCategories();
+        List<Categories> l1 = d.getAllCategories();
         Products latestProduct = dao.getLatestProduct();
         // Kiểm tra kết quả
         if (latestProduct != null) {
@@ -300,11 +370,11 @@ public class dao {
         } else {
             System.out.println("Không có sản phẩm nào trong cơ sở dữ liệu.");
         }
-for(Products p : l) {
-    System.out.println(p);
-}
-for(Categories c : l1) {
-    System.out.println(c);
-}
+        for (Products p : l) {
+            System.out.println(p);
+        }
+        for (Categories c : l1) {
+            System.out.println(c);
+        }
     }
 }
