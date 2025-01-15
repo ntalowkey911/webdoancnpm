@@ -1,13 +1,15 @@
 package entity;
 
 public class CartItem {
-    private Products product; // Đối tượng sản phẩm
-    private int quantity; // Số lượng sản phẩm trong giỏ
+    private Products product;
+    private int quantity;
+    private int totalPrice; // Thêm thuộc tính tổng giá tiền
 
     // Constructor
     public CartItem(Products product, int quantity) {
         this.product = product;
         this.quantity = quantity;
+        this.totalPrice = product.getPrice() * quantity; // Khởi tạo tổng giá tiền
     }
 
     // Getters và Setters
@@ -17,6 +19,7 @@ public class CartItem {
 
     public void setProduct(Products product) {
         this.product = product;
+        updateTotalPrice(); // Cập nhật tổng giá tiền khi thay đổi sản phẩm
     }
 
     public int getQuantity() {
@@ -25,11 +28,20 @@ public class CartItem {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+        updateTotalPrice(); // Cập nhật tổng giá tiền khi thay đổi số lượng
     }
 
-    // Phương thức tính tổng giá tiền của sản phẩm trong giỏ
     public int getTotalPrice() {
-        return product.getPrice() * quantity;
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice; // Cho phép cập nhật trực tiếp nếu cần
+    }
+
+    // Phương thức cập nhật tổng giá tiền
+    private void updateTotalPrice() {
+        this.totalPrice = product.getPrice() * quantity;
     }
 
     @Override
@@ -37,7 +49,7 @@ public class CartItem {
         return "CartItem{" +
                 "product=" + product +
                 ", quantity=" + quantity +
-                ", totalPrice=" + getTotalPrice() +
+                ", totalPrice=" + totalPrice +
                 '}';
     }
 }
