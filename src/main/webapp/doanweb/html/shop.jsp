@@ -172,7 +172,7 @@
 <!-- Featured Product section -->
 <section id="featured" class="my-5 py-5">
     <div class="container ml-5 mt-5 px-5 pt-5">
-        <h3>Các món nổi bật Đùi gà</h3>
+        <h3>Các món nổi bật</h3>
         <hr class="border border-danger border-2 opacity-75">
         <p style="font-size: 18px">Tại đây, bạn có thể khám phá các món mới của chúng tôi trên <span
                 style="color: #BC1F23">MarsStore.</span></p>

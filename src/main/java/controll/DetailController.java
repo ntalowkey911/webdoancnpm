@@ -30,13 +30,7 @@ public class DetailController extends HttpServlet {
         request.setAttribute("product", product);
 
         // Lấy toàn bộ sản phẩm và trộn ngẫu nhiên
-        List<Products> productList = d.getAllProducts();
-        Collections.shuffle(productList);
-
-        // Lấy 4 sản phẩm đầu tiên sau khi trộn
-        List<Products> randomProductList = productList.stream().limit(4).collect(Collectors.toList());
-
-        // Đưa danh sách sản phẩm ngẫu nhiên vào request
+        List<Products> randomProductList = d.getRandomProducts();
         request.setAttribute("randomProductList", randomProductList);
 
         // Chuyển tiếp tới JSP

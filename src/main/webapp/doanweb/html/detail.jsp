@@ -55,7 +55,8 @@
         }
         /* CSS cho phần hình ảnh sản phẩm */
         .product img {
-            margin-left: 60px;
+            margin-right: 50px;
+            margin-left: 50px;
             width: 80%;
             max-width: 300px;
             height: 300px;
@@ -380,7 +381,6 @@
         <hr class="border border-danger border-2 opacity-75 mx-auto">
     </div>
     <div class="row mx-auto container-fluid">
-        <!-- Kiểm tra xem productList có dữ liệu hay không -->
         <c:if test="${not empty randomProductList}">
             <c:forEach var="product" items="${randomProductList}" varStatus="status">
                 <!-- Chỉ hiển thị 4 sản phẩm đầu tiên -->

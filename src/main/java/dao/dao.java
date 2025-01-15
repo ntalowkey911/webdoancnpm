@@ -349,7 +349,33 @@ public class dao {
         }
     }
 
+    public List<Products> getRandomProducts() {
+        List<Products> products = new ArrayList<>();
+        String query = "SELECT * FROM Products ORDER BY RAND() LIMIT 4"; // Lấy 4 sản phẩm ngẫu nhiên
 
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet rs = statement.executeQuery()) {
+
+            // Duyệt qua kết quả trả về và tạo đối tượng Products
+            while (rs.next()) {
+                Products product = new Products(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getInt("price"),
+                        rs.getInt("stock"),
+                        rs.getString("image"),
+                        rs.getTimestamp("created_at"),
+                        rs.getInt("category_id")
+                );
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
 
     public static void main(String[] args) {
         dao d = new dao();

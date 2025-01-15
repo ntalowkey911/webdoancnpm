@@ -56,7 +56,7 @@
                     <a class="nav-link " href="<%= request.getContextPath() %>/home">Trang Chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#">Cửa Hàng</a>
+                    <a class="nav-link " href="<%= request.getContextPath() %>/shop">Cửa Hàng</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="<%= request.getContextPath() %>/about">Thông tin</a>
