@@ -73,7 +73,7 @@
           </li>
           <div class="nav-item" id="nav-icons">
             <!-- <i class="bi bi-search"></i> -->
-            <a href="<%= request.getContextPath() %>/login"><i class="bi bi-person-fill"
+            <a href="<%= request.getContextPath() %>/doanweb/html/Login.jsp"><i class="bi bi-person-fill"
                 id="user-icon"></i></a>
             <!-- User Menu -->
 
