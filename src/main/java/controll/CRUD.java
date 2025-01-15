@@ -83,14 +83,9 @@ public class CRUD extends HttpServlet {
     }
 
     private void addCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String name = request.getParameter("name");
-
-        if (name != null && !name.trim().isEmpty()) {
-            daoInstance.addCategories(name);
-            response.getWriter().write("Thêm danh mục thành công!");
-        } else {
-            response.getWriter().write("Tên danh mục không được để trống!");
-        }
+        String name = request.getParameter("categoryName");
+        daoInstance.addCategories(name);
+        response.getWriter().write("Thêm sản phẩm thành công!");
     }
 
     private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {

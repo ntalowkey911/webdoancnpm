@@ -1,6 +1,7 @@
 package entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Products {
     private int id;
@@ -8,12 +9,12 @@ public class Products {
     private String description;
     private int price;
     private int stock;
-    private String image;
+    private String image;  // Danh sách ảnh của sản phẩm
     private Timestamp createdAt; // Sử dụng Timestamp cho DATETIME
     private int category_id; // Tham chiếu đến Category
     // Constructor
 
-    public Products(int id, String name, String description, int price, int stock, String image, Timestamp createdAt, int category_id) {
+    public Products(int id, String name, String description, int price, int stock,String image, Timestamp createdAt, int category_id) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -24,7 +25,7 @@ public class Products {
         this.category_id = category_id;
     }
 
-    // Getters và Setters
+
     public Timestamp getCreatedAt() {
         return createdAt;
     }

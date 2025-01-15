@@ -158,11 +158,8 @@
                 <div class="nav-item">
                     <li class="nav-item">
                         <a href="<%= request.getContextPath() %>/login"><i class="bi bi-person-fill"></i></a>
-                        <!-- Biểu tượng giỏ hàng với số lượng sản phẩm -->
                         <a href="<%= request.getContextPath() %>/cart" class="position-relative">
                             <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i>
-                            <!-- Biểu tượng giỏ hàng -->
-                            <!-- Số lượng sản phẩm trong giỏ -->
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                                   id="cart-count">
                                 ${sessionScope.totalItems != null ? sessionScope.totalItems : 0}
@@ -247,8 +244,8 @@
         <div class="col-lg-6 col-md-12 col-12">
             <h6
                     class="text-secondary mt-5"
-                    onclick="window.location.href = 'sproduct1.html';">
-                Trang chủ / Sản phẩm
+                    onclick="window.location.href = 'doanweb/html/shop.jsp';">
+                Shop / Sản phẩm
             </h6>
             <h3 class="pt-3 pb-2">${product.name}</h3>
             <h2 class="p">${product.price}k</h2>

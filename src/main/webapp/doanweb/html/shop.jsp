@@ -538,7 +538,7 @@
                 </div>
 
                 <div class="last-product">
-                    <h5 class="lproduct-title">Last Product</h5>
+                    <h5 class="lproduct-title">Sản phẩm mới nhất</h5>
                     <c:if test="${not empty lastp}">
                         <img src="${pageContext.request.contextPath}/${lastp.image}" alt="${lastp.name}">
                         <p>${lastp.name}</p>

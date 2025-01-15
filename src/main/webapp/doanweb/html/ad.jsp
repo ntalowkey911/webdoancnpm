@@ -69,7 +69,7 @@
 %>
 
 
-<form action="AddProduct" method="post">
+<form action="AddProduct" method="post" enctype="multipart/form-data">
     <h3>Thêm/Sửa sản phẩm</h3>
     <input type="hidden" name="id" placeholder="ID (chỉ nhập khi sửa)">
     <label>
@@ -85,7 +85,7 @@
         <input type="number" name="stock" placeholder="Số lượng tồn" required>
     </label>
     <label>
-        <input type="text" name="image" placeholder="Link ảnh" required>
+        <input type="file" name="image" accept="image/*" multiple required>
     </label>
     <label>
         <select name="category_id" required>
