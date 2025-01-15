@@ -72,6 +72,8 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
     <div class="container-fluid mr-5">
+        <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" onclick="location.reload();" id="logo-img" alt="logo..">
+
 
         <button class="navbar-toggler" onclick="toggleMenu()">
             <span><i id="nav-bar-icon" class="bi bi-list"></i></span>
