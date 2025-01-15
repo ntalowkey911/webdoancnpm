@@ -9,12 +9,13 @@
     <title>Shop</title>
     <head>
         <link rel="stylesheet" href="<%= request.getContextPath() %>/doanweb/styles/style.css">
+        <title></title>
     </head>
     <link rel="icon" href="<%= request.getContextPath() %>/doanweb/images/Page1/LoadWeb.png" type="image/png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <script src="/js/index.js"></script>
+<%--    <script src="/js/index.js"></script>--%>
     <script
             src="https://kit.fontawesome.com/cc9450bd42.js"
             crossorigin="anonymous"
@@ -117,29 +118,29 @@
         </div>
         <div id="mySideBar" class="sidebar">
             <div class="sidebar-header">
-                <img src="/images/Page1/LogoWeb.png" alt="Logo" class="logo">
+                <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" alt="Logo" class="logo">
                 <span id="closeBtn" class="close-btn" onclick="toggleMenu()">&times;</span>
             </div>
             <div class="sidebar-content">
                 <div class="menu-section">
-                    <h4><a href="/html/index.html">TRANG CHỦ</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/home">TRANG CHỦ</a></h4>
                 </div>
                 <div class="menu-section">
                     <h4><a href="/">GIỎ HÀNG</a></h4>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="/html/Menu/AboutUs.html">VỀ MFS</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/about">VỀ MFS</a></h4>
 
                 </div>
                 <div class="menu-section">
-                    <h4><a href="/html/sidebar/chinhsach.html">CHÍNH SÁCH</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/chinhsach">CHÍNH SÁCH</a></h4>
 
                 </div>
                 <div class="menu-section">
                     <h4><a href="javascript:void(0);" class="toggle-menu">THỰC ĐƠN</a></h4>
                     <ul class="submenu">
-                        <li><a href="/html/Menu/shop.html">Các món đùi gà nổi bật</a></li>
-                        <li><a href="/html/Menu/shop1.html">Các món cánh gà nổi bật</a></li>
+                        <li><a href="<%= request.getContextPath() %>/shop">Các món đùi gà nổi bật</a></li>
+                        <li><a href="<%= request.getContextPath() %>/shop">Các món cánh gà nổi bật</a></li>
                         <li><a href="#">Combo gà phải thử</a></li>
                     </ul>
                 </div>
@@ -147,15 +148,15 @@
                     <h4><a href="#">DỊCH VỤ</a></h4>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="/html/Menu/ContactUs.html">LIÊN HỆ</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/contact">LIÊN HỆ</a></h4>
                 </div>
                 <div class="menu-section">
                     <h4><a href="#">TUYỂN DỤNG</a></h4>
                 </div>
 
                 <div class="menu-section user" id="user-sidebar">
-                    <h4><i class="bi bi-person"></i><a href="/html/Menu/Login.html">ĐĂNG NHẬP</a> / <a
-                            href="/html/Menu/Register.html">ĐĂNG KÝ</a></h4>
+                    <h4><i class="bi bi-person"></i><a href="<%= request.getContextPath() %>/login">ĐĂNG NHẬP</a> / <a
+                            href="<%= request.getContextPath() %>/register">ĐĂNG KÝ</a></h4>
 
                 </div>
                 <div class="menu-section user-logged-in" id="user-logged-in" style="display: none;">
