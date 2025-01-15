@@ -302,23 +302,27 @@
             overflow: hidden;
             text-align: center;
             padding: 10px;
+            outline: none;
         }
 
 
         .product-card h5 {
             font-size: 1.2rem;
             margin-top: 10px;
+            outline: none;
         }
 
         .product-card p {
             font-size: 0.9rem;
             color: #555;
+            outline: none;
         }
 
         .product-card .price {
             font-size: 1.1rem;
             color: red;
             font-weight: bold;
+            outline: none;
         }
 
         .last-product {
@@ -470,6 +474,13 @@
             text-transform: uppercase;
             transition: 0.5s ease-in-out;
         }
+        .category-title, .lproduct-title{
+            text-align: center;
+            padding: 10px;
+            background-color:#BC1F23 ;
+            font-weight: bold;
+            color: white !important;
+        }
 
 
 
@@ -528,7 +539,7 @@
 
 
                 <div class="last-product">
-                    <h5 class="lproduct-title">Sản phẩm mới nhất</h5>
+                    <h5 class="lproduct-title">Last Product</h5>
                     <c:if test="${not empty lastp}">
                         <img src="${pageContext.request.contextPath}/${lastp.image}" alt="${lastp.name}">
                         <p>${lastp.name}</p>
