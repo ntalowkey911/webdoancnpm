@@ -98,9 +98,9 @@
                     <a class="nav-link" href="<%= request.getContextPath() %>/doanweb/html/admin.jsp">Quản trị</a>
                 </li>
                 <div class="nav-item" id="nav-icons">
-                    <!-- <i class="bi bi-search"></i> -->
-                    <a href="<%= request.getContextPath() %>/doanweb/html/Login.jsp"><i class="bi bi-person-fill"
-                                                                                        id="user-icon"></i></a>
+                    <a href="<%= (session.getAttribute("user") != null) ? request.getContextPath() + "/profile" : request.getContextPath() + "/doanweb/html/Login.jsp" %>">
+                        <i class="bi bi-person-fill" id="user-icon"></i>
+                    </a>
                     <!-- User Menu -->
                     <div class="user-menu" id="user-menu">
                         <span id="greeting"></span>

@@ -297,7 +297,7 @@
         <div class="d-flex justify-content-between">
           <h6>Tổng cộng</h6>
           <p id="total-value">
-            <fmt:formatNumber value="${total}" type="currency" currencySymbol="VND" />
+            <fmt:formatNumber value="${sessionScope.totalPrice}" type="currency" currencySymbol="VND" />
           </p>
         </div>
 

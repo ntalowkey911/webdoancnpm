@@ -15,7 +15,6 @@ import java.io.IOException;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
     private dao daoInstance;
 
     @Override
@@ -23,6 +22,15 @@ public class LoginController extends HttpServlet {
         daoInstance = new dao(); // Khởi tạo instance của DAO
     }
 
+    // Xử lý phương thức GET (hiển thị trang login)
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Chuyển hướng đến trang đăng nhập
+        request.getRequestDispatcher("/doanweb/html/Login.jsp").forward(request, response);
+    }
+
+    // Xử lý phương thức POST (xử lý đăng nhập)
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -39,14 +47,16 @@ public class LoginController extends HttpServlet {
                 request.setAttribute("mess", "Tài khoản hoặc mật khẩu sai");
                 request.getRequestDispatcher("/home").forward(request, response);
             } else {
+                // Lưu thông tin người dùng vào session
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                response.sendRedirect("/home");
+                response.sendRedirect("/home");  // Chuyển hướng đến trang home hoặc bất kỳ trang nào bạn muốn
             }
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("mess", "Đã xảy ra lỗi trong quá trình đăng nhập");
-            request.getRequestDispatcher("doanweb/html/Login.jsp").forward(request, response);
+            request.getRequestDispatcher("/doanweb/html/Login.jsp").forward(request, response);
         }
     }
 }
+

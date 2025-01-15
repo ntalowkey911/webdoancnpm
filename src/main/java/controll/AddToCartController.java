@@ -22,6 +22,14 @@ public class AddToCartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        HttpSession session = request.getSession(false); // false để không tạo session mới nếu không có
+        if (session == null || session.getAttribute("user") == null) {
+            // Nếu chưa đăng nhập, chuyển hướng người dùng đến trang đăng nhập
+            response.sendRedirect("/login"); // Hoặc URL trang đăng nhập của bạn
+            return; // Dừng xử lý tiếp theo
+        }
+
         // Lấy ID sản phẩm từ tham số truy vấn
         String productId = request.getParameter("id");
         String action = request.getParameter("action"); // Lấy hành động (buy-now, thêm vào giỏ hàng, hoặc remove)
@@ -42,7 +50,6 @@ public class AddToCartController extends HttpServlet {
         }
 
         // Lấy giỏ hàng từ session (nếu có)
-        HttpSession session = request.getSession();
         List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
 
         // Nếu giỏ hàng chưa được tạo, khởi tạo giỏ hàng mới
@@ -73,7 +80,8 @@ public class AddToCartController extends HttpServlet {
                 cart.add(new CartItem(product, 1)); // Mặc định thêm 1 sản phẩm vào giỏ
             }
         }
-        //Hiển thị sản phẩm gợi ý
+
+        // Hiển thị sản phẩm gợi ý
         List<Products> randomProducts = dao.getRandomProducts();
         request.setAttribute("randomProductList", randomProducts);
 
@@ -92,8 +100,8 @@ public class AddToCartController extends HttpServlet {
         if ("buy-now".equals(action) || "remove".equals(action)) {
             // Chuyển hướng đến trang giỏ hàng sau khi thêm sản phẩm
             response.sendRedirect("/cart");
-        }else if ("add-cart".equals(action) ) {
-            // THêm sản phẩm vào giỏ không chuyển trang
+        } else if ("add-cart".equals(action)) {
+            // Thêm sản phẩm vào giỏ không chuyển trang
             response.sendRedirect("/shop");
         } else {
             // Thông báo khi thêm sản phẩm thành công

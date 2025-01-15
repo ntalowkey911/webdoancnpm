@@ -113,13 +113,6 @@
                     <!-- <i class="bi bi-search"></i> -->
                     <a href="<%= request.getContextPath() %>/login"><i class="bi bi-person-fill"
                                                                                               id="user-icon"></i></a>
-                    <!-- User Menu -->
-
-                    <div class="user-menu" id="user-menu">
-                        <span id="greeting"></span>
-                        <a href="<%= request.getContextPath() %>/profile">Tài khoản của tôi</a>
-                        <a href="javascript:void(0);" onclick="logout()">Đăng xuất</a>
-                    </div>
 
                     <a href="<%= request.getContextPath() %>/cart"><i class="bi bi-bag-heart-fill"></i></a>
                 </div>
