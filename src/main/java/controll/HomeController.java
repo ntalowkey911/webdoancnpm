@@ -21,11 +21,31 @@ import java.util.stream.Collectors;
 @WebServlet("/home")
 public class HomeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private dao dao;
+
+    @Override
+    public void init() throws ServletException {
+        dao = new dao();
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        // Lấy tất cả các sản phẩm (có thể thêm lọc theo danh mục sau)
         List<Products> randomProducts = dao.getRandomProducts();
-        System.out.println("Số lượng sản phẩm trả về: " + randomProducts.size());  // Kiểm tra số lượng sản phẩm
+
+        // Lấy các sản phẩm theo từng danh mục (ví dụ: category_id = 1, 2, 3, ...)
+        List<Products> category1Products = dao.getProductsByCategory(1); // Đùi Gà
+        List<Products> category2Products = dao.getProductsByCategory(2); // Cá
+        List<Products> category3Products = dao.getProductsByCategory(3); // Thịt
+
+        // Đưa danh sách sản phẩm vào request
         request.setAttribute("randomProductList", randomProducts);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("doanweb/html/index.jsp");
-        dispatcher.forward(request, response);
+        request.setAttribute("category1ProductList", category1Products);
+        request.setAttribute("category2ProductList", category2Products);
+        request.setAttribute("category3ProductList", category3Products);
+
+        // Chuyển tiếp tới JSP để hiển thị
+        request.getRequestDispatcher("doanweb/html/index.jsp").forward(request, response);
     }
 }

@@ -56,10 +56,10 @@
         /* CSS cho phần hình ảnh sản phẩm */
         .product img {
             margin-right: 50px;
-            margin-left: 50px;
-            width: 80%;
-            max-width: 300px;
-            height: 300px;
+            margin-left: 20px;
+            width: 90%;
+            max-width: 350px;
+            height: 350px;
             object-fit: cover;
         }
 
