@@ -37,11 +37,11 @@ public class LoginController extends HttpServlet {
 
             if (user == null) {
                 request.setAttribute("mess", "Tài khoản hoặc mật khẩu sai");
-                request.getRequestDispatcher("doanweb/html/Login.jsp").forward(request, response);
+                request.getRequestDispatcher("/home").forward(request, response);
             } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                response.sendRedirect("doanweb/html/index.jsp");
+                response.sendRedirect("/home");
             }
         } catch (Exception e) {
             e.printStackTrace();
