@@ -57,13 +57,25 @@
 
         <div class="search-bar">
             <label for="searchInput"></label>
-            <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm...">
+            <input type="text" class="search-input" id="searchInput" name="productName" placeholder="Tìm kiếm...">
             <button class="search-button" id="searchButton">
                 <i class="bi bi-search"></i>
             </button>
         </div>
 
-        <div id="searchResults" class="search-results"></div>
+        <div id="searchResults" class="search-results">
+            <c:if test="${not empty productsList}">
+                <div class="product-list">
+                    <c:forEach var="product" items="${productsList}">
+                        <div class="product-item">
+                            <img class="img-fluid" src="<%= request.getContextPath() %>/${product.image}"/>
+                            <p><strong>${product.name}</strong></p>
+                            <p> - ${product.price}</p>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:if>
+        </div>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
@@ -90,7 +102,6 @@
                     <a href="<%= request.getContextPath() %>/doanweb/html/Login.jsp"><i class="bi bi-person-fill"
                                                                                         id="user-icon"></i></a>
                     <!-- User Menu -->
-
                     <div class="user-menu" id="user-menu">
                         <span id="greeting"></span>
                         <a href="<%= request.getContextPath() %>/profile">Tài khoản của tôi</a>

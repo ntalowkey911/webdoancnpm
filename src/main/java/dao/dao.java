@@ -144,6 +144,39 @@ public class dao {
         return product;  // Trả về sản phẩm nếu tìm thấy, nếu không trả về null
     }
 
+    public Products getProductByName(String productName) {
+        Products product = null;
+        String query = "SELECT * FROM Products WHERE name like ?";  // Câu lệnh SQL để lấy sản phẩm theo ID
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            // Thiết lập tham số cho PreparedStatement
+            statement.setString(1, "%" + productName + "%");
+
+            // Thực thi câu lệnh và lấy kết quả
+            try (ResultSet rs = statement.executeQuery()) {
+                // Nếu có sản phẩm với ID tương ứng
+                if (rs.next()) {
+                    product = new Products(
+                            rs.getInt("id"),
+                            rs.getString("name"),
+                            rs.getString("description"),
+                            rs.getInt("price"),
+                            rs.getInt("stock"),
+                            rs.getString("image"),
+                            rs.getTimestamp("created_at"), // Lấy giá trị DATETIME
+                            rs.getInt("category_id")
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();  // In ra lỗi nếu có
+        }
+        return product;  // Trả về sản phẩm nếu tìm thấy, nếu không trả về null
+    }
+
     /// ///////////////////
     public void addProduct(String name, String description, double price, int stock, String image, int category_id) {
         String sql = "INSERT INTO Products (name, description, price, stock, image, category_id) VALUES (?, ?, ?, ?, ?, ?)";

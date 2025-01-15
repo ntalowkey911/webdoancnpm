@@ -157,122 +157,122 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Đảm bảo chạy mã JavaScript sau khi trang đã tải
-document.addEventListener("DOMContentLoaded", function () {
-  // Lắng nghe sự kiện khi người dùng nhập từ khóa tìm kiếm
-  document.getElementById("searchInput").addEventListener("input", function () {
-    let query = this.value.trim().toLowerCase();
+// // Đảm bảo chạy mã JavaScript sau khi trang đã tải
+// document.addEventListener("DOMContentLoaded", function () {
+//   // Lắng nghe sự kiện khi người dùng nhập từ khóa tìm kiếm
+//   document.getElementById("searchInput").addEventListener("input", function () {
+//     let query = this.value.trim().toLowerCase();
+//
+//     if (query) {
+//       searchProducts(query);
+//     } else {
+//       clearSearchResults(); // Nếu ô tìm kiếm trống, ẩn kết quả
+//     }
+//   });
+// });
 
-    if (query) {
-      searchProducts(query);
-    } else {
-      clearSearchResults(); // Nếu ô tìm kiếm trống, ẩn kết quả
-    }
-  });
-});
-
-function searchProducts(query) {
-  const results = Object.values(productList).filter((product) =>
-    product.name.toLowerCase().includes(query)
-  );
-
-  if (results.length > 0) {
-    displaySearchResults(results);
-  } else {
-    clearSearchResults(); // Nếu không có kết quả, ẩn đi
-  }
-}
-
-// Hàm hiển thị kết quả tìm kiếm
-function displaySearchResults(results) {
-  let resultContainer = document.getElementById("searchResults");
-  resultContainer.innerHTML = ""; // Xóa các kết quả cũ
-
-  results.forEach((product) => {
-    let productElement = document.createElement("div");
-    productElement.classList.add("search-result");
-
-    // Thêm nội dung sản phẩm
-    productElement.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <p><strong>${product.name}</strong> - ${product.price} VND</p>
-        `;
-
-    // Thêm sự kiện click để chuyển hướng đến link sản phẩm
-    productElement.addEventListener("click", () => {
-      window.location.href = product.link; // Chuyển đến trang chi tiết
-    });
-
-    // Thêm phần tử vào container
-    resultContainer.appendChild(productElement);
-  });
-
-  // Hiển thị phần tử kết quả tìm kiếm
-  resultContainer.style.display = "block";
-}
-
-
-
-// Hàm xóa kết quả tìm kiếm
-function clearSearchResults() {
-  let resultContainer = document.getElementById("searchResults");
-  resultContainer.innerHTML = ""; // Xóa tất cả kết quả
-  resultContainer.style.display = "none"; // Ẩn kết quả
-}
-const users = [
-  { username: "user1", password: "password1", role: "user" },
-  { username: "user2", password: "password2", role: "user" },
-  { username: "user3", password: "password3", role: "user" },
-  { username: "user4", password: "password4", role: "user" },
-  { username: "user5", password: "password5", role: "user" },
-  { username: "admin@gmail.com", password: "admin123", role: "admin" },
-];
-
-const products = [
-  {
-    id: 1,
-    name: "Cánh gà kiểu Thái",
-    price: "50000",
-    quantity: 10,
-    image:
-      "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuThai.png",
-  },
-  {
-    id: 2,
-    name: "Cánh gà giòn",
-    price: "35000",
-    quantity: 15,
-    image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaGion.png",
-  },
-  {
-    id: 3,
-    name: "Cánh gà phô mai",
-    price: "45000",
-    quantity: 8,
-    image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaPhoMai.png",
-  },
-];
-
-// Hàm lấy productId từ URL
-function getProductIdFromUrl() {
-  const url = window.location.href;
-  const fileName = url.split("/").pop();
-  const productId = parseInt(fileName.split("sproduct")[1].split(".html")[0]);
-  return productId;
-}
-
-function displayAvailableQuantity() {
-  const productId = getProductIdFromUrl();
-  const product = products.find((p) => p.id === productId);
-
-  if (product) {
-    const quantityElement = document.getElementById("available-quantity");
-    if (quantityElement) {
-      quantityElement.textContent = `${product.quantity} sản phẩm có sẵn`;
-    }
-  }
-}
-document.addEventListener("DOMContentLoaded", displayAvailableQuantity);
+// function searchProducts(query) {
+//   const results = Object.values(productList).filter((product) =>
+//     product.name.toLowerCase().includes(query)
+//   );
+//
+//   if (results.length > 0) {
+//     displaySearchResults(results);
+//   } else {
+//     clearSearchResults(); // Nếu không có kết quả, ẩn đi
+//   }
+// }
+//
+// // Hàm hiển thị kết quả tìm kiếm
+// function displaySearchResults(results) {
+//   let resultContainer = document.getElementById("searchResults");
+//   resultContainer.innerHTML = ""; // Xóa các kết quả cũ
+//
+//   results.forEach((product) => {
+//     let productElement = document.createElement("div");
+//     productElement.classList.add("search-result");
+//
+//     // Thêm nội dung sản phẩm
+//     productElement.innerHTML = `
+//             <img src="${product.image}" alt="${product.name}">
+//             <p><strong>${product.name}</strong> - ${product.price} VND</p>
+//         `;
+//
+//     // Thêm sự kiện click để chuyển hướng đến link sản phẩm
+//     productElement.addEventListener("click", () => {
+//       window.location.href = product.link; // Chuyển đến trang chi tiết
+//     });
+//
+//     // Thêm phần tử vào container
+//     resultContainer.appendChild(productElement);
+//   });
+//
+//   // Hiển thị phần tử kết quả tìm kiếm
+//   resultContainer.style.display = "block";
+// }
+//
+//
+//
+// // Hàm xóa kết quả tìm kiếm
+// function clearSearchResults() {
+//   let resultContainer = document.getElementById("searchResults");
+//   resultContainer.innerHTML = ""; // Xóa tất cả kết quả
+//   resultContainer.style.display = "none"; // Ẩn kết quả
+// }
+// const users = [
+//   { username: "user1", password: "password1", role: "user" },
+//   { username: "user2", password: "password2", role: "user" },
+//   { username: "user3", password: "password3", role: "user" },
+//   { username: "user4", password: "password4", role: "user" },
+//   { username: "user5", password: "password5", role: "user" },
+//   { username: "admin@gmail.com", password: "admin123", role: "admin" },
+// ];
+//
+// const products = [
+//   {
+//     id: 1,
+//     name: "Cánh gà kiểu Thái",
+//     price: "50000",
+//     quantity: 10,
+//     image:
+//       "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuThai.png",
+//   },
+//   {
+//     id: 2,
+//     name: "Cánh gà giòn",
+//     price: "35000",
+//     quantity: 15,
+//     image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaGion.png",
+//   },
+//   {
+//     id: 3,
+//     name: "Cánh gà phô mai",
+//     price: "45000",
+//     quantity: 8,
+//     image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaPhoMai.png",
+//   },
+// ];
+//
+// // Hàm lấy productId từ URL
+// function getProductIdFromUrl() {
+//   const url = window.location.href;
+//   const fileName = url.split("/").pop();
+//   const productId = parseInt(fileName.split("sproduct")[1].split(".html")[0]);
+//   return productId;
+// }
+//
+// function displayAvailableQuantity() {
+//   const productId = getProductIdFromUrl();
+//   const product = products.find((p) => p.id === productId);
+//
+//   if (product) {
+//     const quantityElement = document.getElementById("available-quantity");
+//     if (quantityElement) {
+//       quantityElement.textContent = `${product.quantity} sản phẩm có sẵn`;
+//     }
+//   }
+// }
+// document.addEventListener("DOMContentLoaded", displayAvailableQuantity);
 
 let currentUser = null; // Biến lưu trữ người dùng hiện tại
 

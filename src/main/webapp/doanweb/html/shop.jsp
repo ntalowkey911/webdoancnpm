@@ -376,7 +376,6 @@
         }
 
         /*sidebar  */
-        /* Định dạng toàn bộ danh sách dưới dạng bảng */
         .list-category{
             list-style-type: none; /* Xóa các dấu đầu dòng */
             padding: 0;
@@ -384,24 +383,6 @@
             border-collapse: collapse; /* Loại bỏ khoảng cách giữa các đường viền */
             width: 100%; /* Căn chỉnh chiều rộng 100% */
         }
-
-        /* Định dạng tiêu đề category */
-        .category-title, .lproduct-title {
-            background-color: #BC1F23; /* Màu nền đỏ */
-            color: white !important;
-            padding: 10px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            border: 1px solid #ddd; /* Đường viền */
-            margin-bottom: 15px; /* Khoảng cách dưới tiêu đề */
-            display: block; /* Đảm bảo hiển thị đầy đủ */
-            width: 100%; /* Đảm bảo chiều rộng đầy đủ */
-        }
-
-
-
         /* Định dạng các mục trong danh sách (li) */
         .list-category li {
             background-color: #f9f9f9; /* Màu nền sáng cho các mục */
@@ -409,6 +390,7 @@
             padding: 10px;
             text-align: left;
             transition: background-color 0.3s ease; /* Hiệu ứng chuyển đổi màu nền khi hover */
+            list-style-type: none; /* Xóa dấu chấm đầu dòng */
         }
 
         /* Hiệu ứng hover cho các hàng */
@@ -431,7 +413,11 @@
             font-weight: bold; /* Làm đậm chữ khi hover */
         }
 
-
+        /* Định dạng mục danh mục khi được chọn (active) */
+        .list-category li.active a {
+            color: #BC1F23; /* Đổi màu chữ thành màu đỏ khi mục được chọn */
+            font-weight: bold; /* Làm đậm chữ khi mục được chọn */
+        }
 
 
         .last-product {
@@ -532,10 +518,14 @@
                     <h5 class="category-title">Categories</h5>
                     <ul class="list-category">
                         <c:forEach var="o" items="${categoriesList}">
-                            <li><a href="?categoryId=${o.id}">${o.name}</a></li>
+                            <!-- Kiểm tra nếu categoryId trong URL trùng với id của danh mục -->
+                            <li class="${param.categoryId == o.id ? 'active' : ''}">
+                                <a href="?categoryId=${o.id}">${o.name}</a>
+                            </li>
                         </c:forEach>
                     </ul>
                 </div>
+
 
                 <div class="last-product">
                     <h5 class="lproduct-title">Sản phẩm mới nhất</h5>
