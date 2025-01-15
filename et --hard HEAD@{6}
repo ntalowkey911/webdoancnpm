@@ -1,0 +1,14 @@
+[33m0b0c050[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{0}: pull origin main: Fast-forward
+[33m80130b9[m HEAD@{1}: pull origin main: Fast-forward
+[33ma0b3eea[m HEAD@{2}: pull origin main: Fast-forward
+[33m848b825[m HEAD@{3}: pull --rebase origin main (finish): returning to refs/heads/main
+[33m848b825[m HEAD@{4}: pull --rebase origin main (pick): them connection pool sua loi vat
+[33m55c7ea2[m HEAD@{5}: pull --rebase origin main (start): checkout 55c7ea24f046aa0780f28178600d0dd0589a3443
+[33m3bca1fa[m HEAD@{6}: commit: them connection pool sua loi vat
+[33m4ce19cd[m HEAD@{7}: merge origin/main: Merge made by the 'ort' strategy.
+[33mc60c270[m HEAD@{8}: commit: sua su kien buton tim
+[33m03bff09[m HEAD@{9}: commit: sua ad
+[33m88b32b7[m HEAD@{10}: pull origin main: Fast-forward
+[33md750d7a[m HEAD@{11}: commit: them chuc nang + - san pham va tinh tong tien
+[33med2dece[m HEAD@{12}: pull origin main: Fast-forward
+[33m6f4b818[m HEAD@{13}: commit: them chuc nang crud product ad
