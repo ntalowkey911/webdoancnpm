@@ -72,6 +72,8 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
     <div class="container-fluid mr-5">
+        <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" onclick="location.reload();" id="logo-img" alt="logo..">
+
 
         <button class="navbar-toggler" onclick="toggleMenu()">
             <span><i id="nav-bar-icon" class="bi bi-list"></i></span>
@@ -90,7 +92,7 @@
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Trang Chủ</a>
+                    <a class="nav-link active" href="<%= request.getContextPath() %>/home">Trang Chủ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<%= request.getContextPath() %>/shop">Cửa Hàng</a>
@@ -104,7 +106,7 @@
 
                 </li>
                 <li class="nav-item" id="admin-btn" style="display: none;">
-                    <a class="nav-link" href="<%= request.getContextPath() %>/doanweb/Admin.jsp">Quản trị</a>
+                    <a class="nav-link" href="<%= request.getContextPath() %>/admin">Quản trị</a>
                 </li>
                 <div class="nav-item" id="nav-icons">
                     <!-- <i class="bi bi-search"></i> -->
@@ -131,16 +133,16 @@
             </div>
             <div class="sidebar-content">
                 <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/index.jsp">TRANG CHỦ</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/home">TRANG CHỦ</a></h4>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/Cart.jsp">GIỎ HÀNG</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/cart">GIỎ HÀNG</a></h4>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/AboutUs.jsp">VỀ MFS</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/about">VỀ MFS</a></h4>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/sidebar/chinhsach.jsp">CHÍNH SÁCH</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/chinhsach">CHÍNH SÁCH</a></h4>
                 </div>
                 <div class="menu-section">
                     <h4><a href="javascript:void(0);" class="toggle-menu">THỰC ĐƠN</a></h4>
@@ -152,7 +154,7 @@
                     <h4><a href="<%= request.getContextPath() %>/doanweb/html/sidebar/DichVu.html">DỊCH VỤ</a></h4>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/Menu/ContactUs.html">LIÊN HỆ</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/contact">LIÊN HỆ</a></h4>
                 </div>
                 <div class="menu-section">
                     <h4><a href="<%= request.getContextPath() %>/doanweb/html/sidebar/job.html">TUYỂN DỤNG</a></h4>
@@ -241,11 +243,11 @@
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
             <h5 class="pb-2">Liên kết nhanh</h5>
             <ul class="text-uppercase list-unstyled">
-                <li><a href="index.html">trang chủ</a></li>
-                <li><a href="/html/Menu/shop.html">Cửa hàng</a></li>
-                <li><a href="/html/Menu/AboutUs.html">thông tin</a></li>
-                <li><a href="/html/Menu/ContactUs.html">liên hệ</a></li>
-                <li><a href="/html/Menu/Cart.html">Giỏ hàng</a></li>
+                <li><a href="<%= request.getContextPath() %>/home">trang chủ</a></li>
+                <li><a href="<%= request.getContextPath() %>/shop">Cửa hàng</a></li>
+                <li><a href="<%= request.getContextPath() %>/about">thông tin</a></li>
+                <li><a href="<%= request.getContextPath() %>/contact">liên hệ</a></li>
+                <li><a href="<%= request.getContextPath() %>/cart">Giỏ hàng</a></li>
             </ul>
         </div>
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">

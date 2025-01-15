@@ -93,7 +93,7 @@
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Trang Chủ</a>
+                    <a class="nav-link active" href="<%= request.getContextPath() %>/home">Trang Chủ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<%= request.getContextPath() %>/shop">Cửa Hàng</a>
@@ -107,21 +107,21 @@
 
                 </li>
                 <li class="nav-item" id="admin-btn" style="display: none;">
-                    <a class="nav-link" href="<%= request.getContextPath() %>/doanweb/Admin.jsp">Quản trị</a>
+                    <a class="nav-link" href="<%= request.getContextPath() %>/admin">Quản trị</a>
                 </li>
                 <div class="nav-item" id="nav-icons">
                     <!-- <i class="bi bi-search"></i> -->
-                    <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Login.html"><i class="bi bi-person-fill"
+                    <a href="<%= request.getContextPath() %>/login"><i class="bi bi-person-fill"
                                                                                               id="user-icon"></i></a>
                     <!-- User Menu -->
 
                     <div class="user-menu" id="user-menu">
                         <span id="greeting"></span>
-                        <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Profile.html">Tài khoản của tôi</a>
+                        <a href="<%= request.getContextPath() %>/profile">Tài khoản của tôi</a>
                         <a href="javascript:void(0);" onclick="logout()">Đăng xuất</a>
                     </div>
 
-                    <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
+                    <a href="<%= request.getContextPath() %>/cart"><i class="bi bi-bag-heart-fill"></i></a>
                 </div>
 
             </ul>
@@ -135,43 +135,43 @@
             </div>
             <div class="sidebar-content">
                 <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/index.jsp">TRANG CHỦ</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/home">TRANG CHỦ</a></h4>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/Cart.jsp">GIỎ HÀNG</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/cart">GIỎ HÀNG</a></h4>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/AboutUs.jsp">VỀ MFS</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/about">VỀ MFS</a></h4>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/sidebar/chinhsach.jsp">CHÍNH SÁCH</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/chinhsach">CHÍNH SÁCH</a></h4>
                 </div>
                 <div class="menu-section">
                     <h4><a href="javascript:void(0);" class="toggle-menu">THỰC ĐƠN</a></h4>
                     <ul class="submenu">
-                        <li><a href="<%= request.getContextPath() %>/doanweb/html/Menu/shop.html">Các món đùi gà nổi bật</a></li>
-                        <li><a href="<%= request.getContextPath() %>/doanweb/html/Menu/shop1.html">Các món cánh gà nổi bật</a></li>
-                        <li><a href="<%= request.getContextPath() %>/doanweb#">Combo gà phải thử</a></li>
+                        <li><a href="<%= request.getContextPath() %>/shop">Các món đùi gà nổi bật</a></li>
+                        <li><a href="<%= request.getContextPath() %>/shop">Các món cánh gà nổi bật</a></li>
+                        <li><a href="<%= request.getContextPath() %>/shop">Combo gà phải thử</a></li>
                     </ul>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/sidebar/DichVu.html">DỊCH VỤ</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/home">DỊCH VỤ</a></h4>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/Menu/ContactUs.html">LIÊN HỆ</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/contact">LIÊN HỆ</a></h4>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/sidebar/job.html">TUYỂN DỤNG</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/home">TUYỂN DỤNG</a></h4>
                 </div>
 
                 <div class="menu-section user" id="user-sidebar">
                     <h4><i class="bi bi-person"></i><a href="<%= request.getContextPath() %>Login.html">ĐĂNG
-                        NHẬP</a> / <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Register.html">ĐĂNG KÝ</a></h4>
+                        NHẬP</a> / <a href="<%= request.getContextPath() %>/register">ĐĂNG KÝ</a></h4>
 
                 </div>
                 <div class="menu-section user-logged-in" id="user-logged-in" style="display: none;">
                     <span id="greeting-menu"></span>
-                    <h4><a href="<%= request.getContextPath() %>/doanweb/html/Menu/Profile.html">TÀI KHOẢN CỦA TÔI / </a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/profile">TÀI KHOẢN CỦA TÔI / </a></h4>
                     <h4><i class="bi bi-person"></i><a href="javascript:void(0);" onclick="logout()">ĐĂNG XUẤT</a></h4>
                 </div>
             </div>
@@ -209,7 +209,7 @@
                     <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
                 </div>
                 <button type="submit" class="login-btn btn btn-dark py-2 mt-4 mb-3">Đăng nhập</button>
-                <p class="py-2 text-center">Bạn chưa có tài khoản? <a href="<%= request.getContextPath() %>/doanweb/html/Register.jsp" id="showSignUp">Đăng ký</a></p>
+                <p class="py-2 text-center">Bạn chưa có tài khoản? <a href="<%= request.getContextPath() %>/register" id="showSignUp">Đăng ký</a></p>
             </form>
         </div>
     </div>
@@ -228,11 +228,11 @@
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
             <h5 class="pb-2">Liên kết nhanh</h5>
             <ul class="text-uppercase list-unstyled">
-                <li><a href="index.html">trang chủ</a></li>
-                <li><a href="/html/Menu/shop.html">Cửa hàng</a></li>
-                <li><a href="/html/Menu/AboutUs.html">thông tin</a></li>
-                <li><a href="/html/Menu/ContactUs.html">liên hệ</a></li>
-                <li><a href="/html/Menu/Cart.html">Giỏ hàng</a></li>
+                <li><a href="<%= request.getContextPath() %>/home">trang chủ</a></li>
+                <li><a href="<%= request.getContextPath() %>/shop">Cửa hàng</a></li>
+                <li><a href="<%= request.getContextPath() %>/about">thông tin</a></li>
+                <li><a href="<%= request.getContextPath() %>/contact">liên hệ</a></li>
+                <li><a href="<%= request.getContextPath() %>/cart">Giỏ hàng</a></li>
             </ul>
         </div>
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">

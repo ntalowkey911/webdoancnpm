@@ -72,17 +72,29 @@
 <form action="AddProduct" method="post">
     <h3>Thêm/Sửa sản phẩm</h3>
     <input type="hidden" name="id" placeholder="ID (chỉ nhập khi sửa)">
-    <input type="text" name="name" placeholder="Tên sản phẩm" required>
-    <input type="text" name="description" placeholder="Mô tả sản phẩm" required>
-    <input type="number" name="price" placeholder="Giá sản phẩm" required>
-    <input type="number" name="stock" placeholder="Số lượng tồn" required>
-    <input type="text" name="image" placeholder="Link ảnh" required>
-    <select name="category_id" required>
-        <option value="">Chọn danh mục</option>
-        <% for (Categories category : categoryList) { %>
-        <option value="<%= category.getId() %>"><%= category.getName() %></option>
-        <% } %>
-    </select>
+    <label>
+        <input type="text" name="name" placeholder="Tên sản phẩm" required>
+    </label>
+    <label>
+        <input type="text" name="description" placeholder="Mô tả sản phẩm" required>
+    </label>
+    <label>
+        <input type="number" name="price" placeholder="Giá sản phẩm" required>
+    </label>
+    <label>
+        <input type="number" name="stock" placeholder="Số lượng tồn" required>
+    </label>
+    <label>
+        <input type="text" name="image" placeholder="Link ảnh" required>
+    </label>
+    <label>
+        <select name="category_id" required>
+            <option value="">Chọn danh mục</option>
+            <% for (Categories category : categoryList) { %>
+            <option value="<%= category.getId() %>"><%= category.getName() %></option>
+            <% } %>
+        </select>
+    </label>
     <button type="submit">Thêm sản phẩm</button>
 </form>
 
