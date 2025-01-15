@@ -215,6 +215,71 @@
             <i class="bi bi-search"></i>
         </button>
     </div>
+
+    <script>
+        // Hàm loại bỏ dấu tiếng Việt
+        function removeVietnameseTones(str) {
+            return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase();
+        }
+
+        function searchProduct() {
+            // Lấy giá trị từ ô input
+            const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
+            const normalizedSearch = removeVietnameseTones(searchInput);
+
+            // Lấy danh sách các sản phẩm
+            const products = document.querySelectorAll(".product-card");
+
+            // Nếu ô tìm kiếm trống, hiển thị tất cả sản phẩm
+            if (normalizedSearch === "") {
+                products.forEach(product => {
+                    product.style.display = "block"; // Hiển thị lại tất cả sản phẩm
+                });
+                return;
+            }
+
+            let found = false; // Kiểm tra nếu tìm thấy sản phẩm
+
+            products.forEach(product => {
+                const productName = product.querySelector(".product-name").textContent.trim().toLowerCase();
+                const normalizedName = removeVietnameseTones(productName);
+
+                // Kiểm tra nếu sản phẩm phù hợp với từ khóa tìm kiếm
+                if (normalizedName.includes(normalizedSearch)) {
+                    product.style.display = "block"; // Hiển thị sản phẩm
+                    found = true;
+                } else {
+                    product.style.display = "none"; // Ẩn sản phẩm không khớp
+                }
+            });
+
+            // Thông báo nếu không tìm thấy sản phẩm nào
+            if (!found) {
+                alert("Không tìm thấy sản phẩm nào phù hợp.");
+            }
+        }
+
+        // Thêm sự kiện click cho nút tìm kiếm
+        document.getElementById("searchButton").addEventListener("click", searchProduct);
+
+        // Thêm sự kiện cho phím Enter trên ô tìm kiếm
+        document.getElementById("searchInput").addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                searchProduct(); // Gọi hàm tìm kiếm khi nhấn Enter
+            }
+        });
+
+        // Tự động hiển thị lại tất cả sản phẩm khi xóa hết nội dung ô tìm kiếm
+        document.getElementById("searchInput").addEventListener("input", function () {
+            if (this.value.trim() === "") {
+                const products = document.querySelectorAll(".product-card");
+                products.forEach(product => {
+                    product.style.display = "block"; // Hiển thị lại tất cả sản phẩm
+                });
+            }
+        });
+    </script>
+
     <style>
 
         .category-list {
@@ -430,44 +495,6 @@
         }
 
     </style>
-    <script>
-        // Hàm loại bỏ dấu tiếng Việt
-        function removeVietnameseTones(str) {
-            return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase();
-        }
-
-        function searchProduct() {
-            // Lấy giá trị từ ô input
-            const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
-            const normalizedSearch = removeVietnameseTones(searchInput);
-
-            // Lấy danh sách các sản phẩm
-            const products = document.querySelectorAll(".product-card");
-            let found = false; // Kiểm tra nếu tìm thấy sản phẩm
-
-            products.forEach(product => {
-                const productName = product.querySelector(".product-name").textContent.trim().toLowerCase();
-                const normalizedName = removeVietnameseTones(productName);
-
-                // Kiểm tra nếu sản phẩm phù hợp với từ khóa tìm kiếm
-                if (normalizedName.includes(normalizedSearch)) {
-                    product.style.display = "block"; // Hiển thị sản phẩm
-                    found = true;
-                } else {
-                    product.style.display = "none"; // Ẩn sản phẩm không khớp
-                }
-            });
-
-            // Thông báo nếu không tìm thấy sản phẩm nào
-            if (!found) {
-                alert("Không tìm thấy sản phẩm nào phù hợp.");
-            }
-        }
-
-        // Thêm sự kiện click cho nút tìm kiếm
-        document.getElementById("searchButton").addEventListener("click", searchProduct);
-
-    </script>
 
     <div style="text-align: right; margin-right: 100px; ">
         <button class="sort-button" onclick="sortProducts('asc')">Sắp xếp từ thấp đến cao</button>

@@ -17,9 +17,39 @@
     </style>
 </head>
 <body>
-<h1>Admin Dashboard</h1>
-<h2>Quản lý sản phẩm</h2>
+<button id="backToTopBtn" onclick="scrollToTop()">⬆️</button>
+<style>
+    /* CSS cho nút "Lên đầu trang" */
+    #backToTopBtn {
+        position: fixed;
+        bottom: 20px; /* Cách đáy màn hình 20px */
+        right: 20px; /* Cách phải màn hình 20px */
+        z-index: 1000; /* Đặt trên các phần tử khác */
+        display: none; /* Ẩn nút ban đầu */
+        background-color: #007bff; /* Màu nền */
+        color: white; /* Màu chữ */
+        border: none; /* Xóa viền */
+        border-radius: 50%; /* Bo tròn nút */
+        padding: 10px 15px; /* Kích thước nút */
+        cursor: pointer; /* Hiển thị con trỏ */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+        font-size: 16px; /* Kích thước chữ */
+    }
 
+    #backToTopBtn:hover {
+        background-color: #0056b3; /* Màu khi hover */
+    }
+</style>
+<h1>Admin Quản lý sản phẩm</h1>
+<input
+        type="text"
+        id="searchInput"
+        placeholder="Tìm kiếm sản phẩm..."
+        oninput="searchProduct()"
+        onkeypress="handleEnter(event)"
+        style="width: 300px; padding: 5px; margin-bottom: 20px;"
+>
+<button onclick="searchProduct()" style="padding: 5px 10px; margin-left: 10px;">Tìm kiếm</button>
 <%
     dao daoInstance = new dao();
     List<Products> productList = daoInstance.getAllProducts();
@@ -37,6 +67,7 @@
         daoInstance.deleteCategory(Integer.parseInt(deleteCategoryId));
     }
 %>
+
 
 <form action="AddProduct" method="post">
     <h3>Thêm/Sửa sản phẩm</h3>
@@ -126,4 +157,78 @@
     <% } %>
 </table>
 </body>
+
+
+<script>
+    // Hàm chuẩn hóa chuỗi: Loại bỏ dấu và chuyển về chữ thường
+    function normalizeString(str) {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+
+    // Hàm xử lý khi nhấn Enter
+    function handleEnter(event) {
+        if (event.key === "Enter") { // Kiểm tra nếu nhấn Enter
+            searchProduct();
+        }
+    }
+
+    // Hàm tìm kiếm sản phẩm
+    function searchProduct() {
+        // Lấy giá trị tìm kiếm từ ô input
+        let input = document.getElementById("searchInput").value;
+        let normalizedInput = normalizeString(input);
+
+        // Lấy tất cả các hàng trong bảng sản phẩm
+        let rows = document.querySelectorAll("table tr");
+
+        // Nếu ô tìm kiếm trống, hiển thị lại tất cả các hàng
+        if (normalizedInput === "") {
+            rows.forEach(row => {
+                row.style.display = ""; // Hiển thị tất cả các hàng
+                row.style.backgroundColor = ""; // Xóa màu đánh dấu
+            });
+            return; // Dừng hàm tại đây
+        }
+
+        // Duyệt qua các hàng và kiểm tra nếu tên sản phẩm khớp
+        rows.forEach(row => {
+            let productNameCell = row.querySelector("td:nth-child(2)"); // Cột tên sản phẩm (thứ 2)
+            if (productNameCell) {
+                let productName = productNameCell.textContent;
+                let normalizedProductName = normalizeString(productName);
+
+                if (normalizedProductName.includes(normalizedInput)) {
+                    // Hiển thị hàng nếu khớp
+                    row.style.display = "";
+                    row.style.backgroundColor = "#ffff99"; // Đánh dấu
+                } else {
+                    // Ẩn hàng nếu không khớp
+                    row.style.display = "none";
+                    row.style.backgroundColor = ""; // Xóa đánh dấu
+                }
+            }
+        });
+    }
+
+
+    // Hàm cuộn lên đầu trang
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0, // Cuộn lên đầu trang
+            behavior: "smooth", // Cuộn mượt
+        });
+    }
+
+    // Hiển thị hoặc ẩn nút khi cuộn
+    window.addEventListener("scroll", () => {
+        const btn = document.getElementById("backToTopBtn");
+        if (window.scrollY > 200) { // Hiển thị khi cuộn xuống 200px
+            btn.style.display = "block";
+        } else {
+            btn.style.display = "none"; // Ẩn khi ở gần đầu trang
+        }
+    });
+
+</script>
+
 </html>
