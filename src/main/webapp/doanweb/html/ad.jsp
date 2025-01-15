@@ -70,6 +70,7 @@
     </tr>
     <% for (Products product : productList) { %>
     <tr>
+
         <td><%= product.getId() %></td>
         <td><%= product.getName() %></td>
         <td><%= product.getDescription() %></td>
@@ -78,8 +79,25 @@
         <td><img src="<%= product.getImage() %>" alt="<%= product.getName() %>" style="width: 50px;"></td>
         <td><%= product.getCategoryId() %></td>
         <td>
-            <a href="UpdateProduct.jsp?id=<%= product.getId() %>">Sửa</a> |
-            <a href="DeleteProduct?id=<%= product.getId() %>" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>        </td>
+            <form action="UpdateProduct" method="post" style="display:inline;">
+                <input type="hidden" name="id" value="<%= product.getId() %>">
+                <input type="text" name="name" value="<%= product.getName() %>" required>
+                <input type="text" name="description" value="<%= product.getDescription() %>" required>
+                <input type="number" name="price" value="<%= product.getPrice() %>" required>
+                <input type="number" name="stock" value="<%= product.getStock() %>" required>
+                <input type="text" name="image" value="<%= product.getImage() %>" required>
+                <select name="category_id" required>
+                    <% for (Categories category : categoryList) { %>
+                    <option value="<%= category.getId() %>" <%= (category.getId() == product.getCategoryId()) ? "selected" : "" %>>
+                        <%= category.getName() %>
+                    </option>
+                    <% } %>
+                </select><br>
+                <button type="submit">Cập nhật</button>
+            </form>
+
+            <a href="DeleteProduct?id=<%= product.getId() %>" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
+        </td>
     </tr>
     <% } %>
 </table>

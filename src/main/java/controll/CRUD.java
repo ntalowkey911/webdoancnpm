@@ -20,13 +20,7 @@ import java.util.ArrayList;
 })
 public class CRUD extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    private dao daoInstance;
-
-    @Override
-    public void init() throws ServletException {
-        daoInstance = new dao(); // Khởi tạo DAO
-    }
+    dao daoInstance = new dao();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -100,17 +94,29 @@ public class CRUD extends HttpServlet {
     }
 
     private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        // Lấy các tham số từ request
+        String id = request.getParameter("id");
         String name = request.getParameter("name");
         String description = request.getParameter("description");
-        double price = Double.parseDouble(request.getParameter("price"));
-        int stock = Integer.parseInt(request.getParameter("stock"));
+        String price = request.getParameter("price");
+        String stock = request.getParameter("stock");
         String image = request.getParameter("image");
-        int category_id = Integer.parseInt(request.getParameter("category_id"));
+        String categoryId = request.getParameter("category_id");
 
-        daoInstance.updateProduct(id, name, description, price, stock, image, category_id);
+        // Chuyển đổi các tham số sang kiểu dữ liệu phù hợp
+        int productId = Integer.parseInt(id); // id phải là số nguyên
+        double productPrice = Double.parseDouble(price); // price phải là số thực
+        int productStock = Integer.parseInt(stock); // stock phải là số nguyên
+        int productCategoryId = Integer.parseInt(categoryId); // categoryId phải là số nguyên
+
+        // Cập nhật sản phẩm vào cơ sở dữ liệu
+        daoInstance.updateProduct(productId, name, description, productPrice, productStock, image, productCategoryId);
+
+        // Kiểm tra và phản hồi cho người dùng
         response.getWriter().write("Cập nhật sản phẩm thành công!");
+        response.sendRedirect("doanweb/html/ad.jsp");
     }
+
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
