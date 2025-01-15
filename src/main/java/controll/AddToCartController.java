@@ -73,6 +73,9 @@ public class AddToCartController extends HttpServlet {
                 cart.add(new CartItem(product, 1)); // Mặc định thêm 1 sản phẩm vào giỏ
             }
         }
+        //Hiển thị sản phẩm gợi ý
+        List<Products> randomProducts = dao.getRandomProducts();
+        request.setAttribute("randomProductList", randomProducts);
 
         // Cập nhật tổng số lượng sản phẩm trong giỏ hàng
         int totalItems = 0;

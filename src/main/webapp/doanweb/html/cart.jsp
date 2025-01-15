@@ -331,48 +331,6 @@
     </div>
   </div>
 </section>
-<section class="my-5 pb-5">
-  <div class="container text-center mt-5 py-5">
-    <h3>Các sản phẩm liên quan</h3>
-    <hr class="border border-danger border-2 opacity-75 mx-auto">
-  </div>
-  <div class="row mx-auto container-fluid">
-    <div class="product text-center col-lg-3 col-md-4 col-12">
-      <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaXiMuoi.png"
-           alt="Cánh gà xí muội">
-
-      <h5 class="product-name">Cánh gà sốt cay xí muội</h5>
-      <h4 class="product-price">30.000 VND</h4>
-      <button class="buy-btn" onclick="window.location.href = 'sproduct13.html';">Mua ngay</button>
-    </div>
-    <div class="product text-center col-lg-3 col-md-4 col-12">
-      <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaKieuThai.jpg"
-           alt="Gà rán sốt cay kiểu Thái">
-
-      <h5 class="product-name">Gà rán sốt cay kiểu Thái</h5>
-      <h4 class="product-price">45.000 VND</h4>
-      <button class="buy-btn" onclick="window.location.href = 'sproduct17.html';">Mua ngay</button>
-    </div>
-    <div class="product text-center col-lg-3 col-md-4 col-12">
-      <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaChanhDay.jpg"
-           alt="Gà rán giòn sốt chanh dây">
-
-      <h5 class="product-name">Gà rán giòn sốt chanh dây</h5>
-      <h4 class="product-price">50.000 VND</h4>
-      <button class="buy-btn" onclick="window.location.href = 'sproduct20.html';">Mua ngay</button>
-    </div>
-    <div class="product container text-center col-lg-3 col-md-4 col-12">
-      <img class="img-fluid" src="<%= request.getContextPath() %>/doanweb/images/CanhGa/CanhGaKieuNhat.jpg"
-           alt="Gà rán xù kiểu Nhật">
-
-      <h5 class="product-name">Gà rán xù kiểu Nhật</h5>
-      <h4 class="product-price">39.000 VND</h4>
-      <button class="buy-btn" onclick="window.location.href = 'sproduct21.html';">Mua ngay</button>
-    </div>
-    <button class="ShopMore my-5 mx-auto" onclick="window.location.href = '/shop';">Tiếp tục mua
-      sắm</button>
-  </div>
-</section>
 </body>
 <footer class="mt-5 p-5 bg-dark">
   <div class="row conatiner mx-auto pt-5">

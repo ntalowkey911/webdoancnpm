@@ -33,7 +33,6 @@ public class HomeController extends HttpServlet {
 
         // Lấy tất cả các sản phẩm (có thể thêm lọc theo danh mục sau)
         List<Products> randomProducts = dao.getRandomProducts();
-
         // Lấy các sản phẩm theo từng danh mục (ví dụ: category_id = 1, 2, 3, ...)
         List<Products> category1Products = dao.getProductsByCategory(1); // Đùi Gà
         List<Products> category2Products = dao.getProductsByCategory(2); // Cá
