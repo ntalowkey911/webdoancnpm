@@ -349,7 +349,7 @@ public class dao {
         }
     }
 
-    public List<Products> getRandomProducts() {
+    public static List<Products> getRandomProducts() {
         List<Products> products = new ArrayList<>();
         String query = "SELECT * FROM Products ORDER BY RAND() LIMIT 4"; // Lấy 4 sản phẩm ngẫu nhiên
 

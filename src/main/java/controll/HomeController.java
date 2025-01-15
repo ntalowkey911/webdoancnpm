@@ -22,14 +22,9 @@ import java.util.stream.Collectors;
 public class HomeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Lấy danh sách sản phẩm từ DAO
-        dao productDao = new dao();
-        List<Products> products = productDao.getAllProducts();
-
-        // Đặt danh sách sản phẩm vào request để gửi tới JSP
-        request.setAttribute("products", products);
-
-        // Chuyển tiếp yêu cầu đến trang index.jsp
+        List<Products> randomProducts = dao.getRandomProducts();
+        System.out.println("Số lượng sản phẩm trả về: " + randomProducts.size());  // Kiểm tra số lượng sản phẩm
+        request.setAttribute("randomProductList", randomProducts);
         RequestDispatcher dispatcher = request.getRequestDispatcher("doanweb/html/index.jsp");
         dispatcher.forward(request, response);
     }
