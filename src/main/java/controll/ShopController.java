@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 @WebServlet("/shop") // Đường dẫn để gọi servlet
@@ -49,18 +50,37 @@ public class ShopController extends HttpServlet {
 
 // loc sp
         String categoryId = request.getParameter("categoryId");
+        List<Products> filteredProducts;
         if (categoryId != null) {
-            List<Products> filteredProducts = productDAO.getProductsByCategory(Integer.parseInt(categoryId));
-            request.setAttribute("productList", filteredProducts);
+            filteredProducts = productDAO.getProductsByCategory(Integer.parseInt(categoryId));
+            request.setAttribute("categoryId", categoryId); // Lưu categoryId để đánh dấu danh mục đang chọn
         } else {
-            List<Products> allProducts = productDAO.getAllProducts();
-            request.setAttribute("productList", allProducts);
+            filteredProducts = productDAO.getAllProducts();
         }
 
+
+
+
+        String sortOrder = request.getParameter("sort");
+        if (sortOrder != null) {
+            filteredProducts = sortProducts(filteredProducts, sortOrder);
+        }
+
+        // Cập nhật danh sách sản phẩm đã lọc và sắp xếp vào request
+        request.setAttribute("productList", filteredProducts);
 
         // Chuyển tiếp yêu cầu tới trang JSP để hiển thị
         RequestDispatcher dispatcher = request.getRequestDispatcher("doanweb/html/shop.jsp");
         dispatcher.forward(request, response);
 
+    }
+    // Hàm sắp xếp sản phẩm theo giá
+    private List<Products> sortProducts(List<Products> products, String sortOrder) {
+        if ("asc".equals(sortOrder)) {
+            products.sort(Comparator.comparingDouble(Products::getPrice)); // Giá thấp đến cao
+        } else if ("desc".equals(sortOrder)) {
+            products.sort((p1, p2) -> Double.compare(p2.getPrice(), p1.getPrice())); // Giá cao đến thấp
+        }
+        return products;
     }
 }

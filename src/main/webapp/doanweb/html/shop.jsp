@@ -495,31 +495,9 @@
     </style>
 
     <div style="text-align: right; margin-right: 100px; ">
-        <button class="sort-button" onclick="sortProducts('asc')">Sắp xếp từ thấp đến cao</button>
-        <button class="sort-button" onclick="sortProducts('desc')">Sắp xếp từ cao đến thấp</button>
+        <a class="sort-button" href="?categoryId=${param.categoryId}&sort=asc" class="${param.sort == 'asc' ? 'active' : ''}">Giá: Thấp đến cao</a>
+        <a class="sort-button" href="?categoryId=${param.categoryId}&sort=desc" class="${param.sort == 'desc' ? 'active' : ''}">Giá: Cao đến thấp</a>
     </div>
-
-    <script>
-        function sortProducts(order) {
-            // Lấy danh sách các sản phẩm
-            const products = Array.from(document.querySelectorAll(".col-md-4"));
-
-            // Sắp xếp sản phẩm theo giá
-            const sortedProducts = products.sort((a, b) => {
-                const priceA = parseInt(a.querySelector(".product-price").textContent.replace(/[^0-9]/g, ""));
-                const priceB = parseInt(b.querySelector(".product-price").textContent.replace(/[^0-9]/g, ""));
-                return order === "asc" ? priceA - priceB : priceB - priceA;
-            });
-
-            // Thay đổi thứ tự hiển thị trực tiếp trong container
-            const container = document.querySelector(".col-md-9 .row");
-            sortedProducts.forEach(product => {
-                container.appendChild(product); // Di chuyển sản phẩm (không xóa)
-            });
-        }
-
-    </script>
-
 
     <body>
     <div class="container mt-4">
