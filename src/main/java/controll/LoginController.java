@@ -50,7 +50,8 @@ public class LoginController extends HttpServlet {
                 // Lưu thông tin người dùng vào session
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                response.sendRedirect("/home");  // Chuyển hướng đến trang home hoặc bất kỳ trang nào bạn muốn
+                response.sendRedirect(request.getContextPath() + "/home");
+
             }
         } catch (Exception e) {
             e.printStackTrace();
