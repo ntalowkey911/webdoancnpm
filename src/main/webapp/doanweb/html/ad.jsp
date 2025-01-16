@@ -41,6 +41,7 @@
     }
 </style>
 <h1>Admin Quản lý sản phẩm</h1>
+<label for="searchInput"></label>
 <input
         type="text"
         id="searchInput"
@@ -124,18 +125,30 @@
         <td>
             <form action="UpdateProduct" method="post" style="display:inline;">
                 <input type="hidden" name="id" value="<%= product.getId() %>">
-                <input type="text" name="name" value="<%= product.getName() %>" required>
-                <input type="text" name="description" value="<%= product.getDescription() %>" required>
-                <input type="number" name="price" value="<%= product.getPrice() %>" required>
-                <input type="number" name="stock" value="<%= product.getStock() %>" required>
-                <input type="text" name="image" value="<%= product.getImage() %>" required>
-                <select name="category_id" required>
-                    <% for (Categories category : categoryList) { %>
-                    <option value="<%= category.getId() %>" <%= (category.getId() == product.getCategoryId()) ? "selected" : "" %>>
-                        <%= category.getName() %>
-                    </option>
-                    <% } %>
-                </select><br>
+                <label>
+                    <input type="text" name="name" value="<%= product.getName() %>" required>
+                </label>
+                <label>
+                    <input type="text" name="description" value="<%= product.getDescription() %>" required>
+                </label>
+                <label>
+                    <input type="number" name="price" value="<%= product.getPrice() %>" required>
+                </label>
+                <label>
+                    <input type="number" name="stock" value="<%= product.getStock() %>" required>
+                </label>
+                <label>
+                    <input type="text" name="image" value="<%= product.getImage() %>" required>
+                </label>
+                <label>
+                    <select name="category_id" required>
+                        <% for (Categories category : categoryList) { %>
+                        <option value="<%= category.getId() %>" <%= (category.getId() == product.getCategoryId()) ? "selected" : "" %>>
+                            <%= category.getName() %>
+                        </option>
+                        <% } %>
+                    </select>
+                </label><br>
                 <button type="submit">Cập nhật</button>
             </form>
 
@@ -149,7 +162,9 @@
 <h2>Quản lý danh mục</h2>
 <form action="AddCategory" method="post">
     <h3>Thêm danh mục mới</h3>
-    <input type="text" name="categoryName" placeholder="Tên danh mục" required>
+    <label>
+        <input type="text" name="categoryName" placeholder="Tên danh mục" required>
+    </label>
     <button type="submit">Thêm danh mục</button>
 </form>
 
