@@ -32,6 +32,7 @@ public class LoginController extends HttpServlet {
 
     // Xử lý phương thức POST (xử lý đăng nhập)
     @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
@@ -45,13 +46,12 @@ public class LoginController extends HttpServlet {
 
             if (user == null) {
                 request.setAttribute("mess", "Tài khoản hoặc mật khẩu sai");
-                request.getRequestDispatcher("/home").forward(request, response);
+                request.getRequestDispatcher("/doanweb/html/Login.jsp").forward(request, response);
             } else {
                 // Lưu thông tin người dùng vào session
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
                 response.sendRedirect(request.getContextPath() + "/home");
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,5 +59,6 @@ public class LoginController extends HttpServlet {
             request.getRequestDispatcher("/doanweb/html/Login.jsp").forward(request, response);
         }
     }
+
 }
 
