@@ -114,17 +114,25 @@ public class UserDao {
                             int rowsAffected = deleteStatement.executeUpdate();
                             if (rowsAffected > 0) {
                                 isDeleted = true;  // Xóa tài khoản thành công
+                            } else {
+                                System.out.println("Không thể xóa tài khoản, vui lòng thử lại.");
                             }
                         }
                     } else {
                         System.out.println("Mật khẩu không đúng.");
                     }
+                } else {
+                    System.out.println("Không tìm thấy tài khoản với username: " + username);
                 }
             }
-
+        } catch (SQLException e) {
+            System.err.println("Lỗi cơ sở dữ liệu: " + e.getMessage());
+            e.printStackTrace();
         } catch (Exception e) {
-            e.printStackTrace();  // In ra lỗi nếu có
+            System.err.println("Lỗi: " + e.getMessage());
+            e.printStackTrace();
         }
+
         return isDeleted;  // Trả về true nếu xóa tài khoản thành công, ngược lại là false
     }
 

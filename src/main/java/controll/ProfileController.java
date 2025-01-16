@@ -25,84 +25,65 @@ public class ProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html; charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-
         Users loggedInUser = getLoggedInUser(request);
 
         if (loggedInUser == null) {
-            redirectToLogin(response);
+            response.sendRedirect("/login");
             return;
         }
 
+        // Lấy action từ request (nếu có)
+        String action = request.getParameter("action");
+        request.setAttribute("action", action); // Truyền action sang JSP
+
+        // Lấy thông tin người dùng để hiển thị
         Users user = dao.getUserByUsername(loggedInUser.getUsername());
-
-        if (user == null) {
-            redirectToHome(response);
-            return;
-        }
-
-        // Set user info for profile page
         request.setAttribute("user", user);
+
+        // Chuyển đến profile.jsp
         forwardToPage(request, response, "doanweb/html/profile.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html; charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-
         Users loggedInUser = getLoggedInUser(request);
 
         if (loggedInUser == null) {
-            redirectToLogin(response);
+            response.sendRedirect("/login");
             return;
         }
 
         String action = request.getParameter("action");
         if (action == null) {
-            redirectToProfile(response);
+            response.sendRedirect("/profile");
             return;
         }
 
         switch (action) {
-            case "/showinfo":
-                handleViewProfile(request, response, loggedInUser);
-                break;
-
-            case "/changeInfo":
+            case "changeInfo":
                 handleEditProfile(request, response, loggedInUser);
                 break;
 
-            case "/change-pass":
+            case "change-pass":
                 handleChangePassword(request, response, loggedInUser);
                 break;
 
-            case "/deleteAccount":
+            case "deleteAccount":
                 handleDeleteAccount(request, response, loggedInUser);
                 break;
 
             default:
-                redirectToProfile(response);
+                response.sendRedirect("/profile");
         }
     }
 
     private Users getLoggedInUser(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        return (Users) session.getAttribute("user");
-    }
-
-    private void redirectToLogin(HttpServletResponse response) throws IOException {
-        response.sendRedirect("/login");
-    }
-
-    private void redirectToHome(HttpServletResponse response) throws IOException {
-        response.sendRedirect("/home");
-    }
-
-    private void redirectToProfile(HttpServletResponse response) throws IOException {
-        response.sendRedirect("/profile");
+        HttpSession session = request.getSession(false); // Không tạo session mới nếu chưa tồn tại
+        if (session != null) {
+            return (Users) session.getAttribute("user");
+        }
+        return null;
     }
 
     private void forwardToPage(HttpServletRequest request, HttpServletResponse response, String page)
@@ -113,70 +94,54 @@ public class ProfileController extends HttpServlet {
 
     private void handleEditProfile(HttpServletRequest request, HttpServletResponse response, Users loggedInUser)
             throws IOException, ServletException {
-        String newEmail = request.getParameter("email");
-        String newPhone = request.getParameter("phone");
-        String newAddress = request.getParameter("address");
+        String newEmail = request.getParameter("newEmail");
+        String newPhone = request.getParameter("newPhone");
+        String newAddress = request.getParameter("newAddress");
 
-        // Update user info
         loggedInUser.setEmail(newEmail);
         loggedInUser.setPhone(newPhone);
         loggedInUser.setAddress(newAddress);
 
-        // Update database
         boolean isUpdated = dao.editUser(loggedInUser);
 
         if (isUpdated) {
-            // Update session and reload profile
             request.getSession().setAttribute("user", loggedInUser);
             request.setAttribute("successMessage", "Cập nhật thông tin thành công!");
-            handleViewProfile(request, response, loggedInUser); // Reload profile info
         } else {
-            // If update failed, show error message
             request.setAttribute("errorMessage", "Cập nhật thông tin thất bại. Vui lòng thử lại!");
-            forwardToPage(request, response, "doanweb/html/edit-profile.jsp");
         }
+
+        response.sendRedirect("/profile?action=changeInfo");
     }
 
-    private void handleViewProfile(HttpServletRequest request, HttpServletResponse response, Users loggedInUser)
-            throws ServletException, IOException {
-        Users user = dao.getUserByUsername(loggedInUser.getUsername());
-        request.setAttribute("user", user);
-        forwardToPage(request, response, "doanweb/html/profile.jsp");
-    }
-
-    // Phương thức xử lý thay đổi mật khẩu
     private void handleChangePassword(HttpServletRequest request, HttpServletResponse response, Users loggedInUser)
-            throws ServletException, IOException {
+            throws IOException, ServletException {
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
 
-        // Kiểm tra và thay đổi mật khẩu
         boolean isPasswordChanged = dao.changePassword(loggedInUser.getUsername(), oldPassword, newPassword);
 
         if (isPasswordChanged) {
             request.setAttribute("successMessage", "Mật khẩu đã được thay đổi thành công!");
-            forwardToPage(request, response, "doanweb/html/profile.jsp");
         } else {
             request.setAttribute("errorMessage", "Mật khẩu cũ không đúng hoặc có lỗi xảy ra!");
-            forwardToPage(request, response, "doanweb/html/change-password.jsp");
         }
+
+        response.sendRedirect("/profile?action=change-pass");
     }
 
-    // Phương thức xử lý xóa tài khoản
     private void handleDeleteAccount(HttpServletRequest request, HttpServletResponse response, Users loggedInUser)
-            throws ServletException, IOException {
-        String password = request.getParameter("password");
+            throws IOException, ServletException {
+        String password = request.getParameter("confirmDelete");
 
-        // Kiểm tra và xóa tài khoản
         boolean isAccountDeleted = dao.deleteAccount(loggedInUser.getUsername(), password);
 
         if (isAccountDeleted) {
-            // Xóa tài khoản thành công, yêu cầu người dùng đăng nhập lại
-            request.getSession().invalidate();  // Hủy session
+            request.getSession().invalidate();
             response.sendRedirect("/login");
         } else {
             request.setAttribute("errorMessage", "Mật khẩu không đúng hoặc có lỗi xảy ra!");
-            forwardToPage(request, response, "doanweb/html/delete-account.jsp");
+            response.sendRedirect("/profile?action=deleteAccount");
         }
     }
 }

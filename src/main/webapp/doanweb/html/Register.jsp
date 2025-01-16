@@ -112,13 +112,14 @@
                     <!-- <i class="bi bi-search"></i> -->
                     <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Login.html"><i class="bi bi-person-fill"
                                                                                               id="user-icon"></i></a>
-                    <!-- User Menu -->
-
-                    <div class="user-menu" id="user-menu">
-                        <span id="greeting"></span>
-                        <a href="<%= request.getContextPath() %>/doanweb/html/Menu/Profile.html">Tài khoản của tôi</a>
-                        <a href="javascript:void(0);" onclick="logout()">Đăng xuất</a>
-                    </div>
+                    <!-- Biểu tượng giỏ hàng với số lượng sản phẩm -->
+                    <a href="<%= request.getContextPath() %>/cart" class="position-relative">
+                        <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i> <!-- Biểu tượng giỏ hàng -->
+                        <!-- Số lượng sản phẩm trong giỏ -->
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
+                            ${sessionScope.totalItems != null ? sessionScope.totalItems : 0}
+                        </span>
+                    </a>
 
                 </div>
 

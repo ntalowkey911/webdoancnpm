@@ -147,49 +147,93 @@
     <!-- Sidebar -->
     <div class="profile-bar">
       <div class="profile-info">
-        <img src="<%= request.getContextPath() %>/doanweb/images/Page1/IconLogo.png" alt="Avatar" class="avatar">
-        <span class="profile-greeting" id="profile-greeting">XIN CHÀO</span>
+        <img src="<%= request.getContextPath() %>/doanweb/images/Page1/IconLogo.png" alt="Avatar"
+             class="avatar">
+        <span class="profile-greeting" id="profile-greeting">XIN CHÀO ${user.username}</span>
       </div>
       <ul class="menu-links">
-        <li><a href="/html/Menu/OrderTracker.html">Đơn hàng đã đặt</a></li>
-        <li><a href="/html/Menu/DDyeuThich.html">Đơn hàng yêu thích</a></li>
-        <li><a href="/html/Menu/Address.html">Địa chỉ của bạn</a></li>
-        <li><a href="/html/Menu/LSmuaHang.html">Lịch sử mua hàng</a></li>
+        <li><a href="javascript:void(0);" onclick="showProfileForm()">Thông tin cá nhân</a></li>
+        <li><a href="javascript:void(0);" onclick="showChangeProfileForm()">Chỉnh sửa thông tin</a></li>
+        <li><a href=""></a>Đơn hàng đã đặt</li>
         <li><a href="javascript:void(0);" onclick="showChangePasswordForm()">Đặt lại mật khẩu</a></li>
-        <li><a href="#">Xóa tài khoản</a></li>
+        <li><a href="javascript:void(0);" onclick="showDeleteAccountForm()">Xóa tài khoản</a></li>
       </ul>
-      <a href="javascript:void(0);" onclick="logout()" class="logout" id="logout">ĐĂNG XUẤT</a>
+      <form action="/logout" method="POST" id="logout-form">
+        <button type="submit" class="logout-btn">ĐĂNG XUẤT</button>
+      </form>
     </div>
 
     <!-- Profile Form -->
     <div class="profile-form" id="profile-form">
-      <form id="profileForm">
+        <form method="post" action="/profile?action=showinfo">
+        <!-- Hiển thị thông tin tên người dùng -->
         <div class="mb-3">
           <label for="name" class="form-label">Họ và Tên</label>
-          <input type="text" class="form-control" id="name" name="name" required>
+          <span class="form-control" id="name">${user.username}</span>
         </div>
+
+        <!-- Hiển thị thông tin số điện thoại -->
         <div class="mb-3">
           <label for="phone" class="form-label">Số Điện Thoại</label>
-          <input type="text" class="form-control" id="phone" name="phone" required>
+          <span class="form-control" id="phone">${user.phone}</span>
         </div>
+
+        <!-- Hiển thị thông tin email -->
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" name="email" required>
+          <span class="form-control" id="email">${user.email}</span>
         </div>
+
+        <!-- Hiển thị thông tin địa chỉ -->
         <div class="mb-3">
           <label for="address" class="form-label">Địa Chỉ</label>
-          <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
+          <span class="form-control" id="address">${user.address}</span>
         </div>
-        <button type="submit" class="btn-profile" id="btn-profile">Cập nhật</button>
+
+      </form>
+    </div>
+
+    <!-- Profile Form -->
+    <div class="profile-form" id="change-profile-form" style="display: none;">
+      <form method="post" action="/profile?action=changeInfo">
+        <!-- Hiển thị thông tin tên người dùng -->
+        <div class="mb-3">
+          <label for="name" class="form-label">Họ và Tên</label>
+          <span class="form-control" id="edit-name">${user.username}</span>
+        </div>
+
+        <!-- Hiển thị thông tin số điện thoại -->
+        <div class="mb-3">
+          <label for="phone" class="form-label">Số Điện Thoại</label>
+          <input type="text" class="form-control" id="newPhone" name="newPhone" required>
+
+        </div>
+
+        <!-- Hiển thị thông tin email -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="text" class="form-control" id="newEmail" name="newEmail" required>
+        </div>
+
+        <!-- Hiển thị thông tin địa chỉ -->
+        <div class="mb-3">
+          <label for="address" class="form-label">Địa Chỉ</label>
+          <input type="text" class="form-control" id="newAddress" name="newAddress" required>
+        </div>
+
+        <!-- Nút chỉnh sửa -->
+        <button type="submit" class="btn-profile" id="edit-profile">Chỉnh sửa
+        </button>
       </form>
     </div>
 
     <!-- Change Password Form -->
-    <div class="changedpw-form" id="changedpw-form" style="display: none;">
-      <form id="changePasswordForm">
+    <div class="changedpw-form" id="change-password-form" style="display: none;">
+      <form method="post" action="/profile?action=change-pass">
+        <h3>Đổi mật khẩu</h3> <!-- Bạn có thể thêm tiêu đề này nếu muốn -->
         <div class="mb-3">
-          <label for="currentPassword" class="form-label">Mật khẩu cũ</label>
-          <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+          <label for="oldPassword" class="form-label">Mật khẩu cũ</label>
+          <input type="password" class="form-control" id="oldPassword" name="oldPassword" required>
         </div>
         <div class="mb-3">
           <label for="newPassword" class="form-label">Mật khẩu mới</label>
@@ -202,69 +246,55 @@
         <button type="submit" class="btn-profile" id="btn-change-password">Cập nhật mật khẩu</button>
       </form>
     </div>
-  </div>
 
+
+    <!-- Delete Account Form -->
+    <div class="delete-account-form" id="delete-account-form" style="display: none;">
+        <form method="post" action="/profile?action=deleteAccount">
+        <h3>Xóa tài khoản</h3> <!-- Bạn có thể thêm tiêu đề này nếu muốn -->
+        <div class="mb-3">
+          <label for="confirmDelete" class="form-label">Nhập mật khẩu để xác nhận xóa tài khoản</label>
+          <input type="password" class="form-control" id="confirmDelete" name="confirmDelete" required>
+        </div>
+        <button type="submit" class="btn-profile" id="btn-delete-account">Xóa tài khoản</button>
+      </form>
+    </div>
+  </div>
 </div>
 
 
 <script>
-  // Load user info từ localStorage
-  function loadProfile() {
-    const user = JSON.parse(localStorage.getItem('currentUser')) || {
-      name: '',
-      phone: '',
-      email: '',
-      address: '',
-    };
+    // Hàm ẩn tất cả các form
+    function hideAllForms() {
+        document.getElementById('profile-form').style.display = 'none';
+        document.getElementById('change-profile-form').style.display = 'none';
+        document.getElementById('change-password-form').style.display = 'none';
+        document.getElementById('delete-account-form').style.display = 'none';
+    }
 
-    document.getElementById('name').value = user.name;
-    document.getElementById('phone').value = user.phone;
-    document.getElementById('email').value = user.email;
-    document.getElementById('address').value = user.address;
-  }
+    // Hàm hiển thị form Thông tin cá nhân
+    function showProfileForm() {
+        hideAllForms(); // Ẩn các form khác
+        document.getElementById('profile-form').style.display = 'block'; // Hiển thị form profile
+    }
 
-  // Save user info vào localStorage
-  function saveProfile(event) {
-    event.preventDefault();
-    const updatedUser = {
-      name: document.getElementById('name').value,
-      phone: document.getElementById('phone').value,
-      email: document.getElementById('email').value,
-      address: document.getElementById('address').value,
-    };
+    // Hàm hiển thị form Chỉnh sửa thông tin cá nhân
+    function showChangeProfileForm() {
+        hideAllForms(); // Ẩn các form khác
+        document.getElementById('change-profile-form').style.display = 'block'; // Hiển thị form chỉnh sửa thông tin
+    }
 
-    // Lưu vào localStorage
-    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+    // Hàm hiển thị form Đổi mật khẩu
+    function showChangePasswordForm() {
+        hideAllForms(); // Ẩn các form khác
+        document.getElementById('change-password-form').style.display = 'block'; // Hiển thị form đổi mật khẩu
+    }
 
-    // Gửi thông tin đến admin (nếu cần)
-    alert('Cập nhật thông tin thành công!');
-  }
-  function logout() {
-    localStorage.removeItem('currentUser');
-    window.location.href = '/html/Menu/Login.html';
-  }
-
-  // Gắn sự kiện
-  document.getElementById('profileForm').addEventListener('submit', saveProfile);
-
-  // Load dữ liệu khi trang được tải
-  loadProfile();
-  function showChangePasswordForm() {
-    // Ẩn form profile
-    document.getElementById('profile-form').style.display = 'none';
-
-    // Hiển thị form đổi mật khẩu
-    document.getElementById('changedpw-form').style.display = 'block';
-  }
-
-  // Hàm để trở lại form profile (nếu cần)
-  function showProfileForm() {
-    // Hiển thị lại form profile
-    document.getElementById('profile-form').style.display = 'block';
-
-    // Ẩn form đổi mật khẩu
-    document.getElementById('changedpw-form').style.display = 'none';
-  }
+    // Hàm hiển thị form Xóa tài khoản
+    function showDeleteAccountForm() {
+        hideAllForms(); // Ẩn các form khác
+        document.getElementById('delete-account-form').style.display = 'block'; // Hiển thị form xóa tài khoản
+    }
 
 
 </script>
