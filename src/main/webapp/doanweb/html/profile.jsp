@@ -143,124 +143,70 @@
 </section>
 
 <div class="container mt-4">
-    <div class="profile-layout">
-        <!-- Sidebar -->
-        <div class="profile-bar">
-            <div class="profile-info">
-                <img src="<%= request.getContextPath() %>/doanweb/images/Page1/IconLogo.png" alt="Avatar"
-                     class="avatar">
-                <span class="profile-greeting" id="profile-greeting">XIN CHÀO ${user.username}</span>
-            </div>
-            <ul class="menu-links">
-                <li><a href="javascript:void(0);" onclick="showProfileForm()">Thông tin cá nhân</a></li>
-                <li><a href="javascript:void(0);" onclick="showChangeProfileForm()">Chỉnh sửa thông tin</a></li>
-                <li><a href=""></a>Đơn hàng đã đặt</li>
-                <li><a href="javascript:void(0);" onclick="showChangePasswordForm()">Đặt lại mật khẩu</a></li>
-                <li><a href="javascript:void(0);" onclick="showDeleteAccountForm()">Xóa tài khoản</a></li>
-            </ul>
-            <form action="/logout" method="POST" id="logout-form">
-                <button type="submit" class="logout-btn">ĐĂNG XUẤT</button>
-            </form>
-        </div>
-
-        <!-- Profile Form -->
-        <div class="profile-form" id="profile-form">
-            <form id="profileForm" action="/showinfo" method="POST">
-                <!-- Hiển thị thông tin tên người dùng -->
-                <div class="mb-3">
-                    <label for="name" class="form-label">Họ và Tên</label>
-                    <span class="form-control" id="name">${user.username}</span>
-                </div>
-
-                <!-- Hiển thị thông tin số điện thoại -->
-                <div class="mb-3">
-                    <label for="phone" class="form-label">Số Điện Thoại</label>
-                    <span class="form-control" id="phone">${user.phone}</span>
-                </div>
-
-                <!-- Hiển thị thông tin email -->
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <span class="form-control" id="email">${user.email}</span>
-                </div>
-
-                <!-- Hiển thị thông tin địa chỉ -->
-                <div class="mb-3">
-                    <label for="address" class="form-label">Địa Chỉ</label>
-                    <span class="form-control" id="address">${user.address}</span>
-                </div>
-
-            </form>
-        </div>
-
-        <!-- Profile Form -->
-        <div class="profile-form" id="change-profile-form" style="display: none;">
-            <form id="changeProfileForm" action="/changeInfo" method="POST">
-                <!-- Hiển thị thông tin tên người dùng -->
-                <div class="mb-3">
-                    <label for="name" class="form-label">Họ và Tên</label>
-                    <span class="form-control" id="newName">${user.username}</span>
-                </div>
-
-                <!-- Hiển thị thông tin số điện thoại -->
-                <div class="mb-3">
-                    <label for="phone" class="form-label">Số Điện Thoại</label>
-                    <span class="form-control" id="newPhone">${user.phone}</span>
-                </div>
-
-                <!-- Hiển thị thông tin email -->
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <span class="form-control" id="newEmail">${user.email}</span>
-                </div>
-
-                <!-- Hiển thị thông tin địa chỉ -->
-                <div class="mb-3">
-                    <label for="address" class="form-label">Địa Chỉ</label>
-                    <span class="form-control" id="newAddress">${user.address}</span>
-                </div>
-
-                <!-- Nút chỉnh sửa -->
-                <button type="button" class="btn-profile" id="edit-profile"
-                        onclick="window.location.href='/editProfile'">Chỉnh sửa
-                </button>
-            </form>
-        </div>
-
-        <!-- Change Password Form -->
-        <div class="changedpw-form" id="change-password-form" style="display: none;">
-            <form id="changePasswordForm" action="/updatePassword" method="POST">
-                <h3>Đổi mật khẩu</h3> <!-- Bạn có thể thêm tiêu đề này nếu muốn -->
-                <div class="mb-3">
-                    <label for="currentPassword" class="form-label">Mật khẩu cũ</label>
-                    <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
-                </div>
-                <div class="mb-3">
-                    <label for="newPassword" class="form-label">Mật khẩu mới</label>
-                    <input type="password" class="form-control" id="newPassword" name="newPassword" required>
-                </div>
-                <div class="mb-3">
-                    <label for="confirmPassword" class="form-label">Xác nhận mật khẩu mới</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                </div>
-                <button type="submit" class="btn-profile" id="btn-change-password">Cập nhật mật khẩu</button>
-            </form>
-        </div>
-
-
-        <!-- Delete Account Form -->
-        <div class="delete-account-form" id="delete-account-form" style="display: none;">
-            <form id="deleteAccountForm" action="/deleteAccount" method="POST">
-                <h3>Xóa tài khoản</h3> <!-- Bạn có thể thêm tiêu đề này nếu muốn -->
-                <div class="mb-3">
-                    <label for="confirmDelete" class="form-label">Nhập mật khẩu để xác nhận xóa tài khoản</label>
-                    <input type="password" class="form-control" id="confirmDelete" name="confirmDelete" required>
-                </div>
-                <button type="submit" class="btn-profile" id="btn-delete-account">Cập nhật mật khẩu</button>
-            </form>
-        </div>
+  <div class="profile-layout">
+    <!-- Sidebar -->
+    <div class="profile-bar">
+      <div class="profile-info">
+        <img src="<%= request.getContextPath() %>/doanweb/images/Page1/IconLogo.png" alt="Avatar" class="avatar">
+        <span class="profile-greeting" id="profile-greeting">XIN CHÀO</span>
+      </div>
+      <ul class="menu-links">
+        <li><a href="/html/Menu/OrderTracker.html">Đơn hàng đã đặt</a></li>
+        <li><a href="/html/Menu/DDyeuThich.html">Đơn hàng yêu thích</a></li>
+        <li><a href="/html/Menu/Address.html">Địa chỉ của bạn</a></li>
+        <li><a href="/html/Menu/LSmuaHang.html">Lịch sử mua hàng</a></li>
+        <li><a href="javascript:void(0);" onclick="showChangePasswordForm()">Đặt lại mật khẩu</a></li>
+        <li><a href="#">Xóa tài khoản</a></li>
+      </ul>
+      <a href="javascript:void(0);" onclick="logout()" class="logout" id="logout">ĐĂNG XUẤT</a>
     </div>
+
+    <!-- Profile Form -->
+    <div class="profile-form" id="profile-form">
+      <form id="profileForm">
+        <div class="mb-3">
+          <label for="name" class="form-label">Họ và Tên</label>
+          <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Số Điện Thoại</label>
+          <input type="text" class="form-control" id="phone" name="phone" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+          <label for="address" class="form-label">Địa Chỉ</label>
+          <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn-profile" id="btn-profile">Cập nhật</button>
+      </form>
+    </div>
+
+    <!-- Change Password Form -->
+    <div class="changedpw-form" id="changedpw-form" style="display: none;">
+      <form id="changePasswordForm">
+        <div class="mb-3">
+          <label for="currentPassword" class="form-label">Mật khẩu cũ</label>
+          <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+        </div>
+        <div class="mb-3">
+          <label for="newPassword" class="form-label">Mật khẩu mới</label>
+          <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Xác nhận mật khẩu mới</label>
+          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+        </div>
+        <button type="submit" class="btn-profile" id="btn-change-password">Cập nhật mật khẩu</button>
+      </form>
+    </div>
+  </div>
+
 </div>
+
+
 <script>
   // Load user info từ localStorage
   function loadProfile() {
