@@ -30,6 +30,13 @@ public class ShopController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
+        String categoryId = request.getParameter("categoryId");
+
+        // Nếu categoryId không có hoặc rỗng, chuyển hướng đến URL mặc định
+        if (categoryId == null || categoryId.isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/shop?categoryId=1");
+            return; // Dừng xử lý tiếp
+        }
 
         // Lấy danh sách sản phẩm từ DAO
         List<Products> p = productDAO.getAllProducts();
@@ -49,7 +56,6 @@ public class ShopController extends HttpServlet {
         request.setAttribute("lastp", l);
 
 // loc sp
-        String categoryId = request.getParameter("categoryId");
         List<Products> filteredProducts;
         if (categoryId != null) {
             filteredProducts = productDAO.getProductsByCategory(Integer.parseInt(categoryId));

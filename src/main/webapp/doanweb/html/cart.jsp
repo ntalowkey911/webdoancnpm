@@ -246,7 +246,7 @@
           <img src="${item.product.image}" alt="${item.product.name}" width="100">
         </td>
         <td>${item.product.name}</td>
-        <td>${item.product.price}k</td>
+        <td>${item.product.price}K</td>
         <td>
           <form action="quantity-inc-dec" method="post" >
             <input type="hidden" name="id" value="${item.product.id}">
@@ -278,12 +278,12 @@
         <div class="d-flex justify-content-between">
           <h6>Tạm tính</h6>
           <p id="subtotal-value">
-            <strong>${sessionScope.totalPrice}k</strong>
+            <strong>${sessionScope.totalPrice}K</strong>
           </p>
         </div>
         <div class="d-flex justify-content-between">
           <h6>Phí vận chuyển</h6>
-          <p id="shipping-value">20,000 VND</p>
+          <p id="shipping-value">20K</p>
         </div>
         <div class="d-flex justify-content-between">
           <h6>Thời gian giao hàng dự kiến</h6>
@@ -299,7 +299,7 @@
         <div class="d-flex justify-content-between">
           <h6>Tổng cộng</h6>
           <p id="total-value">
-            <fmt:formatNumber value="${sessionScope.totalPrice}" type="currency" currencySymbol="VND" />
+            ${sessionScope.totalPrice + 20}K
           </p>
         </div>
 
@@ -320,9 +320,8 @@
             <h6>Phương thức thanh toán</h6>
           </label>
           <select class="form-control" id="paymentMethod">
-            <option value="cash">Thanh toán tiền mặt</option>
+            <option value="cash">Thanh toán bằng trực tiếp</option>
             <option value="card">Thanh toán bằng thẻ</option>
-            <option value="momo">Thanh toán bằng momo</option>
           </select>
         </div>
         <button class="ml-auto" onclick="handlePayment()">TIẾN HÀNH THANH TOÁN</button>

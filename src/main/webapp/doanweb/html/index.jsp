@@ -92,33 +92,31 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<%= request.getContextPath() %>/contact">Liên hệ</a>
+                </li>
+                <li class="nav-item" id="admin-btn" style="display: <%=
+                    (session.getAttribute("role") != null &&
+                    (Integer.parseInt((String)session.getAttribute("role")) == 1)) ? "block" : "none"
+                    %>;">
+                    <a class="nav-link" href="<%= request.getContextPath() %>/ad">Quản trị</a>
+                </li>
 
-                </li>
-                <li class="nav-item" id="admin-btn" style="display: none;">
-                    <a class="nav-link" href="<%= request.getContextPath() %>/doanweb/html/admin.jsp">Quản trị</a>
-                </li>
+
                 <div class="nav-item" id="nav-icons">
                     <a href="<%= (session.getAttribute("user") != null) ? request.getContextPath() + "/profile" : request.getContextPath() + "/doanweb/html/Login.jsp" %>">
                         <i class="bi bi-person-fill" id="user-icon"></i>
                     </a>
-                    <!-- User Menu -->
-                    <div class="user-menu" id="user-menu">
-                        <span id="greeting"></span>
-                        <a href="<%= request.getContextPath() %>/profile">Tài khoản của tôi</a>
-                        <a href="javascript:void(0);" onclick="logout()">Đăng xuất</a>
-                    </div>
 
                     <a href="<%= request.getContextPath() %>/cart" class="position-relative">
                         <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i>
                         <!-- Biểu tượng giỏ hàng -->
                         <!-- Số lượng sản phẩm trong giỏ -->
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                              id="cart-count">
+                        <span class="position-absolute top-0 start-90 translate-middle badge rounded-circle bg-danger"
+                              id="cart-count"
+                              style="width: 22px; height: 22px; line-height: 22px; font-size: 14px; text-align: center; display: flex; align-items: center; justify-content: center;">
                             ${sessionScope.totalItems != null ? sessionScope.totalItems : 0}
                         </span>
                     </a>
                 </div>
-
             </ul>
         </div>
 

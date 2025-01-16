@@ -88,7 +88,9 @@
                         <a href="<%= request.getContextPath() %>/cart" class="position-relative">
                             <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i> <!-- Biểu tượng giỏ hàng -->
                             <!-- Số lượng sản phẩm trong giỏ -->
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
+                            <span class="position-absolute top-0 start-90 translate-middle badge rounded-circle bg-danger"
+                                  id="cart-count"
+                                  style="width: 22px; height: 22px; line-height: 22px; font-size: 14px; text-align: center; display: flex; align-items: center; justify-content: center;">
                                 ${sessionScope.totalItems != null ? sessionScope.totalItems : 0}
                             </span>
                         </a>

@@ -94,7 +94,7 @@
             background-color: black;
         }
 
-        .ShopMore {
+        .ShopMore  {
             background-color: black;
             font-size: 18px;
             font-weight: 700;
@@ -110,7 +110,21 @@
             width: 250px;
         }
 
-        .ShopMore:hover {
+        .buy-now-btn  {
+            background-color: black !important;
+            font-size: 0.8rem;
+            font-weight: 700;
+            outline: none;
+            border-radius: 2px;
+            border: none;
+            color: white !important;
+            padding: 13px 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.5s ease-in-out;
+        }
+
+        .ShopMore:hover, .buy-now-btn {
             background-color: #BC1F23;
             color: black;
         }
@@ -162,8 +176,9 @@
                         </a>
                         <a href="<%= request.getContextPath() %>/cart" class="position-relative">
                             <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                                  id="cart-count">
+                            <span class="position-absolute top-0 start-90 translate-middle badge rounded-circle bg-danger"
+                                  id="cart-count"
+                                  style="width: 22px; height: 22px; line-height: 22px; font-size: 14px; text-align: center; display: flex; align-items: center; justify-content: center;">
                                 ${sessionScope.totalItems != null ? sessionScope.totalItems : 0}
                             </span>
                         </a>
@@ -266,7 +281,7 @@
             <br>
 
             <button
-                    class="buy-btn"
+                    class="buy-now-btn"
                     onclick="window.location.href='add-to-cart?id=${product.id}&action=buy-now'">
                 Mua ngay
             </button>
