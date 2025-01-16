@@ -157,7 +157,9 @@
                 </li>
                 <div class="nav-item">
                     <li class="nav-item">
-                        <a href="<%= request.getContextPath() %>/login"><i class="bi bi-person-fill"></i></a>
+                        <a href="<%= (session.getAttribute("user") != null) ? request.getContextPath() + "/profile" : request.getContextPath() + "/doanweb/html/Login.jsp" %>">
+                            <i class="bi bi-person-fill" id="user-icon"></i>
+                        </a>
                         <a href="<%= request.getContextPath() %>/cart" class="position-relative">
                             <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"

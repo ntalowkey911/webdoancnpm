@@ -147,4 +147,29 @@ public class UserDao {
         return false; // Trả về false nếu không tìm thấy hoặc có lỗi xảy ra
     }
 
+    public boolean editUser(Users user) {
+        boolean isUpdated = false;
+        String query = "UPDATE Users SET email = ?, phone = ?, address = ? WHERE username = ?"; // Câu lệnh SQL cập nhật thông tin người dùng
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            // Thiết lập tham số cho câu lệnh PreparedStatement
+            statement.setString(1, user.getEmail());
+            statement.setString(2, user.getPhone());
+            statement.setString(3, user.getAddress());
+            statement.setString(4, user.getUsername());
+
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                isUpdated = true; // Cập nhật thành công
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace(); // In lỗi nếu có
+        }
+        return isUpdated; // Trả về true nếu thành công, false nếu không
+    }
+
+
 }
