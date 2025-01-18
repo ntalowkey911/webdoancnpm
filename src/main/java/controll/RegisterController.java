@@ -27,19 +27,19 @@ public class RegisterController extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String confirmPassword = request.getParameter("confirmPassword");
+        String confirmPassword = request.getParameter("xác nhận mật khẩu");
         String phone = request.getParameter("phone");
 
         // Kiểm tra nếu có tham số nào rỗng hoặc null
         if (isEmpty(username) || isEmpty(email) || isEmpty(password) || isEmpty(confirmPassword) || isEmpty(phone)) {
-            request.setAttribute("error", "All fields are required.");
+            request.setAttribute("error", "Tất cả các trường hợp bắc buộc");
             forwardToRegisterPage(request, response);
             return;
         }
 
         // Kiểm tra nếu mật khẩu và xác nhận mật khẩu không khớp
         if (!password.equals(confirmPassword)) {
-            request.setAttribute("error", "Passwords do not match.");
+            request.setAttribute("error", "Mật khẩu không khớp");
             forwardToRegisterPage(request, response);
             return;
         }
@@ -49,7 +49,7 @@ public class RegisterController extends HttpServlet {
 
         // Kiểm tra nếu tài khoản đã tồn tại
         if (existingUser != null) {
-            request.setAttribute("error", "Username already exists.");
+            request.setAttribute("error", "Tên người dùng đã tồn tại");
             forwardToRegisterPage(request, response);
         } else {
             try {
@@ -58,12 +58,12 @@ public class RegisterController extends HttpServlet {
 
                 // Đăng ký người dùng mới
                 d.Register(username, email, hashedPassword, phone);
-                request.setAttribute("success", "Registration successful!");
+                request.setAttribute("success", "Dăng kí thành công !");
                 response.sendRedirect("doanweb/html/index.jsp"); // Chuyển hướng đến trang chính sau khi đăng ký
             } catch (Exception e) {
                 // Ghi log ngoại lệ và thông báo lỗi cho người dùng
-                LOGGER.log(Level.SEVERE, "Error during registration", e);
-                request.setAttribute("error", "An error occurred during registration. Please try again.");
+                LOGGER.log(Level.SEVERE, "Lỗi trong quá trình đăng kí", e);
+                request.setAttribute("error", "Đã xảy ra lỗi trong quá trình đăng ký. Vui lòng thử lại.");
                 forwardToRegisterPage(request, response);
             }
         }
