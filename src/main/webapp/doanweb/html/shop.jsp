@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<%--    <script src="/js/index.js"></script>--%>
+    <%--    <script src="/js/index.js"></script>--%>
     <script
             src="https://kit.fontawesome.com/cc9450bd42.js"
             crossorigin="anonymous"
@@ -107,7 +107,8 @@
                         </a>
                         <!-- Biểu tượng giỏ hàng với số lượng sản phẩm -->
                         <a href="<%= request.getContextPath() %>/cart" class="position-relative">
-                            <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i> <!-- Biểu tượng giỏ hàng -->
+                            <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i>
+                            <!-- Biểu tượng giỏ hàng -->
                             <!-- Số lượng sản phẩm trong giỏ -->
                             <span class="position-absolute top-0 start-90 translate-middle badge rounded-circle bg-danger"
                                   id="cart-count"
@@ -384,13 +385,14 @@
         }
 
         /*sidebar  */
-        .list-category{
+        .list-category {
             list-style-type: none; /* Xóa các dấu đầu dòng */
             padding: 0;
             margin: 0;
             border-collapse: collapse; /* Loại bỏ khoảng cách giữa các đường viền */
             width: 100%; /* Căn chỉnh chiều rộng 100% */
         }
+
         /* Định dạng các mục trong danh sách (li) */
         .list-category li {
             background-color: #f9f9f9; /* Màu nền sáng cho các mục */
@@ -461,10 +463,11 @@
         }
 
         .button-container {
-            display: flex;  /* Dùng Flexbox để các nút nằm cùng một hàng */
-            justify-content: space-between;  /* Căn đều các nút theo chiều ngang */
-            gap: 10px;  /* Khoảng cách giữa các nút */
+            display: flex; /* Dùng Flexbox để các nút nằm cùng một hàng */
+            justify-content: space-between; /* Căn đều các nút theo chiều ngang */
+            gap: 10px; /* Khoảng cách giữa các nút */
         }
+
         .add-btn {
             background-color: #BC1F23;
             font-size: 0.8rem;
@@ -473,24 +476,25 @@
             border-radius: 5px;
             border: none;
             color: aliceblue;
-            padding:5px 5px;
+            padding: 5px 5px;
             cursor: pointer;
             text-transform: uppercase;
             transition: 0.5s ease-in-out;
         }
-        .category-title, .lproduct-title{
+
+        .category-title, .lproduct-title {
             text-align: center;
             padding: 10px;
-            background-color:#BC1F23 ;
+            background-color: #BC1F23;
             font-weight: bold;
             color: white !important;
         }
 
 
-
         .add-btn:hover {
             background-color: black;
         }
+
         .container {
             max-width: 1400px; /* Tăng độ rộng tối đa của container */
             width: 100%; /* Đảm bảo container chiếm hết chiều ngang nếu cần */
@@ -499,8 +503,10 @@
     </style>
 
     <div style="text-align: right; margin-right: 100px; ">
-        <a class="sort-button" href="?categoryId=${param.categoryId}&sort=asc" class="${param.sort == 'asc' ? 'active' : ''}">Giá: Thấp đến cao</a>
-        <a class="sort-button" href="?categoryId=${param.categoryId}&sort=desc" class="${param.sort == 'desc' ? 'active' : ''}">Giá: Cao đến thấp</a>
+        <a class="sort-button" href="?categoryId=${param.categoryId}&sort=asc"
+           class="${param.sort == 'asc' ? 'active' : ''}">Giá: Thấp đến cao</a>
+        <a class="sort-button" href="?categoryId=${param.categoryId}&sort=desc"
+           class="${param.sort == 'desc' ? 'active' : ''}">Giá: Cao đến thấp</a>
     </div>
 
     <body>
@@ -540,13 +546,20 @@
                         <div class="col-md-3 mb-4">
                             <div class="product-card">
                                 <a href="detail?id=${product.id}">
-                                    <img class="img-fluid" src="<%= request.getContextPath() %>/${product.image}" alt="${product.name}">
+                                    <img class="img-fluid" src="<%= request.getContextPath() %>/${product.image}"
+                                         alt="${product.name}">
                                     <h5 class="product-name">${product.name}</h5>
                                     <p class="product-price">${product.price}k</p>
                                 </a>
                                 <div class="button-container">
-                                    <button class="add-btn" onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart'">Add to cart</button>
-                                    <button class="buy-btn" onclick="window.location.href='add-to-cart?id=${product.id}&action=buy-now'">Mua ngay</button>
+                                    <button class="add-btn"
+                                            onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart'">
+                                        Add to cart
+                                    </button>
+                                    <button class="buy-btn"
+                                            onclick="window.location.href='add-to-cart?id=${product.id}&action=buy-now'">
+                                        Mua ngay
+                                    </button>
                                 </div>
                             </div>
                         </div>

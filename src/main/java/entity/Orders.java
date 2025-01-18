@@ -6,19 +6,17 @@ import java.sql.Timestamp;
 public class Orders {
     private int orderId;
     private int userId;
-    private Timestamp orderDate;
     private BigDecimal totalAmount;
-    private String status;
-    private boolean cancelled;
+    private Timestamp orderDate;
 
     // Constructor, getters, and setters
-    public Orders(int orderId, int userId, Timestamp orderDate, BigDecimal totalAmount, String status, boolean cancelled) {
+
+
+    public Orders(int orderId, int userId, BigDecimal totalAmount , Timestamp orderDate) {
         this.orderId = orderId;
         this.userId = userId;
-        this.orderDate = orderDate;
         this.totalAmount = totalAmount;
-        this.status = status;
-        this.cancelled = cancelled;
+        this.orderDate = orderDate;
     }
 
     public int getOrderId() {
@@ -53,31 +51,13 @@ public class Orders {
         this.totalAmount = totalAmount;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public boolean isCancelled() {
-        return cancelled;
-    }
-
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
-    }
-
     @Override
     public String toString() {
         return "Orders{" +
                 "orderId=" + orderId +
                 ", userId=" + userId +
-                ", orderDate=" + orderDate +
                 ", totalAmount=" + totalAmount +
-                ", status='" + status + '\'' +
-                ", cancelled=" + cancelled +
+                ", orderDate=" + orderDate +
                 '}';
     }
 }

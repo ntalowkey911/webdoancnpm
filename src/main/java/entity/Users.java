@@ -6,26 +6,20 @@ public class Users {
     private String email;
     private String password;
     private String phone;
-    private String address;
-    private String created_at;
     private String role;
 
     // Constructors
-    public Users () {
-    }
 
-    public Users (int id, String username, String email, String password, String phone, String address,String created_at, String role) {
+
+    public Users(int id, String username, String email, String password,String phone, String role) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.phone = phone;
-        this.address = address;
-        this.created_at = created_at;
         this.role = role;
     }
 
-    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -38,8 +32,8 @@ public class Users {
         return username;
     }
 
-    public void setUsername(String name) {
-        this.username = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -58,37 +52,20 @@ public class Users {
         this.password = password;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
-    }
-
-
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     // Override toString() for debugging
@@ -99,8 +76,6 @@ public class Users {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }

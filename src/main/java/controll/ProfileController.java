@@ -99,8 +99,6 @@ public class ProfileController extends HttpServlet {
         String newAddress = request.getParameter("newAddress");
 
         loggedInUser.setEmail(newEmail);
-        loggedInUser.setPhone(newPhone);
-        loggedInUser.setAddress(newAddress);
 
         boolean isUpdated = dao.editUser(loggedInUser);
 

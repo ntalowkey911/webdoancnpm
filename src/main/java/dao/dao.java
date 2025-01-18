@@ -16,7 +16,7 @@ public class dao {
     // Phương thức lấy danh sách tất cả sản phẩm
     public List<Products> getAllProducts() {
         List<Products> l = new ArrayList<>();
-        String query = "SELECT * FROM Products";
+        String query = "SELECT * FROM Product";
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
@@ -24,14 +24,13 @@ public class dao {
 
             while (rs.next()) {
                 Products product = new Products(
-                        rs.getInt("id"),
+                        rs.getInt("p_id"), // Sử dụng 'p_id' thay vì 'id'
                         rs.getString("name"),
-                        rs.getString("description"),
                         rs.getInt("price"),
                         rs.getInt("stock"),
-                        rs.getString("image"),
-                        rs.getTimestamp("created_at"),// Lấy giá trị DATETIME
-                        rs.getInt("category_id")
+                        rs.getString("description"),
+                        rs.getInt("category_id"),
+                        rs.getString("img")
                 );
                 l.add(product);
 
@@ -44,13 +43,13 @@ public class dao {
 
     public List<Categories> getAllCategories() {
         List<Categories> l = new ArrayList<>();
-        String query = "SELECT * FROM Categories";
+        String query = "SELECT * FROM category";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet rs = statement.executeQuery()) {
             while (rs.next()) {
                 Categories product = new Categories(
-                        rs.getInt("id"),
+                        rs.getInt("c_id"),
                         rs.getString("name")
                 );
                 l.add(product);
@@ -63,19 +62,21 @@ public class dao {
     }
 
     public static Products getLatestProduct() {
-        String query = "SELECT * FROM Products ORDER BY id  DESC LIMIT 1";
+        String query = "SELECT * FROM Product ORDER BY p_id DESC LIMIT 1";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet rs = statement.executeQuery()) {
-            while (rs.next()) {
-                return new Products(rs.getInt("id"),
+
+            if (rs.next()) {
+                return new Products(
+                        rs.getInt("p_id"), // Sử dụng 'p_id' thay vì 'id'
                         rs.getString("name"),
-                        rs.getString("description"),
                         rs.getInt("price"),
                         rs.getInt("stock"),
-                        rs.getString("image"),
-                        rs.getTimestamp("created_at"),// Lấy giá trị DATETIME
-                        rs.getInt("category_id"));
+                        rs.getString("description"),
+                        rs.getInt("category_id"),
+                        rs.getString("img")
+                );
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,9 +84,10 @@ public class dao {
         return null;
     }
 
+
     public List<Products> getProductsByCategory(int category_id) {
         List<Products> l = new ArrayList<>();
-        String query = "SELECT * FROM Products WHERE category_id = ?";
+        String query = "SELECT * FROM Product WHERE category_id = ?";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             // Gán giá trị của category_id vào câu truy vấn tại vị trí tham số ?
@@ -94,14 +96,13 @@ public class dao {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Products product = new Products(
-                        rs.getInt("id"),
+                        rs.getInt("p_id"), // Sử dụng 'p_id' thay vì 'id'
                         rs.getString("name"),
-                        rs.getString("description"),
                         rs.getInt("price"),
                         rs.getInt("stock"),
-                        rs.getString("image"),
-                        rs.getTimestamp("created_at"), // Lấy giá trị DATETIME
-                        rs.getInt("category_id")
+                        rs.getString("description"),
+                        rs.getInt("category_id"),
+                        rs.getString("img")
                 );
                 l.add(product);
             }
@@ -113,7 +114,7 @@ public class dao {
 
     public Products getProductById(int productId) {
         Products product = null;
-        String query = "SELECT * FROM Products WHERE id = ?";  // Câu lệnh SQL để lấy sản phẩm theo ID
+        String query = "SELECT * FROM Product WHERE p_id = ?";  // Câu lệnh SQL để lấy sản phẩm theo ID
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -126,14 +127,13 @@ public class dao {
                 // Nếu có sản phẩm với ID tương ứng
                 if (rs.next()) {
                     product = new Products(
-                            rs.getInt("id"),
+                            rs.getInt("p_id"), // Sử dụng 'p_id' thay vì 'id'
                             rs.getString("name"),
-                            rs.getString("description"),
                             rs.getInt("price"),
                             rs.getInt("stock"),
-                            rs.getString("image"),
-                            rs.getTimestamp("created_at"), // Lấy giá trị DATETIME
-                            rs.getInt("category_id")
+                            rs.getString("description"),
+                            rs.getInt("category_id"),
+                            rs.getString("img")
                     );
                 }
             }
@@ -146,7 +146,7 @@ public class dao {
 
     public Products getProductByName(String productName) {
         Products product = null;
-        String query = "SELECT * FROM Products WHERE name like ?";  // Câu lệnh SQL để lấy sản phẩm theo ID
+        String query = "SELECT * FROM Product WHERE name like ?";  // Câu lệnh SQL để lấy sản phẩm theo ID
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -159,14 +159,13 @@ public class dao {
                 // Nếu có sản phẩm với ID tương ứng
                 if (rs.next()) {
                     product = new Products(
-                            rs.getInt("id"),
+                            rs.getInt("p_id"), // Sử dụng 'p_id' thay vì 'id'
                             rs.getString("name"),
-                            rs.getString("description"),
                             rs.getInt("price"),
                             rs.getInt("stock"),
-                            rs.getString("image"),
-                            rs.getTimestamp("created_at"), // Lấy giá trị DATETIME
-                            rs.getInt("category_id")
+                            rs.getString("description"),
+                            rs.getInt("category_id"),
+                            rs.getString("img")
                     );
                 }
             }
@@ -178,15 +177,15 @@ public class dao {
     }
 
     /// ///////////////////
-    public void addProduct(String name, String description, double price, int stock, String image, int category_id) {
-        String sql = "INSERT INTO Products (name, description, price, stock, image, category_id) VALUES (?, ?, ?, ?, ?, ?)";
+    public void addProduct(String name, double price,  int stock, String description, int category_id, String image ) {
+        String sql = "INSERT INTO Product (name, price, stock, description, category_id, image) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, name);
-            stmt.setString(2, description);
-            stmt.setDouble(3, price);
-            stmt.setInt(4, stock);
-            stmt.setString(5, image);
-            stmt.setInt(6, category_id);
+            stmt.setDouble(2, price);
+            stmt.setInt(3, stock);
+            stmt.setString(4, description);
+            stmt.setInt(5, category_id);
+            stmt.setString(6, image);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -194,7 +193,7 @@ public class dao {
     }
 
     public void addCategories(String name) {
-        String sql = "INSERT INTO Categories (name) VALUES (?)";
+        String sql = "INSERT INTO category (name) VALUES (?)";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, name);
             stmt.executeUpdate();
@@ -204,15 +203,15 @@ public class dao {
     }
 
     // Sửa sản phẩm
-    public void updateProduct(int id, String name, String description, double price, int stock, String image, int category_id) {
-        String sql = "UPDATE Products SET name=?, description=?, price=?, stock=?, image=?, category_id=? WHERE id=?";
+    public void updateProduct(int id, String name,int price,  int stock, String description,int category_id, String image ) {
+        String sql = "UPDATE Product SET name=?, description=?, price=?, stock=?, image=?, category_id=? WHERE p_id=?";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, name);
-            stmt.setString(2, description);
-            stmt.setDouble(3, price);
-            stmt.setInt(4, stock);
-            stmt.setString(5, image);
-            stmt.setInt(6, category_id);
+            stmt.setDouble(2, price);
+            stmt.setInt(3, stock);
+            stmt.setString(4, description);
+            stmt.setInt(5, category_id);
+            stmt.setString(6, image);
             stmt.setInt(7, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -222,7 +221,7 @@ public class dao {
 
     // Xóa sản phẩm
     public void deleteProduct(int id) {
-        String sql = "DELETE FROM Products WHERE id=?";
+        String sql = "DELETE FROM Product WHERE p_id=?";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -232,7 +231,7 @@ public class dao {
     }
 
     public void deleteCategory(int id) {
-        String sql = "DELETE FROM Categories  WHERE id=?";
+        String sql = "DELETE FROM category  WHERE c_id=?";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -243,7 +242,7 @@ public class dao {
 
     // Cập nhật số lượng tồn kho
     public int updateStock(int productId, int stock) {
-        String query = "UPDATE Products SET stock = ? WHERE id = ?";
+        String query = "UPDATE Product SET stock = ? WHERE p_id = ?";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
@@ -264,7 +263,7 @@ public class dao {
         if (cartList != null && !cartList.isEmpty()) {
             for (CartItem cartItem : cartList) {
                 // Truy vấn giá của sản phẩm từ cơ sở dữ liệu theo ID
-                String query = "SELECT price FROM products WHERE id = ?";
+                String query = "SELECT price FROM product WHERE p_id = ?";
 
                 try (Connection connection = getConnection();
                      PreparedStatement statement = connection.prepareStatement(query)) {
@@ -290,7 +289,7 @@ public class dao {
     }
 
     public Users login(String username, String password) {
-        String query = "SELECT * FROM Users WHERE username = ? AND password = ?";
+        String query = "SELECT * FROM User WHERE username = ? AND password = ?";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, username);
@@ -301,13 +300,11 @@ public class dao {
                 if (rs.next()) {
                     // Lấy thông tin người dùng từ kết quả truy vấn
                     Users user = new Users(
-                            rs.getInt("id"),
+                            rs.getInt("user_id"),
                             rs.getString("username"),
                             rs.getString("email"),
                             rs.getString("password"),
                             rs.getString("phone"),
-                            rs.getString("address"),
-                            rs.getString("created_at"),
                             rs.getString("role")
                     );
                     // Hiển thị thông tin người dùng ra console (debug)
@@ -325,7 +322,7 @@ public class dao {
     }
 
     public Users checkExist(String username) {
-        String query = "SELECT * FROM Users WHERE username = ?";
+        String query = "SELECT * FROM User WHERE username = ?";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
@@ -334,14 +331,12 @@ public class dao {
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
                     // Trả về đối tượng người dùng nếu tìm thấy
-                    return new Users(
-                            rs.getInt("id"),
+                    Users user = new Users(
+                            rs.getInt("user_id"),
                             rs.getString("username"),
                             rs.getString("email"),
                             rs.getString("password"),
                             rs.getString("phone"),
-                            rs.getString("address"),
-                            rs.getString("created_at"),
                             rs.getString("role")
                     );
                 }
@@ -356,8 +351,8 @@ public class dao {
         return null; // Trả về null nếu không tìm thấy người dùng
     }
 
-    public void Register(String username, String email, String password, String phone, String address) {
-        String query = "INSERT INTO Users (username, email, password, phone, address, created_at, role) VALUES (?, ?, ?, ?, ?, NOW(), 0)";
+    public void Register(String username, String email, String password, String phone) {
+        String query = "INSERT INTO User (username, email, password, phone, role) VALUES (?, ?, ?, ?, 0)";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
@@ -365,7 +360,6 @@ public class dao {
             statement.setString(2, email);
             statement.setString(3, password);
             statement.setString(4, phone);
-            statement.setString(5, address);
 
             // Thực thi câu lệnh và kiểm tra kết quả
             int rowsAffected = statement.executeUpdate();
@@ -385,7 +379,7 @@ public class dao {
 
     public List<Products> getRandomProducts() {
         List<Products> products = new ArrayList<>();
-        String query = "SELECT * FROM Products ORDER BY RAND() LIMIT 4"; // Lấy 4 sản phẩm ngẫu nhiên
+        String query = "SELECT * FROM Product ORDER BY RAND() LIMIT 4"; // Lấy 4 sản phẩm ngẫu nhiên
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
@@ -394,14 +388,13 @@ public class dao {
             // Duyệt qua kết quả trả về và tạo đối tượng Products
             while (rs.next()) {
                 Products product = new Products(
-                        rs.getInt("id"),
+                        rs.getInt("p_id"),
                         rs.getString("name"),
-                        rs.getString("description"),
                         rs.getInt("price"),
                         rs.getInt("stock"),
-                        rs.getString("image"),
-                        rs.getTimestamp("created_at"),
-                        rs.getInt("category_id")
+                        rs.getString("description"),
+                        rs.getInt("category_id"),
+                        rs.getString("img")
                 );
                 products.add(product);
             }
@@ -425,7 +418,6 @@ public class dao {
             System.out.println("Giá: " + latestProduct.getPrice());
             System.out.println("Số lượng: " + latestProduct.getStock());
             System.out.println("Hình ảnh: " + latestProduct.getImage());
-            System.out.println("Ngày tạo: " + latestProduct.getCreatedAt());
             System.out.println("ID Danh mục: " + latestProduct.getCategoryId());
         } else {
             System.out.println("Không có sản phẩm nào trong cơ sở dữ liệu.");

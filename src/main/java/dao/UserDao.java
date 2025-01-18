@@ -32,13 +32,11 @@ public class UserDao {
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
                     user = new Users(
-                            rs.getInt("id"),
+                            rs.getInt("user_id"),
                             rs.getString("username"),
                             rs.getString("email"),
                             rs.getString("password"),
                             rs.getString("phone"),
-                            rs.getString("address"),
-                            rs.getString("created_at"),
                             rs.getString("role")
                     );
                 }
@@ -162,11 +160,11 @@ public class UserDao {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
-            // Thiết lập tham số cho câu lệnh PreparedStatement
-            statement.setString(1, user.getEmail());
-            statement.setString(2, user.getPhone());
-            statement.setString(3, user.getAddress());
-            statement.setString(4, user.getUsername());
+//            // Thiết lập tham số cho câu lệnh PreparedStatement
+//            statement.setString(1, user.getEmail());
+//            statement.setString(2, user.getPhone());
+//            statement.setString(3, user.getAddress());
+//            statement.setString(4, user.getUsername());
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {

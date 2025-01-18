@@ -78,7 +78,7 @@ public class CRUD extends HttpServlet {
         String image = request.getParameter("image");
         int category_id = Integer.parseInt(request.getParameter("category_id"));
 
-        daoInstance.addProduct(name, description, price, stock, image, category_id);
+        daoInstance.addProduct(name, price, stock,description, category_id, image);
         response.getWriter().write("Thêm sản phẩm thành công!");
     }
 
@@ -105,7 +105,7 @@ public class CRUD extends HttpServlet {
         int productCategoryId = Integer.parseInt(categoryId); // categoryId phải là số nguyên
 
         // Cập nhật sản phẩm vào cơ sở dữ liệu
-        daoInstance.updateProduct(productId, name, description, productPrice, productStock, image, productCategoryId);
+        daoInstance.updateProduct(productId, name, (int) productPrice, productStock, description, productCategoryId, image);
 
         // Kiểm tra và phản hồi cho người dùng
         response.getWriter().write("Cập nhật sản phẩm thành công!");

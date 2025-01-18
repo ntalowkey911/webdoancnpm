@@ -188,8 +188,8 @@
 
         <!-- Hiển thị thông tin địa chỉ -->
         <div class="mb-3">
-          <label for="address" class="form-label">Địa Chỉ</label>
-          <span class="form-control" id="address">${user.address}</span>
+<%--          <label for="address" class="form-label">Địa Chỉ</label>--%>
+<%--          <span class="form-control" id="address">${user.address}</span>--%>
         </div>
 
       </form>
@@ -219,8 +219,8 @@
 
         <!-- Hiển thị thông tin địa chỉ -->
         <div class="mb-3">
-          <label for="address" class="form-label">Địa Chỉ</label>
-          <input type="text" class="form-control" id="newAddress" name="newAddress" required>
+<%--          <label for="address" class="form-label">Địa Chỉ</label>--%>
+<%--          <input type="text" class="form-control" id="newAddress" name="newAddress" required>--%>
         </div>
 
         <!-- Nút chỉnh sửa -->

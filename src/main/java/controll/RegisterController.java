@@ -29,10 +29,9 @@ public class RegisterController extends HttpServlet {
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
         String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
 
         // Kiểm tra nếu có tham số nào rỗng hoặc null
-        if (isEmpty(username) || isEmpty(email) || isEmpty(password) || isEmpty(confirmPassword) || isEmpty(phone) || isEmpty(address)) {
+        if (isEmpty(username) || isEmpty(email) || isEmpty(password) || isEmpty(confirmPassword) || isEmpty(phone)) {
             request.setAttribute("error", "All fields are required.");
             forwardToRegisterPage(request, response);
             return;
@@ -58,7 +57,7 @@ public class RegisterController extends HttpServlet {
                 String hashedPassword = hashPassword(password);
 
                 // Đăng ký người dùng mới
-                d.Register(username, email, hashedPassword, phone, address);
+                d.Register(username, email, hashedPassword, phone);
                 request.setAttribute("success", "Registration successful!");
                 response.sendRedirect("doanweb/html/index.jsp"); // Chuyển hướng đến trang chính sau khi đăng ký
             } catch (Exception e) {
