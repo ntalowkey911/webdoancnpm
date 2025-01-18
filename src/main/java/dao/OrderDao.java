@@ -14,7 +14,7 @@ import static dao.MySQLConnection.getConnection;
 public class OrderDao {
     public List<Orders> getAllOrders() {
         List<Orders> orderList = new ArrayList<>();
-        String query = "SELECT * FROM Orders"; // Thêm dấu nháy ngược nếu tên bảng là Order
+        String query = "SELECT * FROM orders"; // Thêm dấu nháy ngược nếu tên bảng là Order
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query);

@@ -20,7 +20,7 @@ public class UserDao {
 
     public Users getUserByUsername(String username) {
         Users user = null;
-        String query = "SELECT * FROM Users WHERE username = ?";  // Câu lệnh SQL để lấy người dùng theo username
+        String query = "SELECT * FROM user WHERE username = ?";  // Câu lệnh SQL để lấy người dùng theo username
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -49,8 +49,8 @@ public class UserDao {
     }
     public boolean changePassword(String username, String oldPassword, String newPassword) {
         boolean isUpdated = false;
-        String queryCheck = "SELECT password FROM Users WHERE username = ?";  // Câu lệnh kiểm tra mật khẩu cũ
-        String queryUpdate = "UPDATE Users SET password = ? WHERE username = ?";  // Câu lệnh cập nhật mật khẩu mới
+        String queryCheck = "SELECT password FROM user WHERE username = ?";  // Câu lệnh kiểm tra mật khẩu cũ
+        String queryUpdate = "UPDATE user SET password = ? WHERE username = ?";  // Câu lệnh cập nhật mật khẩu mới
 
         try (Connection connection = getConnection();
              PreparedStatement checkStatement = connection.prepareStatement(queryCheck)) {
@@ -89,8 +89,8 @@ public class UserDao {
 
     public boolean deleteAccount(String username, String password) {
         boolean isDeleted = false;
-        String queryCheck = "SELECT password FROM Users WHERE username = ?";  // Câu lệnh kiểm tra mật khẩu
-        String queryDelete = "DELETE FROM Users WHERE username = ?";  // Câu lệnh xóa tài khoản
+        String queryCheck = "SELECT password FROM user WHERE username = ?";  // Câu lệnh kiểm tra mật khẩu
+        String queryDelete = "DELETE FROM user WHERE username = ?";  // Câu lệnh xóa tài khoản
 
         try (Connection connection = getConnection();
              PreparedStatement checkStatement = connection.prepareStatement(queryCheck)) {
@@ -136,7 +136,7 @@ public class UserDao {
 
 
     public boolean checkCurrentPassword(String username, String currentPassword) {
-        String sql = "SELECT password FROM Users WHERE username = ?"; // Câu lệnh SQL để lấy mật khẩu từ DB
+        String sql = "SELECT password FROM user WHERE username = ?"; // Câu lệnh SQL để lấy mật khẩu từ DB
         try (Connection conn = getConnection(); // Mở kết nối tới DB
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -155,7 +155,7 @@ public class UserDao {
 
     public boolean editUser(Users user) {
         boolean isUpdated = false;
-        String query = "UPDATE Users SET email = ?, phone = ?, address = ? WHERE username = ?"; // Câu lệnh SQL cập nhật thông tin người dùng
+        String query = "UPDATE user SET email = ?, phone = ?, address = ? WHERE username = ?"; // Câu lệnh SQL cập nhật thông tin người dùng
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
