@@ -8,8 +8,10 @@ import entity.Users;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import static dao.MySQLConnection.getConnection;
 
 public class dao {
@@ -177,7 +179,7 @@ public class dao {
     }
 
     /// ///////////////////
-    public void addProduct(String name, double price,  int stock, String description, int category_id, String image ) {
+    public void addProduct(String name, double price, int stock, String description, int category_id, String image) {
         String sql = "INSERT INTO Product (name, price, stock, description, category_id, image) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, name);
@@ -203,7 +205,7 @@ public class dao {
     }
 
     // Sửa sản phẩm
-    public void updateProduct(int id, String name,int price,  int stock, String description,int category_id, String image ) {
+    public void updateProduct(int id, String name, int price, int stock, String description, int category_id, String image) {
         String sql = "UPDATE Product SET name=?, description=?, price=?, stock=?, image=?, category_id=? WHERE p_id=?";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, name);
@@ -305,8 +307,9 @@ public class dao {
                             rs.getString("email"),
                             rs.getString("password"),
                             rs.getString("phone"),
-                            rs.getString("role")
-                    );
+                            rs.getString("role"),
+                            rs.getString("address")
+                            );
                     // Hiển thị thông tin người dùng ra console (debug)
                     System.out.println("Đăng nhập thành công! Người dùng: " + user);
                     return user;
@@ -337,7 +340,8 @@ public class dao {
                             rs.getString("email"),
                             rs.getString("password"),
                             rs.getString("phone"),
-                            rs.getString("role")
+                            rs.getString("role"),
+                            rs.getString("address")
                     );
                 }
             }
@@ -351,15 +355,17 @@ public class dao {
         return null; // Trả về null nếu không tìm thấy người dùng
     }
 
-    public void Register(String username, String email, String password, String phone) {
-        String query = "INSERT INTO User (username, email, password, phone, role) VALUES (?, ?, ?, ?, 0)";
+    public void Register(String username, String email, String password, String phone, String address) {
+        String query = "INSERT INTO User (username, email, password, role, phone, address) VALUES (?, ?, ?, 0, ?, ?)";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
+            // Thiết lập các tham số theo thứ tự đúng
             statement.setString(1, username);
             statement.setString(2, email);
             statement.setString(3, password);
             statement.setString(4, phone);
+            statement.setString(5, address);
 
             // Thực thi câu lệnh và kiểm tra kết quả
             int rowsAffected = statement.executeUpdate();
@@ -376,6 +382,7 @@ public class dao {
             e.printStackTrace(); // In lỗi nếu có lỗi không phải từ database
         }
     }
+
 
     public List<Products> getRandomProducts() {
         List<Products> products = new ArrayList<>();
