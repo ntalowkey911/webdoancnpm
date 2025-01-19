@@ -26,7 +26,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Chuyển hướng đến trang đăng nhập
+
         request.getRequestDispatcher("/doanweb/html/Login.jsp").forward(request, response);
     }
 
@@ -56,7 +56,7 @@ public class LoginController extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("mess", "Đã xảy ra lỗi trong quá trình đăng nhập");
+            request.setAttribute("mess", "Đã xảy ra lỗi trong quá trình xử lý đăng nhập");
             request.getRequestDispatcher("/doanweb/html/Login.jsp").forward(request, response);
         }
     }
