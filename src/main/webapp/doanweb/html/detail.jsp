@@ -75,6 +75,24 @@
         .sproduct input:focus {
             outline: none;
         }
+        .wishlist-btn {
+            background-color: #BC1F23; /* Màu đỏ nhấn */
+            color: white;
+            border-radius: 2px;
+            border: none;
+            padding: 16px 16px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .wishlist-btn:hover {
+            background-color: #ff3d3d;
+            transition: 0.3s;
+        }
+
 
         .cart-btn {
             background-color: #BC1F23;
@@ -285,8 +303,18 @@
                     onclick="window.location.href='add-to-cart?id=${product.id}&action=buy-now'">
                 Mua ngay
             </button>
-            <button class="cart-btn" onclick="window.location.href='add-to-cart?id=${product.id}'">Thêm vào giỏ hàng
+            <button
+                    class="cart-btn"
+                    onclick="window.location.href='add-to-cart?id=${product.id}'">
+                Thêm vào giỏ hàng
             </button>
+            <button
+                    class="wishlist-btn"
+                    onclick="window.location.href='<%= request.getContextPath() %>/add-to-wishlist?id=${product.id}'">
+                <i class="fa fa-heart"></i>
+            </button>
+
+
             <%
                 String message = (String) request.getAttribute("message");
                 if (message != null) {

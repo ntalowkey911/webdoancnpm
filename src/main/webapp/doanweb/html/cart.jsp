@@ -6,7 +6,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop</title>
+    <title>Cart</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/doanweb/styles/style.css">
     <link rel="icon" href="<%= request.getContextPath() %>/doanweb/images/Page1/LoadWeb.png" type="image/png">
 
@@ -111,7 +111,6 @@
 
   </style>
 </head>
-  <title></title>
 <body>
 <!-- Nav section -->
 <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">

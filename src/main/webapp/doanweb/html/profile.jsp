@@ -156,6 +156,7 @@
       <ul class="menu-links">
         <li><a href="javascript:void(0);" onclick="showProfileForm()">Thông tin cá nhân</a></li>
         <li><a href="javascript:void(0);" onclick="showChangeProfileForm()">Chỉnh sửa thông tin</a></li>
+        <li><a href="javascript:void(0);"  onclick="window.location.href = '/wishlist';">Danh sách yêu thích</a></li>
         <li id="admin-link" style="display:none;">
           <a href="javascript:void(0);" onclick="window.location.href = '/ad';">Quản trị</a>
         </li>

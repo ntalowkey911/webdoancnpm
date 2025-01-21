@@ -114,7 +114,7 @@ public class dao {
         return l;
     }
 
-    public Products getProductById(int productId) {
+    public static Products getProductById(int productId) {
         Products product = null;
         String query = "SELECT * FROM Product WHERE p_id = ?";  // Câu lệnh SQL để lấy sản phẩm theo ID
 
