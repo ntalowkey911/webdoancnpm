@@ -251,9 +251,11 @@
                 <td>${product.name}</td>
                 <td>${product.price}</td>
                 <td>
-                    <button type="button" class="remove-btn" onclick="window.location.href='add-to-cart?id=${product.id}&action=remove'">
+                    <button type="button" class="remove-btn"
+                            onclick="window.location.href='add-to-wishlist?id=${product.id}&action=remove'">
                         <i class="bi bi-trash3"></i>
                     </button>
+
                 </td>
             </tr>
         </c:forEach>
