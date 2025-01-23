@@ -348,7 +348,18 @@
 <section class="container my-5">
     <h3 class="text-center pb-3">Đánh giá sản phẩm</h3>
     <hr class="border border-danger border-2 opacity-75 mx-auto mb-4">
-
+    <div class="rating-summary">
+        <div class="rating-score">5 trên 5</div>
+        <div class="stars">★★★★★</div>
+        <div class="filter-buttons">
+            <button class="active">Tất Cả</button>
+            <button>5 Sao (3)</button>
+            <button>4 Sao (0)</button>
+            <button>3 Sao (0)</button>
+            <button>2 Sao (0)</button>
+            <button>1 Sao (0)</button>
+        </div>
+    </div>
     <!-- Reviews List -->
     <div class="reviews mt-4">
         <c:if test="${empty reviews}">

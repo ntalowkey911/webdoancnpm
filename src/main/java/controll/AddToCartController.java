@@ -76,9 +76,9 @@ public class AddToCartController extends HttpServlet {
             }
 
             // Nếu sản phẩm chưa có trong giỏ, thêm vào giỏ hàng
-            if (!productFound) {
-                cart.add(new CartItem(product, 1)); // Mặc định thêm 1 sản phẩm vào giỏ
-            }
+//            if (!productFound) {
+//                cart.add(new CartItem(product, 1)); // Mặc định thêm 1 sản phẩm vào giỏ
+//            }
         }
 
         // Hiển thị sản phẩm gợi ý

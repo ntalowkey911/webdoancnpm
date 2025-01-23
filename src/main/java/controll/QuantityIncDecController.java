@@ -45,7 +45,7 @@ public class QuantityIncDecController extends HttpServlet {
                         item.setQuantity(item.getQuantity() - 1); // Giảm số lượng (nhưng không dưới 1)
                     }
                     // Cập nhật tổng tiền
-                    item.setTotalPrice(item.getQuantity() * item.getProduct().getPrice());
+//                    item.setTotalPrice(item.getQuantity() * item.getProduct().getPrice());
                     break;
             }
         }
@@ -54,7 +54,7 @@ public class QuantityIncDecController extends HttpServlet {
             // Tính tổng giá tạm tính
             int totalPrice = 0;
             for (CartItem item : cart) {
-                totalPrice += item.getTotalPrice();
+//                totalPrice += item.getTotalPrice();
         }
 
             session.setAttribute("totalPrice", totalPrice);
