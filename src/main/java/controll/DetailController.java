@@ -32,45 +32,51 @@ public class DetailController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Lấy danh sách sản phẩm từ dao
         String productId = request.getParameter("id");
         Products product = d.getProductById(Integer.parseInt(productId));
-        System.out.println("Product ID: " + productId);
-        System.out.println("Product Name: " + product.getName()); // In ra tên sản phẩm
         request.setAttribute("product", product);
 
-        // Lấy danh sách review từ DAO
-        List<Review> reviews = rd.getReviewsByProductId(Integer.parseInt(productId));
-        System.out.println("Number of reviews: " + reviews.size()); // In ra số lượng review lấy được
-        for (Review review : reviews) {
-            System.out.println("Review ID: " + review.getReview_id());
-            System.out.println("Review Rating: " + review.getRating());
-            System.out.println("Review Comment: " + review.getComment());
-            System.out.println("Review Date: " + review.getReview_date());
+        String ratingParam = request.getParameter("rating");
+        List<Review> reviews;
 
-            // Kiểm tra xem user có dữ liệu không
-            Users user = ud.getUserByUserId(review.getUser_id());  // Lấy đối tượng user từ review
-            if (user != null) {
-                review.setUsername(user.getUsername());
-                System.out.println("User Username: " + user.getUsername());  // In ra tên người dùng
-            } else {
-                System.out.println("No user found for this review.");
+        if (ratingParam != null && !ratingParam.isEmpty() && !ratingParam.equals("null")) {
+            try {
+                int rating = Integer.parseInt(ratingParam);
+                reviews = rd.getReviewsByRatingAndProductId(rating, Integer.parseInt(productId));
+            } catch (NumberFormatException e) {
+                // Nếu xảy ra lỗi khi chuyển đổi, lấy tất cả reviews
+                reviews = rd.getReviewsByProductId(Integer.parseInt(productId));
             }
+        } else {
+            reviews = rd.getReviewsByProductId(Integer.parseInt(productId)); // Nếu không có rating, lấy tất cả reviews
         }
-        request.setAttribute("reviews", reviews);
 
-        // Lấy toàn bộ sản phẩm và trộn ngẫu nhiên
-        List<Products> randomProductList = d.getRandomProducts();
-        System.out.println("Number of random products: " + randomProductList.size()); // In ra số lượng sản phẩm ngẫu nhiên
-        for (Products p : randomProductList) {
-            System.out.println("Random Product ID: " + p.getId());
-            System.out.println("Random Product Name: " + p.getName());
+
+
+        // Tính toán điểm trung bình và số lượng đánh giá
+        double averageRating = 0;
+        int totalReviews = reviews.size();
+        int[] ratingCounts = new int[5]; // Đếm số lượng đánh giá cho từng rating từ 1-5 sao
+
+        if (totalReviews > 0) {
+            int totalRating = 0;
+            for (Review review : reviews) {
+                totalRating += review.getRating();
+                ratingCounts[review.getRating() - 1]++;
+            }
+            averageRating = (double) totalRating / totalReviews;
         }
-        request.setAttribute("randomProductList", randomProductList);
 
-        // Chuyển tiếp tới JSP
-        request.getRequestDispatcher("doanweb/html/detail.jsp").forward(request, response);
+        // Trả về dữ liệu cần thiết để hiển thị trong JSP
+        request.setAttribute("averageRating", averageRating);
+        request.setAttribute("totalReviews", totalReviews);
+        request.setAttribute("ratingCounts", ratingCounts);
+        request.setAttribute("reviews", reviews); // Gửi danh sách review cho JSP
+
+        // Chuyển hướng tới trang chi tiết sản phẩm
+        request.getRequestDispatcher("/doanweb/html/detail.jsp").include(request, response);
     }
+
 
 
 }

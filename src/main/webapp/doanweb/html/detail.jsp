@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -155,6 +156,11 @@
         .product-name {
             color: black;
             font-weight: bold;
+        }
+
+        .filter-buttons button.active {
+            background-color: #BC1F23;; /* Màu tô đậm */
+            color: #fff; /* Chữ màu trắng */
         }
     </style>
 </head>
@@ -349,17 +355,33 @@
     <h3 class="text-center pb-3">Đánh giá sản phẩm</h3>
     <hr class="border border-danger border-2 opacity-75 mx-auto mb-4">
     <div class="rating-summary">
-        <div class="rating-score">5 trên 5</div>
-        <div class="stars">★★★★★</div>
-        <div class="filter-buttons">
-            <button class="active">Tất Cả</button>
-            <button>5 Sao (3)</button>
-            <button>4 Sao (0)</button>
-            <button>3 Sao (0)</button>
-            <button>2 Sao (0)</button>
-            <button>1 Sao (0)</button>
+        <div class="rating-score"><%= request.getAttribute("averageRating") %> trên 5</div>
+        <div class="stars">
+            <%
+                double averageRating = (double) request.getAttribute("averageRating");
+                int fullStars = (int) averageRating;
+                int halfStars = (int) ((averageRating - fullStars) * 2);
+            %>
+            <% for (int i = 0; i < fullStars; i++) { %> ★ <% } %>
+            <% if (halfStars == 1) { %> ★☆ <% } %>
         </div>
+
+        <%
+            int[] ratingCounts = (int[]) request.getAttribute("ratingCounts");
+        %>
+
+        <div class="filter-buttons">
+            <button class="<%= request.getParameter("rating") == null ? "active" : "" %>" onclick="window.location='?id=<%= request.getParameter("id") %>'">Tất Cả</button>
+            <button class="<%= request.getParameter("rating") != null && request.getParameter("rating").equals("5") ? "active" : "" %>" onclick="window.location='?id=<%= request.getParameter("id") %>&rating=5'">5 Sao (<%= ratingCounts[4] %>)</button>
+            <button class="<%= request.getParameter("rating") != null && request.getParameter("rating").equals("4") ? "active" : "" %>" onclick="window.location='?id=<%= request.getParameter("id") %>&rating=4'">4 Sao (<%= ratingCounts[3] %>)</button>
+            <button class="<%= request.getParameter("rating") != null && request.getParameter("rating").equals("3") ? "active" : "" %>" onclick="window.location='?id=<%= request.getParameter("id") %>&rating=3'">3 Sao (<%= ratingCounts[2] %>)</button>
+            <button class="<%= request.getParameter("rating") != null && request.getParameter("rating").equals("2") ? "active" : "" %>" onclick="window.location='?id=<%= request.getParameter("id") %>&rating=2'">2 Sao (<%= ratingCounts[1] %>)</button>
+            <button class="<%= request.getParameter("rating") != null && request.getParameter("rating").equals("1") ? "active" : "" %>" onclick="window.location='?id=<%= request.getParameter("id") %>&rating=1'">1 Sao (<%= ratingCounts[0] %>)</button>
+        </div>
+
+
     </div>
+
     <!-- Reviews List -->
     <div class="reviews mt-4">
         <c:if test="${empty reviews}">
@@ -460,9 +482,42 @@
         <button class="ShopMore my-5 mx-auto" onclick="window.location.href = '/shop';">Tiếp tục mua sắm</button>
     </div>
 </section>
+<script>
+    function setActive(button) {
+        // Lấy tất cả các nút trong div .filter-buttons
+        const buttons = document.querySelectorAll('.filter-buttons button');
 
+        // Xóa class 'active' khỏi tất cả các nút
+        buttons.forEach(btn => btn.classList.remove('active'));
 
+        // Thêm class 'active' vào nút vừa được nhấn
+        button.classList.add('active');
+    }
 
+    // Hàm gửi yêu cầu AJAX và cập nhật giao diện khi chọn rating
+    function filterReviews(rating) {
+        var productId = "${product.id}"; // Sử dụng EL để lấy ID sản phẩm từ JSP
+        var url = "/detail?id=" + productId + "&rating=" + rating; // URL yêu cầu
+
+        // Gửi yêu cầu AJAX (sử dụng Fetch API)
+        fetch(url)
+            .then(response => response.text()) // Nhận dữ liệu HTML từ server
+            .then(html => {
+                // Cập nhật nội dung HTML vào phần tử tương ứng
+                document.querySelector('.rating-summary').innerHTML = html;
+            })
+            .catch(error => console.error('Error:', error)); // Xử lý lỗi nếu có
+    }
+
+    // Lắng nghe sự kiện click trên các nút lọc
+    document.querySelectorAll('.filter-buttons button').forEach(button => {
+        button.addEventListener('click', function() {
+            var rating = this.getAttribute('data-rating');
+            filterReviews(rating); // Gửi yêu cầu AJAX khi người dùng chọn rating
+        });
+    });
+
+</script>
 <footer class="mt-5 p-5 bg-dark">
     <div class="row conatiner mx-auto pt-5">
         <div class="footer-one col-lg-3 col-md-6 col-12">
@@ -481,7 +536,7 @@
                 <li><a href="<%= request.getContextPath() %>/shop">Cửa hàng</a></li>
                 <li><a href="<%= request.getContextPath() %>/about">thông tin</a></li>
                 <li><a href="<%= request.getContextPath() %>/contact">liên hệ</a></li>
-                <li><a href="/<%= request.getContextPath() %>/cart">Giỏ hàng</a></li>
+                <li><a href="<%= request.getContextPath() %>/cart">Giỏ hàng</a></li>
             </ul>
         </div>
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
