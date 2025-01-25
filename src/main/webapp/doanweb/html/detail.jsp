@@ -309,11 +309,12 @@
                     onclick="window.location.href='add-to-cart?id=${product.id}&action=buy-now'">
                 Mua ngay
             </button>
-            <button
-                    class="cart-btn"
-                    onclick="window.location.href='add-to-cart?id=${product.id}'">
+
+            <button  class="cart-btn"
+                    onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart'">
                 Thêm vào giỏ hàng
             </button>
+
             <button
                     class="wishlist-btn"
                     onclick="window.location.href='<%= request.getContextPath() %>/add-to-wishlist?id=${product.id}'">

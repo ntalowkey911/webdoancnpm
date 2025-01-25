@@ -66,12 +66,13 @@ public class DetailController extends HttpServlet {
             }
             averageRating = (double) totalRating / totalReviews;
         }
-
+        List<Products> randomProductList = d.getRandomProducts();
         // Trả về dữ liệu cần thiết để hiển thị trong JSP
         request.setAttribute("averageRating", averageRating);
         request.setAttribute("totalReviews", totalReviews);
         request.setAttribute("ratingCounts", ratingCounts);
         request.setAttribute("reviews", reviews); // Gửi danh sách review cho JSP
+        request.setAttribute("randomProductList", randomProductList);
 
         // Chuyển hướng tới trang chi tiết sản phẩm
         request.getRequestDispatcher("/doanweb/html/detail.jsp").include(request, response);

@@ -1,16 +1,12 @@
 package dao;
 
-import entity.CartItem;
-import entity.Categories;
-import entity.Products;
-import entity.Users;
+import entity.*;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import java.util.Map;
 
 import static dao.MySQLConnection.getConnection;
 
@@ -258,37 +254,65 @@ public class dao {
     }
 
     //Tổng giá tiền của giỏ hàng
-    public double getTotalCartPrice(ArrayList<CartItem> cartList) {
+    public double getTotalCartPrice(List<CartItem> cartList) {
         double sum = 0;
 
         // Kiểm tra nếu giỏ hàng không rỗng
         if (cartList != null && !cartList.isEmpty()) {
-            for (CartItem cartItem : cartList) {
-                // Truy vấn giá của sản phẩm từ cơ sở dữ liệu theo ID
-                String query = "SELECT price FROM product WHERE p_id = ?";
+            // Xây dựng danh sách ID sản phẩm từ giỏ hàng
+            StringBuilder queryBuilder = new StringBuilder("SELECT p_id, price FROM product WHERE p_id IN (");
+            for (int i = 0; i < cartList.size(); i++) {
+                queryBuilder.append("?");
+                if (i < cartList.size() - 1) {
+                    queryBuilder.append(",");
+                }
+            }
+            queryBuilder.append(")");
 
-                try (Connection connection = getConnection();
-                     PreparedStatement statement = connection.prepareStatement(query)) {
+            String query = queryBuilder.toString();
 
-                    // Thiết lập tham số cho câu lệnh SQL (ID sản phẩm)
-                    statement.setInt(1, cartItem.getProduct().getId());
+            try (Connection connection = getConnection();
+                 PreparedStatement statement = connection.prepareStatement(query)) {
 
-                    try (ResultSet rs = statement.executeQuery()) {
-                        // Nếu có sản phẩm, lấy giá và tính tổng
-                        if (rs.next()) {
-                            double price = rs.getDouble("price");
-                            // Cộng giá trị của sản phẩm vào tổng giỏ hàng (có nhân với số lượng)
-                            sum += price * cartItem.getQuantity();
+                // Gán giá trị cho từng tham số ID trong truy vấn
+                for (int i = 0; i < cartList.size(); i++) {
+                    statement.setInt(i + 1, cartList.get(i).getProduct().getId());
+                }
+
+                // Thực thi truy vấn và tính tổng giá trị giỏ hàng
+                try (ResultSet rs = statement.executeQuery()) {
+                    Map<Integer, Double> productPriceMap = new HashMap<>();
+
+                    // Lưu trữ giá sản phẩm trong Map (product_id -> price)
+                    while (rs.next()) {
+                        productPriceMap.put(rs.getInt("p_id"), rs.getDouble("price"));
+                    }
+
+                    // Tính tổng giá trị giỏ hàng dựa trên Map
+                    for (CartItem cartItem : cartList) {
+                        int productId = cartItem.getProduct().getId(); // Lấy ID sản phẩm
+                        Double price = productPriceMap.get(productId); // Lấy giá từ Map
+
+                        if (price != null) {
+                            int quantity = cartItem.getQuantity(); // Lấy số lượng từ CartItem
+                            double itemTotal = price * quantity; // Tính giá trị sản phẩm (giá * số lượng)
+                            sum += itemTotal; // Cộng giá trị sản phẩm vào tổng
+                            System.out.println("Product ID: " + productId + ", Quantity: " + quantity + ", Item Total: " + itemTotal);
+                        } else {
+                            // Trường hợp không tìm thấy giá của sản phẩm trong Map
+                            System.err.println("Price not found for Product ID: " + productId);
                         }
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();  // In lỗi nếu có sự cố
+
                 }
+            } catch (Exception e) {
+                e.printStackTrace(); // In lỗi nếu có sự cố
             }
         }
 
-        return sum;  // Trả về tổng giá trị giỏ hàng
+        return sum; // Trả về tổng giá trị giỏ hàng
     }
+
 
     public Users login(String username, String password) {
         String query = "SELECT * FROM User WHERE username = ? AND password = ?";

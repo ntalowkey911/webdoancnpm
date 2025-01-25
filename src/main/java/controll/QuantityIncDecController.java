@@ -1,6 +1,6 @@
 package controll;
 
-import entity.CartItem;
+import entity.Cart;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/quantity-inc-dec")
@@ -34,26 +33,26 @@ public class QuantityIncDecController extends HttpServlet {
             return;
         }
         HttpSession session = request.getSession();
-        List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
+        List<Cart> cart = (List<Cart>) session.getAttribute("cart");
 
-        if (cart != null) {
-            for (CartItem item : cart) {
-                if (item.getProduct().getId() == productId) {
-                    if ("inc".equals(action)) {
-                        item.setQuantity(item.getQuantity() + 1); // Tăng số lượng
-                    } else if ("dec".equals(action) && item.getQuantity() > 1) {
-                        item.setQuantity(item.getQuantity() - 1); // Giảm số lượng (nhưng không dưới 1)
-                    }
-                    // Cập nhật tổng tiền
-//                    item.setTotalPrice(item.getQuantity() * item.getProduct().getPrice());
-                    break;
-            }
-        }
+//        if (cart != null) {
+//            for (Cart item : cart) {
+//                if (item.getProduct().getId() == productId) {
+//                    if ("inc".equals(action)) {
+//                        item.setQuantity(item.getQuantity() + 1); // Tăng số lượng
+//                    } else if ("dec".equals(action) && item.getQuantity() > 1) {
+//                        item.setQuantity(item.getQuantity() - 1); // Giảm số lượng (nhưng không dưới 1)
+//                    }
+//                    // Cập nhật tổng tiền
+////                    item.setTotalPrice(item.getQuantity() * item.getProduct().getPrice());
+//                    break;
+//            }
+//        }
 
             session.setAttribute("cart", cart);
             // Tính tổng giá tạm tính
             int totalPrice = 0;
-            for (CartItem item : cart) {
+            for (Cart item : cart) {
 //                totalPrice += item.getTotalPrice();
         }
 
@@ -61,5 +60,5 @@ public class QuantityIncDecController extends HttpServlet {
             // Chuyển hướng về giỏ hàng
             response.sendRedirect("cart");
     }
-}}
+}
 
