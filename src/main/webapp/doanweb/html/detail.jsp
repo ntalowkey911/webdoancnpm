@@ -306,14 +306,16 @@
 
             <button
                     class="buy-now-btn"
-                    onclick="window.location.href='add-to-cart?id=${product.id}&action=buy-now'">
+                    onclick="window.location.href='add-to-cart?id=${product.id}&action=buy-now&quantity=' + document.getElementById('quantity').value">
                 Mua ngay
             </button>
 
-            <button  class="cart-btn"
-                    onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart'">
+            <button
+                    class="cart-btn"
+                    onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart&quantity=' + document.getElementById('quantity').value">
                 Thêm vào giỏ hàng
             </button>
+
 
             <button
                     class="wishlist-btn"
@@ -347,7 +349,6 @@
             <span class="text-secondary">${product.description}</span>
         </div>
     </div>
-
 </section>
 
 

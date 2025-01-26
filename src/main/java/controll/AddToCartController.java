@@ -1,7 +1,6 @@
 package controll;
 
 import dao.dao;
-import entity.Cart;
 import dao.CartDao;
 import entity.CartItem;
 import entity.Products;
@@ -15,21 +14,21 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/add-to-cart")
 public class AddToCartController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private CartDao cartDao;
-    private dao dao;
+    private final CartDao cartDao;
+    private final dao dao;
 
     public AddToCartController() {
         super();
-        cartDao = new CartDao();  // Khởi tạo CartDao
+        cartDao = new CartDao();
         dao = new dao();
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
 
@@ -42,47 +41,74 @@ public class AddToCartController extends HttpServlet {
         // Lấy thông tin từ request
         String productIdParam = request.getParameter("id");
         String action = request.getParameter("action");
+        String quantityParam = request.getParameter("quantity");
 
-        // Kiểm tra xem tham số "id" có tồn tại không
+        // Kiểm tra tham số id hợp lệ
         if (productIdParam == null || productIdParam.isEmpty()) {
             redirectToErrorPage(response);
             return;
         }
 
         int productId;
+        int quantity = 1; // Số lượng mặc định là 1
+
         try {
             productId = Integer.parseInt(productIdParam);
+            if (quantityParam != null && !quantityParam.isEmpty()) {
+                quantity = Integer.parseInt(quantityParam);
+                if (quantity <= 0) {
+                    throw new NumberFormatException("Quantity must be positive.");
+                }
+            }
         } catch (NumberFormatException e) {
             redirectToErrorPage(response);
             return;
         }
 
         Users user = (Users) session.getAttribute("user");
-        int userId = user.getId();  // Lấy ID người dùng từ session
+        int userId = user.getId(); // Lấy ID người dùng từ session
 
-        // Kiểm tra hành động, xử lý xóa hoặc thêm sản phẩm vào giỏ hàng
-        if ("remove".equals(action)) {
-            cartDao.removeFromCart(userId, productId);  // Gọi phương thức xóa
-        } else if ("add-cart".equals(action)) {
-            cartDao.AddToCart(userId, productId);  // Gọi phương thức thêm vào giỏ
-        } else if ("buy-now".equals(action)) {
-            cartDao.AddToCart(userId, productId);  // Thêm vào giỏ và chuyển đến trang giỏ hàng
-            response.sendRedirect("/cart");
-            return;
-        } else {
+        // Kiểm tra tồn kho trước khi thêm sản phẩm
+        Products product = dao.getProductById(productId);
+        if (product == null || product.getStock() < quantity) {
+            request.setAttribute("error", "Sản phẩm không tồn tại hoặc số lượng vượt quá tồn kho.");
             redirectToErrorPage(response);
             return;
+        }
+
+        // Xử lý hành động
+        switch (action) {
+            case "remove":
+                cartDao.removeFromCart(userId, productId);
+                break;
+
+            case "add-cart":
+                cartDao.AddToCart(userId, productId, quantity);
+                request.setAttribute("message", "Sản phẩm đã được thêm vào giỏ hàng!");
+                request.setAttribute("productId", productId);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/detail");
+                dispatcher.forward(request, response);
+                return;
+
+            case "buy-now":
+                cartDao.AddToCart(userId, productId, quantity);
+                response.sendRedirect("/cart");
+                return;
+
+            default:
+                redirectToErrorPage(response);
+                return;
         }
 
         // Cập nhật giỏ hàng trong session
         List<CartItem> cart = cartDao.getCartByUserId(userId);
         updateCartSession(session, cart);
 
-        // Xử lý gợi ý sản phẩm (nếu cần)
+        // Xử lý gợi ý sản phẩm
         handleRandomProducts(request);
 
-        // Chuyển hướng hoặc hiển thị thông báo
-        handleRedirectOrMessage(action, request, response, productId);
+        // Chuyển hướng đến trang giỏ hàng
+        response.sendRedirect("/cart");
     }
 
     private void redirectToErrorPage(HttpServletResponse response) throws IOException {
@@ -97,29 +123,11 @@ public class AddToCartController extends HttpServlet {
 
         session.setAttribute("totalItems", totalItems);
         session.setAttribute("totalPrice", totalPrice);
-        session.setAttribute("cart", cart);  // Cập nhật lại giỏ hàng trong session
+        session.setAttribute("cart", cart); // Cập nhật lại giỏ hàng trong session
     }
 
     private void handleRandomProducts(HttpServletRequest request) {
         List<Products> randomProducts = dao.getRandomProducts();
         request.setAttribute("randomProductList", randomProducts);
     }
-
-    private void handleRedirectOrMessage(String action, HttpServletRequest request, HttpServletResponse response, int productId) throws ServletException, IOException {
-        if ("add-cart".equals(action)) {
-            // Trả về trang chi tiết sản phẩm sau khi thêm vào giỏ hàng
-            request.setAttribute("message", "Sản phẩm đã được thêm vào giỏ hàng!");
-            request.setAttribute("productId", productId);  // Đảm bảo thông tin sản phẩm vẫn có sẵn
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/detail");
-            dispatcher.forward(request, response);  // Chuyển tiếp đến trang chi tiết sản phẩm
-        } else if ("remove".equals(action)) {
-            // Quay lại trang giỏ hàng sau khi xóa sản phẩm
-            response.sendRedirect("/cart");
-        } else {
-            response.sendRedirect("/cart");
-        }
-    }
 }
-
-
-

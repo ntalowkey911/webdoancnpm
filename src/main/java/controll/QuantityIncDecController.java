@@ -1,6 +1,6 @@
 package controll;
 
-import entity.Cart;
+import entity.CartItem;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,7 +21,7 @@ public class QuantityIncDecController extends HttpServlet {
         String idParam = request.getParameter("id");
 
         if (action == null || (!"inc".equals(action) && !"dec".equals(action))) {
-            response.sendRedirect("cart.jsp");
+            response.sendRedirect("/cart");
             return;
         }
 
@@ -29,36 +29,43 @@ public class QuantityIncDecController extends HttpServlet {
         try {
             productId = Integer.parseInt(idParam);
         } catch (NumberFormatException e) {
-            response.sendRedirect("cart.jsp");
+            response.sendRedirect("/cart");
             return;
         }
+
         HttpSession session = request.getSession();
-        List<Cart> cart = (List<Cart>) session.getAttribute("cart");
+        List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
 
-//        if (cart != null) {
-//            for (Cart item : cart) {
-//                if (item.getProduct().getId() == productId) {
-//                    if ("inc".equals(action)) {
-//                        item.setQuantity(item.getQuantity() + 1); // Tăng số lượng
-//                    } else if ("dec".equals(action) && item.getQuantity() > 1) {
-//                        item.setQuantity(item.getQuantity() - 1); // Giảm số lượng (nhưng không dưới 1)
-//                    }
-//                    // Cập nhật tổng tiền
-////                    item.setTotalPrice(item.getQuantity() * item.getProduct().getPrice());
-//                    break;
-//            }
-//        }
-
-            session.setAttribute("cart", cart);
-            // Tính tổng giá tạm tính
-            int totalPrice = 0;
-            for (Cart item : cart) {
-//                totalPrice += item.getTotalPrice();
+        // Kiểm tra nếu giỏ hàng chưa tồn tại
+        if (cartItems == null) {
+            response.sendRedirect("/cart");
+            return;
         }
 
-            session.setAttribute("totalPrice", totalPrice);
-            // Chuyển hướng về giỏ hàng
-            response.sendRedirect("cart");
+        // Xử lý cập nhật số lượng
+        for (CartItem item : cartItems) {
+            if (item.getProduct().getId() == productId) {
+                if ("inc".equals(action)) {
+                    item.setQuantity(item.getQuantity() + 1); // Tăng số lượng
+                } else if ("dec".equals(action) && item.getQuantity() > 1) {
+                    item.setQuantity(item.getQuantity() - 1); // Giảm số lượng (nhưng không dưới 1)
+                }
+                break;
+            }
+        }
+
+        // Cập nhật session với giỏ hàng mới
+        session.setAttribute("cartItems", cartItems);
+
+        // Tính tổng giá tạm tính
+        int totalPrice = 0;
+        for (CartItem item : cartItems) {
+            totalPrice += item.getQuantity() * item.getProduct().getPrice();
+        }
+
+        session.setAttribute("totalPrice", totalPrice);
+
+        // Quay lại trang giỏ hàng
+        response.sendRedirect("/cart");
     }
 }
-

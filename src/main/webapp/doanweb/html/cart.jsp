@@ -249,16 +249,19 @@
         <td>${item.product.name}</td>
         <td>${item.product.price}K</td>
         <td>
-          <form action="quantity-inc-dec" method="post" >
-            <input type="hidden" name="id" value="${item.product.id}">
-              <div class="quantity-selector">
-                <button type="submit" name="action" value="dec" class="btn-minus">-</button>
-                <input type="number" name="quantity" value="${item.quantity}" min="1" class="form-control" disabled>
-                <button type="submit" name="action" value="inc" class="btn-plus">+</button>
-              </div>
+          <div class="quantity-selector">
+            <form action="/quantity-inc-dec" method="post" style="display:inline;">
+              <input type="hidden" name="id" value="${item.product.id}">
+              <button type="submit" name="action" value="dec" class="btn-minus">-</button>
             </form>
-
+            <input type="number" id="quantity-${item.product.id}" value="${item.quantity}" min="1" class="form-control" disabled>
+            <form action="/quantity-inc-dec" method="post" style="display:inline;">
+              <input type="hidden" name="id" value="${item.product.id}">
+              <button type="submit" name="action" value="inc" class="btn-plus">+</button>
+            </form>
+          </div>
         </td>
+
         <td>${item.quantity * item.product.price}k</td>
         <td>
           <button type="button" class="remove-btn" onclick="window.location.href='add-to-cart?id=${item.product.id}&action=remove'">
