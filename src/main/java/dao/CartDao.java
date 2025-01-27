@@ -147,19 +147,36 @@ public class CartDao {
 
         return cart;  // Trả về danh sách CartItem
     }
+
+
     public int getQuantity(int cartId, int productId) throws SQLException {
         String sql = "SELECT quantity FROM cart_item WHERE cart_id = ? AND product = ?";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            // Log thông tin truy vấn và tham số
+            System.out.println("[getQuantity] Executing query: " + sql);
+            System.out.println("[getQuantity] Parameters - cartId: " + cartId + ", productId: " + productId);
+
             stmt.setInt(1, cartId);
             stmt.setInt(2, productId);
+
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt("quantity");
+                    int quantity = rs.getInt("quantity");
+                    // Log kết quả nếu tìm thấy sản phẩm
+                    System.out.println("[getQuantity] Found quantity: " + quantity + " for productId: " + productId);
+                    return quantity;
                 } else {
-                    return -1;  // Nếu không tìm thấy sản phẩm trong giỏ hàng
+                    // Log nếu không tìm thấy sản phẩm
+                    System.out.println("[getQuantity] No product found for productId: " + productId + " in cartId: " + cartId);
+                    return -1;
                 }
             }
+        } catch (SQLException e) {
+            // Log lỗi SQL
+            System.err.println("[getQuantity] SQL Error: " + e.getMessage());
+            throw e;
         }
     }
 
@@ -167,11 +184,76 @@ public class CartDao {
         String sql = "UPDATE cart_item SET quantity = ? WHERE cart_id = ? AND product = ?";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            // Log thông tin truy vấn và tham số
+            System.out.println("[updateQuantity] Executing query: " + sql);
+            System.out.println("[updateQuantity] Parameters - newQuantity: " + newQuantity + ", cartId: " + cartId + ", productId: " + productId);
+
             stmt.setInt(1, newQuantity);
             stmt.setInt(2, cartId);
             stmt.setInt(3, productId);
-            stmt.executeUpdate();
+
+            int rowsUpdated = stmt.executeUpdate();
+            // Log số hàng được cập nhật
+            if (rowsUpdated > 0) {
+                System.out.println("[updateQuantity] Successfully updated quantity to " + newQuantity + " for productId: " + productId + " in cartId: " + cartId);
+            } else {
+                System.out.println("[updateQuantity] No rows updated for productId: " + productId + " in cartId: " + cartId);
+            }
+        } catch (SQLException e) {
+            // Log lỗi SQL
+            System.err.println("[updateQuantity] SQL Error: " + e.getMessage());
+            throw e;
         }
+    }
+    // Lấy cart_id từ user_id
+    public int getCartIdByUserId(int userId) throws SQLException {
+        String query = "SELECT cart_id FROM cart WHERE user_id = ? ORDER BY created_at DESC LIMIT 1";
+        try (Connection connection = MySQLConnection.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("cart_id");
+            } else {
+                return -1; // Trả về -1 nếu không có cart_id
+            }
+        }
+    }
+
+    // Lấy danh sách các sản phẩm trong giỏ hàng
+    public List<CartItem> getCartItemsByCartId(int cartId) throws SQLException {
+        List<CartItem> cartItems = new ArrayList<>();
+        String query = "SELECT ci.product_id, ci.quantity, p.p_id, p.name, p.price, p.stock, p.description, p.category_id, p.img " +
+                "FROM cart_item ci " +
+                "JOIN products p ON ci.product_id = p.p_id " +
+                "WHERE ci.cart_id = ?";
+
+        try (Connection connection = MySQLConnection.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, cartId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int productId = rs.getInt("product_id");
+                int quantity = rs.getInt("quantity");
+                int pId = rs.getInt("p_id"); // Lấy p_id từ bảng products
+                String name = rs.getString("name");
+                int price = rs.getInt("price");
+                int stock = rs.getInt("stock");
+                String description = rs.getString("description");
+                int categoryId = rs.getInt("category_id");
+                String img = rs.getString("img");
+
+                // Tạo đối tượng Products
+                Products product = new Products(pId, name, price, stock, description, categoryId, img);
+
+                // Tạo CartItem với Products và quantity
+                CartItem item = new CartItem(product, quantity); // Giả sử bạn đã có constructor phù hợp cho CartItem
+                cartItems.add(item);
+            }
+        }
+        return cartItems;
     }
 }
 
