@@ -118,7 +118,7 @@ public class AddToCartController extends HttpServlet {
     private void updateCartSession(HttpSession session, List<CartItem> cart) {
         int totalItems = cart.stream().mapToInt(CartItem::getQuantity).sum();
         double totalPrice = cart.stream()
-                .mapToDouble(cartItem -> cartItem.getProduct().getPrice() * cartItem.getQuantity())
+                .mapToDouble(cartItem -> dao.getProductPriceById(cartItem.getProductId()) * cartItem.getQuantity())
                 .sum();
 
         session.setAttribute("totalItems", totalItems);

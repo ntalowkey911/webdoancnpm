@@ -22,10 +22,11 @@ public class CartDao {
                         // Nếu sản phẩm đã tồn tại trong giỏ hàng, cập nhật quantity
                         int cartId = resultSet.getInt("cart_id");
 
-                        String updateQuery = "UPDATE cart_item SET quantity = quantity + ? WHERE cart_id = ?";
+                        String updateQuery = "UPDATE cart_item SET quantity = quantity + ? WHERE cart_id = ? AND product = ?";
                         try (PreparedStatement updateStmt = connection.prepareStatement(updateQuery)) {
                             updateStmt.setInt(1, quantity);
                             updateStmt.setInt(2, cartId);
+                            updateStmt.setInt(3, productId);
                             int rowsUpdated = updateStmt.executeUpdate();
                             return rowsUpdated > 0;
                         }
@@ -37,7 +38,7 @@ public class CartDao {
                             insertCartStmt.setInt(2, productId);
                             insertCartStmt.executeUpdate();
 
-                            // Lấy cartid vừa được thêm
+                            // Lấy cart_id vừa được thêm
                             try (ResultSet generatedKeys = insertCartStmt.getGeneratedKeys()) {
                                 if (generatedKeys.next()) {
                                     int cartId = generatedKeys.getInt(1);
@@ -58,9 +59,9 @@ public class CartDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();  // In lỗi nếu xảy ra ngoại lệ
+            e.printStackTrace();
         }
-        return false;  // Trả về false nếu thêm hoặc cập nhật thất bại
+        return false;
     }
 
 
@@ -68,7 +69,6 @@ public class CartDao {
 
     public boolean removeFromCart(int userId, int productId) {
         try (Connection connection = MySQLConnection.getConnection()) {
-            // Kiểm tra xem cart_id tồn tại cho userId và productId
             String checkQuery = "SELECT cart_id FROM cart WHERE user_id = ? AND product_id = ?";
             try (PreparedStatement checkStmt = connection.prepareStatement(checkQuery)) {
                 checkStmt.setInt(1, userId);
@@ -78,8 +78,8 @@ public class CartDao {
                     if (resultSet.next()) {
                         int cartId = resultSet.getInt("cart_id");
 
-                        // Xóa sản phẩm khỏi bảng cart_item trước
-                        String deleteCartItemQuery = "DELETE FROM cart_item WHERE cart_id = ? AND product = ?";
+                        // Xóa sản phẩm khỏi bảng cart_item
+                        String deleteCartItemQuery = "DELETE FROM cart_item WHERE cart_id = ? AND product_id = ?";
                         try (PreparedStatement deleteCartItemStmt = connection.prepareStatement(deleteCartItemQuery)) {
                             deleteCartItemStmt.setInt(1, cartId);
                             deleteCartItemStmt.setInt(2, productId);
@@ -102,7 +102,7 @@ public class CartDao {
                                 }
                             }
                         }
-                        return true; // Xóa thành công
+                        return true;
                     }
                 }
             }
@@ -110,43 +110,47 @@ public class CartDao {
             System.err.println("Error while removing from cart: " + e.getMessage());
             e.printStackTrace();
         }
-        return false; // Trả về false nếu xóa thất bại
+        return false;
     }
 
 
 
     public List<CartItem> getCartByUserId(int userId) {
-        List<CartItem> cart = new ArrayList<>();
-        String query = "SELECT product_id, COUNT(*) AS quantity FROM cart WHERE user_id = ? GROUP BY product_id";
+        List<CartItem> cartItems = new ArrayList<>();
+        String query = "SELECT c.cart_id, c.user_id, c.product_id, c.created_at, ci.quantity " +
+                "FROM cart c " +
+                "JOIN cart_item ci ON c.cart_id = ci.cart_id " +
+                "WHERE c.user_id = ?";
 
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
 
-            stmt.setInt(1, userId);  // Gán user_id
+            stmt.setInt(1, userId);
             ResultSet rs = stmt.executeQuery();
 
-            // Lấy dữ liệu từ bảng cart
             while (rs.next()) {
+                int cartId = rs.getInt("cart_id");
                 int productId = rs.getInt("product_id");
                 int quantity = rs.getInt("quantity");
+                Timestamp createdAt = rs.getTimestamp("created_at");
 
-                // Lấy thông tin sản phẩm từ product_id
-                Products product = dao.getProductById(productId);
-                if (product != null) {
-                    CartItem cartItem = new CartItem(product, quantity);  // Tạo đối tượng CartItem
-                    cart.add(cartItem);  // Thêm CartItem vào danh sách
-                } else {
-                    System.out.println("No product found for product_id: " + productId);
-                }
+                // Tạo đối tượng Cart
+                Cart cart = new Cart(cartId, userId, productId, createdAt);
+
+                // Tạo đối tượng CartItem
+                CartItem cartItem = new CartItem(cart, quantity);
+                cartItems.add(cartItem);
             }
 
         } catch (SQLException e) {
-            System.out.println("SQLException: " + e.getMessage());
+            System.out.println("SQLException in getCartByUserId: " + e.getMessage());
             e.printStackTrace();
         }
 
-        return cart;  // Trả về danh sách CartItem
+        return cartItems;
     }
+
+
 
 
     public int getQuantity(int cartId, int productId) throws SQLException {
@@ -221,40 +225,6 @@ public class CartDao {
         }
     }
 
-    // Lấy danh sách các sản phẩm trong giỏ hàng
-    public List<CartItem> getCartItemsByCartId(int cartId) throws SQLException {
-        List<CartItem> cartItems = new ArrayList<>();
-        String query = "SELECT ci.product_id, ci.quantity, p.p_id, p.name, p.price, p.stock, p.description, p.category_id, p.img " +
-                "FROM cart_item ci " +
-                "JOIN products p ON ci.product_id = p.p_id " +
-                "WHERE ci.cart_id = ?";
-
-        try (Connection connection = MySQLConnection.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, cartId);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                int productId = rs.getInt("product_id");
-                int quantity = rs.getInt("quantity");
-                int pId = rs.getInt("p_id"); // Lấy p_id từ bảng products
-                String name = rs.getString("name");
-                int price = rs.getInt("price");
-                int stock = rs.getInt("stock");
-                String description = rs.getString("description");
-                int categoryId = rs.getInt("category_id");
-                String img = rs.getString("img");
-
-                // Tạo đối tượng Products
-                Products product = new Products(pId, name, price, stock, description, categoryId, img);
-
-                // Tạo CartItem với Products và quantity
-                CartItem item = new CartItem(product, quantity); // Giả sử bạn đã có constructor phù hợp cho CartItem
-                cartItems.add(item);
-            }
-        }
-        return cartItems;
-    }
 }
 
 

@@ -276,7 +276,7 @@ public class dao {
 
                 // Gán giá trị cho từng tham số ID trong truy vấn
                 for (int i = 0; i < cartList.size(); i++) {
-                    statement.setInt(i + 1, cartList.get(i).getProduct().getId());
+                    statement.setInt(i + 1, cartList.get(i).getProductId());
                 }
 
                 // Thực thi truy vấn và tính tổng giá trị giỏ hàng
@@ -290,7 +290,7 @@ public class dao {
 
                     // Tính tổng giá trị giỏ hàng dựa trên Map
                     for (CartItem cartItem : cartList) {
-                        int productId = cartItem.getProduct().getId(); // Lấy ID sản phẩm
+                        int productId = cartItem.getProductId(); // Lấy ID sản phẩm
                         Double price = productPriceMap.get(productId); // Lấy giá từ Map
 
                         if (price != null) {
@@ -460,4 +460,25 @@ public class dao {
             System.out.println(c);
         }
     }
+    public double getProductPriceById(int productId) {
+        String query = "SELECT price FROM product WHERE p_id = ?";
+        double price = 0.0;
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setInt(1, productId);
+
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    price = rs.getDouble("price");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return price;
+    }
+
 }

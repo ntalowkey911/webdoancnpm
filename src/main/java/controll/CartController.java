@@ -1,6 +1,7 @@
 package controll;
 
 import dao.CartDao;
+import dao.dao;
 import entity.CartItem;
 import entity.Users;
 import jakarta.servlet.RequestDispatcher;
@@ -18,10 +19,12 @@ import java.util.List;
 public class CartController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private CartDao cartDao;
+    private dao dao;
 
     public CartController() {
         super();
         cartDao = new CartDao();  // Khởi tạo CartDao
+        dao = new dao();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,14 +52,28 @@ public class CartController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private void updateCartSession(HttpSession session, List<CartItem> cart) {
-        int totalItems = cart.stream().mapToInt(CartItem::getQuantity).sum();
-        double totalPrice = cart.stream()
-                .mapToDouble(cartItem -> cartItem.getProduct().getPrice() * cartItem.getQuantity())
-                .sum();
+    private void updateCartSession(HttpSession session, List<CartItem> cartItems) {
+        int totalItems = 0;
+        double totalPrice = 0.0;
 
+        for (CartItem cartItem : cartItems) {
+            if (cartItem != null && cartItem.getCart() != null) {
+                int quantity = cartItem.getQuantity(); // Lấy số lượng từ CartItem
+                int productId = cartItem.getCart().getProduct_id(); // Lấy Product ID từ Cart
+
+                // Lấy giá sản phẩm từ cơ sở dữ liệu
+                double productPrice = dao.getProductPriceById(productId);
+
+                totalItems += quantity;
+                totalPrice += productPrice * quantity;
+            }
+        }
+
+        // Đặt giá trị vào session
         session.setAttribute("totalItems", totalItems);
         session.setAttribute("totalPrice", totalPrice);
-        session.setAttribute("cart", cart);  // Cập nhật lại giỏ hàng trong session
+        session.setAttribute("cart", cartItems);  // Cập nhật lại giỏ hàng trong session
     }
+
+
 }

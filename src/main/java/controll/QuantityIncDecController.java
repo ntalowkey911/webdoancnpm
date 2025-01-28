@@ -44,7 +44,7 @@ public class QuantityIncDecController extends HttpServlet {
 
         // Xử lý cập nhật số lượng
         for (CartItem item : cartItems) {
-            if (item.getProduct().getId() == productId) {
+            if (item.getProductId() == productId) {
                 if ("inc".equals(action)) {
                     item.setQuantity(item.getQuantity() + 1); // Tăng số lượng
                 } else if ("dec".equals(action) && item.getQuantity() > 1) {
@@ -60,7 +60,7 @@ public class QuantityIncDecController extends HttpServlet {
         // Tính tổng giá tạm tính
         int totalPrice = 0;
         for (CartItem item : cartItems) {
-            totalPrice += item.getQuantity() * item.getProduct().getPrice();
+            totalPrice += item.getQuantity();
         }
 
         session.setAttribute("totalPrice", totalPrice);
