@@ -79,36 +79,31 @@
 
             .quantity-selector {
                 display: flex;
-                align-items: center; /* Căn giữa các phần tử theo chiều dọc */
-                justify-content: center; /* Căn giữa các phần tử theo chiều ngang */
-                gap: 10px; /* Khoảng cách giữa các phần tử */
-                padding-top: 12px;
+                justify-content: center; /* Căn giữa theo chiều ngang */
+                align-items: center; /* Căn giữa theo chiều dọc */
+                gap: 5px; /* Khoảng cách giữa các phần tử */
             }
 
-            .quantity-selector button {
+            .quantity-selector form {
+                margin: 0;
+            }
+
+            .quantity-selector .btn-minus,
+            .quantity-selector .btn-plus {
                 padding: 5px 10px;
-                font-size: 20px; /* Điều chỉnh kích thước chữ để dễ nhìn */
-                border: 1px solid #ccc;
-                background-color: #f0f0f0;
+                font-size: 14px;
                 cursor: pointer;
-                width: 35px; /* Điều chỉnh kích thước nút */
-                height: 35px; /* Điều chỉnh kích thước nút */
-                display: flex;
-                align-items: center; /* Căn giữa nội dung nút theo chiều dọc */
-                justify-content: center; /* Căn giữa nội dung nút theo chiều ngang */
             }
 
-            .quantity-selector button:hover {
-                background-color: #e0e0e0;
-            }
-
-            .quantity-selector input {
-                width: 50px; /* Điều chỉnh chiều rộng của ô nhập liệu */
+            .quantity-selector input[type="number"] {
+                width: 50px;
                 text-align: center;
-                padding: 5px;
-                font-size: 16px;
-                border: 1px solid #ccc;
+                margin: 0 5px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 4px;
             }
+
 
 
         </style>

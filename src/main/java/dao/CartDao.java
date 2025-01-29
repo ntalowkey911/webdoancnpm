@@ -79,7 +79,7 @@ public class CartDao {
                         int cartId = resultSet.getInt("cart_id");
 
                         // Xóa sản phẩm khỏi bảng cart_item
-                        String deleteCartItemQuery = "DELETE FROM cart_item WHERE cart_id = ? AND product_id = ?";
+                        String deleteCartItemQuery = "DELETE FROM cart_item WHERE cart_id = ? AND product= ?";
                         try (PreparedStatement deleteCartItemStmt = connection.prepareStatement(deleteCartItemQuery)) {
                             deleteCartItemStmt.setInt(1, cartId);
                             deleteCartItemStmt.setInt(2, productId);
@@ -224,6 +224,9 @@ public class CartDao {
             }
         }
     }
+
+
+
 
 }
 
