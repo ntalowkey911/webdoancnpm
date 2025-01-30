@@ -89,7 +89,12 @@ public class AddToCartController extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/detail");
                 dispatcher.forward(request, response);
                 return;
-
+            case "add-cart-shop":
+                cartDao.AddToCart(userId, productId, quantity);
+                request.setAttribute("productId", productId);
+                RequestDispatcher dispatcher1 = request.getRequestDispatcher("/shop");
+                dispatcher1.forward(request, response);
+                return;
             case "buy-now":
                 cartDao.AddToCart(userId, productId, quantity);
                 response.sendRedirect("/cart");

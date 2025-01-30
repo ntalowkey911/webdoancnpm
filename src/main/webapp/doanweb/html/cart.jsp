@@ -334,6 +334,17 @@
         </div>
     </div>
 </section>
+<script>
+    function handlePayment() {
+        const paymentMethod = document.getElementById("paymentMethod").value;
+        if (paymentMethod === "card") {
+            window.location.href = "/checkout";
+        } else {
+            alert("Bạn đã chọn thanh toán trực tiếp.");
+        }
+    }
+</script>
+
 </body>
 <footer class="mt-5 p-5 bg-dark">
     <div class="row conatiner mx-auto pt-5">

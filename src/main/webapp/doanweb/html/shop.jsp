@@ -553,7 +553,7 @@
                                 </a>
                                 <div class="button-container">
                                     <button class="add-btn"
-                                            onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart'">
+                                            onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart-shop'">
                                         Add to cart
                                     </button>
                                     <button class="buy-btn"
