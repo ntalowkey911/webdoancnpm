@@ -57,25 +57,63 @@
 
         <div class="search-bar">
             <label for="searchInput"></label>
-            <input type="text" class="search-input" id="searchInput" name="productName" placeholder="Tìm kiếm...">
-            <button class="search-button" id="searchButton">
+            <input type="text" class="search-input" id="searchInput" name="productName" placeholder="Tìm kiếm..." onkeyup="performSearch()">
+            <button class="search-button" id="searchButton" onclick="performSearch()">
                 <i class="bi bi-search"></i>
             </button>
         </div>
 
-        <div id="searchResults" class="search-results">
-            <c:if test="${not empty productsList}">
-                <div class="product-list">
-                    <c:forEach var="product" items="${productsList}">
-                        <div class="product-item">
-                            <img class="img-fluid" src="<%= request.getContextPath() %>/${product.image}"/>
-                            <p><strong>${product.name}</strong></p>
-                            <p> - ${product.price}</p>
-                        </div>
-                    </c:forEach>
-                </div>
+        <div class="search-results">
+            <c:if test="${not empty searchProductList}">
+                <c:forEach var="product" items="${searchProductList}">
+                    <div class="search-result">
+                        <img src="${product.image}" alt="${product.name}">
+                        <p><strong>${product.name}</strong> - ${product.price}k</p>
+                    </div>
+                </c:forEach>
+            </c:if>
+
+            <c:if test="${empty searchProductList}">
+                <p>Không có sản phẩm nào tìm thấy.</p>
+            </c:if>
+
+            <c:if test="${not empty message}">
+                <p>${message}</p>
             </c:if>
         </div>
+
+
+        <script>
+            function performSearch() {
+                const keyword = document.getElementById("searchInput").value.trim();
+                const searchResults = document.getElementById("searchResults");
+
+                // Kiểm tra nếu từ khóa tìm kiếm không rỗng
+                if (!keyword) {
+                    searchResults.innerHTML = ""; // Xóa kết quả tìm kiếm khi không có từ khóa
+                    return; // Dừng hàm nếu không có từ khóa
+                }
+
+                // Lấy context path tự động từ URL
+                const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
+
+                // Gửi yêu cầu fetch nếu có từ khóa tìm kiếm
+                fetch(contextPath + '/home?query=' + encodeURIComponent(keyword))
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Lỗi khi tìm kiếm!');
+                        }
+                        return response.text();  // Nhận kết quả dưới dạng text
+                    })
+                    .then(data => {
+                        searchResults.innerHTML = data;  // Hiển thị kết quả tìm kiếm
+                    })
+                    .catch(error => {
+                        searchResults.innerHTML = "<p>" + error.message + "</p>";
+                    });
+            }
+        </script>
+
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">

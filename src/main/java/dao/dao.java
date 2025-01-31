@@ -481,4 +481,34 @@ public class dao {
         return price;
     }
 
+    public List<Products> searchProducts(String keyword) {
+        List<Products> list_products = new ArrayList<>();
+        String sql = "SELECT * FROM Product WHERE name LIKE ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, "%" + keyword + "%");
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Products product = new Products(
+                        rs.getInt("p_id"),
+                        rs.getString("name"),
+                        rs.getInt("price"),
+                        rs.getInt("stock"),
+                        rs.getString("description"),
+                        rs.getInt("category_id"),
+                        rs.getString("img")
+                );
+                list_products.add(product);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list_products;
+    }
+
 }

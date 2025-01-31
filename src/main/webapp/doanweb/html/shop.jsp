@@ -309,6 +309,14 @@
             padding: 10px;
             outline: none;
         }
+        .product-card a {
+            text-decoration: none !important; /* Xóa gạch chân mặc định */
+            color: inherit; /* Giữ màu mặc định của văn bản */
+        }
+
+        .product-card a:hover {
+            text-decoration: none !important;
+        }
 
 
         .product-card h5 {
