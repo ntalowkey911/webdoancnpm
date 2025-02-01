@@ -481,7 +481,7 @@ public class dao {
         return price;
     }
 
-    public List<Products> searchProducts(String keyword) {
+    public static List<Products> searchProducts(String keyword) {
         List<Products> list_products = new ArrayList<>();
         String sql = "SELECT * FROM Product WHERE name LIKE ?";
 

@@ -355,7 +355,6 @@
             align-items: center;
             justify-content: center;
             border-radius: 50px;
-            overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border: solid #BC1F23 2px;
             margin-left: 625px;

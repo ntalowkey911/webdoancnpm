@@ -38,32 +38,6 @@ public class HomeController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
-        // Lấy tham số từ URL query string
-        String keyword = request.getParameter("query");
-        System.out.print(keyword);
-
-        // Nếu không có từ khóa tìm kiếm, không làm gì cả
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            // Gọi DAO để tìm kiếm sản phẩm theo keyword
-            List<Products> searchProducts = dao.searchProducts(keyword.trim());
-
-            // Trả về kết quả tìm kiếm cho client
-            try (PrintWriter out = response.getWriter()) {
-                if (searchProducts.isEmpty()) {
-                    out.println("<p>Không có sản phẩm nào tìm thấy.</p>");
-                } else {
-                    for (Products product : searchProducts) {
-                        out.println("<div class='search-result'>");
-                        out.println("<img src='" + product.getImage() + "' alt='" + product.getName() + "'>");
-                        out.println("<p><strong>" + product.getName() + "</strong> - " + product.getPrice() + "k</p>");
-                        out.println("</div>");
-                    }
-                }
-            }
-        } else {
-            // Nếu không có từ khóa tìm kiếm, không làm gì và chỉ hiển thị trang chính
-            response.getWriter().write("");  // Không hiển thị thông báo
-        }
 
         // Lấy các sản phẩm khác (ngẫu nhiên, theo danh mục...)
         List<Products> randomProducts = dao.getRandomProducts();

@@ -41,6 +41,93 @@
             color: black;
             font-weight: bold;
         }
+
+        .search-bar {
+            width: 500px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: solid #BC1F23 2px;
+            margin-left: 50px;
+            position: relative; /* Để các phần tử con có thể sử dụng position absolute */
+        }
+
+        .search-input {
+            width: 85%;
+            padding: 10px 20px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            height: 40px;
+        }
+
+        .search-button {
+            width: 15%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background-color: #BC1F23;
+            border: solid #BC1F23 10px;
+            height: 40px;
+        }
+
+        .search-button i {
+            font-size: 20px;
+            color: white;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 80%; /* Đặt kết quả ngay dưới ô tìm kiếm */
+            left: 360px;
+            width: 500px; /* Chiều rộng của kết quả tìm kiếm giống với thanh tìm kiếm */
+            max-height: 300px; /* Giới hạn chiều cao */
+            overflow-y: auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            z-index: 10;
+            display: none;
+            box-sizing: border-box;
+            padding: 5px;
+        }
+
+        .search-result {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            background-color: #f8f8f8;
+            color: #333333;
+        }
+
+        .search-result:last-child {
+            border-bottom: none;
+        }
+
+        .search-result:hover {
+            background-color: #e6e6e6;
+            color: #000;
+        }
+
+        .search-result img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .search-result p {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .search-container input {
+            width: 300px;
+            padding: 8px;
+        }
+
     </style>
 </head>
 
@@ -56,61 +143,31 @@
         </button>
 
         <div class="search-bar">
-            <label for="searchInput"></label>
-            <input type="text" class="search-input" id="searchInput" name="productName" placeholder="Tìm kiếm..." onkeyup="performSearch()">
-            <button class="search-button" id="searchButton" onclick="performSearch()">
+            <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm sản phẩm..." onkeyup="searchProducts()">
+            <button class="search-button" onclick="searchProducts()">
                 <i class="bi bi-search"></i>
             </button>
         </div>
 
-        <div class="search-results">
-            <c:if test="${not empty searchProductList}">
-                <c:forEach var="product" items="${searchProductList}">
-                    <div class="search-result">
-                        <img src="${product.image}" alt="${product.name}">
-                        <p><strong>${product.name}</strong> - ${product.price}k</p>
-                    </div>
-                </c:forEach>
-            </c:if>
-
-            <c:if test="${empty searchProductList}">
-                <p>Không có sản phẩm nào tìm thấy.</p>
-            </c:if>
-
-            <c:if test="${not empty message}">
-                <p>${message}</p>
-            </c:if>
-        </div>
-
+        <div id="searchResults" class="search-results"></div>
 
         <script>
-            function performSearch() {
-                const keyword = document.getElementById("searchInput").value.trim();
-                const searchResults = document.getElementById("searchResults");
-
-                // Kiểm tra nếu từ khóa tìm kiếm không rỗng
-                if (!keyword) {
-                    searchResults.innerHTML = ""; // Xóa kết quả tìm kiếm khi không có từ khóa
-                    return; // Dừng hàm nếu không có từ khóa
-                }
-
-                // Lấy context path tự động từ URL
-                const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
-
-                // Gửi yêu cầu fetch nếu có từ khóa tìm kiếm
-                fetch(contextPath + '/home?query=' + encodeURIComponent(keyword))
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Lỗi khi tìm kiếm!');
+            function searchProducts() {
+                const query = document.getElementById('searchInput').value;
+                if (query.length > 0) {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('GET', '/search?name=' + query, true);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            // Set the response HTML to the results container
+                            document.getElementById('searchResults').innerHTML = xhr.responseText;
+                            document.getElementById('searchResults').style.display = 'block';
                         }
-                        return response.text();  // Nhận kết quả dưới dạng text
-                    })
-                    .then(data => {
-                        searchResults.innerHTML = data;  // Hiển thị kết quả tìm kiếm
-                    })
-                    .catch(error => {
-                        searchResults.innerHTML = "<p>" + error.message + "</p>";
-                    });
+                    };
+                    xhr.send();
+                } else {
+                    document.getElementById('searchResults').style.display = 'none';
+                }
             }
         </script>
 
