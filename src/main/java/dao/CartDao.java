@@ -225,6 +225,38 @@ public class CartDao {
         }
     }
 
+    public int getProductStock(int productId) throws SQLException {
+        String sql = "SELECT stock FROM product WHERE p_id = ?";
+        try (Connection connection = MySQLConnection.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, productId);
+            System.out.println("[getProductStock] Executing query: " + sql + " with productId: " + productId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int stock = rs.getInt("stock");
+                    System.out.println("[getProductStock] Stock for productId " + productId + ": " + stock);
+                    return stock;
+                }
+            }
+        }
+        return 0;
+    }
+    public int getQuantityByUserAndProduct(int userId, int productId) throws SQLException {
+        String sql = "SELECT quantity FROM cart_item ci " +
+                "JOIN cart c ON ci.cart_id = c.cart_id " +
+                "WHERE c.user_id = ? AND ci.product = ?";
+        try (Connection connection = MySQLConnection.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            stmt.setInt(2, productId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("quantity");
+                }
+            }
+        }
+        return 0;
+    }
 
 
 

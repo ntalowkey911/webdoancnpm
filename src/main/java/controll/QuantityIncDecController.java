@@ -21,7 +21,6 @@ public class QuantityIncDecController extends HttpServlet {
         String action = request.getParameter("action");
         int productId = Integer.parseInt(request.getParameter("id"));
 
-        // Kiểm tra session và lấy thông tin user
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect("/login");
@@ -30,15 +29,13 @@ public class QuantityIncDecController extends HttpServlet {
         int userId = ((Users) session.getAttribute("user")).getId();
 
         try {
-            // Lấy danh sách CartItem của người dùng
             List<CartItem> cartItems = cartDao.getCartByUserId(userId);
             int cartId = -1;
 
-            // Tìm cart_id của sản phẩm trong giỏ hàng của người dùng
             for (CartItem item : cartItems) {
                 if (item.getProduct().getId() == productId) {
                     cartId = item.getCartId();
-                    break;  // Nếu tìm thấy, dừng vòng lặp
+                    break;
                 }
             }
 
@@ -47,11 +44,10 @@ public class QuantityIncDecController extends HttpServlet {
                 return;
             }
 
-            // Lấy số lượng hiện tại của sản phẩm trong giỏ
             int currentQuantity = cartDao.getQuantity(cartId, productId);
+            int productStock = cartDao.getProductStock(productId); // Lấy stock của sản phẩm
 
-            // Tăng hoặc giảm số lượng sản phẩm trong giỏ
-            if ("inc".equals(action)) {
+            if ("inc".equals(action) && currentQuantity < productStock) {
                 cartDao.updateQuantity(cartId, productId, currentQuantity + 1);
             } else if ("dec".equals(action) && currentQuantity > 1) {
                 cartDao.updateQuantity(cartId, productId, currentQuantity - 1);
@@ -59,7 +55,6 @@ public class QuantityIncDecController extends HttpServlet {
                 cartDao.removeFromCart(userId, productId);
             }
 
-            // Điều hướng lại trang giỏ hàng
             response.sendRedirect("/cart");
 
         } catch (NumberFormatException e) {
@@ -69,5 +64,10 @@ public class QuantityIncDecController extends HttpServlet {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi khi cập nhật giỏ hàng.");
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
     }
 }

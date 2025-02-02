@@ -148,11 +148,12 @@
             color: black;
         }
 
-        .alert-success {
+        .alert-success, .alert-danger{
             width: 61%; /* Điều chỉnh chiều rộng của thông báo */
             text-align: center;
             margin-top: 10px;
         }
+        
         .product-name {
             color: black;
             font-weight: bold;
@@ -325,21 +326,46 @@
 
 
             <%
-                String message = (String) request.getAttribute("message");
-                if (message != null) {
+                String successMessage = (String) request.getAttribute("message");
+                String errorMessage = (String) request.getAttribute("error");
             %>
-            <div class="alert alert-success" id="successMessage">
-                <%= message %>
+
+            <%-- Hiển thị thông báo thành công hoặc lỗi --%>
+            <div id="messageContainer">
+                <%
+                    if (successMessage != null) {
+                %>
+                <div class="alert alert-success" id="successMessage">
+                    <%= successMessage %>
+                </div>
+                <%
+                } else if (errorMessage != null) {
+                %>
+                <div class="alert alert-danger" id="errorMessage">
+                    <%= errorMessage %>
+                </div>
+                <%
+                    }
+                %>
             </div>
-            <% } %>
+
             <script>
-                // Kiểm tra xem có thông báo hay không
                 window.onload = function () {
-                    var messageElement = document.getElementById("successMessage");
-                    if (messageElement) {
-                        messageElement.style.display = "block";  // Hiển thị thông báo
+                    var successMessageElement = document.getElementById("successMessage");
+                    var errorMessageElement = document.getElementById("errorMessage");
+
+                    // Chỉ hiển thị 1 thông báo: thành công hoặc lỗi
+                    if (successMessageElement) {
+                        successMessageElement.style.display = "block";  // Hiển thị thông báo thành công
                         setTimeout(function () {
-                            messageElement.style.display = "none";  // Ẩn thông báo sau 2 giây
+                            successMessageElement.style.display = "none";  // Ẩn thông báo sau 2 giây
+                        }, 2000);  // 2000ms = 2s
+                    }
+
+                    if (errorMessageElement) {
+                        errorMessageElement.style.display = "block";  // Hiển thị thông báo lỗi
+                        setTimeout(function () {
+                            errorMessageElement.style.display = "none";  // Ẩn thông báo sau 2 giây
                         }, 2000);  // 2000ms = 2s
                     }
                 };

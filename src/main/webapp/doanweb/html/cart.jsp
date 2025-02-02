@@ -105,10 +105,15 @@
             }
 
 
-
         </style>
     </head>
 <body>
+<% String errorMessage = (String) request.getAttribute("errorMessage"); %>
+<% if (errorMessage != null) { %>
+<script>
+    alert("<%= errorMessage %>");
+</script>
+<% } %>
 <!-- Nav section -->
 <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
     <div class="container-fluid mr-5">
@@ -254,7 +259,8 @@
                             <input type="hidden" name="id" value="${item.product.id}">
                             <button type="submit" name="action" value="dec" class="btn-minus">-</button>
                         </form>
-                        <input type="number" id="quantity-${item.product.id}" value="${item.quantity}" min="1" class="form-control" disabled>
+                        <input type="number" id="quantity-${item.product.id}" value="${item.quantity}" min="1"
+                               class="form-control" disabled>
                         <form action="/quantity-inc-dec" method="post" style="display:inline;">
                             <input type="hidden" name="id" value="${item.product.id}">
                             <button type="submit" name="action" value="inc" class="btn-plus">+</button>
@@ -342,8 +348,10 @@
         } else {
             alert("Bạn đã chọn thanh toán trực tiếp.");
         }
+
     }
 </script>
+
 
 </body>
 <footer class="mt-5 p-5 bg-dark">
