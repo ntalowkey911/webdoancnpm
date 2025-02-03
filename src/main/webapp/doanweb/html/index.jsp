@@ -127,6 +127,10 @@
             width: 300px;
             padding: 8px;
         }
+        a:hover {
+            text-decoration: none; /* Xóa gạch chân khi hover */
+            color: #ff6600; /* Thay đổi màu khi hover (tùy chỉnh) */
+        }
 
     </style>
 </head>

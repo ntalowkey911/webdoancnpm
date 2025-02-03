@@ -95,7 +95,7 @@
         }
 
 
-        .cart-btn {
+        .cart-btn, .btn-danger {
             background-color: #BC1F23;
             font-size: 0.8rem;
             font-weight: 700;
@@ -162,6 +162,10 @@
         .filter-buttons button.active {
             background-color: #BC1F23;; /* Màu tô đậm */
             color: #fff; /* Chữ màu trắng */
+        }
+        a:hover {
+            text-decoration: none; /* Xóa gạch chân khi hover */
+            color: #ff6600; /* Thay đổi màu khi hover (tùy chỉnh) */
         }
     </style>
 </head>

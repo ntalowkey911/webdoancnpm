@@ -506,6 +506,14 @@
             max-width: 1400px; /* Tăng độ rộng tối đa của container */
             width: 100%; /* Đảm bảo container chiếm hết chiều ngang nếu cần */
         }
+        a:hover {
+            text-decoration: none; /* Xóa gạch chân khi hover */
+            color: #ff6600; /* Thay đổi màu khi hover (tùy chỉnh) */
+        }
+        .button-container{
+            margin: 10px;
+        }
+
 
     </style>
 
