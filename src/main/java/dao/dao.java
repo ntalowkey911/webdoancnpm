@@ -314,29 +314,45 @@ public class dao {
     }
 
 
+
     public Users login(String username, String password) {
-        String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+        String query = "SELECT * FROM User WHERE username = ?";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, username);
-            statement.setString(2, password);
 
-            // Kiểm tra kết quả truy vấn
+            statement.setString(1, username);
+
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
-                    // Lấy thông tin người dùng từ kết quả truy vấn
-                    Users user = new Users(
-                            rs.getInt("user_id"),
-                            rs.getString("username"),
-                            rs.getString("email"),
-                            rs.getString("password"),
-                            rs.getString("phone"),
-                            rs.getString("role"),
-                            rs.getString("address")
-                            );
-                    // Hiển thị thông tin người dùng ra console (debug)
-                    System.out.println("Đăng nhập thành công! Người dùng: " + user);
-                    return user;
+                    String storedPassword = rs.getString("password"); // Mật khẩu đã hash lưu trong DB
+                    String[] parts = storedPassword.split(":");
+
+                    if (parts.length != 2) {
+                        System.out.println("Lỗi dữ liệu mật khẩu trong database.");
+                        return null;
+                    }
+
+                    byte[] salt = hexToBytes(parts[0]);
+                    String hashedPasswordFromDB = parts[1];
+
+                    // Kiểm tra mật khẩu nhập vào
+                    String hashedInputPassword = hashPassword(password, salt);
+
+                    if (hashedInputPassword.equals(storedPassword)) {
+                        Users user = new Users(
+                                rs.getInt("user_id"),
+                                rs.getString("username"),
+                                rs.getString("email"),
+                                rs.getString("password"),
+                                rs.getString("phone"),
+                                rs.getString("role"),
+                                rs.getString("address")
+                        );
+                        System.out.println("Đăng nhập thành công! Người dùng: " + user);
+                        return user;
+                    } else {
+                        System.out.println("Sai mật khẩu.");
+                    }
                 } else {
                     System.out.println("Không tìm thấy người dùng.");
                 }
@@ -345,11 +361,43 @@ public class dao {
             e.printStackTrace();
         }
         return null;
-
     }
 
+    private String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        int iterations = 65536;
+        int keyLength = 256;
+        PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, keyLength);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+        byte[] hash = skf.generateSecret(spec).getEncoded();
+        return bytesToHex(salt) + ":" + bytesToHex(hash); // Ghép salt và hash lại giống format trong DB
+    }
+
+    private byte[] hexToBytes(String hex) {
+        int length = hex.length();
+        byte[] bytes = new byte[length / 2];
+        for (int i = 0; i < length; i += 2) {
+            bytes[i / 2] = (byte) ((Character.digit(hex.charAt(i), 16) << 4)
+                    + Character.digit(hex.charAt(i + 1), 16));
+        }
+        return bytes;
+    }
+
+    private String bytesToHex(byte[] bytes) {
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : bytes) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
+
+
+
     public Users checkExist(String username) {
-        String query = "SELECT * FROM user WHERE username = ?";
+        String query = "SELECT * FROM User WHERE username = ?";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
@@ -379,7 +427,7 @@ public class dao {
         return null; // Trả về null nếu không tìm thấy người dùng
     }
 
-    public void Register(String username, String email, String password, String phone, String address) {
+    public void Register(String username, String email, String hashedPassword, String phone, String address) {
         String query = "INSERT INTO User (username, email, password, role, phone, address) VALUES (?, ?, ?, 0, ?, ?)";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -387,7 +435,7 @@ public class dao {
             // Thiết lập các tham số theo thứ tự đúng
             statement.setString(1, username);
             statement.setString(2, email);
-            statement.setString(3, password);
+            statement.setString(3, hashedPassword); // Dùng mật khẩu đã băm
             statement.setString(4, phone);
             statement.setString(5, address);
 
@@ -398,12 +446,13 @@ public class dao {
             } else {
                 System.out.println("Failed to register user.");
             }
+        } catch (SQLIntegrityConstraintViolationException e) {
+            // Bắt lỗi nếu username hoặc email đã tồn tại (giả sử có ràng buộc UNIQUE trong DB)
+            System.err.println("Lỗi: Tên người dùng hoặc email đã tồn tại.");
         } catch (SQLException e) {
-            System.err.println("Database error: " + e.getMessage());
-            e.printStackTrace(); // In lỗi chi tiết ra để dễ dàng debug
+            System.err.println("Lỗi cơ sở dữ liệu: " + e.getMessage());
         } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-            e.printStackTrace(); // In lỗi nếu có lỗi không phải từ database
+            System.err.println("Lỗi không xác định: " + e.getMessage());
         }
     }
 
