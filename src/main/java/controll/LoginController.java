@@ -39,7 +39,39 @@ public class LoginController extends HttpServlet {
         request.getRequestDispatcher(LOGIN_PAGE).forward(request, response);
     }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Thiết lập mã hóa để xử lý tiếng Việt
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
 
+        // Lấy thông tin tên người dùng và mật khẩu từ form
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        try {
+            // Kiểm tra đăng nhập thông qua DAO
+            Users user = daoInstance.login(username, password);
+
+            if (user == null) {
+                // Nếu thông tin đăng nhập không đúng, trả về thông báo lỗi
+                request.setAttribute("mess", LOGIN_ERROR_MESSAGE);
+                request.getRequestDispatcher(LOGIN_PAGE).forward(request, response);
+            } else {
+                // Nếu thông tin đăng nhập đúng, lưu thông tin người dùng vào session
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                session.setAttribute("role", user.getRole());
+
+                // Chuyển hướng tới trang chủ
+                response.sendRedirect(request.getContextPath() + HOME_PAGE);
+            }
+        } catch (Exception e) {
+            // Xử lý ngoại lệ và ghi log lỗi
+            LOGGER.log(Level.SEVERE, "Lỗi trong quá trình đăng nhập cho người dùng: " + username, e);
+            request.setAttribute("mess", PROCESS_ERROR_MESSAGE);
+            request.getRequestDispatcher(LOGIN_PAGE).forward(request, response);
         }
     }
 }
