@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <link rel="stylesheet" href="/styles/style.css">
+     <link rel="icon" href="/images/Page1/LoadWeb.png" type="image/png">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="/js/index.js"></script>
+    <script
+      src="https://kit.fontawesome.com/cc9450bd42.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- bootstarp stackpath cdn -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Bootstrap icons cdn-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .product img {
+            width: 100%;
+            height: 400px;
+            box-sizing: border-box;
+            object-fit: contain;
+        }
+        #featured > div.row.container-fluid.px-5 > div:nth-child(n) > nav > ul > li.page-item.active > a {
+            background-color: #343a40;
+            color: #BC1F23;
+            border: none;
+        }
+        #featured > div.row.container-fluid.px-5 > div:nth-child(n) > nav > ul > li:nth-child(n):hover > a{
+            background-color: #BC1F23;
+            color: #343a40;
+        }
+        .pagination a{
+            color: #343a40;
+            border-color: #343a40;
+        }
+         .product img {
+            object-fit: cover; /* Cắt ảnh theo tỷ lệ vuông */
+            display: block;
+        
+        }
+    </style>
+</head>
+<body>
+<button class="back-to-top" id="backToTop"><i class="fa-solid fa-angle-up"></i></button>
+    <script>
+        // Lấy nút quay lại đầu trang
+        const backToTopButton = document.getElementById("backToTop");
+
+        // Hiển thị nút khi cuộn xuống 100px
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        };
+
+        // Thêm sự kiện click để quay lại đầu trang
+        backToTopButton.onclick = function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+    </script>
+    <!-- Nav section -->
+                 <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
+        <div class="container-fluid mr-5">
+                     <!-- <div class="col-1"></div> -->
+            <img src="/images/Page1/LogoWeb.png" onclick="location.reload();" id="logo-img" alt="logo..">
+            
+            <button class="navbar-toggler" onclick="toggleMenu()">
+                <span><i id = "nav-bar-icon" class="bi bi-list"></i></span>
+            </button>
+
+             
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/html/index.html">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/html/Menu/shop.html">Cửa Hàng</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Quality</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/html/Menu/AboutUs.html">Thông tin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/html/Menu/ContactUs.html">Liên hệ</a>
+
+                    </li>
+                    <li class="nav-item" id="nav-icons">
+                        <!-- <i class="bi bi-search"></i> -->
+                      <a href="/html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
+                        <a href="/html/Menu/Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
+                    </li>
+                    
+                </ul>
+              </div>
+
+            
+                <!-- Biểu tượng menu để mở/đóng sidebar
+                <i class="bi bi-list menu-icon" onclick="toggleMenu()" id="menu-btn"></i>
+
+                <-- Sidebar menu -->
+           <div id="mySideBar" class="sidebar">
+              <div class="sidebar-header">
+                  <img src="/images/Page1/LogoWeb.png" alt="Logo" class="logo"> 
+                  <span id="closeBtn" class="close-btn" onclick="toggleMenu()">&times;</span>
+              </div>
+              <div class="sidebar-content">
+                  <div class="menu-section">
+                      <h4><a href="/html/index.html">TRANG CHỦ</a></h4>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="/html/Menu/Cart.html">GIỎ HÀNG</a></h4>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="/html/Menu/AboutUs.html">VỀ MFS</a></h4>
+                      
+                  </div>
+                   <div class="menu-section">
+                      <h4><a href="/html/sidebar/chinhsach.html">CHÍNH SÁCH</a></h4>
+                      
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="javascript:void(0);" class="toggle-menu">THỰC ĐƠN</a></h4>
+                      <ul class="submenu">
+                          <li><a href="/html/Menu/shop.html">Các món đùi gà nổi bật</a></li>
+                          <li><a href="/html/Menu/shop1.html">Các món cánh gà nổi bật</a></li>
+                          <li><a href="/html/Menu/shop2.html">Combo gà phải thử</a></li>
+                      </ul>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="#">DỊCH VỤ</a></h4>
+                  </div>
+                   <div class="menu-section">
+                      <h4><a href="/html/Menu/ContactUs.html">LIÊN HỆ</a></h4>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="#">TUYỂN DỤNG</a></h4>
+                  </div>
+
+                   <div class="menu-section user" id="user-sidebar">
+                      <h4><i class="bi bi-person"></i><a href="/html/Menu/Login.html">ĐĂNG NHẬP</a> / <a href="/html/Menu/Register.html">ĐĂNG KÝ</a></h4> 
+                      
+                  </div>
+                   <div class="menu-section user-logged-in" id="user-logged-in" style="display: none;">
+                      <span id="greeting-menu"></span>
+                      <h4><a href="/html/Menu/Profile.html">TÀI KHOẢN CỦA TÔI / </a></h4>
+                      <h4><i class="bi bi-person"></i><a href="javascript:void(0);" onclick="logout()">ĐĂNG XUẤT</a></h4>
+                  </div>
+              </div>
+          </div>
+  </nav>
+    <!-- Featured Product section -->
+    <section id="featured" class="my-5 py-5">
+        <div class="container ml-5 mt-5 px-5 pt-5">
+           <h3>Các món nổi bật Cánh gà</h3>
+            <hr class="border border-danger border-2 opacity-75">
+            <p style="font-size: 18px">Tại đây, bạn có thể khám phá các món mới của chúng tôi trên <span style="color: #BC1F23" >MarsStore.</span> </p>
+        <div style="display: flex; justify-content: center;">
+            </div>    
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination mt-5">
+                    
+                    <li class="page-item"><a class="page-link" href="/html/Menu/shop.html" id="page1">1</a></li>
+                    <li class="page-item active"><a class="page-link" href="">2</a></li>
+                    <li class="page-item"><a class="page-link" href="/html/Menu/shop2.html" id="page3">3</a></li>
+
+                </ul>
+            </nav>
+        </div>
+        <style>
+            .pagination .page-item .page-link {
+                color: #fff; /* Màu chữ trắng */
+                background-color: #BC1F23; /* Màu nền đỏ */
+                border: 1px solid #BC1F23; /* Viền đỏ */
+                padding: 8px 12px;
+                border-radius: 4px;
+                text-decoration: none;
+                transition: background-color 0.3s ease;
+            }
+        
+            .pagination .page-item .page-link:hover {
+                background-color: #a71d2a; /* Màu nền đỏ đậm hơn khi hover */
+            }
+        
+            .pagination .page-item.active .page-link {
+                background-color: #7b111a; /* Màu đỏ tối cho trang đang active */
+                border-color: #7b111a;
+            }
+        
+            .pagination {
+                display: flex;
+                list-style-type: none;
+                padding: 0;
+            }
+        
+            .pagination .page-item {
+                margin: 0 5px;
+            }
+        </style>
+         <div class="search-bar">
+                <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm...">
+                <button class="search-button" id="searchButton">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        <style>
+            
+            .product.show {
+                display: block; /* Hiện sản phẩm phù hợp */
+            }
+            .search-bar {
+                    width: 400px;
+                    overflow: hidden;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50px;
+                    overflow: hidden;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    border: solid #BC1F23 2px;
+                    margin-left: 650px;
+
+                    }
+
+                    .search-input {
+                    width: 85%;
+                    padding: 10px 20px;
+                    border: none;
+                    outline: none;
+                    font-size: 16px;
+                    height: 40px;
+                    }
+
+                    .search-button {
+                    width: 15%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    background-color: #BC1F23;
+                    border: solid #BC1F23 10px;
+                    height: 40px;
+                    }
+
+                    .search-button i {
+                    font-size: 20px;
+                    color: white;
+                    }
+                    .search-container input {
+                        width: 300px;
+                        padding: 8px;
+                    }
+
+            
+        </style>    
+        <script>
+    // Hàm loại bỏ dấu tiếng Việt
+    function removeVietnameseTones(str) {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase();
+    }
+
+    // Hàm tìm kiếm sản phẩm
+            function searchProduct() {
+                // Lấy giá trị từ ô input
+                const searchInput = document.getElementById("searchInput").value.toLowerCase();
+                const normalizedSearch = removeVietnameseTones(searchInput);
+
+                // Lấy danh sách các sản phẩm
+                const products = document.querySelectorAll(".product");
+                let found = false; // Kiểm tra nếu tìm thấy sản phẩm
+
+                products.forEach(product => {
+                    const productName = product.querySelector(".product-name").textContent.toLowerCase();
+                    const normalizedName = removeVietnameseTones(productName);
+
+                    // Kiểm tra nếu sản phẩm phù hợp với từ khóa tìm kiếm
+                    if (normalizedName.includes(normalizedSearch)) {
+                        product.classList.add("show");
+                        product.style.display = "block"; // Hiển thị sản phẩm
+                        found = true;
+                    } else {
+                        product.classList.remove("show");
+                        product.style.display = "none"; // Ẩn sản phẩm không khớp
+                    }
+                });
+
+                // Thông báo nếu không tìm thấy sản phẩm nào
+                if (!found) {
+                    alert("Không tìm thấy sản phẩm nào phù hợp.");
+                }
+            }
+
+            // Thêm sự kiện click cho nút tìm kiếm
+            document.getElementById("searchButton").addEventListener("click", searchProduct);
+        </script>
+        <div style="text-align: right; margin-bottom: 20px;">
+            <button class="sort-button" onclick="sortProducts('asc')">Sắp xếp từ thấp đến cao</button>
+            <button class="sort-button" onclick="sortProducts('desc')">Sắp xếp từ cao đến thấp</button>
+        </div>
+        <script>
+            function sortProducts(order) {
+                const products = document.querySelectorAll('.product');
+        
+                const sortedProducts = Array.from(products).sort((a, b) => {
+                    const priceA = parseInt(a.querySelector('.product-price').innerText.replace(/\./g, '').replace(' đ', ''));
+                    const priceB = parseInt(b.querySelector('.product-price').innerText.replace(/\./g, '').replace(' đ', ''));
+                    return order === 'asc' ? priceA - priceB : priceB - priceA;
+                });
+        
+                const container = document.querySelector('.row.container-fluid');
+                container.innerHTML = ''; // Xóa nội dung hiện tại
+                sortedProducts.forEach(product => {
+                    container.appendChild(product); // Thêm lại các sản phẩm đã sắp xếp
+                });
+            }
+        </script>
+        <div class="row container-fluid px-5">
+           <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaThaoMoc.png" alt="Cánh gà thảo mộc">
+    <h5 class="product-name">Cánh gà thảo mộc</h5>
+    <h4 class="product-price">67.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = '/html/chickendishes/sproduct4.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaXotDauNanh.png" alt="Cánh gà xốt đậu nành">
+    <h5 class="product-name">Cánh gà xốt đậu nành</h5>
+    <h4 class="product-price">63.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = '/html/chickendishes/sproduct5.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaNuongBoToi.png" alt="Cánh gà nướng bơ tỏi">
+    <h5 class="product-name">Cánh gà nướng bơ tỏi</h5>
+    <h4 class="product-price">70.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct23.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaGionPhuCom.png" alt="Cánh gà giòn phủ cốm">
+    <h5 class="product-name">Cánh gà giòn phủ cốm</h5>
+    <h4 class="product-price">72.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct24.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaTieuXay.png" alt="Cánh gà tiêu xay">
+    <h5 class="product-name">Cánh gà tiêu xay</h5>
+    <h4 class="product-price">66.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct25.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaGiaViTongHop.png" alt="Cánh gà gia vị tổng hợp">
+    <h5 class="product-name">Cánh gà gia vị tổng hợp</h5>
+    <h4 class="product-price">75.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct26.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaKieuHan.png" alt="Cánh gà kiểu Hàn">
+    <h5 class="product-name">Cánh gà kiểu Hàn</h5>
+    <h4 class="product-price">78.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct27.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaTuongOt.png" alt="Cánh gà tương ớt">
+    <h5 class="product-name">Cánh gà tương ớt</h5>
+    <h4 class="product-price">68.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct28.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaKieuDaiLoan.png" alt="Cánh gà kiểu Đài Loan">
+    <h5 class="product-name">Cánh gà kiểu Đài Loan</h5>
+    <h4 class="product-price">76.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct29.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaCayNhe.png" alt="Cánh gà cay nhẹ">
+    <h5 class="product-name">Cánh gà cay nhẹ</h5>
+    <h4 class="product-price">65.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct30.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaKieuY.png" alt="Cánh gà kiểu Ý">
+    <h5 class="product-name">Cánh gà kiểu Ý</h5>
+    <h4 class="product-price">80.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct31.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaXotBBQ.png" alt="Cánh gà xốt BBQ">
+    <h5 class="product-name">Cánh gà xốt BBQ</h5>
+    <h4 class="product-price">85.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct32.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaKieuMexico.png" alt="Cánh gà kiểu Mexico">
+    <h5 class="product-name">Cánh gà kiểu Mexico</h5>
+    <h4 class="product-price">82.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct33.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaGiaViNhe.png" alt="Cánh gà gia vị nhẹ">
+    <h5 class="product-name">Cánh gà gia vị nhẹ</h5>
+    <h4 class="product-price">75.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct34.html';">Mua ngay</button>
+</div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaBoChanh.png" alt="Cánh gà bơ chanh">
+    <h5 class="product-name">Cánh gà bơ chanh</h5>
+    <h4 class="product-price">78.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct35.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaGionSotChanhDay.png" alt="Cánh gà giòn sốt chanh dây">
+    <h5 class="product-name">Cánh gà giòn sốt chanh dây</h5>
+    <h4 class="product-price">80.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct36.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaMuoiLac.png" alt="Cánh gà muối lạc">
+    <h5 class="product-name">Cánh gà muối lạc</h5>
+    <h4 class="product-price">82.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct37.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaBotMiGion.png" alt="Cánh gà bột mì giòn">
+    <h5 class="product-name">Cánh gà bột mì giòn</h5>
+    <h4 class="product-price">77.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct38.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaSotDauHao.png" alt="Cánh gà sốt dầu hào">
+    <h5 class="product-name">Cánh gà sốt dầu hào</h5>
+    <h4 class="product-price">85.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct39.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaPhoMaiCayNhe.png" alt="Cánh gà phô mai cay nhẹ">
+    <h5 class="product-name">Cánh gà phô mai cay nhẹ</h5>
+    <h4 class="product-price">89.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct40.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaKieuAnDo.png" alt="Cánh gà kiểu Ấn Độ">
+    <h5 class="product-name">Cánh gà kiểu Ấn Độ</h5>
+    <h4 class="product-price">90.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct41.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaNamHuong.png" alt="Cánh gà nấm hương">
+    <h5 class="product-name">Cánh gà nấm hương</h5>
+    <h4 class="product-price">86.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct42.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaNguVi.png" alt="Cánh gà ngũ vị">
+    <h5 class="product-name">Cánh gà ngũ vị</h5>
+    <h4 class="product-price">83.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct43.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaNguViHuong.png" alt="Cánh gà ngũ vị hương">
+    <h5 class="product-name">Cánh gà ngũ vị hương</h5>
+    <h4 class="product-price">55.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct13.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaSaOt.png" alt="Cánh gà sả ớt">
+    <h5 class="product-name">Cánh gà sả ớt</h5>
+    <h4 class="product-price">60.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct14.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaLaChanh.png" alt="Cánh gà lá chanh">
+    <h5 class="product-name">Cánh gà lá chanh</h5>
+    <h4 class="product-price">65.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct15.html';">Mua ngay</button>
+</div>
+
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaGung.png" alt="Cánh gà gừng">
+    <h5 class="product-name">Cánh gà gừng</h5>
+    <h4 class="product-price">58.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct16.html';">Mua ngay</button>
+</div>
+
+<div onclick="window.location.href = '/html/chickendishes/sproduct1.html';" class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaKieuThai.png" onclick="window.location.href = 'sproduct1.html';">
+    <h5 class="product-name">Cánh gà kiểu Thái</h5>
+    <h4 class="product-price">50.000 VND</h4>
+    <button class="buy-btn" onclick="event.stopPropagation(); window.location.href = '/html/chickendishes/sproduct1.html';">Mua ngay</button>
+</div>
+
+<div onclick="window.location.href = '/html/chickendishes/sproduct2.html';" class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaGion.png" alt="Cánh gà giòn" onclick="window.location.href = 'sproduct2.html';">
+    <h5 class="product-name">Cánh gà giòn</h5>
+    <h4 class="product-price">35.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = '/html/chickendishes/sproduct2.html';">Mua ngay</button>
+</div>
+
+            <div onclick="window.location.href = '/html/chickendishes/sproduct3.html';" class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaPhoMai.png" alt="Cánh gà phô mai" onclick="window.location.href = 'sproduct3.html';">
+    <h5 class="product-name">Cánh gà phô mai</h5>
+    <h4 class="product-price">45.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = '/html/chickendishes/sproduct3.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/GaTieuDen.png" alt="Cánh gà tiêu đen">
+    <h5 class="product-name">Cánh gà tiêu đen</h5>
+    <h4 class="product-price">40.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = './sproduct3.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaTieuChanh.png" alt="Cánh gà tiêu chanh">
+    <h5 class="product-name">Cánh gà tiêu chanh</h5>
+    <h4 class="product-price">35.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = './sproduct5.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/GaTamBot.png" alt="Gà tẩm bột">
+    <h5 class="product-name">Gà tẩm bột</h5>
+    <h4 class="product-price">30.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = './sproduct6.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/GaTruyenThong.png" alt="Gà truyền thống">
+    <h5 class="product-name">Gà truyền thống</h5>
+    <h4 class="product-price">29.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct10.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/GaSotMatOng.png" alt="Gà sốt mật ong">
+    <h5 class="product-name">Gà sốt mật ong</h5>
+    <h4 class="product-price">45.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct11.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/GaKieuMy.png" alt="Gà kiểu Mỹ">
+    <h5 class="product-name">Gà kiểu Mỹ</h5>
+    <h4 class="product-price">55.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct12.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/GaXuKieuNhat.png" alt="Gà xù kiểu Nhật">
+    <h5 class="product-name">Gà xù kiểu Nhật</h5>
+    <h4 class="product-price">50.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct11.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaMuoiTieu.png" alt="Cánh gà muối tiêu">
+    <h5 class="product-name">Cánh gà muối tiêu</h5>
+    <h4 class="product-price">56.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct20.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaNuocTuong.png" alt="Cánh gà sốt nước tương">
+    <h5 class="product-name">Cánh gà sốt nước tương</h5>
+    <h4 class="product-price">50.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct21.html';">Mua ngay</button>
+</div>
+
+          <!-- mốc -->
+
+           <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaMuTat.png" alt="Cánh gà mù tạt">
+    <h5 class="product-name">Cánh gà mù tạt</h5>
+    <h4 class="product-price">70.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct17.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaKieuTrungHoa.png" alt="Cánh gà kiểu Trung Hoa">
+    <h5 class="product-name">Cánh gà kiểu Trung Hoa</h5>
+    <h4 class="product-price">68.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct18.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaHanhToi.png" alt="Cánh gà hành tỏi">
+    <h5 class="product-name">Cánh gà hành tỏi</h5>
+    <h4 class="product-price">62.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct19.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaTieuOt.png" alt="Cánh gà tiêu ớt">
+    <h5 class="product-name">Cánh gà tiêu ớt</h5>
+    <h4 class="product-price">64.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct20.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaThaoMoc.png" alt="Cánh gà thảo mộc">
+    <h5 class="product-name">Cánh gà thảo mộc</h5>
+    <h4 class="product-price">67.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct21.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaXotDauNanh.png" alt="Cánh gà xốt đậu nành">
+    <h5 class="product-name">Cánh gà xốt đậu nành</h5>
+    <h4 class="product-price">63.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct22.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaNuongBoToi.png" alt="Cánh gà nướng bơ tỏi">
+    <h5 class="product-name">Cánh gà nướng bơ tỏi</h5>
+    <h4 class="product-price">70.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct23.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaGionPhuCom.png" alt="Cánh gà giòn phủ cốm">
+    <h5 class="product-name">Cánh gà giòn phủ cốm</h5>
+    <h4 class="product-price">72.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct24.html';">Mua ngay</button>
+</div>
+<div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+    <img class="img-fluid" src="/images/CanhGa/CanhGaTieuXay.png" alt="Cánh gà tiêu xay">
+    <h5 class="product-name">Cánh gà tiêu xay</h5>
+    <h4 class="product-price">66.000 VND</h4>
+    <button class="buy-btn" onclick="window.location.href = 'sproduct25.html';">Mua ngay</button>
+</div>
+
+<!-- mốcmốc -->
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaGiaViTongHop.png" alt="Cánh gà gia vị tổng hợp">
+               
+                <h5 class="product-name">Cánh gà gia vị tổng hợp</h5>
+                <h4 class="product-price">75.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct26.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaKieuHan.png" alt="Cánh gà kiểu Hàn">
+               
+                <h5 class="product-name">Cánh gà kiểu Hàn</h5>
+                <h4 class="product-price">78.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct27.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaTuongOt.png" alt="Cánh gà tương ớt">
+               
+                <h5 class="product-name">Cánh gà tương ớt</h5>
+                <h4 class="product-price">68.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct28.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaKieuDaiLoan.png" alt="Cánh gà kiểu Đài Loan">
+               
+                <h5 class="product-name">Cánh gà kiểu Đài Loan</h5>
+                <h4 class="product-price">76.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct29.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaCayNhe.png" alt="Cánh gà cay nhẹ">
+               
+                <h5 class="product-name">Cánh gà cay nhẹ</h5>
+                <h4 class="product-price">65.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct30.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaKieuY.png" alt="Cánh gà kiểu Ý">
+               
+                <h5 class="product-name">Cánh gà kiểu Ý</h5>
+                <h4 class="product-price">80.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct31.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaXotBBQ.png" alt="Cánh gà xốt BBQ">
+               
+                <h5 class="product-name">Cánh gà xốt BBQ</h5>
+                <h4 class="product-price">85.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct32.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaKieuMexico.png" alt="Cánh gà kiểu Mexico">
+               
+                <h5 class="product-name">Cánh gà kiểu Mexico</h5>
+                <h4 class="product-price">82.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct33.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaGiaViNhe.png" alt="Cánh gà gia vị nhẹ">
+               
+                <h5 class="product-name">Cánh gà gia vị nhẹ</h5>
+                <h4 class="product-price">75.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct34.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaBoChanh.png" alt="Cánh gà bơ chanh">
+               
+                <h5 class="product-name">Cánh gà bơ chanh</h5>
+                <h4 class="product-price">78.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct35.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaGionSotChanhDay.png" alt="Cánh gà giòn sốt chanh dây">
+               
+                <h5 class="product-name">Cánh gà giòn sốt chanh dây</h5>
+                <h4 class="product-price">80.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct36.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaMuoiLac.png" alt="Cánh gà muối lạc">
+               
+                <h5 class="product-name">Cánh gà muối lạc</h5>
+                <h4 class="product-price">82.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct37.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaBotMiGion.png" alt="Cánh gà bột mì giòn">
+               
+                <h5 class="product-name">Cánh gà bột mì giòn</h5>
+                <h4 class="product-price">77.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct38.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaSotDauHao.png" alt="Cánh gà sốt dầu hào">
+               
+                <h5 class="product-name">Cánh gà sốt dầu hào</h5>
+                <h4 class="product-price">85.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct39.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaPhoMaiCayNhe.png" alt="Cánh gà phô mai cay nhẹ">
+               
+                <h5 class="product-name">Cánh gà phô mai cay nhẹ</h5>
+                <h4 class="product-price">89.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct40.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaKieuAnDo.png" alt="Cánh gà kiểu Ấn Độ">
+               
+                <h5 class="product-name">Cánh gà kiểu Ấn Độ</h5>
+                <h4 class="product-price">90.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct41.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaNamHuong.png" alt="Cánh gà nấm hương">
+               
+                <h5 class="product-name">Cánh gà nấm hương</h5>
+                <h4 class="product-price">86.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct42.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaNguVi.png" alt="Cánh gà ngũ vị">
+               
+                <h5 class="product-name">Cánh gà ngũ vị</h5>
+                <h4 class="product-price">83.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct43.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaDauPhong.png" alt="Cánh gà đậu phộng">
+               
+                <h5 class="product-name">Cánh gà đậu phộng</h5>
+                <h4 class="product-price">88.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct44.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaToiChien.png" alt="Cánh gà tỏi chiên">
+               
+                <h5 class="product-name">Cánh gà tỏi chiên</h5>
+                <h4 class="product-price">82.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct45.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaTuongCa.png" alt="Cánh gà tương cà">
+               
+                <h5 class="product-name">Cánh gà tương cà</h5>
+                <h4 class="product-price">79.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct46.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaPhuHatDe.png" alt="Cánh gà phủ hạt dẻ">
+               
+                <h5 class="product-name">Cánh gà phủ hạt dẻ</h5>
+                <h4 class="product-price">90.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct47.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaSotChuaNgot.png" alt="Cánh gà sốt chua ngọt">
+               
+                <h5 class="product-name">Cánh gà sốt chua ngọt</h5>
+                <h4 class="product-price">85.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct48.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaNuocMam.png" alt="Cánh gà nước mắm">
+               
+                <h5 class="product-name">Cánh gà nước mắm</h5>
+                <h4 class="product-price">78.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct49.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaPhoMaiMan.png" alt="Cánh gà phô mai mặn">
+               
+                <h5 class="product-name">Cánh gà phô mai mặn</h5>
+                <h4 class="product-price">88.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct50.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaTrungMuoi.png" alt="Cánh gà trứng muối">
+               
+                <h5 class="product-name">Cánh gà trứng muối</h5>
+                <h4 class="product-price">92.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct51.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaBotYenMach.png" alt="Cánh gà bột yến mạch">
+               
+                <h5 class="product-name">Cánh gà bột yến mạch</h5>
+                <h4 class="product-price">95.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct52.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaCayHanQuoc.png" alt="Cánh gà cay Hàn Quốc">
+               
+                <h5 class="product-name">Cánh gà cay Hàn Quốc</h5>
+                <h4 class="product-price">93.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct53.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaPhoMaiCay.png" alt="Cánh gà phô mai cay">
+               
+                <h5 class="product-name">Cánh gà phô mai cay</h5>
+                <h4 class="product-price">97.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct54.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaSotCayKieuThai.png" alt="Cánh gà sốt cay kiểu Thái">
+               
+                <h5 class="product-name">Cánh gà sốt cay kiểu Thái</h5>
+                <h4 class="product-price">96.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct55.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaGionCay.png" alt="Cánh gà giòn cay">
+               
+                <h5 class="product-name">Cánh gà giòn cay</h5>
+                <h4 class="product-price">89.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct56.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaLouisiana.png" alt="Cánh gà kiểu Louisiana">
+               
+                <h5 class="product-name">Cánh gà kiểu Louisiana</h5>
+                <h4 class="product-price">91.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct57.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaSotOtToi.png" alt="Cánh gà sốt ớt tỏi">
+               
+                <h5 class="product-name">Cánh gà sốt ớt tỏi</h5>
+                <h4 class="product-price">87.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct58.html';">Mua ngay</button>
+            </div>
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaViSaTe.png" alt="Cánh gà vị sa tế">
+               
+                <h5 class="product-name">Cánh gà vị sa tế</h5>
+                <h4 class="product-price">94.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct59.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaCayGion.png" alt="Cánh gà cay giòn">
+               
+                <h5 class="product-name">Cánh gà cay giòn</h5>
+                <h4 class="product-price">88.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct60.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaCaySotMe.png" alt="Cánh gà cay xốt me">
+               
+                <h5 class="product-name">Cánh gà cay xốt me</h5>
+                <h4 class="product-price">89.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct61.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaCayBBQ.png" alt="Cánh gà cay BBQ">
+               
+                <h5 class="product-name">Cánh gà cay BBQ</h5>
+                <h4 class="product-price">92.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct62.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaCayAnDo.png" alt="Cánh gà cay kiểu Ấn">
+               
+                <h5 class="product-name">Cánh gà cay kiểu Ấn</h5>
+                <h4 class="product-price">95.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct63.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaTieuDo.png" alt="Cánh gà tiêu đỏ">
+               
+                <h5 class="product-name">Cánh gà tiêu đỏ</h5>
+                <h4 class="product-price">90.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct64.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaSotCayNgot.png" alt="Cánh gà sốt cay ngọt">
+               
+                <h5 class="product-name">Cánh gà sốt cay ngọt</h5>
+                <h4 class="product-price">89.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct65.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaSaCay.png" alt="Cánh gà sả cay">
+               
+                <h5 class="product-name">Cánh gà sả cay</h5>
+                <h4 class="product-price">92.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct66.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaTieuCay.png" alt="Cánh gà tiêu cay">
+               
+                <h5 class="product-name">Cánh gà tiêu cay</h5>
+                <h4 class="product-price">87.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct67.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaSotCayNhat.png" alt="Cánh gà xốt cay Nhật">
+               
+                <h5 class="product-name">Cánh gà xốt cay Nhật</h5>
+                <h4 class="product-price">93.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct68.html';">Mua ngay</button>
+            </div>
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaSotTieuCay.png" alt="Cánh gà xốt tiêu cay">
+               
+                <h5 class="product-name">Cánh gà xốt tiêu cay</h5>
+                <h4 class="product-price">94.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct69.html';">Mua ngay</button>
+            </div>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                <img class="img-fluid" src="/images/CanhGa/CanhGaSotCayChanh.png" alt="Cánh gà sốt cay chanh">
+               
+                <h5 class="product-name">Cánh gà sốt cay chanh</h5>
+                <h4 class="product-price">98.000 VND</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct70.html';">Mua ngay</button>
+            </div>
+            <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaKieuTayBanNha.png" alt="Cánh gà kiểu Tây Ban Nha">
+                  
+                    <h5 class="product-name">Cánh gà kiểu Tây Ban Nha</h5>
+                    <h4 class="product-price">99.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct71.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaKieuJamaica.png" alt="Cánh gà kiểu Jamaica">
+                  
+                    <h5 class="product-name">Cánh gà kiểu Jamaica</h5>
+                    <h4 class="product-price">102.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct72.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaKieuCaribbean.png" alt="Cánh gà kiểu Caribbean">
+                  
+                    <h5 class="product-name">Cánh gà kiểu Caribbean</h5>
+                    <h4 class="product-price">105.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct73.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaOtChuongCay.png" alt="Cánh gà ớt chuông cay">
+                  
+                    <h5 class="product-name">Cánh gà ớt chuông cay</h5>
+                    <h4 class="product-price">91.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct74.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaCayMuoiOt.png" alt="Cánh gà cay muối ớt">
+                  
+                    <h5 class="product-name">Cánh gà cay muối ớt</h5>
+                    <h4 class="product-price">96.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct75.html';">Mua ngay</button>
+                </div>
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaSotToiCay.png" alt="Cánh gà sốt tỏi cay">
+                  
+                    <h5 class="product-name">Cánh gà sốt tỏi cay</h5>
+                    <h4 class="product-price">92.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct76.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaHanhToiCay.png" alt="Cánh gà hành tỏi cay">
+                  
+                    <h5 class="product-name">Cánh gà hành tỏi cay</h5>
+                    <h4 class="product-price">95.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct77.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaOtCayCay.png" alt="Cánh gà ớt cay cay">
+                  
+                    <h5 class="product-name">Cánh gà ớt cay cay</h5>
+                    <h4 class="product-price">90.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct78.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaSotKimChi.png" alt="Cánh gà sốt kim chi">
+                  
+                    <h5 class="product-name">Cánh gà sốt kim chi</h5>
+                    <h4 class="product-price">105.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct79.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaNuongCay.png" alt="Cánh gà nướng cay">
+                  
+                    <h5 class="product-name">Cánh gà nướng cay</h5>
+                    <h4 class="product-price">99.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct80.html';">Mua ngay</button>
+                </div>
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaKieuMexico.png" alt="Cánh gà kiểu Mexico">
+                  
+                    <h5 class="product-name">Cánh gà kiểu Mexico</h5>
+                    <h4 class="product-price">103.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct81.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaQueCay.png" alt="Cánh gà vị quế cay">
+                  
+                    <h5 class="product-name">Cánh gà vị quế cay</h5>
+                    <h4 class="product-price">98.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct82.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaSotOtThai.png" alt="Cánh gà sốt ớt Thái">
+                  
+                    <h5 class="product-name">Cánh gà sốt ớt Thái</h5>
+                    <h4 class="product-price">101.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct83.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaKieuTandoori.png" alt="Cánh gà kiểu tandoori">
+                  
+                    <h5 class="product-name">Cánh gà kiểu tandoori</h5>
+                    <h4 class="product-price">107.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct84.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaSotTabasco.png" alt="Cánh gà sốt Tabasco">
+                  
+                    <h5 class="product-name">Cánh gà sốt Tabasco</h5>
+                    <h4 class="product-price">108.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct85.html';">Mua ngay</button>
+                </div>
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaOtHiem.png" alt="Cánh gà ớt hiểm">
+                  
+                    <h5 class="product-name">Cánh gà ớt hiểm</h5>
+                    <h4 class="product-price">99.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct86.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaXotBbq.png" alt="Cánh gà kiểu BBQ cay">
+                  
+                    <h5 class="product-name">Cánh gà kiểu BBQ cay</h5>
+                    <h4 class="product-price">105.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct87.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaSotCayXiMuoi.png" alt="Cánh gà sốt cay xí muội">
+                  
+                    <h5 class="product-name">Cánh gà sốt cay xí muội</h5>
+                    <h4 class="product-price">98.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct88.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaTuongOt.png" alt="Cánh gà sốt tương ớt">
+                  
+                    <h5 class="product-name">Cánh gà sốt tương ớt</h5>
+                    <h4 class="product-price">97.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct89.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/GaTieuDen.png" alt="Cánh gà tiêu đen cay">
+                  
+                    <h5 class="product-name">Cánh gà tiêu đen cay</h5>
+                    <h4 class="product-price">100.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct90.html';">Mua ngay</button>
+                </div>
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaToiCayKieuY.png" alt="Cánh gà tỏi cay kiểu Ý">
+                  
+                    <h5 class="product-name">Cánh gà tỏi cay kiểu Ý</h5>
+                    <h4 class="product-price">105.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct91.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaCayGion.png" alt="Cánh gà cay nóng">
+                  
+                    <h5 class="product-name">Cánh gà cay nóng</h5>
+                    <h4 class="product-price">98.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct92.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaCaySotMe.png" alt="Cánh gà xốt me cay">
+                  
+                    <h5 class="product-name">Cánh gà xốt me cay</h5>
+                    <h4 class="product-price">103.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct93.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaPhoMai copy.png" alt="Cánh gà phô mai xốt cay">
+                  
+                    <h5 class="product-name">Cánh gà phô mai xốt cay</h5>
+                    <h4 class="product-price">110.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct94.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaTeriyakiCay.png" alt="Cánh gà sốt teriyaki cay">
+                  
+                    <h5 class="product-name">Cánh gà sốt teriyaki cay</h5>
+                    <h4 class="product-price">112.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct95.html';">Mua ngay</button>
+                </div>
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaCayGion.png" alt="Cánh gà nướng sốt cay">
+                  
+                    <h5 class="product-name">Cánh gà nướng sốt cay</h5>
+                    <h4 class="product-price">107.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct96.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaXotBbq.png" alt="Cánh gà sốt kiểu BBQ">
+                  
+                    <h5 class="product-name">Cánh gà sốt kiểu BBQ</h5>
+                    <h4 class="product-price">104.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct97.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaSotHanhToiCay.png" alt="Cánh gà sốt hành tỏi cay">
+                  
+                    <h5 class="product-name">Cánh gà sốt hành tỏi cay</h5>
+                    <h4 class="product-price">106.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct98.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaSotBotOt.png" alt="Cánh gà bột ớt cay">
+                  
+                    <h5 class="product-name">Cánh gà bột ớt cay</h5>
+                    <h4 class="product-price">99.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct99.html';">Mua ngay</button>
+                </div>
+
+                <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
+                    <img class="img-fluid" src="/images/CanhGa/CanhGaSotBoOt.png" alt="Cánh gà sốt bơ ớt">
+                  
+                    <h5 class="product-name">Cánh gà sốt bơ ớt</h5>
+                    <h4 class="product-price">110.000 VND</h4>
+                    <button class="buy-btn" onclick="window.location.href = 'sproduct100.html';">Mua ngay</button>
+                </div>
+            
+            <div style="display: flex; justify-content: center;">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination mt-5">
+                        
+                        <li class="page-item"><a class="page-link" href="/html/Menu/shop.html" id="page1">1</a></li>
+                        <li class="page-item active"><a class="page-link" href="">2</a></li>
+                        <li class="page-item"><a class="page-link" href="/html/Menu/shop2.html" id="page3">3</a></li>
+
+                    </ul>
+                </nav>
+            </div>    
+        </div>
+    </section>
+
+
+
+<!-- Footer section -->
+<footer class="mt-5 p-5 bg-dark">
+  <div class="row conatiner mx-auto pt-5">
+    <div class="footer-one col-lg-3 col-md-6 col-12">
+    
+      <img id="logo-img-footer" src="/images/Page1/LogoWeb.png" alt="logo">
+      <p class="py-3 pl-2 ml-4 mr-5">Tiệm Gà Sao Hỏa là một quán ăn hiện đại với phong cách thiết kế đậm chất không gian. Thực đơn của quán không chỉ có các món gà nổi tiếng, mà còn kèm theo những món ăn độc lạ lấy cảm hứng từ vũ trụ mang lại cảm giác mới mẻ cho thực khách.</p>
+    
+    </div>
+
+    <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+      <h5 class="pb-2">Liên kết nhanh</h5>
+      <ul class="text-uppercase list-unstyled">
+        <li><a href="index.html">trang chủ</a></li>
+        <li><a href="/html/Menu/shop.html">Cửa hàng</a></li>
+        <li><a href="/html/Menu/AboutUs.html">thông tin</a></li>
+        <li><a href="/html/Menu/ContactUs.html">liên hệ</a></li>
+        <li><a href="/html/Menu/Cart.html">Giỏ hàng</a></li>
+      </ul>
+    </div>
+    <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+      <h5 class="pb-2">Liên hệ với chúng tôi</h5>
+      <div>
+        <h6 class="text-uppercase">Địa chỉ</h6>
+        <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
+      </div>
+      <div>
+        <h6 class="text-uppercase">điện thoại</h6>
+        <p>0849294483</p>
+      </div>
+      <div>
+        <h6 class="text-uppercase">Email</h6>
+        <p>MarsStore@gmail.com</p>
+      </div>
+    </div>
+    <div class="Photos col-lg-3 col-md-6 col-12">
+         <h5 class="pb-2">Các đơn vị tài trợ</h5>
+    <div class="row">
+      <img class="footer-img img-fluid mb-2" src="/images/Page1/image copy 3.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="/images/Page1/image copy 2.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="/images/Page1/image copy.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="/images/Page1/image.png" alt="leather-img">
+    </div>
+    </div>
+  <div class="copyright mt-5">
+    <div class="row container mx-auto">
+      <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
+        <img src="img/payment.png" alt="payment..logo">
+      </div> -->
+
+      <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
+        <p>MARSSTORE WEBSITE &copy; DESIGN 2024</p>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-12">
+        <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
+        <a href="https://x.com/home?lang=vi"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/feed/"><i class="bi bi-linkedin"></i></a>
+        <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+  </div>  
+</footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>

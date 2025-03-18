@@ -1,0 +1,18 @@
+0000000000000000000000000000000000000000 cca0f47f53ed619c2b7ccf212593e9f8b4029db3 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737353760 +0700	branch: Created from HEAD
+cca0f47f53ed619c2b7ccf212593e9f8b4029db3 85f0da14cbc9d35e010dbc4274bb2018641fd94f ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737376002 +0700	commit: Thêm chức năng đánh giá và đánh giá vào sản phẩm
+85f0da14cbc9d35e010dbc4274bb2018641fd94f 7a740d9701924a64556d1336ec188ae9a8f1ac61 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737453026 +0700	commit: Thêm wishlist
+7a740d9701924a64556d1336ec188ae9a8f1ac61 3a677d5c822acf540ba803de626832679d9e80d9 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737521646 +0700	commit: Thêm và xóa sản phẩm trong wishlist
+3a677d5c822acf540ba803de626832679d9e80d9 6152e975ce03e76623377b2c8f16b31fc0c0dfcb ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737636411 +0700	commit: Them sắp xếp đánh giá
+6152e975ce03e76623377b2c8f16b31fc0c0dfcb f41064a6dde56d05f771481cc89e08d0ad31ec3a ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737732164 +0700	commit: Update chức năng của phần lọc comment
+f41064a6dde56d05f771481cc89e08d0ad31ec3a 969bfaf4d39ec26a3d452e22624927912788bb10 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737793874 +0700	commit: Update cart
+969bfaf4d39ec26a3d452e22624927912788bb10 602aaf186718638e613256f1951100ae6f415aa2 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737908627 +0700	commit: Them san pham so luong lon
+602aaf186718638e613256f1951100ae6f415aa2 89dea9684543f01fa49a17f4f78010414717e7ca ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737969431 +0700	commit: Sua loi them nhieu san pham
+89dea9684543f01fa49a17f4f78010414717e7ca 1176a3a4211f9008aa8757f474233124c1afa3f9 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738074213 +0700	commit: update hiển thị số lượng trong giỏ hàng
+1176a3a4211f9008aa8757f474233124c1afa3f9 7865b7d7911a2297d77a6f8527f7005964b2e701 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738128766 +0700	commit: Chinh sua so luong trong gio hang
+7865b7d7911a2297d77a6f8527f7005964b2e701 8e2849f8634ebb005dc4cd30ead9403ad9c23045 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738253850 +0700	commit: Them checkout và sửa lõoi thêm giỏ hàng ở shop
+8e2849f8634ebb005dc4cd30ead9403ad9c23045 71da72c2c439ef4330ff6323597a3c1ba7c69544 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738334183 +0700	commit: Them chuc nang cho thanh search
+71da72c2c439ef4330ff6323597a3c1ba7c69544 8de7a492c0dc0e7cbecc14177a3d6c7156f91e9c ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738396223 +0700	commit: Hoàn chỉnh thanh tìm kiếm
+8de7a492c0dc0e7cbecc14177a3d6c7156f91e9c becb7f5f95a8ed2366fe3bb9057605df73da9696 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738513240 +0700	commit: Xu ly loi them qua stock
+becb7f5f95a8ed2366fe3bb9057605df73da9696 3f2c03e330d46c6066ee00451b7b694476eb0896 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738596586 +0700	commit: Chỉnh sửa lại giao diện và dấu gạch chân
+3f2c03e330d46c6066ee00451b7b694476eb0896 7c51f594e0a9aa86aaba68e398044ad531132037 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738765874 +0700	commit: Them phuong thuc cho orderdao
+7c51f594e0a9aa86aaba68e398044ad531132037 580c75d82e201720bc367181f30201baf625e0d7 ntalowkey911 <andzverymuch@gmail.com> 1741538802 +0700	commit: them review

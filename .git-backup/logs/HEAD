@@ -1,0 +1,65 @@
+0000000000000000000000000000000000000000 6c5a229fd2caeeadf8d94c91136cc3f3d57a8e5e ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736865858 +0700	reset: moving to origin/main
+6c5a229fd2caeeadf8d94c91136cc3f3d57a8e5e 6c5a229fd2caeeadf8d94c91136cc3f3d57a8e5e ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736865936 +0700	checkout: moving from master to main
+6c5a229fd2caeeadf8d94c91136cc3f3d57a8e5e 5da8ea1f58a07fc35c1e4d7c9cf38e5c6a8614b9 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736869446 +0700	commit: Chỉnh sửa lại giao diện của shop
+5da8ea1f58a07fc35c1e4d7c9cf38e5c6a8614b9 c6c9fb0de258bc9a0fef25936ff814f99c54c0b4 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736870545 +0700	commit: Chinh loi anh ở detail và giỏ hàng ở các trang khác
+c6c9fb0de258bc9a0fef25936ff814f99c54c0b4 a2b0bd04f11edf9618cbc02794b1c254e50c2d18 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736876470 +0700	commit: Sua loi nav bar và ảnh ở detail
+a2b0bd04f11edf9618cbc02794b1c254e50c2d18 6f4b8182d8e0498fefe83b480190f42e10d1bf9c ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736880036 +0700	pull origin main: Fast-forward
+6f4b8182d8e0498fefe83b480190f42e10d1bf9c 6f4b8182d8e0498fefe83b480190f42e10d1bf9c ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736922111 +0700	reset: moving to HEAD
+6f4b8182d8e0498fefe83b480190f42e10d1bf9c 88b32b78b31dace7a480a210cdd7c00665272536 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736922121 +0700	pull origin main: Fast-forward
+88b32b78b31dace7a480a210cdd7c00665272536 03bff09bdc7c122c36f04e45e0bda5348cf59d2b ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736925899 +0700	pull origin main: Fast-forward
+03bff09bdc7c122c36f04e45e0bda5348cf59d2b d9cb6d8f517dc4b1d1bce14e84026963c444963c ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736929002 +0700	pull origin main: Fast-forward
+4ce19cd8ca5f13dc1b1c7a3d3a5261e51a17028c 157671c516826c560cbd1aa2ba87dc54c3d00120 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736940801 +0700	rebase (continue): Lưu các thay đổi trước khi pull
+157671c516826c560cbd1aa2ba87dc54c3d00120 1abcbc00815a80baf297982cff53c002c536529c ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736940809 +0700	rebase (continue): Them san pham o trang index
+1abcbc00815a80baf297982cff53c002c536529c 1abcbc00815a80baf297982cff53c002c536529c ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736940812 +0700	rebase (finish): returning to refs/heads/main
+1abcbc00815a80baf297982cff53c002c536529c 28903829ad6c79987e67e17459a002c5c6caeefb ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736942611 +0700	commit: Them san pham vao trang index
+28903829ad6c79987e67e17459a002c5c6caeefb 55c7ea24f046aa0780f28178600d0dd0589a3443 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736943445 +0700	commit: Chinh sua lại sản phẩm ở cart
+55c7ea24f046aa0780f28178600d0dd0589a3443 848b82578528b61b7041728c8b6c54a0a6c4e822 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736944587 +0700	pull origin main: Fast-forward
+848b82578528b61b7041728c8b6c54a0a6c4e822 a0b3eea506f6a925275d2025d7d4474cbdf91a16 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736951768 +0700	commit: Them hover ở shop
+a0b3eea506f6a925275d2025d7d4474cbdf91a16 80130b930999af501c6b7977dbefe73db5215a10 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736952555 +0700	commit: Fix lỗi giao diện ở shop
+80130b930999af501c6b7977dbefe73db5215a10 0b0c050855b1393360fdc1a79f4d70a1a7518c10 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736954357 +0700	commit: FIx lỗi mất ảnh khi đăng nhập
+0b0c050855b1393360fdc1a79f4d70a1a7518c10 0b0c050855b1393360fdc1a79f4d70a1a7518c10 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736965333 +0700	reset: moving to HEAD
+0b0c050855b1393360fdc1a79f4d70a1a7518c10 0b0c050855b1393360fdc1a79f4d70a1a7518c10 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736965345 +0700	reset: moving to HEAD
+0b0c050855b1393360fdc1a79f4d70a1a7518c10 9c8292b5e7a0ae1a05f65f0da2bed4d088ae1e9c ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736965622 +0700	pull origin main: Fast-forward
+9c8292b5e7a0ae1a05f65f0da2bed4d088ae1e9c 9d65d5552453acef987a7b7ed69cc0e1025e43a7 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736970805 +0700	pull origin main: Fast-forward
+9d65d5552453acef987a7b7ed69cc0e1025e43a7 35880b1e8be2f911829069c87e6585f711007ee1 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736977086 +0700	commit: Them profile
+35880b1e8be2f911829069c87e6585f711007ee1 a76f563b100595d8edb1214aa35319f694d847aa ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736998713 +0700	merge origin/main: Fast-forward
+a76f563b100595d8edb1214aa35319f694d847aa f53eb05258bbaab1daeb9aec3152175f548c8139 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1736999780 +0700	commit: Fix lỗi đăng nhập 2 lần
+f53eb05258bbaab1daeb9aec3152175f548c8139 6cdca01734490b44e8496b1ee17c0fcb85a025c6 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737000176 +0700	merge origin/main: Fast-forward
+6cdca01734490b44e8496b1ee17c0fcb85a025c6 b3ec37add5bcfddbaed352521e050583ad05ff55 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737004182 +0700	merge origin/main: Fast-forward
+b3ec37add5bcfddbaed352521e050583ad05ff55 47712cf12ee4bac4b86a00a06fd41d7f042e4957 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737004306 +0700	commit: Them chuc nang profile
+47712cf12ee4bac4b86a00a06fd41d7f042e4957 7e04d6483505f3dae7e84b6f282aa4a7d99665e3 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737009219 +0700	pull origin main: Fast-forward
+7e04d6483505f3dae7e84b6f282aa4a7d99665e3 0afd627f087377ec25716a3ae2c2abdeb16c143d ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737009250 +0700	commit: Chỉnh sửa
+0afd627f087377ec25716a3ae2c2abdeb16c143d 22d96a2df2999380b2957ac325bcb0c2a7d29f61 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737199816 +0700	merge origin/main: Fast-forward
+22d96a2df2999380b2957ac325bcb0c2a7d29f61 587037d72814dfc181b33e1341209fabfddc6deb ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737205293 +0700	commit: Chỉnh sửa database
+587037d72814dfc181b33e1341209fabfddc6deb 834ec11206e7440ddb839134504b180acd204360 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737282840 +0700	commit: Update profile
+834ec11206e7440ddb839134504b180acd204360 834ec11206e7440ddb839134504b180acd204360 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737283067 +0700	reset: moving to HEAD
+834ec11206e7440ddb839134504b180acd204360 cca0f47f53ed619c2b7ccf212593e9f8b4029db3 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737283243 +0700	commit (merge): Merge remote-tracking branch 'origin/main'
+cca0f47f53ed619c2b7ccf212593e9f8b4029db3 cca0f47f53ed619c2b7ccf212593e9f8b4029db3 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737353760 +0700	checkout: moving from main to KhangBranch
+cca0f47f53ed619c2b7ccf212593e9f8b4029db3 85f0da14cbc9d35e010dbc4274bb2018641fd94f ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737376002 +0700	commit: Thêm chức năng đánh giá và đánh giá vào sản phẩm
+85f0da14cbc9d35e010dbc4274bb2018641fd94f 7a740d9701924a64556d1336ec188ae9a8f1ac61 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737453026 +0700	commit: Thêm wishlist
+7a740d9701924a64556d1336ec188ae9a8f1ac61 3a677d5c822acf540ba803de626832679d9e80d9 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737521646 +0700	commit: Thêm và xóa sản phẩm trong wishlist
+3a677d5c822acf540ba803de626832679d9e80d9 6152e975ce03e76623377b2c8f16b31fc0c0dfcb ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737636411 +0700	commit: Them sắp xếp đánh giá
+6152e975ce03e76623377b2c8f16b31fc0c0dfcb f41064a6dde56d05f771481cc89e08d0ad31ec3a ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737732164 +0700	commit: Update chức năng của phần lọc comment
+f41064a6dde56d05f771481cc89e08d0ad31ec3a 969bfaf4d39ec26a3d452e22624927912788bb10 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737793874 +0700	commit: Update cart
+969bfaf4d39ec26a3d452e22624927912788bb10 602aaf186718638e613256f1951100ae6f415aa2 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737908627 +0700	commit: Them san pham so luong lon
+602aaf186718638e613256f1951100ae6f415aa2 89dea9684543f01fa49a17f4f78010414717e7ca ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1737969431 +0700	commit: Sua loi them nhieu san pham
+89dea9684543f01fa49a17f4f78010414717e7ca 1176a3a4211f9008aa8757f474233124c1afa3f9 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738074213 +0700	commit: update hiển thị số lượng trong giỏ hàng
+1176a3a4211f9008aa8757f474233124c1afa3f9 7865b7d7911a2297d77a6f8527f7005964b2e701 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738128766 +0700	commit: Chinh sua so luong trong gio hang
+7865b7d7911a2297d77a6f8527f7005964b2e701 8e2849f8634ebb005dc4cd30ead9403ad9c23045 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738253850 +0700	commit: Them checkout và sửa lõoi thêm giỏ hàng ở shop
+8e2849f8634ebb005dc4cd30ead9403ad9c23045 71da72c2c439ef4330ff6323597a3c1ba7c69544 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738334183 +0700	commit: Them chuc nang cho thanh search
+71da72c2c439ef4330ff6323597a3c1ba7c69544 8de7a492c0dc0e7cbecc14177a3d6c7156f91e9c ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738396223 +0700	commit: Hoàn chỉnh thanh tìm kiếm
+8de7a492c0dc0e7cbecc14177a3d6c7156f91e9c becb7f5f95a8ed2366fe3bb9057605df73da9696 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738513240 +0700	commit: Xu ly loi them qua stock
+becb7f5f95a8ed2366fe3bb9057605df73da9696 3f2c03e330d46c6066ee00451b7b694476eb0896 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738596586 +0700	commit: Chỉnh sửa lại giao diện và dấu gạch chân
+3f2c03e330d46c6066ee00451b7b694476eb0896 7c51f594e0a9aa86aaba68e398044ad531132037 ChiKhang250224 <22130112@st.hcmuaf.edu.vn> 1738765874 +0700	commit: Them phuong thuc cho orderdao
+7c51f594e0a9aa86aaba68e398044ad531132037 580c75d82e201720bc367181f30201baf625e0d7 ntalowkey911 <andzverymuch@gmail.com> 1741538802 +0700	commit: them review
+580c75d82e201720bc367181f30201baf625e0d7 d2b57207957fd0964b0cb74ab53fc412ce0d06f6 ntalowkey911 <andzverymuch@gmail.com> 1741538900 +0700	checkout: moving from KhangBranch to anbranch
+d2b57207957fd0964b0cb74ab53fc412ce0d06f6 580c75d82e201720bc367181f30201baf625e0d7 ntalowkey911 <andzverymuch@gmail.com> 1741539031 +0700	reset: moving to KhangBranch
+580c75d82e201720bc367181f30201baf625e0d7 9eceba6562508fcadd1042f4b09667645b3202eb ntalowkey911 <andzverymuch@gmail.com> 1741539244 +0700	commit: sua conflict
+9eceba6562508fcadd1042f4b09667645b3202eb a90df7fc8befb82ce8c11591c8517677c5977b06 ntalowkey911 <andzverymuch@gmail.com> 1741539310 +0700	commit: them lai cac ham
+a90df7fc8befb82ce8c11591c8517677c5977b06 f0cc40886c6b1249a81ee4c3969d46d5a79c3468 ntalowkey911 <andzverymuch@gmail.com> 1742136564 +0700	commit: sua login
+f0cc40886c6b1249a81ee4c3969d46d5a79c3468 68ea58ccb18dc71e03034a06a90b33e84d065354 ntalowkey911 <andzverymuch@gmail.com> 1742142173 +0700	commit: ma hoa mat khau
+68ea58ccb18dc71e03034a06a90b33e84d065354 c4753c2bbca47e8884d1daff3f2b3b2dcb481ae8 ntalowkey911 <andzverymuch@gmail.com> 1742142418 +0700	commit: sua lai dao
+c4753c2bbca47e8884d1daff3f2b3b2dcb481ae8 0000000000000000000000000000000000000000 ntalowkey911 <andzverymuch@gmail.com> 1742309772 +0700	Branch: renamed refs/heads/anbranch to refs/heads/main
+0000000000000000000000000000000000000000 c4753c2bbca47e8884d1daff3f2b3b2dcb481ae8 ntalowkey911 <andzverymuch@gmail.com> 1742309772 +0700	Branch: renamed refs/heads/anbranch to refs/heads/main
+c4753c2bbca47e8884d1daff3f2b3b2dcb481ae8 0000000000000000000000000000000000000000 ntalowkey911 <andzverymuch@gmail.com> 1742309937 +0700	Branch: renamed refs/heads/main to refs/heads/main
+c4753c2bbca47e8884d1daff3f2b3b2dcb481ae8 c4753c2bbca47e8884d1daff3f2b3b2dcb481ae8 ntalowkey911 <andzverymuch@gmail.com> 1742309937 +0700	Branch: renamed refs/heads/main to refs/heads/main

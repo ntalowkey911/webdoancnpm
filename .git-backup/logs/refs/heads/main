@@ -1,0 +1,9 @@
+0000000000000000000000000000000000000000 d2b57207957fd0964b0cb74ab53fc412ce0d06f6 ntalowkey911 <andzverymuch@gmail.com> 1741538900 +0700	branch: Created from refs/remotes/origin/anbranch
+d2b57207957fd0964b0cb74ab53fc412ce0d06f6 580c75d82e201720bc367181f30201baf625e0d7 ntalowkey911 <andzverymuch@gmail.com> 1741539031 +0700	reset: moving to KhangBranch
+580c75d82e201720bc367181f30201baf625e0d7 9eceba6562508fcadd1042f4b09667645b3202eb ntalowkey911 <andzverymuch@gmail.com> 1741539244 +0700	commit: sua conflict
+9eceba6562508fcadd1042f4b09667645b3202eb a90df7fc8befb82ce8c11591c8517677c5977b06 ntalowkey911 <andzverymuch@gmail.com> 1741539310 +0700	commit: them lai cac ham
+a90df7fc8befb82ce8c11591c8517677c5977b06 f0cc40886c6b1249a81ee4c3969d46d5a79c3468 ntalowkey911 <andzverymuch@gmail.com> 1742136564 +0700	commit: sua login
+f0cc40886c6b1249a81ee4c3969d46d5a79c3468 68ea58ccb18dc71e03034a06a90b33e84d065354 ntalowkey911 <andzverymuch@gmail.com> 1742142173 +0700	commit: ma hoa mat khau
+68ea58ccb18dc71e03034a06a90b33e84d065354 c4753c2bbca47e8884d1daff3f2b3b2dcb481ae8 ntalowkey911 <andzverymuch@gmail.com> 1742142418 +0700	commit: sua lai dao
+c4753c2bbca47e8884d1daff3f2b3b2dcb481ae8 c4753c2bbca47e8884d1daff3f2b3b2dcb481ae8 ntalowkey911 <andzverymuch@gmail.com> 1742309772 +0700	Branch: renamed refs/heads/anbranch to refs/heads/main
+c4753c2bbca47e8884d1daff3f2b3b2dcb481ae8 c4753c2bbca47e8884d1daff3f2b3b2dcb481ae8 ntalowkey911 <andzverymuch@gmail.com> 1742309937 +0700	Branch: renamed refs/heads/main to refs/heads/main
