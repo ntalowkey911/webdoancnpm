@@ -268,6 +268,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </nav>
 
 <!-- Home Section -->
