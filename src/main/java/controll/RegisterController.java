@@ -1,6 +1,8 @@
 package controll;
 
 import dao.dao;
+import dao.OTPDao;
+import entity.OTP;
 import entity.Users;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -8,15 +10,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import util.EmailUtil;  // Import lớp EmailUtil
 
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
@@ -25,7 +28,7 @@ public class RegisterController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Thiết lập mã hóa UTF-8 để xử lý tiếng Việt
+        // Thiết lập mã hóa UTF-8
         response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
 
@@ -37,14 +40,12 @@ public class RegisterController extends HttpServlet {
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
 
-        // Kiểm tra nếu có tham số nào rỗng hoặc null
         if (isEmpty(username) || isEmpty(email) || isEmpty(password) || isEmpty(confirmPassword) || isEmpty(phone) || isEmpty(address)) {
             request.setAttribute("error", "Tất cả các trường là bắt buộc.");
             forwardToRegisterPage(request, response);
             return;
         }
 
-        // Kiểm tra nếu mật khẩu và xác nhận mật khẩu không khớp
         if (!password.equals(confirmPassword)) {
             request.setAttribute("error", "Mật khẩu không khớp.");
             forwardToRegisterPage(request, response);
@@ -54,7 +55,6 @@ public class RegisterController extends HttpServlet {
         dao d = new dao();
         Users existingUser = d.checkExist(username);
 
-        // Kiểm tra nếu tài khoản đã tồn tại
         if (existingUser != null) {
             request.setAttribute("error", "Tên người dùng đã tồn tại.");
             forwardToRegisterPage(request, response);
@@ -70,10 +70,33 @@ public class RegisterController extends HttpServlet {
 
                 // Đăng ký người dùng mới
                 d.Register(username, email, hashedPassword, phone, address);
-                request.setAttribute("success", "Đăng ký thành công!");
-                response.sendRedirect("doanweb/html/Login.jsp"); // Chuyển hướng đến trang đăng nhập sau khi đăng ký
+
+                // Lấy thông tin user vừa đăng ký (giả sử checkExist trả về user theo username)
+                Users newUser = d.getUserByUsername(username);
+                int newUserId = newUser.getId();
+
+                // Sinh OTP 6 chữ số
+                String otpCode = generateOTP();
+                // Thiết lập thời gian hết hạn 5 phút sau
+                Date expirationTime = new Date(System.currentTimeMillis() + 5 * 60 * 1000);
+
+                OTP otpObj = new OTP();
+                otpObj.setUserId(newUserId);
+                otpObj.setOtp(otpCode);
+                otpObj.setExpirationTime(expirationTime);
+                otpObj.setVerified(false);
+
+                // Lưu OTP vào DB
+                OTPDao otpDao = new OTPDao();
+                otpDao.insertOTP(otpObj);
+
+                // Gửi OTP qua email
+                EmailUtil.sendEmail(email, "OTP Xác Thực", "Mã OTP của bạn là: " + otpCode);
+                // Lưu user id vào session để dùng trong xác thực OTP
+                request.getSession().setAttribute("userId", newUserId);
+                // Chuyển hướng đến trang xác thực OTP
+                response.sendRedirect("doanweb/html/OTPVerification.jsp");
             } catch (Exception e) {
-                // Ghi log ngoại lệ và thông báo lỗi cho người dùng
                 LOGGER.log(Level.SEVERE, "Lỗi trong quá trình đăng ký", e);
                 request.setAttribute("error", "Đã xảy ra lỗi trong quá trình đăng ký. Vui lòng thử lại.");
                 forwardToRegisterPage(request, response);
@@ -83,7 +106,6 @@ public class RegisterController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Chuyển hướng về trang đăng ký nếu truy cập GET
         forwardToRegisterPage(request, response);
     }
 
@@ -102,7 +124,7 @@ public class RegisterController extends HttpServlet {
         PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, keyLength);
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
         byte[] hash = skf.generateSecret(spec).getEncoded();
-        return bytesToHex(salt) + ":" + bytesToHex(hash); // Lưu cả salt và hash
+        return bytesToHex(salt) + ":" + bytesToHex(hash);
     }
 
     private String bytesToHex(byte[] bytes) {
@@ -115,5 +137,11 @@ public class RegisterController extends HttpServlet {
             hexString.append(hex);
         }
         return hexString.toString();
+    }
+
+    private String generateOTP() {
+        SecureRandom random = new SecureRandom();
+        int otp = 100000 + random.nextInt(900000); // OTP 6 chữ số
+        return String.valueOf(otp);
     }
 }

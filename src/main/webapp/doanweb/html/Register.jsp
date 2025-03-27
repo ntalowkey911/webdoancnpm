@@ -164,15 +164,17 @@
                 </div>
 
                 <div class="menu-section user" id="user-sidebar">
-                    <h4><i class="bi bi-person"></i><a href="<%= request.getContextPath() %>Login.html">ĐĂNG
-
+                    <h4><i class="bi bi-person"></i><a href="<%= request.getContextPath() %>/Login.html">ĐĂNG NHẬP</a></h4>
                 </div>
-                    <div class="menu-section user-logged-in" id="user-logged-in" style="display: none;">
+
+                <div class="menu-section user-logged-in" id="user-logged-in" style="display: none;">
                         <span id="greeting-menu"></span>
                         <h4><i class="bi bi-person"></i><a href="javascript:void(0);" onclick="logout()">ĐĂNG XUẤT</a></h4>
                     </div>
                 </div>
+
         </div>
+    </div>
 </nav>
 
 <!-- login section -->
@@ -231,8 +233,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 <footer class="mt-5 p-5 bg-dark">
