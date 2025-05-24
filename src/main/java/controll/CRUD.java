@@ -214,5 +214,14 @@ public class CRUD extends HttpServlet {
             e.printStackTrace();
         }
     }
+    public void addCategories(String name) {
+        String sql = "INSERT INTO category (name) VALUES (?)";
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, name);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
