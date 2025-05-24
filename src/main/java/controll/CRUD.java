@@ -223,5 +223,19 @@ public class CRUD extends HttpServlet {
             e.printStackTrace();
         }
     }
-
+    public void updateProduct(int id, String name, int price, int stock, String description, int category_id, String image) {
+        String sql = "UPDATE Product SET name=?, description=?, price=?, stock=?, image=?, category_id=? WHERE p_id=?";
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, name);
+            stmt.setDouble(2, price);
+            stmt.setInt(3, stock);
+            stmt.setString(4, description);
+            stmt.setInt(5, category_id);
+            stmt.setString(6, image);
+            stmt.setInt(7, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
