@@ -1,5 +1,6 @@
 package controll;
 import entity.Cart;
+import entity.Products;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,7 +9,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import dao.dao ;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
+
+import static dao.MySQLConnection.getConnection;
 
 @WebServlet({
         "/AddProduct", "/AddCategory",
@@ -145,5 +152,31 @@ public class CRUD extends HttpServlet {
 
 //        double total = daoInstance.getTotalCartPrice(cartList);
 //        response.getWriter().write("Tổng giá trị giỏ hàng: " + total);
+    }
+    public List<Products> getAllProducts() {
+        List<Products> l = new ArrayList<>();
+        String query = "SELECT * FROM product";
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet rs = statement.executeQuery()) {
+
+            while (rs.next()) {
+                Products product = new Products(
+                        rs.getInt("p_id"), // Sử dụng 'p_id' thay vì 'id'
+                        rs.getString("name"),
+                        rs.getInt("price"),
+                        rs.getInt("stock"),
+                        rs.getString("description"),
+                        rs.getInt("category_id"),
+                        rs.getString("img")
+                );
+                l.add(product);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return l;
     }
 }
