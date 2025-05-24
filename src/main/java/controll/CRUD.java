@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -198,6 +199,20 @@ public class CRUD extends HttpServlet {
             e.printStackTrace();
         }
         return l;
+    }
+    public void addProduct(String name, double price, int stock, String description, int category_id, String image) {
+        String sql = "INSERT INTO Product (name, price, stock, description, category_id, image) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, name);
+            stmt.setDouble(2, price);
+            stmt.setInt(3, stock);
+            stmt.setString(4, description);
+            stmt.setInt(5, category_id);
+            stmt.setString(6, image);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }
