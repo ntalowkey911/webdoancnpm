@@ -1,5 +1,6 @@
 package controll;
 import entity.Cart;
+import entity.Categories;
 import entity.Products;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -179,4 +180,24 @@ public class CRUD extends HttpServlet {
         }
         return l;
     }
+    public List<Categories> getAllCategories() {
+        List<Categories> l = new ArrayList<>();
+        String query = "SELECT * FROM category";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet rs = statement.executeQuery()) {
+            while (rs.next()) {
+                Categories product = new Categories(
+                        rs.getInt("c_id"),
+                        rs.getString("name")
+                );
+                l.add(product);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return l;
+    }
+
 }
