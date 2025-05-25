@@ -216,6 +216,7 @@
         }
     </style>
     <div class="search-bar">
+        <!--4.1.3 Người dùng nhập từ khóa để tìm kiếm sản phẩm trên thanh tìm kiếm-->
         <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm...">
         <button class="search-button" id="searchButton">
             <i class="bi bi-search"></i>
