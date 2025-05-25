@@ -9,13 +9,12 @@
   <link rel="icon" href="<%= request.getContextPath() %>/doanweb/images/Page1/LoadWeb.png" type="image/png">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/doanweb/styles/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<%--  <script src="/js/index.js"></script>--%>
+  <%--  <script src="/js/index.js"></script>--%>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
   <style>
     h3 {
       color: #000000;
@@ -34,6 +33,32 @@
     }
     .container mt-4 {
       max-height: 550px;
+    }
+    #uploadBtn {
+      text-align: center;   /* Căn giữa văn bản */
+      background-color: #dc3545; /* Màu đỏ cho nút */
+      color: white; /* Màu chữ trắng */
+      font-size: 16px; /* Kích thước chữ */
+      padding: 12px 24px; /* Padding để làm nút lớn hơn */
+      border: none; /* Không viền */
+      border-radius: 5px; /* Các góc bo tròn */
+      cursor: pointer; /* Con trỏ dạng bàn tay khi hover */
+      transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền khi hover */
+      display: block; /* Để nút thành block, dễ dàng căn giữa */
+      margin: 20px auto; /* Căn giữa và tạo khoảng cách phía trên và dưới */
+    }
+
+    #uploadBtn:hover {
+      background-color: #c82333; /* Màu đỏ đậm khi hover */
+    }
+
+    #uploadBtn:focus {
+      outline: none; /* Xóa đường viền khi nút được chọn */
+    }
+
+    /* Tạo khoảng cách giữa nút và ảnh avatar */
+    .avatar {
+      margin-bottom: 20px; /* Khoảng cách dưới ảnh avatar */
     }
 
   </style>
@@ -55,10 +80,7 @@
         <i class="bi bi-search"></i>
       </button>
     </div>
-
     <div id="searchResults" class="search-results"></div>
-
-
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
@@ -136,6 +158,7 @@
         </div>
       </div>
     </div>
+  </div>
 </nav>
 
 <section id="featured" class="mt-5 pt-5">
@@ -150,8 +173,25 @@
     <!-- Sidebar -->
     <div class="profile-bar">
       <div class="profile-header">
-        <img src="<%= request.getContextPath() %>/doanweb/images/Page1/IconLogo.png" alt="Avatar" class="avatar">
-        <span class="profile-greeting" id="profile-greeting">XIN CHÀO, ${user.username}</span>
+        <!-- nếu user.picture null thì dùng default-avatar.png -->
+        <c:choose>
+          <c:when test="${not empty user.picture}">
+            <c:set var="avatarUrl" value="${user.picture}" />
+          </c:when>
+          <c:otherwise>
+            <c:set var="avatarUrl" value="${pageContext.request.contextPath}/doanweb/images/default-avatar.png" />
+          </c:otherwise>
+        </c:choose>
+        <img src="${avatarUrl}" alt="Avatar" class="avatar">
+
+        <!-- trong profile.jsp -->
+        <form id="uploadForm" enctype="multipart/form-data" method="post" action="${contextPath}/api/avatar/upload">
+          <!-- 7: Chọn file, gửi form upload (User -> Browser) -->
+          <!-- 7.1: Browser -> AvatarServlet: POST /api/avatar/upload -->
+          <input type="file" name="avatar" id="avatarInput" accept="image/jpeg, image/png" style="display:none">
+          <label for="avatarInput" id="uploadBtn" class="btn-profile">Chọn ảnh</label>
+        </form>
+        <span class="profile-greeting">XIN CHÀO, ${user.username}</span>
       </div>
       <ul class="menu-links">
         <li><a href="javascript:void(0);" onclick="showProfileForm()">Thông tin cá nhân</a></li>
@@ -168,10 +208,9 @@
       </form>
     </div>
 
-
     <!-- Profile Form -->
     <div class="profile-form" id="profile-form">
-        <form method="post" action="/profile?action=showinfo">
+      <form method="post" action="/profile?action=showinfo">
         <!-- Hiển thị thông tin tên người dùng -->
         <div class="mb-3">
           <label for="name" class="form-label">Họ và Tên</label>
@@ -256,7 +295,7 @@
 
     <!-- Delete Account Form -->
     <div class="delete-account-form" id="delete-account-form" style="display: none;">
-        <form method="post" action="/profile?action=deleteAccount">
+      <form method="post" action="/profile?action=deleteAccount">
         <h3>Xóa tài khoản</h3> <!-- Bạn có thể thêm tiêu đề này nếu muốn -->
         <div class="mb-3">
           <label for="confirmDelete" class="form-label">Nhập mật khẩu để xác nhận xóa tài khoản</label>
@@ -382,8 +421,22 @@
         </div>
       </div>
     </div>
+  </div>
 </footer>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const avatarInput = document.getElementById('avatarInput');
+    const uploadForm  = document.getElementById('uploadForm');
+
+    avatarInput.addEventListener('change', () => {
+      if (avatarInput.files.length) {
+        // 7.1: Browser -> AvatarServlet
+        uploadForm.submit();
+      }
+    });
+  });
+</script>
 
 <!-- bootstarp cdn -->
 

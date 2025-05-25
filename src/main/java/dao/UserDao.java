@@ -39,7 +39,10 @@ public class UserDao {
                             rs.getString("phone"),
                             rs.getString("role"),
                             rs.getString("address")
+
                     );
+                    user.setPicture(rs.getString("picture"));    // <-- thêm dòng này
+                    return user;
                 }
             }
 

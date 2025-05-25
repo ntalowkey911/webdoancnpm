@@ -8,6 +8,7 @@ public class Users {
     private String role;
     private String phone;
     private String address;
+    private String picture;
 
     // Constructors
 
@@ -77,6 +78,10 @@ public class Users {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    // getter / setter cho picture
+    public String getPicture() { return picture; }
+    public void setPicture(String picture) { this.picture = picture; }
 
     // Override toString() for debugging
     @Override
