@@ -310,7 +310,7 @@
                 <div class="d-flex justify-content-between">
                     <h6>Tổng cộng</h6>
                     <p id="total-value">
-                        ${sessionScope.totalPrice + 20}K
+                        ${sessionScope.totalPrice }K
                     </p>
                 </div>
 
@@ -325,52 +325,24 @@
                     </select>
                 </div>
 
-                <!-- Phương thức thanh toán -->
-                <div class="form-group my-3">
-                    <label for="paymentMethod">
-                        <h6>Phương thức thanh toán</h6>
-                    </label>
-                    <select class="form-control" id="paymentMethod">
-                        <option value="cash">Thanh toán trực tiếp</option>
-                        <option value="card">Thanh toán bằng thẻ</option>
-                    </select>
-                </div>
-                <button class="ml-auto" onclick="handlePayment()">TIẾN HÀNH THANH TOÁN</button>
+                <button class="ml-auto" onclick="window.location.href='doanweb/html/checkout.jsp'">
+                    TIẾN HÀNH THANH TOÁN
+                </button>
+
             </div>
         </div>
     </div>
 </section>
 <script>
     function handlePayment() {
-        const paymentMethod = document.getElementById("paymentMethod").value;
-
-        if (paymentMethod === "card") {
-            // Điều hướng đến trang xử lý thanh toán thẻ
-            window.location.href = "/checkout";
-        } else {
-            // Thanh toán trực tiếp thành công
-            alert("Thanh toán thành công!");
-
-            // Gửi AJAX yêu cầu xóa giỏ hàng và tạo đơn hàng
-            sendDirectPaymentRequest();
+        function handlePayment() {
+            // Bỏ phân biệt phương thức, chuyển hướng luôn
+            window.location.href = "doanweb/html/checkout.jsp";
         }
+
     }
 
-    function sendDirectPaymentRequest() {
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "/checkout", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                alert("Giỏ hàng đã được thanh toán thành công.");
-            } else {
-                alert("Có lỗi xảy ra khi thanh toán. Vui lòng thử lại.");
-            }
-        };
-
-        xhr.send("action=directPayment");
-    }
 </script>
 
 

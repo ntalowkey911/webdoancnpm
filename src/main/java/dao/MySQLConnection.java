@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class MySQLConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/ecommerce_db"; // Thay your_database bằng tên database của bạn
     private static final String USER = "root"; // Thay root bằng username MySQL của bạn
-    private static final String PASSWORD = "12345"; // Thay password bằng mật khẩu MySQL của bạn
+    private static final String PASSWORD = ""; // Thay password bằng mật khẩu MySQL của bạn
 
     private static HikariDataSource dataSource;
 

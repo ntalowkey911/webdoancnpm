@@ -1,116 +1,207 @@
 package dao;
 
-import entity.Orders;
+import entity.Order;
+import entity.OrderDetails;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static dao.MySQLConnection.getConnection;
+
 
 public class OrderDao {
 
-    private final CartDao cartDao;
+    public OrderDao(Connection conn) {
+    }
 
     public OrderDao() {
-        cartDao = new CartDao();
+
     }
 
-    public List<Orders> getAllOrders() {
-        List<Orders> orderList = new ArrayList<>();
-        String query = "SELECT * FROM orders";
+    public int createOrder(int user, double totalAmount, String shippingMethod,
+                           Date deliveryDate, String deliveryTime, String paymentMethod, String orderNote,
+                           String receiverName, String receiverPhone, String shippingAddress) {
 
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet rs = statement.executeQuery()) {
+        String sql = """
+                    INSERT INTO orders (UserId, OrderDate, TotalAmount, ShippingMethod, DeliveryDate, DeliveryTime, PaymentMethod, OrderNote, ReceiverName, ReceiverPhone, ShippingAddress, created_at, updated_at)
+                    VALUES (?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
+                    """;
+        try (Connection conn = MySQLConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
+            stmt.setInt(1, user);
+            stmt.setDouble(2, totalAmount);
+            stmt.setString(3, shippingMethod);
+            stmt.setDate(4, deliveryDate);
+            stmt.setString(5, deliveryTime);
+            stmt.setString(6, paymentMethod);
+            stmt.setString(7, orderNote);
+            stmt.setString(8, receiverName);
+            stmt.setString(9, receiverPhone);
+            stmt.setString(10, shippingAddress);
+
+            stmt.executeUpdate();
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public List<Order> getOrdersByUserIdWithDetails(int userId) {
+        String sql = """
+            
+                    SELECT o.Id AS orderId, o.UserID, o.OrderDate, o.TotalAmount, o.ShippingMethod,
+                   DATE_FORMAT(o.DeliveryDate, '%d/%m/%Y') AS deliveryDate, o.DeliveryTime,
+                   o.PaymentMethod, o.OrderNote, o.ReceiverName, o.ReceiverPhone,
+                   o.ShippingAddress, o.OrderStatus,
+                   p.ProductName, p.ImageURL, od.ProductID, od.Quantity, od.UnitPrice
+            FROM Orders o
+            JOIN OrderDetails od ON o.Id = od.OrderID
+            JOIN Products p ON od.ProductID = p.Id
+            WHERE o.UserID = ?
+            ORDER BY o.OrderDate DESC
+            """;
+        Map<Integer, Order> orderMap = new HashMap<>();
+        try (Connection conn = MySQLConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Orders order = new Orders(
-                        rs.getInt("order_id"),
-                        rs.getInt("user_id"),
-                        rs.getBigDecimal("order_amount"),
-                        rs.getTimestamp("order_date")
-                );
-                orderList.add(order);
+                int orderId = rs.getInt("orderId");
+                Order order = orderMap.computeIfAbsent(orderId, id -> {
+                    Order newOrder = new Order();
+                    try {
+                        newOrder.setId(orderId);
+                        newOrder.setUserId(rs.getInt("UserID"));
+                        newOrder.setOrderDate(rs.getTimestamp("OrderDate"));
+                        newOrder.setTotalAmount(rs.getDouble("TotalAmount"));
+                        newOrder.setShippingMethod(rs.getString("ShippingMethod"));
+                        newOrder.setDeliveryDate(rs.getString("deliveryDate"));
+                        newOrder.setDeliveryTime(rs.getString("DeliveryTime"));
+                        newOrder.setPaymentMethod(rs.getString("PaymentMethod"));
+                        newOrder.setOrderNote(rs.getString("OrderNote"));
+                        newOrder.setReceiverName(rs.getString("ReceiverName"));
+                        newOrder.setReceiverPhone(rs.getString("ReceiverPhone"));
+                        newOrder.setShippingAddress(rs.getString("ShippingAddress"));
+                        newOrder.setOrderStatus(rs.getString("OrderStatus"));
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return newOrder;
+                });
+
+                OrderDetails detail = new OrderDetails();
+                detail.setProductID(rs.getInt("ProductID"));
+                detail.setProductName(rs.getString("ProductName"));
+                detail.setImg(rs.getString("ImageURL"));
+                detail.setQuantity(rs.getInt("Quantity"));
+                detail.setUnitPrice(rs.getDouble("UnitPrice"));
+                order.addProduct(detail);
+            }
+            return new ArrayList<>(orderMap.values());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean cancelOrder(int orderId) {
+        String selectDetails = "SELECT ProductID, Quantity FROM OrderDetails WHERE OrderID = ?";
+        String updateWarehouse = "UPDATE Warehouse SET Quantity = Quantity + ? WHERE product_id = ?";
+        String insertWarehouse = "INSERT INTO Warehouse (product_id, quantity) VALUES (?, ?)";
+        String updateOrder = "UPDATE Orders SET OrderStatus = 'Đã hủy đơn hàng' WHERE Id = ?";
+
+        try (Connection conn = MySQLConnection.getConnection()) {
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement detailStmt = conn.prepareStatement(selectDetails)) {
+                detailStmt.setInt(1, orderId);
+                ResultSet rs = detailStmt.executeQuery();
+
+                while (rs.next()) {
+                    int productId = rs.getInt("ProductID");
+                    int quantity = rs.getInt("Quantity");
+
+                    try (PreparedStatement updateStmt = conn.prepareStatement(updateWarehouse)) {
+                        updateStmt.setInt(1, quantity);
+                        updateStmt.setInt(2, productId);
+                        int affected = updateStmt.executeUpdate();
+
+                        if (affected == 0) {
+                            try (PreparedStatement insertStmt = conn.prepareStatement(insertWarehouse)) {
+                                insertStmt.setInt(1, productId);
+                                insertStmt.setInt(2, quantity);
+                                insertStmt.executeUpdate();
+                            }
+                        }
+                    }
+                }
             }
 
-            System.out.println("Lấy danh sách đơn hàng thành công. Số đơn hàng: " + orderList.size());
-
-        } catch (SQLException e) {
-            System.out.println("Lỗi khi lấy danh sách đơn hàng: " + e.getMessage());
-        }
-
-        return orderList;
-    }
-
-    public int getLastOrderId() {
-        String query = "SELECT order_id FROM orders ORDER BY order_id DESC LIMIT 1";
-        int orderId = 0;
-
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet rs = statement.executeQuery()) {
-
-            if (rs.next()) {
-                orderId = rs.getInt(1);
+            try (PreparedStatement updateOrderStmt = conn.prepareStatement(updateOrder)) {
+                updateOrderStmt.setInt(1, orderId);
+                int rows = updateOrderStmt.executeUpdate();
+                if (rows == 0) throw new RuntimeException("Không tìm thấy đơn hàng để hủy.");
             }
 
-            System.out.println("Lấy order_id cuối cùng thành công: " + orderId);
-
-        } catch (SQLException e) {
-            System.out.println("Lỗi khi lấy order_id cuối cùng: " + e.getMessage());
-        }
-
-        return orderId;
-    }
-
-    private void createOrderItemsFromCart(int orderId, int userId) {
-        String query = "INSERT INTO order_item (order_id, product_id, quantity, unit_price) " +
-                "SELECT ?, ci.product_id, ci.quantity, p.price " +
-                "FROM cart_item ci " +
-                "JOIN product p ON ci.product_id = p.product_id " +
-                "WHERE ci.cart_id = (SELECT cart_id FROM cart WHERE user_id = ?);";
-
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
-            statement.setInt(1, orderId);
-            statement.setInt(2, userId);
-            int rowsInserted = statement.executeUpdate();
-
-            System.out.println("Thêm " + rowsInserted + " sản phẩm vào order_item thành công cho order_id: " + orderId);
-
-        } catch (SQLException e) {
-            System.out.println("Lỗi khi tạo order_item từ giỏ hàng: " + e.getMessage());
+            conn.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
-    public void createOrderFromCart(int userId, double orderAmount) {
-        String query = "INSERT INTO orders (user_id, order_amount, order_date) VALUES (?, ?, NOW());";
+    public boolean updateOrderStatus(int orderId, String newStatus) {
+        String sql = "UPDATE Orders SET OrderStatus = ?, updated_at = NOW() WHERE Id = ?";
+        try (Connection conn = MySQLConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
-            statement.setInt(1, userId);
-            statement.setDouble(2, orderAmount);
-            statement.executeUpdate();
-
-            int orderId = getLastOrderId();
-            System.out.println("Tạo đơn hàng thành công với order_id: " + orderId);
-
-            // Gọi phương thức chuyển sản phẩm từ cart sang order_item
-            createOrderItemsFromCart(orderId, userId);
-
-            // Xóa giỏ hàng sau khi thanh toán
-            cartDao.clearCart(userId);
-
-            System.out.println("Thanh toán thành công và đã xóa giỏ hàng cho user_id: " + userId);
-
-        } catch (SQLException e) {
-            System.out.println("Lỗi khi tạo đơn hàng: " + e.getMessage());
+            stmt.setString(1, newStatus);
+            stmt.setInt(2, orderId);
+            return stmt.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
+    }
+
+    public Order getOrderById(int orderId) throws SQLException {
+        String sql = "SELECT * FROM orders WHERE id = ?";  // Sửa 'Id' thành 'id' (chữ thường)
+        try (Connection conn = MySQLConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, orderId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Order order = new Order();
+                    // Ánh xạ chính xác tên cột từ database
+                    order.setId(rs.getInt("id"));
+                    order.setUserId(rs.getInt("UserID"));  // Chú ý: 'UserD' thay vì 'UserID'
+                    order.setOrderDate(rs.getTimestamp("OrderDate"));
+                    order.setTotalAmount(rs.getDouble("TotalAmount"));  // Sử dụng BigDecimal cho decimal
+                    order.setShippingMethod(rs.getString("ShippingMethod"));
+                    order.setDeliveryDate(rs.getString("DeliveryDate"));  // Sử dụng getDate cho kiểu date
+                    order.setDeliveryTime(rs.getString("DeliveryTime"));
+                    order.setPaymentMethod(rs.getString("PaymentMethod"));
+                    order.setOrderNote(rs.getString("OrderNote"));
+                    order.setReceiverName(rs.getString("ReceiverName"));  // 'ReceiveName' thay vì 'recipient_name'
+                    order.setReceiverPhone(rs.getString("ReceiverPhone")); // 'ReceivePhone' thay vì 'recipient_phone'
+                    order.setShippingAddress(rs.getString("ShippingAddress")); // 'ShippingAddress' thay vì 'recipient_address'
+                    order.setOrderStatus(rs.getString("OrderStatus"));
+                    order.setCreatedAt(rs.getTimestamp("created_at"));
+                    order.setUpdatedAt(rs.getTimestamp("updated_at"));
+
+                    return order;
+                }
+            }
+        }
+        return null;
     }
 }
+
